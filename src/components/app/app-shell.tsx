@@ -66,7 +66,11 @@ export function AppShell() {
   const { slug } = useHashRoute();
   const meta = getPageMeta(slug);
 
-  /* ===== Metadata dinamis per halaman (SEO maksimal) ===== */
+  /* ===== Metadata dinamis per halaman (SEO maksimal) =====
+   * CATATAN: <title> TIDAK dirender sebagai JSX — React 19 akan meng-hoist
+   * elemen hoistable ke <head> dan bertabrakan dengan sistem metadata
+   * Next.js (duplikat <title>/<meta description>, document.title salah,
+   * dan hydration mismatch radix-useId). Title dikelola via effect di bawah. */
   useEffect(() => {
     const title = meta.seoTitle;
     const desc = meta.metaDescription;
@@ -84,19 +88,42 @@ export function AppShell() {
     if (meta.heroImage) setMeta('property', 'og:image', `${SITE_URL}${meta.heroImage}`);
     setCanonical(url);
 
-    /* Normalisasi <title>: pastikan hanya SATU title dengan teks benar */
+    /* Bersihkan duplikat meta yang tersisa dari snapshot halaman sebelumnya */
+    ['description', 'keywords'].forEach((n) => {
+      const metas = Array.from(document.head.querySelectorAll<HTMLMetaElement>(`meta[name="${n}"]`));
+      metas.slice(1).forEach((m) => m.remove());
+    });
+
+    /* Tulis <title> — pastikan hanya SATU title dengan teks benar.
+     * CATATAN: Next.js memulihkan elemen <title> dari payload RSC SETELAH
+     * hidrasi selesai (khusus <title>; meta lain tidak disentuh). Observer
+     * berumur 2 detik membalik restorasi tersebut sehingga title halaman
+     * aktif selalu menang, tanpa loop (guard same-value). */
     const ours = `${title} | bambuwater.web.id`;
-    const titles = Array.from(document.head.querySelectorAll('title'));
-    if (titles.length === 0) {
-      const t = document.createElement('title');
-      t.textContent = ours;
-      document.head.prepend(t);
-    } else {
-      titles[0].textContent = ours;
-      titles.slice(1).forEach((t) => t.remove());
-    }
+    const applyTitle = () => {
+      const titles = document.head.querySelectorAll('title');
+      if (titles.length === 0) {
+        const t = document.createElement('title');
+        t.textContent = ours;
+        document.head.prepend(t);
+      } else {
+        if (titles[0].textContent !== ours) titles[0].textContent = ours;
+        for (let i = 1; i < titles.length; i++) titles[i].remove();
+      }
+    };
+    applyTitle();
+
+    const observer = new MutationObserver(applyTitle);
+    observer.observe(document.head, { subtree: true, childList: true, characterData: true });
+    const disarm = window.setTimeout(() => observer.disconnect(), 2000);
+    const sweep = window.setTimeout(applyTitle, 2200);
 
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(disarm);
+      window.clearTimeout(sweep);
+    };
   }, [slug, meta]);
 
   const renderPage = () => {
@@ -107,8 +134,7 @@ export function AppShell() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Title dikelola React — tersinkron otomatis per halaman */}
-      <title>{`${meta.seoTitle} | bambuwater.web.id`}</title>
+      {/* Title & meta dikelola React via useEffect — sinkron per halaman tanpa duplikat <head> */}
       <JsonLd />
       <Navbar activeSlug={slug} />
 

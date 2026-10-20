@@ -239,7 +239,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                 </button>
               </div>
 
-              <nav aria-label="Navigasi seluler" className="max-h-scroll flex-1 overflow-y-auto p-4">
+              <nav aria-label="Navigasi seluler" className="flex-1 overflow-y-auto overscroll-contain p-4">
                 {NAV_GROUPS.map((group, gi) => (
                   <motion.div
                     key={group.label}

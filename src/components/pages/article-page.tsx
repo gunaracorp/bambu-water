@@ -148,12 +148,13 @@ export function ArticlePage({ slug }: { slug: string }) {
                     <p key={j}>{p}</p>
                   ))}
                 </div>
-                {sec.list && (
-                  <ul className="mt-5 space-y-3">
+                {Array.isArray(sec.list) && sec.list.length > 0 && (
+                  <div className="mt-5">
                     {sec.listTitle && (
-                      <p className="font-semibold text-foreground">{sec.listTitle}</p>
+                      <p className="mb-3 font-semibold text-foreground">{sec.listTitle}</p>
                     )}
-                    {sec.list.map((li, j) => (
+                    <ul className="space-y-3">
+                      {sec.list.map((li, j) => (
                       <li key={j} className="flex items-start gap-3 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
                         <ArrowRight className="mt-0.5 h-4.5 w-4.5 shrink-0 text-gold" aria-hidden />
                         <div>
@@ -161,8 +162,9 @@ export function ArticlePage({ slug }: { slug: string }) {
                           <p className="text-sm leading-relaxed text-muted-foreground">{li.text}</p>
                         </div>
                       </li>
-                    ))}
-                  </ul>
+                      ))}
+                    </ul>
+                  </div>
                 )}
                 {sec.callout && (
                   <div className="mt-5 flex items-start gap-3 rounded-2xl border-l-4 border-gold bg-gold/10 p-5">

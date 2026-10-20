@@ -100,3 +100,24 @@ Stage Summary:
 - Struktur organisasi lengkap tampil: Dewan Pendiri (Ko Abuy) → Komisaris → Direksi → Divisi Manager Operasional (6)
 - Info modal perusahaan tidak lagi dipublikasikan
 - Branding baru: Rahasia Kaisar China + 10 alasan, santri & dewan pakar, 38 provinsi, 3 kantor
+
+---
+Task ID: 4
+Agent: Z.ai Code (main)
+Task: Fix hydration/console errors (radix-useId mismatch + duplicate <title>) reported by user
+
+Work Log:
+- Reproduced & diagnosed via agent-browser: (1) duplicate <title> & <meta description> in <head> setelah hard reload with hash → document.title wrong; (2) stale errors dari state dev lama (Factory is not defined / sec.list.map — sudah tidak ada).
+- Root cause #1: <title> JSX di AppShell (client) di-hoist React 19 ke <head> dan bertabrakan dengan sistem metadata Next.js; plus Next.js me-restore elemen <title> dari payload RSC setelah hydration selesai.
+- Root cause #2 (runtime): article-page.tsx merender <p> langsung di dalam <ul> (HTML invalid) dan sec.list tanpa guard Array.isArray.
+- Perbaikan app-shell.tsx: hapus <title> JSX; effect SEO kini menulis title via applyTitle() (guard same-value) + MutationObserver 2 detik yang membalik restorasi <title> Next.js + sweep 2.2s; duplikat meta description/keywords dibersihkan.
+- Perbaikan article-page.tsx: listTitle <p> dipindah keluar <ul>, guard Array.isArray(sec.list) && length > 0.
+- Perbaikan navbar.tsx: class tidak valid `max-h-scroll` → flex-1 overflow-y-auto overscroll-contain.
+- Verifikasi browser end-to-end: fresh load #/faq → title benar & 1 title/1 desc; 5 deep-link halaman → 0 error; accordion FAQ homepage & halaman FAQ klik OK; drawer mobile expand OK; mega menu desktop OK; form kontak submit → "Terima Kasih" + data tersimpan di DB (Prisma ContactMessage); footer sticky OK; branding "Sejak 2007 — Terbesar & Pertama di Indonesia" tampil di hero/footer.
+- Sweep 25 halaman sekuensial: 25/25 title & h1 benar, 0 console error. Lint bersih.
+
+Stage Summary:
+- Hydration mismatch radix-useId & duplikasi <head> teratasi; title/hash deep-link kini selalu benar.
+- app-shell.tsx kini satu-satunya pengelola title/meta via effect (tanpa hoistable JSX); pola MutationObserver melawan restorasi title Next.js.
+- article-page.tsx HTML valid; navbar mobile overflow diperbaiki.
+- Tidak ada perubahan pada branding 2007 (sudah lengkap dari sesi sebelumnya).
