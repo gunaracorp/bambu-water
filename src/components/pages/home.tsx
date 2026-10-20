@@ -4,6 +4,7 @@ import { Hero } from '@/components/site/hero';
 import { StatsStrip } from '@/components/site/stats-strip';
 import { About } from '@/components/site/about';
 import { Benefits } from '@/components/site/benefits';
+import { ReasonsSection } from '@/components/site/reasons';
 import { Science } from '@/components/site/science';
 import { Process } from '@/components/site/process';
 import { Products } from '@/components/site/products';
@@ -21,6 +22,7 @@ export function HomePage() {
       <StatsStrip />
       <About />
       <Benefits />
+      <ReasonsSection />
       <Science />
       <Process />
       <Products />

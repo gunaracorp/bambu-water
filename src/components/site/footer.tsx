@@ -1,7 +1,7 @@
 'use client';
 
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from 'lucide-react';
-import { COMPANY, waLink } from '@/lib/company';
+import { COMPANY, OFFICES, waLink } from '@/lib/company';
 import { Logo } from './logo';
 
 /** Sitemap footer — 25 halaman bambuwater.web.id */
@@ -162,9 +162,14 @@ export function Footer() {
             <Mail className="h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
             {COMPANY.email}
           </a>
-          <span className="flex items-center gap-3">
-            <MapPin className="h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
-            {COMPANY.address} — {COMPANY.operationalHours}
+          <span className="flex items-start gap-3">
+            <MapPin className="mt-0.5 h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
+            <span>
+              <strong className="text-white">{OFFICES[0].label}:</strong> {OFFICES[0].address}
+              <span className="mt-1 block text-xs text-emerald-100/60">
+                {OFFICES[1].label}: {OFFICES[1].city} • {OFFICES[2].label}: {OFFICES[2].city} — alamat lengkap di halaman Kontak
+              </span>
+            </span>
           </span>
         </div>
       </div>

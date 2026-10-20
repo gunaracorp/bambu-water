@@ -51,7 +51,7 @@ export function JangkauanKotaPage() {
       <PageSection bg="light">
         <SectionHeading
           eyebrow="Cakupan Wilayah"
-          title="34 Provinsi,"
+          title="38 Provinsi,"
           highlight="Satu Jaringan Terpercaya"
           description="Sejak 2007 jaringan distribusi kami tumbuh dari Jawa Barat ke seluruh Nusantara — kota Anda pasti terjangkau."
         />

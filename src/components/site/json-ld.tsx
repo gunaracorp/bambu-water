@@ -1,7 +1,7 @@
-import { COMPANY, FAQS, PRODUCTS, LEADERSHIP } from '@/lib/company';
+import { COMPANY, FAQS, PRODUCTS, LEADERSHIP, OPERATIONS_MANAGERS } from '@/lib/company';
 
 export function JsonLd() {
-  const siteUrl = 'https://bambuwater.co.id';
+  const siteUrl = 'https://bambuwater.web.id';
 
   const organization = {
     '@context': 'https://schema.org',
@@ -18,8 +18,10 @@ export function JsonLd() {
     foundingDate: String(COMPANY.foundedYear),
     address: {
       '@type': 'PostalAddress',
-      addressLocality: COMPANY.city,
-      addressRegion: COMPANY.province,
+      streetAddress: 'Guntur Village No.50, Kampung Gunung Guntur, Desa Padasuka, Kecamatan Sukarame',
+      addressLocality: 'Tasikmalaya',
+      addressRegion: 'Jawa Barat',
+      postalCode: '46461',
       addressCountry: 'ID',
     },
     areaServed: {
@@ -28,12 +30,22 @@ export function JsonLd() {
     },
     sameAs: [COMPANY.social.instagram, COMPANY.social.facebook, COMPANY.social.linkedin],
     employee: [
+      ...LEADERSHIP.pendiri.map((p) => ({
+        '@type': 'Person',
+        name: p.name,
+        jobTitle: p.role,
+      })),
       ...LEADERSHIP.komisaris.map((p) => ({
         '@type': 'Person',
         name: p.name,
         jobTitle: p.role,
       })),
       ...LEADERSHIP.direktur.map((p) => ({
+        '@type': 'Person',
+        name: p.name,
+        jobTitle: p.role,
+      })),
+      ...OPERATIONS_MANAGERS.map((p) => ({
         '@type': 'Person',
         name: p.name,
         jobTitle: p.role,
@@ -94,8 +106,10 @@ export function JsonLd() {
     priceRange: 'RpRp',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: COMPANY.city,
-      addressRegion: COMPANY.province,
+      streetAddress: 'Guntur Village No.50, Kampung Gunung Guntur, Desa Padasuka, Kecamatan Sukarame',
+      addressLocality: 'Tasikmalaya',
+      addressRegion: 'Jawa Barat',
+      postalCode: '46461',
       addressCountry: 'ID',
     },
     openingHoursSpecification: {
@@ -103,6 +117,10 @@ export function JsonLd() {
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       opens: '08:00',
       closes: '17:00',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Indonesia',
     },
   };
 

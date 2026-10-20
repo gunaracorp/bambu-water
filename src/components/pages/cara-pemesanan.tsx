@@ -27,7 +27,7 @@ const STEPS = [
   {
     icon: PackageCheck,
     title: '4. Kirim & Terima',
-    text: 'Pesanan dikemas food-grade/kargo aman, berangkat dengan resi terlacak — sampai di 34 provinsi Indonesia.',
+    text: 'Pesanan dikemas food-grade/kargo aman, berangkat dengan resi terlacak — sampai di 38 provinsi Indonesia.',
   },
 ];
 

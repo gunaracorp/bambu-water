@@ -58,3 +58,45 @@ Stage Summary:
 - ARTICLES_A siap dipakai: 4 artikel (air-bambu-gula-darah 1289 kata, air-bambu-batu-ginjal 1270, air-bambu-kolesterol 1248, air-bambu-detoksifikasi 1253) — masing-masing 5 section + 1 list + 1 callout + 4 FAQ
 - File: src/lib/articles-a.ts (satu-satunya ekspor ARTICLES_A, import type saja, tanpa import tak terpakai)
 - articles.ts (Task 2) sudah mengimpor ARTICLES_A — menunggu articles-b.ts (Task 3-b) agar ARTICLES lengkap 7 artikel
+
+---
+Task ID: 3
+Agent: orchestrator (Z.ai Code) + subagent 3-a & 3-b
+Task: Transformasi situs 1 halaman menjadi 25 halaman full-SEO + menu mega + domain bambuwater.web.id + WA fix +6281316516524
+
+Work Log:
+- Router hash SPA (useSyncExternalStore) di 1 route (/): AppShell + AnimatePresence transisi per halaman
+- pages-registry.ts: 25 halaman dengan seoTitle/metaDescription/keywords/h1/eyebrow/intro/priority masing-masing
+- Metadata dinamis per halaman: <title> dikelola React + normalisasi (1 elemen title), meta description/keywords/OG/twitter/canonical diupdate per navigasi
+- Navbar mega-menu baru (6 grup dropdown animasi + drawer mobile accordion); Footer sitemap 25 halaman; konversi semua anchor internal ke #/slug
+- Template: PageHero (breadcrumb + JSON-LD BreadcrumbList), PageSection, CtaBand, QuoteForm (POST /api/contact), ProductPageTemplate, ArticlePage (BlogPosting + FAQPage JSON-LD, TOC, related, referensi)
+- Subagent 3-a: articles-a.ts (4 artikel: gula-darah, batu-ginjal, kolesterol, detoks); Subagent 3-b: articles-b.ts (3 artikel: tulang-silika, kecantikan, sejarah); normalisasi shape list di articles.ts
+- 19 file halaman: home, tentang-kami, 4 pilar kesehatan, index artikel, 3 produk, proses-produksi, pengiriman-massal, jangkauan-kota, harga-paket (tabs), cara-pemesanan, testimoni, faq, kontak
+- layout.tsx: metadata maksimal (45+ keywords, OG 2 image, geo, appleWebApp, formatDetection), domain bambuwater.web.id; sitemap.ts 25 URL; robots.ts host
+- Verifikasi Agent Browser: 25/25 halaman render (h1 + tanpa error + title unik), mega menu & drawer mobile OK, form kontak e2e tersimpan di DB (Prisma), accordion FAQ OK, WA link 6281316516524, lint 0 error
+- Fix: nested <a> di Navbar, sec.list.map not a function (normalizer), title berlipat (normalisasi title), set-state-in-effect (useSyncExternalStore)
+
+Stage Summary:
+- 25 halaman full-SEO live di 1 route dengan hash-routing; setiap halaman punya metadata SEO sendiri
+- File kunci baru: src/lib/pages-registry.ts, src/hooks/use-hash-route.ts, src/components/app/app-shell.tsx, src/components/pages/* (19 file), src/lib/articles*.ts
+- WA final: 6281316516524; email domain bambuwater.web.id
+
+---
+Task ID: 4
+Agent: orchestrator (Z.ai Code)
+Task: Revisi konten besar — dewan pendiri & manager operasional, hapus modal, 38 provinsi, branding Rahasia Kaisar China + 10 alasan, 3 alamat kantor, santri & dewan pakar
+
+Work Log:
+- LEADERSHIP.tendiri baru: Ko Abuy (Dewan Pendiri) — ditampilkan pertama di section Pimpinan + JSON-LD employee
+- OPERATIONS_MANAGERS (6): Aceng Kurnia, Yudi Oktora, Mahbub, Soleh M Ramdani, Ivan Nugraha, Hendri Sutiana — grid baru "Divisi Manager Operasional" di leadership.tsx
+- Hapus seluruh info modal dasar/disetor (company.ts, leadership, about, tentang-kami, kontak, FAQ diganti dewan pendiri/pakar)
+- 34 → 38 provinsi: STATS, hero, FAQ, pages-registry (4 titik), jangkauan-kota, cara-pemesanan, kontak, testimoni
+- reasons.tsx baru: narasi "Rahasia Awet Muda Kaisar China" (Tian Zhu Li 天竹瀝, tergores sejarah, "jadilah orang yang beruntung") + grid 10 alasan minum air bambu — dipakai di Beranda (setelah Benefits) & halaman Manfaat
+- OFFICES: Kantor Pusat (Guntur Village No.50 Padasuka Sukarame Tasikmalaya 46461), Branch 2 (Andalusia Garden Granada No.11 Mangkubumi), Branch 3 (Muararajeun Lama No.26 Cihaurgeulis Bandung) — section alamat di tentang-kami + kontak, footer, JSON-LD LocalBusiness, geo metadata Tasikmalaya
+- PRODUCTION_TEAM_NOTE: disuling santri berpengalaman + dewan pakar lintas bidang — section gelar baru di proses-produksi, catatan di leadership, about, tentang-kami
+- Verifikasi: beranda (kaisar+10 alasan+38+Ko Abuy+6 manager+tanpa modal) OK, kontak 3 alamat OK, proses-produksi santri/pakar OK, FAQ 38 provinsi OK, sweep tanpa error, lint bersih
+
+Stage Summary:
+- Struktur organisasi lengkap tampil: Dewan Pendiri (Ko Abuy) → Komisaris → Direksi → Divisi Manager Operasional (6)
+- Info modal perusahaan tidak lagi dipublikasikan
+- Branding baru: Rahasia Kaisar China + 10 alasan, santri & dewan pakar, 38 provinsi, 3 kantor

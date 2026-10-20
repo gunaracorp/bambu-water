@@ -188,7 +188,7 @@ export function Hero() {
             </li>
             <li className="flex items-center gap-2">
               <Truck className="h-4.5 w-4.5 text-amber-300" aria-hidden />
-              Kirim ke 34 provinsi
+              Kirim ke 38 provinsi
             </li>
           </motion.ul>
         </div>

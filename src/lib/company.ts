@@ -21,15 +21,12 @@ export const COMPANY = {
   description:
     'PT Bambu Water Nusantara — sejak 2007 pionir, terbesar, dan pertama di Indonesia dalam penyediaan air bambu alami untuk pengobatan serta distribusi bambu berkualitas dalam jumlah besar ke seluruh Indonesia.',
   foundedYear: 2007,
-  modalDasar: 'Rp 700.000.000',
-  modalDisetor: 'Rp 300.000.000',
   email: 'halo@bambuwater.web.id',
   emailSales: 'sales@bambuwater.web.id',
   phone: '+62 813-1651-6524',
   whatsapp: '6281316516524',
   whatsappDisplay: '+62 813-1651-6524',
-  address: 'Jawa Barat, Indonesia',
-  city: 'Bandung',
+  city: 'Tasikmalaya',
   province: 'Jawa Barat',
   country: 'Indonesia',
   operationalHours: 'Senin – Sabtu, 08.00 – 17.00 WIB',
@@ -40,8 +37,41 @@ export const COMPANY = {
   },
 } as const;
 
-/** Struktur pengurus sesuai Akta Pendirian */
+/** Alamat resmi — Pusat & Branch Office */
+export const OFFICES = [
+  {
+    id: 'pusat',
+    label: 'Kantor Pusat',
+    icon: 'landmark',
+    address:
+      'Guntur Village No.50, Kampung Gunung Guntur, Desa Padasuka, Kecamatan Sukarame, Kabupaten Tasikmalaya, Jawa Barat 46461',
+    city: 'Tasikmalaya',
+  },
+  {
+    id: 'branch-2',
+    label: 'Branch Office 2',
+    icon: 'building',
+    address:
+      'Perumahan Andalusia Garden, Cluster Granada No. 11, Mangkubumi, Tasikmalaya, Jawa Barat',
+    city: 'Tasikmalaya',
+  },
+  {
+    id: 'branch-3',
+    label: 'Branch Office 3',
+    icon: 'building',
+    address:
+      'Muararajeun Lama No. 26, Cihaurgeulis, Cibeunying Kaler, Bandung, Jawa Barat 40122',
+    city: 'Bandung',
+  },
+] as const;
+
+/** Catatan produksi: disuling santri + dewan pakar */
+export const PRODUCTION_TEAM_NOTE =
+  'Air bambu kami disuling oleh santri berpengalaman dan diawasi dewan pakar lintas bidang — memadukan kehati-hatian, kejujuran, dan standar mutu modern.';
+
+/** Struktur pengurus — dewan pendiri, komisaris & direksi */
 export const LEADERSHIP = {
+  pendiri: [{ name: 'Ko Abuy', role: 'Dewan Pendiri' }],
   komisaris: [
     { name: 'Hj. Qonitah Lutfiah, S.E., M.M.', role: 'Komisaris Utama', shares: '30%' },
     { name: 'Drs. Arif Rachman Hakim', role: 'Komisaris', shares: '15%' },
@@ -54,6 +84,16 @@ export const LEADERSHIP = {
     { name: 'H. Solihin', role: 'Direktur', shares: '5%' },
   ],
 } as const;
+
+/** Divisi Manager Operasional */
+export const OPERATIONS_MANAGERS = [
+  { name: 'Mr. Aceng Kurnia', role: 'Manager Operasional' },
+  { name: 'Mr. Yudi Oktora', role: 'Manager Operasional' },
+  { name: 'Mr. Mahbub', role: 'Manager Operasional' },
+  { name: 'Mr. Soleh M Ramdani', role: 'Manager Operasional' },
+  { name: 'Mr. Ivan Nugraha', role: 'Manager Operasional' },
+  { name: 'Mr. Hendri Sutiana', role: 'Manager Operasional' },
+] as const;
 
 /** Manfaat air bambu berdasarkan riset & pengobatan tradisional */
 export const BENEFITS = [
@@ -195,7 +235,12 @@ export const STATS = [
   { prefix: '', value: YEARS_OF_EXPERIENCE, suffix: '+', label: 'Tahun pengalaman — Terbesar & Pertama di Indonesia sejak 2007' },
   { prefix: '', value: 2100000, suffix: ' ha', label: 'Lahan bambu Indonesia — terluas di dunia' },
   { prefix: '', value: 70, suffix: '%', label: 'Kandungan silika organik ekstrak daun bambu' },
-  { prefix: '', value: 34, suffix: ' Provinsi', label: 'Jangkauan pengiriman seluruh Indonesia' },
+  {
+    value: 38,
+    suffix: ' Provinsi',
+    prefix: '',
+    label: 'Jangkauan pengiriman seluruh Indonesia',
+  },
 ] as const;
 
 /** Link WhatsApp resmi dengan pesan siap kirim */
@@ -232,7 +277,7 @@ export const FAQS = [
   },
   {
     q: 'Apakah PT Bambu Water Nusantara badan hukum resmi?',
-    a: 'Ya, kami badan hukum Perseroan Terbatas resmi dengan Akta Pendirian yang tercatat — modal dasar Rp 700.000.000 dan modal disetor Rp 300.000.000 — didukung susunan direksi dan komisaris yang lengkap.',
+    a: 'Ya, kami badan hukum Perseroan Terbatas resmi dengan Akta Pendirian yang tercatat — didukung dewan pendiri, susunan komisaris dan direksi yang lengkap, divisi manager operasional, serta dewan pakar lintas bidang yang mengawasi mutu produksi.',
   },
   {
     q: 'Apa perbedaan Air Bambu Suling dan Air Bambu Tabib?',
@@ -244,7 +289,7 @@ export const FAQS = [
   },
   {
     q: 'Apakah melayani pengiriman ke luar Pulau Jawa?',
-    a: 'Melayani. Kami mengirim ke 34 provinsi di seluruh Indonesia — Sumatera, Kalimantan, Sulawesi, Bali & Nusa Tenggara, Maluku, hingga Papua — melalui jaringan kargo darat, laut, dan udara dengan packing aman untuk pengiriman jarak jauh.',
+    a: 'Melayani. Kami mengirim ke 38 provinsi di seluruh Indonesia — Sumatera, Kalimantan, Sulawesi, Bali & Nusa Tenggara, Maluku, hingga Papua — melalui jaringan kargo darat, laut, dan udara dengan packing aman untuk pengiriman jarak jauh.',
   },
 ] as const;
 

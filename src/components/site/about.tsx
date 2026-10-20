@@ -20,7 +20,7 @@ const VALUES = [
   {
     icon: Scale,
     title: 'Badan Hukum Resmi',
-    text: 'PT berakta dengan modal disetor Rp 300 juta — aman untuk kontrak & pengadaan besar.',
+    text: 'PT berakta resmi dengan dewan pendiri, komisaris, direksi, dan dewan pakar lintas bidang — aman untuk kontrak & pengadaan besar.',
   },
 ];
 
@@ -73,10 +73,10 @@ export function About() {
               transition={{ delay: 0.35, duration: 0.7 }}
               className="absolute -bottom-10 -right-3 w-56 rounded-2xl border border-emerald-900/10 bg-white p-5 shadow-xl shadow-emerald-900/15 sm:-right-8"
             >
-              <p className="text-xs font-semibold uppercase tracking-wider text-bamboo">Legalitas</p>
-              <p className="mt-1 font-serif text-lg font-bold text-foreground">Modal Disetor</p>
-              <p className="font-serif text-2xl font-bold text-primary">{COMPANY.modalDisetor}</p>
-              <p className="mt-1 text-xs text-muted-foreground">Modal dasar {COMPANY.modalDasar} — PT berakta resmi</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-bamboo">Pengalaman</p>
+              <p className="mt-1 font-serif text-lg font-bold text-foreground">Sejak 2007</p>
+              <p className="font-serif text-2xl font-bold text-primary">Terbesar & Pertama</p>
+              <p className="mt-1 text-xs text-muted-foreground">di Indonesia — {new Date().getFullYear() - 2007}+ tahun melayani</p>
             </motion.div>
           </Reveal>
 
@@ -88,8 +88,9 @@ export function About() {
                 keyakinan bahwa Nusantara menyimpan harta penyembuhan paling sederhana:{' '}
                 <em>air yang mengalir di dalam bambu</em>. Selama berabad-abad, tabib tradisional
                 memanen sadapan bambu muda untuk menurunkan demam, meredakan batuk, dan memulihkan
-                tenaga. Kini kami menghadirkan kearifan itu dengan standar produksi modern — dari
-                panen berkelanjutan, distilasi higienis, hingga pengiriman nasional.
+                tenaga. Kini kami menghadirkan kearifan itu dengan standar produksi modern — disuling
+                oleh santri berpengalaman dan diawasi dewan pakar lintas bidang, dari panen
+                berkelanjutan hingga pengiriman nasional.
               </p>
             </Reveal>
 

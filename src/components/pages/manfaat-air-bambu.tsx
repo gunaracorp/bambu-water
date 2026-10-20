@@ -5,6 +5,7 @@ import { PageHero, PageSection } from '@/components/site/page-hero';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal';
 import { Benefits } from '@/components/site/benefits';
+import { ReasonsSection } from '@/components/site/reasons';
 import { CtaBand } from '@/components/site/cta-band';
 import { BENEFITS } from '@/lib/company';
 
@@ -19,6 +20,9 @@ export function ManfaatAirBambuPage() {
   return (
     <>
       <PageHero slug="manfaat-air-bambu" />
+
+      {/* Rahasia Kaisar China + 10 alasan */}
+      <ReasonsSection compact={false} />
 
       {/* Ringkasan 8 manfaat — komponen kartu animasi */}
       <PageSection bg="light">

@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { COMPANY, CITIES } from '@/lib/company';
+import { COMPANY, OFFICES, CITIES } from '@/lib/company';
 import { Reveal } from './reveal';
 import { SectionHeading } from './section-heading';
 import { cn } from '@/lib/utils';
@@ -147,7 +147,10 @@ export function Contact() {
                     </span>
                     <div>
                       <p className="font-semibold text-white">Alamat</p>
-                      <p className="mt-0.5 text-emerald-100/85">{COMPANY.address}</p>
+                      <p className="mt-0.5 text-emerald-100/85">{OFFICES[0].address}</p>
+                      <p className="mt-1 text-xs text-emerald-100/60">
+                        Branch 2: Mangkubumi, Tasikmalaya • Branch 3: Cihaurgeulis, Bandung
+                      </p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3.5">

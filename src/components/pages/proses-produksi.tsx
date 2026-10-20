@@ -1,11 +1,12 @@
 'use client';
 
-import { Factory, Microscope, Award, Sparkles } from 'lucide-react';
+import { Factory, Microscope, Award, Sparkles, GraduationCap } from 'lucide-react';
 import { PageHero, PageSection } from '@/components/site/page-hero';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal';
 import { Process } from '@/components/site/process';
 import { CtaBand } from '@/components/site/cta-band';
+import { PRODUCTION_TEAM_NOTE } from '@/lib/company';
 
 const QC_STEPS = [
   { icon: Microscope, title: 'Uji Mikrobiologi', text: 'Setiap batch diperiksaparameter TPC & patogen sebelum lolos kemasan.' },
@@ -74,6 +75,43 @@ export function ProsesProduksiPage() {
               bisnis kami sejak 2007.
             </p>
           </div>
+        </Reveal>
+      </PageSection>
+
+      {/* Santri + Dewan Pakar */}
+      <PageSection bg="dark">
+        <SectionHeading
+          eyebrow="Tim Produksi"
+          title="Disuling Santri Berpengalaman,"
+          highlight="Diawasi Dewan Pakar Lintas Bidang"
+          dark
+        />
+        <div className="mt-12 grid items-center gap-10 lg:grid-cols-2">
+          <Reveal direction="right">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur">
+              <GraduationCap className="h-10 w-10 text-gold" aria-hidden />
+              <h3 className="mt-4 font-serif text-xl font-bold text-white">Santri Berpengalaman</h3>
+              <p className="mt-3 text-sm leading-relaxed text-emerald-50/80 sm:text-base">
+                Proses penyulingan kami dipercayakan kepada santri-santri berpengalaman — pekerja
+                yang menjunjung kehati-hatian, kejujuran, dan ketelitian. Nilai-nilai inilah yang
+                menjadikan setiap tetes air bambu kami bersih, halal, dan penuh keberkahan.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal direction="left" delay={0.1}>
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur">
+              <Award className="h-10 w-10 text-gold" aria-hidden />
+              <h3 className="mt-4 font-serif text-xl font-bold text-white">Dewan Pakar Lintas Bidang</h3>
+              <p className="mt-3 text-sm leading-relaxed text-emerald-50/80 sm:text-base">
+                Produksi kami dibackup dewan pakar lintas bidang — dari ahli teknologi pangan,
+                praktisi pengobatan tradisional, hingga pakar mutu — memastikan setiap batch
+                memenuhi standar keamanan dan khasiatnya terjaga.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+        <Reveal delay={0.2} className="mx-auto mt-10 max-w-3xl">
+          <p className="text-center text-sm leading-relaxed text-emerald-50/70">{PRODUCTION_TEAM_NOTE}</p>
         </Reveal>
       </PageSection>
 

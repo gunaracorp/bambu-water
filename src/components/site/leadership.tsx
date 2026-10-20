@@ -1,20 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Landmark, Users } from 'lucide-react';
-import { LEADERSHIP } from '@/lib/company';
+import { Crown, Landmark, Users, HardHat, GraduationCap } from 'lucide-react';
+import { LEADERSHIP, OPERATIONS_MANAGERS, PRODUCTION_TEAM_NOTE } from '@/lib/company';
 import { Reveal, StaggerContainer, StaggerItem } from './reveal';
 import { SectionHeading } from './section-heading';
 
-function PersonCard({
-  person,
-  index,
-}: {
-  person: { name: string; role: string; shares: string };
-  index: number;
-}) {
+type Person = { name: string; role: string; shares?: string };
+
+function PersonCard({ person }: { person: Person }) {
   const initials = person.name
-    .replace(/(Hj\.|H\.|Drs\.|S\.E|S\.E\.|M\.M|S\.E\., M\.M\.)/g, '')
+    .replace(/(Hj\.|H\.|Drs\.|S\.E|S\.E\.|M\.M|S\.E\., M\.M\.|Mr\.)/g, '')
     .trim()
     .split(' ')
     .slice(0, 2)
@@ -39,9 +35,11 @@ function PersonCard({
         </span>
         <h3 className="mt-4 font-serif text-base font-bold leading-snug text-foreground">{person.name}</h3>
         <p className="mt-1 text-sm font-medium text-primary">{person.role}</p>
-        <p className="mt-2 inline-block rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">
-          Saham {person.shares}
-        </p>
+        {person.shares && (
+          <p className="mt-2 inline-block rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">
+            Saham {person.shares}
+          </p>
+        )}
       </motion.div>
     </StaggerItem>
   );
@@ -63,9 +61,25 @@ export function Leadership() {
           eyebrow="Tata Kelola"
           title="Tim Pimpinan"
           highlight="Berpengalaman"
-          description="Susunan komisaris dan direksi sesuai Akta Pendirian PT Bambu Water Nusantara — kombinasi pengalaman bisnis dan dedikasi kesehatan masyarakat."
+          description="Dewan pendiri, komisaris, direksi, hingga divisi manager operasional — kombinasi pengalaman bisnis, dedikasi kesehatan masyarakat, dan standar mutu modern."
         />
 
+        {/* Dewan Pendiri */}
+        <div className="mt-16">
+          <Reveal className="mb-8 flex items-center justify-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-gold">
+              <Crown className="h-5.5 w-5.5" aria-hidden />
+            </span>
+            <h3 className="font-serif text-2xl font-bold text-foreground">Dewan Pendiri</h3>
+          </Reveal>
+          <StaggerContainer className="mx-auto grid max-w-sm gap-5" stagger={0.12}>
+            {LEADERSHIP.pendiri.map((p) => (
+              <PersonCard key={p.name} person={p} />
+            ))}
+          </StaggerContainer>
+        </div>
+
+        {/* Dewan Komisaris */}
         <div className="mt-16">
           <Reveal className="mb-8 flex items-center justify-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -74,31 +88,48 @@ export function Leadership() {
             <h3 className="font-serif text-2xl font-bold text-foreground">Dewan Komisaris</h3>
           </Reveal>
           <StaggerContainer className="mx-auto grid max-w-4xl gap-5 sm:grid-cols-3" stagger={0.12}>
-            {LEADERSHIP.komisaris.map((p, i) => (
-              <PersonCard key={p.name} person={p} index={i} />
+            {LEADERSHIP.komisaris.map((p) => (
+              <PersonCard key={p.name} person={p} />
             ))}
           </StaggerContainer>
         </div>
 
+        {/* Dewan Direksi */}
         <div className="mt-16">
           <Reveal className="mb-8 flex items-center justify-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-gold">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <Users className="h-5.5 w-5.5" aria-hidden />
             </span>
             <h3 className="font-serif text-2xl font-bold text-foreground">Dewan Direksi</h3>
           </Reveal>
           <StaggerContainer className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-            {LEADERSHIP.direktur.map((p, i) => (
-              <PersonCard key={p.name} person={p} index={i} />
+            {LEADERSHIP.direktur.map((p) => (
+              <PersonCard key={p.name} person={p} />
             ))}
           </StaggerContainer>
         </div>
 
+        {/* Divisi Manager Operasional */}
+        <div className="mt-16">
+          <Reveal className="mb-8 flex items-center justify-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-500/15 text-teal-700">
+              <HardHat className="h-5.5 w-5.5" aria-hidden />
+            </span>
+            <h3 className="font-serif text-2xl font-bold text-foreground">Divisi Manager Operasional</h3>
+          </Reveal>
+          <StaggerContainer className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+            {OPERATIONS_MANAGERS.map((p) => (
+              <PersonCard key={p.name} person={p} />
+            ))}
+          </StaggerContainer>
+        </div>
+
+        {/* Catatan tim produksi */}
         <Reveal className="mx-auto mt-12 max-w-2xl">
-          <p className="rounded-2xl border border-emerald-900/10 bg-emerald-50/60 px-6 py-4 text-center text-sm text-emerald-900/80">
-            <strong className="font-semibold">Modal Dasar Rp 700.000.000</strong> — Modal Disetor
-            Rp 300.000.000, sebagaimana tercantum dalam Akta Pendirian resmi perseroan.
-          </p>
+          <div className="flex items-start gap-3 rounded-2xl border border-emerald-900/10 bg-emerald-50/60 px-6 py-4 text-center text-sm text-emerald-900/85">
+            <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
+            <p>{PRODUCTION_TEAM_NOTE}</p>
+          </div>
         </Reveal>
       </div>
     </section>

@@ -6,7 +6,7 @@ import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal } from '@/components/site/reveal';
 import { QuoteForm } from '@/components/site/quote-form';
 import { CtaBand } from '@/components/site/cta-band';
-import { COMPANY, waLink } from '@/lib/company';
+import { COMPANY, OFFICES, waLink } from '@/lib/company';
 
 const CONTACT_CARDS = [
   {
@@ -97,10 +97,6 @@ export function KontakPage() {
                     <dd className="mt-0.5 font-semibold text-foreground">{COMPANY.legalName} — PT resmi, akta tercatat</dd>
                   </div>
                   <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Modal Disetor</dt>
-                    <dd className="mt-0.5 font-semibold text-foreground">{COMPANY.modalDisetor}</dd>
-                  </div>
-                  <div>
                     <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Berdiri</dt>
                     <dd className="mt-0.5 font-semibold text-foreground">Pionir sejak 2007 — terbesar & pertama di Indonesia</dd>
                   </div>
@@ -118,15 +114,20 @@ export function KontakPage() {
                   <MapPin className="h-5 w-5 text-primary" aria-hidden />
                   Alamat & Area Layanan
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {COMPANY.address}
-                </p>
-                <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="mt-4 space-y-3">
+                  {OFFICES.map((o) => (
+                    <div key={o.id} className="rounded-2xl bg-secondary/50 p-4">
+                      <p className="text-xs font-bold uppercase tracking-wider text-primary">{o.label}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{o.address}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4 shrink-0 text-primary" aria-hidden />
                   {COMPANY.operationalHours}
                 </p>
                 <div className="mt-4 rounded-2xl bg-secondary/50 p-4 text-sm leading-relaxed text-muted-foreground">
-                  <strong className="text-foreground">Area layanan:</strong> seluruh 34 provinsi
+                  <strong className="text-foreground">Area layanan:</strong> seluruh 38 provinsi
                   Indonesia — kirim reguler, kargo laut, dan ekspres udara.
                 </div>
               </div>

@@ -1,13 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldCheck, Target, Eye, Award, Leaf, Factory, Truck, Users, BadgeCheck, Scale } from 'lucide-react';
+import { ShieldCheck, Target, Eye, Award, Leaf, Factory, Truck, Users, BadgeCheck, GraduationCap, MapPin } from 'lucide-react';
 import { PageHero, PageSection } from '@/components/site/page-hero';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal';
 import { Leadership } from '@/components/site/leadership';
 import { CtaBand } from '@/components/site/cta-band';
-import { COMPANY, BRAND_CLAIM } from '@/lib/company';
+import { COMPANY, BRAND_CLAIM, OFFICES, PRODUCTION_TEAM_NOTE } from '@/lib/company';
 
 const VALUES = [
   {
@@ -23,7 +23,7 @@ const VALUES = [
   {
     icon: Truck,
     title: 'Jangkauan Nasional',
-    description: 'Jaringan kargo darat, laut, dan udara menjangkau 34 provinsi Indonesia.',
+    description: 'Jaringan kargo darat, laut, dan udara menjangkau 38 provinsi Indonesia.',
   },
   {
     icon: Users,
@@ -41,9 +41,9 @@ const MILESTONES = [
 
 const LEGAL = [
   { icon: BadgeCheck, label: 'Status', value: 'Badan Hukum PT Resmi (Akta Pendirian)' },
-  { icon: Scale, label: 'Modal Dasar', value: COMPANY.modalDasar },
-  { icon: Scale, label: 'Modal Disetor', value: COMPANY.modalDisetor },
   { icon: Award, label: 'Pengalaman', value: `Sejak 2007 (${new Date().getFullYear() - 2007}+ tahun)` },
+  { icon: GraduationCap, label: 'Produksi', value: 'Disuling santri berpengalaman' },
+  { icon: ShieldCheck, label: 'Pengawasan', value: 'Dewan pakar lintas bidang' },
 ];
 
 /** Halaman 2/25 — Tentang Kami */
@@ -178,10 +178,42 @@ export function TentangKamiPage() {
         </StaggerContainer>
       </PageSection>
 
-      {/* Pimpinan */}
-      <PageSection bg="cream">
-        <Leadership />
+      {/* Kantor Pusat & Branch Office */}
+      <PageSection bg="cream" id="kantor">
+        <SectionHeading
+          eyebrow="Alamat Kami"
+          title="Kantor Pusat &"
+          highlight="Branch Office"
+          description="Kunjungi kantor kami di Tasikmalaya dan Bandung — pintu selalu terbuka untuk mitra dan pelanggan."
+        />
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {OFFICES.map((o, i) => (
+            <Reveal key={o.id} delay={i * 0.1}>
+              <div className={`h-full rounded-3xl border p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-emerald-900/10 ${i === 0 ? 'border-gold/40 bg-gradient-to-br from-amber-50 to-white' : 'border-primary/10 bg-white'}`}>
+                <span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${i === 0 ? 'bg-gold text-emerald-950' : 'bg-primary/10 text-primary'}`}>
+                  {o.label}
+                </span>
+                <div className="mt-4 flex items-start gap-3">
+                  <MapPin className={`mt-1 h-5 w-5 shrink-0 ${i === 0 ? 'text-amber-700' : 'text-primary'}`} aria-hidden />
+                  <p className="text-sm leading-relaxed text-muted-foreground">{o.address}</p>
+                </div>
+                <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-foreground/60">
+                  {o.city}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={0.2} className="mx-auto mt-10 max-w-3xl">
+          <div className="flex items-start gap-3 rounded-2xl border-l-4 border-gold bg-gold/10 p-5">
+            <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden />
+            <p className="text-sm leading-relaxed text-foreground">{PRODUCTION_TEAM_NOTE}</p>
+          </div>
+        </Reveal>
       </PageSection>
+
+      {/* Pimpinan */}
+      <Leadership />
 
       <CtaBand
         title="Mau Jadi Mitra Distribusi BWN?"

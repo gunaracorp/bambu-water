@@ -145,9 +145,9 @@ export const metadata: Metadata = {
   },
   other: {
     'geo.region': 'ID-JB',
-    'geo.placename': 'Bandung, Jawa Barat, Indonesia',
-    'geo.position': '-6.914744;107.609811',
-    ICBM: '-6.914744, 107.609811',
+    'geo.placename': 'Tasikmalaya, Jawa Barat, Indonesia',
+    'geo.position': '-7.350603;108.224586',
+    ICBM: '-7.350603, 108.224586',
     'distribution': 'global',
     'rating': 'general',
     'revisit-after': '7 days',

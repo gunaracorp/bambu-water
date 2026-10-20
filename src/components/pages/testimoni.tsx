@@ -130,7 +130,7 @@ export function TestimoniPage() {
               <p className="mt-1 text-xs text-muted-foreground">Tahun melayani sejak 2007</p>
             </div>
             <div>
-              <p className="font-serif text-3xl font-bold text-primary">34</p>
+              <p className="font-serif text-3xl font-bold text-primary">38</p>
               <p className="mt-1 text-xs text-muted-foreground">Provinsi terjangkau</p>
             </div>
             <div>

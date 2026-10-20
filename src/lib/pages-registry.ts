@@ -434,7 +434,7 @@ export const PAGES_META = {
     h1: 'Pengiriman Massal ke Seluruh Indonesia',
     eyebrow: 'Layanan Distribusi',
     intro:
-      'Volume besar bukan masalah — jerigen, drum, ikat bambu hingga kargo truk penuh, kami antar ke 34 provinsi dengan packing aman.',
+      'Volume besar bukan masalah — jerigen, drum, ikat bambu hingga kargo truk penuh, kami antar ke 38 provinsi dengan packing aman.',
     heroImage: '/images/product-bulk.jpg',
     priority: 0.9,
     updated: UPDATED,
@@ -443,7 +443,7 @@ export const PAGES_META = {
   'jangkauan-kota': {
     slug: 'jangkauan-kota',
     navLabel: 'Jangkauan Kota',
-    seoTitle: 'Jangkauan Kota Pengiriman — 34 Provinsi Se-Indonesia | BWN',
+    seoTitle: 'Jangkauan Kota Pengiriman — 38 Provinsi Se-Indonesia | BWN',
     metaDescription:
       'Kami mengirim air bambu & bambu batang ke kota-kota seluruh Indonesia: Jakarta, Bandung, Surabaya, Medan, Makassar hingga Jayapura.',
     keywords: [
@@ -456,7 +456,7 @@ export const PAGES_META = {
     h1: 'Jangkauan Kota Se-Indonesia',
     eyebrow: 'Cakupan Wilayah',
     intro:
-      '34 provinsi, puluhan kota, satu jaringan distribusi terpercaya. Temukan kota Anda dan mulai pesan hari ini.',
+      '38 provinsi, puluhan kota, satu jaringan distribusi terpercaya. Temukan kota Anda dan mulai pesan hari ini.',
     heroImage: '/images/product-bulk.jpg',
     priority: 0.8,
     updated: UPDATED,
@@ -657,7 +657,7 @@ export const NAV_GROUPS: NavGroup[] = [
     children: [
       { label: 'Proses Produksi', slug: 'proses-produksi', desc: 'Panen, sadapan, distilasi & uji mutu' },
       { label: 'Pengiriman Massal', slug: 'pengiriman-massal', desc: 'Kargo darat, laut & udara' },
-      { label: 'Jangkauan Kota', slug: 'jangkauan-kota', desc: '34 provinsi se-Indonesia' },
+      { label: 'Jangkauan Kota', slug: 'jangkauan-kota', desc: '38 provinsi se-Indonesia' },
       { label: 'Cara Pemesanan', slug: 'cara-pemesanan', desc: '4 langkah mudah memesan' },
     ],
   },
