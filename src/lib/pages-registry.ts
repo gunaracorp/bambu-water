@@ -4,6 +4,7 @@
  * Routing berbasis hash (#/slug) dalam satu route Next.js (/).
  */
 export const SITE_URL = 'https://bambuwater.web.id';
+
 export type PageMeta = {
   slug: string;
   /** Label di menu navigasi (jika halaman masuk menu) */
