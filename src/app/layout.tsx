@@ -4,6 +4,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { COMPANY, SITE_URL } from '@/lib/company';
 import { PRINCIPAL, SUPPORT_SYSTEMS, ENTITY_KEYWORDS } from '@/lib/branding';
+import { Analytics } from '@vercel/analytics/next';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -181,6 +182,7 @@ export default function RootLayout({
       <body className={`${playfair.variable} ${jakarta.variable} antialiased bg-background text-foreground`}>
         {children}
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
