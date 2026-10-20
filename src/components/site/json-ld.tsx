@@ -29,6 +29,11 @@ export function JsonLd() {
       name: 'Indonesia',
     },
     sameAs: [COMPANY.social.instagram, COMPANY.social.facebook, COMPANY.social.linkedin],
+    founder: LEADERSHIP.pendiri.map((p) => ({
+      '@type': 'Person',
+      name: p.name,
+      jobTitle: p.role,
+    })),
     employee: [
       ...LEADERSHIP.pendiri.map((p) => ({
         '@type': 'Person',

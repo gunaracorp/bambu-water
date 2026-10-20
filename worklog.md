@@ -121,3 +121,19 @@ Stage Summary:
 - app-shell.tsx kini satu-satunya pengelola title/meta via effect (tanpa hoistable JSX); pola MutationObserver melawan restorasi title Next.js.
 - article-page.tsx HTML valid; navbar mobile overflow diperbaiki.
 - Tidak ada perubahan pada branding 2007 (sudah lengkap dari sesi sebelumnya).
+
+---
+Task ID: 5
+Agent: Z.ai Code (main)
+Task: Tambahkan Gugun Gunara ke Dewan Pendiri (permintaan user: "dewan pendiri: masukan Gugun Gunara, juga")
+
+Work Log:
+- src/lib/company.ts: LEADERSHIP.pendiri kini 2 orang — Ko Abuy + H. Gugun Gunara, S.E (tetap juga Direktur Utama di Dewan Direksi sesuai data akta)
+- src/components/site/leadership.tsx: grid Dewan Pendiri max-w-sm 1 kolom → max-w-2xl sm:grid-cols-2 agar 2 kartu founder sejajar rapi
+- src/components/site/json-ld.tsx: tambah properti schema.org "founder" pada Organization (selain employee) — otomatis ikut pendiri baru
+- Verifikasi agent-browser halaman #/tentang-kami: Dewan Pendiri menampilkan 2 kartu (KA Ko Abuy, GG H. Gugun Gunara, S.E) berdampingan; JSON-LD founder OK; 0 console error; lint bersih
+
+Stage Summary:
+- Dewan Pendiri resmi berisi 2 pendiri: Ko Abuy & H. Gugun Gunara, S.E
+- Gugun Gunara tampil ganda sesuai struktur: Dewan Pendiri + Direktur Utama (25%)
+- SEO: schema.org founder memuat kedua pendiri

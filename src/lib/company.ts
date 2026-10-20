@@ -71,7 +71,10 @@ export const PRODUCTION_TEAM_NOTE =
 
 /** Struktur pengurus — dewan pendiri, komisaris & direksi */
 export const LEADERSHIP = {
-  pendiri: [{ name: 'Ko Abuy', role: 'Dewan Pendiri' }],
+  pendiri: [
+    { name: 'Ko Abuy', role: 'Dewan Pendiri' },
+    { name: 'H. Gugun Gunara, S.E', role: 'Dewan Pendiri' },
+  ],
   komisaris: [
     { name: 'Hj. Qonitah Lutfiah, S.E., M.M.', role: 'Komisaris Utama', shares: '30%' },
     { name: 'Drs. Arif Rachman Hakim', role: 'Komisaris', shares: '15%' },

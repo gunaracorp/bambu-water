@@ -72,7 +72,7 @@ export function Leadership() {
             </span>
             <h3 className="font-serif text-2xl font-bold text-foreground">Dewan Pendiri</h3>
           </Reveal>
-          <StaggerContainer className="mx-auto grid max-w-sm gap-5" stagger={0.12}>
+          <StaggerContainer className="mx-auto grid max-w-2xl gap-5 sm:grid-cols-2" stagger={0.12}>
             {LEADERSHIP.pendiri.map((p) => (
               <PersonCard key={p.name} person={p} />
             ))}
