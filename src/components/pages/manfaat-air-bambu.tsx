@@ -7,9 +7,10 @@ import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal'
 import { Benefits } from '@/components/site/benefits';
 import { ReasonsSection } from '@/components/site/reasons';
 import { CtaBand } from '@/components/site/cta-band';
+import { useI18n } from '@/lib/i18n/context';
 import { BENEFITS } from '@/lib/company';
 
-const DAILY_GUIDE = [
+const DAILY_GUIDE_FALLBACK = [
   { time: 'Pagi (kamar mandi)', text: '1 gelas (±250 ml) air bambu suling saat perut kosong — membantu detoks & pencernaan.' },
   { time: 'Siang', text: '1 gelas setelah makan — melancarkan metabolisme dan menjaga hidrasi mineral.' },
   { time: 'Sore/Senja', text: '1 gelas hangat — menenangkan dan mendukung pemulihan tubuh.' },
@@ -17,6 +18,11 @@ const DAILY_GUIDE = [
 
 /** Halaman 4/25 — Manfaat Air Bambu */
 export function ManfaatAirBambuPage() {
+  const { t } = useI18n();
+  const s = t.pages['manfaat-air-bambu'].s;
+  const benefits = Array.isArray(t.data?.benefits) && t.data.benefits.length > 0 ? t.data.benefits : BENEFITS;
+  const dailyGuide = Array.isArray(s.daily_guide) && s.daily_guide.length > 0 ? s.daily_guide : DAILY_GUIDE_FALLBACK;
+
   return (
     <>
       <PageHero slug="manfaat-air-bambu" />
@@ -27,10 +33,10 @@ export function ManfaatAirBambuPage() {
       {/* Ringkasan 8 manfaat — komponen kartu animasi */}
       <PageSection bg="light">
         <SectionHeading
-          eyebrow="Manfaat & Khasiat"
-          title="Delapan Manfaat Utama"
-          highlight="Air Bambu"
-          description="Dirangkum dari pengobatan tradisional Nusantara dan kajian ilmiah ekstrak bambu modern."
+          eyebrow={s.benefits_eyebrow}
+          title={s.benefits_title}
+          highlight={s.benefits_highlight}
+          description={s.benefits_desc}
         />
         <div className="mt-4">
           <Benefits />
@@ -42,10 +48,10 @@ export function ManfaatAirBambuPage() {
         <div className="grid gap-10 lg:grid-cols-2">
           <Reveal direction="right">
             <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-              Untuk Dalam Tubuh: <span className="text-primary">Terapi & Pemulihan</span>
+              {s.inner_title} <span className="text-primary">{s.inner_highlight}</span>
             </h2>
             <ul className="mt-6 space-y-4">
-              {BENEFITS.slice(0, 4).map((b) => (
+              {benefits.slice(0, 4).map((b: { title: string; description: string }) => (
                 <li key={b.title} className="flex items-start gap-3 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
                   <div>
@@ -59,10 +65,10 @@ export function ManfaatAirBambuPage() {
 
           <Reveal direction="left" delay={0.1}>
             <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-              Untuk Luar Tubuh: <span className="text-primary">Vitalitas & Kecantikan</span>
+              {s.outer_title} <span className="text-primary">{s.outer_highlight}</span>
             </h2>
             <ul className="mt-6 space-y-4">
-              {BENEFITS.slice(4).map((b) => (
+              {benefits.slice(4).map((b: { title: string; description: string }) => (
                 <li key={b.title} className="flex items-start gap-3 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
                   <div>
@@ -79,13 +85,13 @@ export function ManfaatAirBambuPage() {
       {/* Panduan konsumsi */}
       <PageSection bg="light">
         <SectionHeading
-          eyebrow="Panduan Harian"
-          title="Cara Konsumsi yang"
-          highlight="Tepat"
-          description="Sederhana namun konsisten — itulah kunci mendapatkan manfaat penuh air bambu."
+          eyebrow={s.guide_eyebrow}
+          title={s.guide_title}
+          highlight={s.guide_highlight}
+          description={s.guide_desc}
         />
         <div className="mx-auto mt-12 max-w-4xl space-y-4">
-          {DAILY_GUIDE.map((g, i) => (
+          {dailyGuide.map((g: { time: string; text: string }, i: number) => (
             <Reveal key={g.time} delay={i * 0.1}>
               <div className="flex flex-col gap-3 rounded-2xl border border-primary/10 bg-white p-5 shadow-sm sm:flex-row sm:items-center">
                 <span className="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">
@@ -102,10 +108,7 @@ export function ManfaatAirBambuPage() {
             <div className="flex items-start gap-3 rounded-2xl border-l-4 border-gold bg-gold/10 p-5">
               <Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden />
               <p className="text-sm leading-relaxed text-foreground">
-                <strong>Catatan penting:</strong> air bambu adalah minuman terapi alami{' '}
-                <strong>pendamping</strong> — bukan pengganti obat resep dokter. Penderita kondisi
-                medis (diabetes, ginjal, hipertensi) sebaiknya berkonsultasi terlebih dahulu
-                dengan tenaga kesehatan.
+                <strong>{s.note_strong}</strong> {s.note_a} <strong>{s.note_strong2}</strong> {s.note_b}
               </p>
             </div>
           </StaggerItem>
@@ -113,9 +116,9 @@ export function ManfaatAirBambuPage() {
       </PageSection>
 
       <CtaBand
-        waMessage="Halo! Saya ingin memesan air bambu untuk kesehatan keluarga."
-        title="Rasakan Manfaatnya Sendiri"
-        description="Air Bambu Suling tersedia botol 600ml hingga drum 30L — dikirim ke seluruh Indonesia."
+        waMessage={s.cta_wa}
+        title={s.cta_title}
+        description={s.cta_desc}
       />
     </>
   );

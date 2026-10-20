@@ -3,12 +3,13 @@
 import { motion } from 'framer-motion';
 import { Crown, Landmark, Users, HardHat, GraduationCap } from 'lucide-react';
 import { LEADERSHIP, OPERATIONS_MANAGERS, PRODUCTION_TEAM_NOTE } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 import { Reveal, StaggerContainer, StaggerItem } from './reveal';
 import { SectionHeading } from './section-heading';
 
 type Person = { name: string; role: string; shares?: string };
 
-function PersonCard({ person }: { person: Person }) {
+function PersonCard({ person, sharesLabel }: { person: Person; sharesLabel: string }) {
   const initials = person.name
     .replace(/(Hj\.|H\.|Drs\.|S\.E|S\.E\.|M\.M|S\.E\., M\.M\.|Mr\.)/g, '')
     .trim()
@@ -37,7 +38,7 @@ function PersonCard({ person }: { person: Person }) {
         <p className="mt-1 text-sm font-medium text-primary">{person.role}</p>
         {person.shares && (
           <p className="mt-2 inline-block rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">
-            Saham {person.shares}
+            {sharesLabel} {person.shares}
           </p>
         )}
       </motion.div>
@@ -46,11 +47,19 @@ function PersonCard({ person }: { person: Person }) {
 }
 
 export function Leadership() {
+  const { t } = useI18n();
+  const s = t.ui.leadership;
+  const pendiri = t.data?.leadership?.pendiri ?? LEADERSHIP.pendiri;
+  const komisaris = t.data?.leadership?.komisaris ?? LEADERSHIP.komisaris;
+  const direktur = t.data?.leadership?.direktur ?? LEADERSHIP.direktur;
+  const managers = t.data?.leadership?.managers ?? OPERATIONS_MANAGERS;
+  const productionNote = t.data?.productionNote ?? PRODUCTION_TEAM_NOTE;
+
   return (
     <section
       id="pimpinan"
       className="relative overflow-hidden py-24 sm:py-28"
-      aria-label="Struktur pimpinan perusahaan"
+      aria-label={s.ariaLabel}
     >
       <div
         aria-hidden
@@ -58,10 +67,10 @@ export function Leadership() {
       />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="Tata Kelola"
-          title="Tim Pimpinan"
-          highlight="Berpengalaman"
-          description="Dewan pendiri, komisaris, direksi, hingga divisi manager operasional — kombinasi pengalaman bisnis, dedikasi kesehatan masyarakat, dan standar mutu modern."
+          eyebrow={s.eyebrow}
+          title={s.title}
+          highlight={s.highlight}
+          description={s.description}
         />
 
         {/* Dewan Pendiri */}
@@ -70,11 +79,11 @@ export function Leadership() {
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-gold">
               <Crown className="h-5.5 w-5.5" aria-hidden />
             </span>
-            <h3 className="font-serif text-2xl font-bold text-foreground">Dewan Pendiri</h3>
+            <h3 className="font-serif text-2xl font-bold text-foreground">{s.pendiriTitle}</h3>
           </Reveal>
           <StaggerContainer className="mx-auto grid max-w-2xl gap-5 sm:grid-cols-2" stagger={0.12}>
-            {LEADERSHIP.pendiri.map((p) => (
-              <PersonCard key={p.name} person={p} />
+            {pendiri.map((p: Person) => (
+              <PersonCard key={p.name} person={p} sharesLabel={s.sharesLabel} />
             ))}
           </StaggerContainer>
         </div>
@@ -85,11 +94,11 @@ export function Leadership() {
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <Landmark className="h-5.5 w-5.5" aria-hidden />
             </span>
-            <h3 className="font-serif text-2xl font-bold text-foreground">Dewan Komisaris</h3>
+            <h3 className="font-serif text-2xl font-bold text-foreground">{s.komisarisTitle}</h3>
           </Reveal>
           <StaggerContainer className="mx-auto grid max-w-4xl gap-5 sm:grid-cols-3" stagger={0.12}>
-            {LEADERSHIP.komisaris.map((p) => (
-              <PersonCard key={p.name} person={p} />
+            {komisaris.map((p: Person) => (
+              <PersonCard key={p.name} person={p} sharesLabel={s.sharesLabel} />
             ))}
           </StaggerContainer>
         </div>
@@ -100,11 +109,11 @@ export function Leadership() {
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <Users className="h-5.5 w-5.5" aria-hidden />
             </span>
-            <h3 className="font-serif text-2xl font-bold text-foreground">Dewan Direksi</h3>
+            <h3 className="font-serif text-2xl font-bold text-foreground">{s.direkturTitle}</h3>
           </Reveal>
           <StaggerContainer className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-            {LEADERSHIP.direktur.map((p) => (
-              <PersonCard key={p.name} person={p} />
+            {direktur.map((p: Person) => (
+              <PersonCard key={p.name} person={p} sharesLabel={s.sharesLabel} />
             ))}
           </StaggerContainer>
         </div>
@@ -115,11 +124,11 @@ export function Leadership() {
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-500/15 text-teal-700">
               <HardHat className="h-5.5 w-5.5" aria-hidden />
             </span>
-            <h3 className="font-serif text-2xl font-bold text-foreground">Divisi Manager Operasional</h3>
+            <h3 className="font-serif text-2xl font-bold text-foreground">{s.managersTitle}</h3>
           </Reveal>
           <StaggerContainer className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
-            {OPERATIONS_MANAGERS.map((p) => (
-              <PersonCard key={p.name} person={p} />
+            {managers.map((p: Person) => (
+              <PersonCard key={p.name} person={p} sharesLabel={s.sharesLabel} />
             ))}
           </StaggerContainer>
         </div>
@@ -128,7 +137,7 @@ export function Leadership() {
         <Reveal className="mx-auto mt-12 max-w-2xl">
           <div className="flex items-start gap-3 rounded-2xl border border-emerald-900/10 bg-emerald-50/60 px-6 py-4 text-center text-sm text-emerald-900/85">
             <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-            <p>{PRODUCTION_TEAM_NOTE}</p>
+            <p>{productionNote}</p>
           </div>
         </Reveal>
       </div>

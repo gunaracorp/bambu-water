@@ -13,6 +13,7 @@ import { PageHero, PageSection } from '@/components/site/page-hero';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal';
 import { CtaBand } from '@/components/site/cta-band';
+import { useI18n } from '@/lib/i18n/context';
 import { waLink, SITE_URL } from '@/lib/company';
 
 export type ProductFaq = { q: string; a: string };
@@ -33,7 +34,23 @@ export type ProductDetail = {
   waMessage: string;
 };
 
-/** JSON-LD Product per halaman produk */
+/** Fallback string template (id) — dipakai bila ui.productTemplate belum ter-compile */
+const TPL_FALLBACK = {
+  packaging: 'Pilihan Kemasan',
+  orderWa: 'Pesan via WhatsApp',
+  viewPrice: 'Lihat Harga',
+  usesEyebrow: 'Untuk Apa',
+  usesTitle: 'Kegunaan &',
+  usesHighlight: 'Manfaatnya',
+  guideTitle: 'Panduan',
+  guideHighlight: 'Penggunaan',
+  faqTitle: 'Pertanyaan',
+  faqHighlight: 'Umum',
+  safetyNote: 'Produk food-grade, diproses higienis, tanpa pengawet.',
+  relatedLabel: 'Produk Lainnya',
+};
+
+/** JSON-LD Product per halaman produk (data sumber id — tidak diterjemahkan) */
 function ProductJsonLd({ p }: { p: ProductDetail }) {
   const data = {
     '@context': 'https://schema.org',
@@ -53,8 +70,35 @@ function ProductJsonLd({ p }: { p: ProductDetail }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
 
-/** Template halaman produk (3 halaman produk) */
+/** Template halaman produk (3 halaman produk) — slug diambil dari prop `p` */
 export function ProductPageTemplate({ p }: { p: ProductDetail }) {
+  const { t } = useI18n();
+  const tpl = { ...TPL_FALLBACK, ...(t.ui?.productTemplate ?? {}) };
+
+  /* String body per halaman produk: t.pages[p.slug].s — fallback ke data prop (id) */
+  const ps = t.pages?.[p.slug]?.s ?? {};
+  const imageAlt: string = ps.imageAlt ?? p.imageAlt;
+  const tagline: string = ps.tagline ?? p.tagline;
+  const description: string[] =
+    Array.isArray(ps.description) && ps.description.length > 0 ? ps.description : p.description;
+  const sizes: { name: string; note: string }[] =
+    Array.isArray(ps.sizes) && ps.sizes.length > 0 ? ps.sizes : p.sizes;
+  const features: string[] =
+    Array.isArray(ps.features) && ps.features.length > 0 ? ps.features : p.features;
+  const specs: { label: string; value: string }[] =
+    Array.isArray(ps.specs) && ps.specs.length > 0 ? ps.specs : p.specs;
+  const uses: ProductDetail['uses'] =
+    Array.isArray(ps.uses) && ps.uses.length > 0 ? ps.uses : p.uses;
+  const howTo: string[] = Array.isArray(ps.howTo) && ps.howTo.length > 0 ? ps.howTo : p.howTo;
+  const faqs: ProductFaq[] = Array.isArray(ps.faqs) && ps.faqs.length > 0 ? ps.faqs : p.faqs;
+  const related: { label: string; slug: string }[] = (
+    Array.isArray(ps.related) && ps.related.length > 0 ? ps.related : p.related
+  ).map((r: { label: string; slug: string }, i: number) => ({
+    label: r.label,
+    slug: p.related[i]?.slug ?? r.slug,
+  }));
+  const waMessage: string = ps.waMessage ?? p.waMessage;
+
   return (
     <>
       <ProductJsonLd p={p} />
@@ -68,7 +112,7 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
               { }
               <img
                 src={p.image}
-                alt={p.imageAlt}
+                alt={imageAlt}
                 className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
@@ -76,10 +120,10 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
             </div>
             {/* Specs */}
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {p.specs.map((s) => (
-                <div key={s.label} className="rounded-2xl border border-primary/10 bg-white p-3 text-center shadow-sm">
-                  <p className="text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground">{s.label}</p>
-                  <p className="mt-1 text-sm font-bold text-primary">{s.value}</p>
+              {specs.map((sp: { label: string; value: string }, i: number) => (
+                <div key={i} className="rounded-2xl border border-primary/10 bg-white p-3 text-center shadow-sm">
+                  <p className="text-[0.65rem] font-bold uppercase tracking-wider text-muted-foreground">{sp.label}</p>
+                  <p className="mt-1 text-sm font-bold text-primary">{sp.value}</p>
                 </div>
               ))}
             </div>
@@ -87,18 +131,18 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
 
           <Reveal direction="left">
             <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-              {p.tagline}
+              {tagline}
             </h2>
             <div className="mt-4 space-y-4 text-base leading-relaxed text-muted-foreground">
-              {p.description.map((d, i) => (
+              {description.map((d, i) => (
                 <p key={i}>{d}</p>
               ))}
             </div>
 
             {/* Fitur */}
             <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
-              {p.features.map((f) => (
-                <li key={f} className="flex items-center gap-2.5 text-sm font-medium text-foreground">
+              {features.map((f, i) => (
+                <li key={i} className="flex items-center gap-2.5 text-sm font-medium text-foreground">
                   <CheckCircle2 className="h-4.5 w-4.5 shrink-0 text-primary" aria-hidden />
                   {f}
                 </li>
@@ -109,16 +153,16 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
             <div className="mt-7 rounded-2xl border border-primary/15 bg-secondary/50 p-5">
               <p className="flex items-center gap-2 text-sm font-bold text-foreground">
                 <Package className="h-4.5 w-4.5 text-primary" aria-hidden />
-                Pilihan Kemasan
+                {tpl.packaging}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {p.sizes.map((s) => (
+                {sizes.map((sz: { name: string; note: string }, i: number) => (
                   <span
-                    key={s.name}
-                    title={s.note}
+                    key={i}
+                    title={sz.note}
                     className="rounded-full border border-primary/20 bg-white px-3.5 py-1.5 text-xs font-semibold text-primary"
                   >
-                    {s.name}
+                    {sz.name}
                   </span>
                 ))}
               </div>
@@ -126,13 +170,13 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="flex-1 rounded-full bg-emerald-600 py-6 text-white shadow-lg hover:bg-emerald-700">
-                <a href={waLink(p.waMessage)} target="_blank" rel="noopener noreferrer external" className="gap-2">
+                <a href={waLink(waMessage)} target="_blank" rel="noopener noreferrer external" className="gap-2">
                   <MessageCircle className="h-5 w-5" aria-hidden />
-                  Pesan via WhatsApp
+                  {tpl.orderWa}
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="flex-1 rounded-full border-primary/40 py-6 text-primary hover:bg-primary/10">
-                <a href="#/harga-paket">Lihat Harga</a>
+                <a href="#/harga-paket">{tpl.viewPrice}</a>
               </Button>
             </div>
           </Reveal>
@@ -142,16 +186,20 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
       {/* Kegunaan */}
       <PageSection bg="cream">
         <SectionHeading
-          eyebrow="Untuk Apa"
-          title="Kegunaan &"
-          highlight="Manfaatnya"
+          eyebrow={tpl.usesEyebrow}
+          title={tpl.usesTitle}
+          highlight={tpl.usesHighlight}
         />
         <StaggerContainer className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {p.uses.map((u) => (
-            <StaggerItem key={u.title}>
+          {uses.map((u: { icon?: string; title: string; text: string }, i: number) => (
+            <StaggerItem key={i}>
               <div className="h-full rounded-3xl border border-primary/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-emerald-900/10">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                  {u.icon === 'tree' ? <TreePine className="h-6 w-6" aria-hidden /> : <Droplets className="h-6 w-6" aria-hidden />}
+                  {(p.uses[i]?.icon ?? u.icon) === 'tree' ? (
+                    <TreePine className="h-6 w-6" aria-hidden />
+                  ) : (
+                    <Droplets className="h-6 w-6" aria-hidden />
+                  )}
                 </span>
                 <h3 className="mt-4 font-serif text-lg font-bold text-foreground">{u.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{u.text}</p>
@@ -166,10 +214,10 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
         <div className="grid gap-12 lg:grid-cols-2">
           <Reveal direction="right">
             <h2 className="font-serif text-2xl font-bold text-foreground sm:text-3xl">
-              Panduan <span className="text-primary">Penggunaan</span>
+              {tpl.guideTitle} <span className="text-primary">{tpl.guideHighlight}</span>
             </h2>
             <ol className="mt-6 space-y-4">
-              {p.howTo.map((h, i) => (
+              {howTo.map((h, i) => (
                 <li key={i} className="flex items-start gap-4 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                     {i + 1}
@@ -180,16 +228,16 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
             </ol>
             <p className="mt-5 inline-flex items-center gap-2 text-xs text-muted-foreground">
               <ShieldCheck className="h-4 w-4 text-primary" aria-hidden />
-              Produk food-grade, diproses higienis, tanpa pengawet.
+              {tpl.safetyNote}
             </p>
           </Reveal>
 
           <Reveal direction="left">
             <h2 className="font-serif text-2xl font-bold text-foreground sm:text-3xl">
-              Pertanyaan <span className="text-primary">Umum</span>
+              {tpl.faqTitle} <span className="text-primary">{tpl.faqHighlight}</span>
             </h2>
             <Accordion type="single" collapsible className="mt-6 space-y-3">
-              {p.faqs.map((f, i) => (
+              {faqs.map((f: ProductFaq, i: number) => (
                 <AccordionItem key={i} value={`pf-${i}`} className="rounded-2xl border border-primary/10 bg-white px-5 shadow-sm">
                   <AccordionTrigger className="text-left text-sm font-semibold text-foreground hover:text-primary sm:text-base">
                     {f.q}
@@ -206,9 +254,9 @@ export function ProductPageTemplate({ p }: { p: ProductDetail }) {
 
       {/* Produk terkait */}
       <PageSection bg="cream" className="!py-12">
-        <p className="text-center text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">Produk Lainnya</p>
+        <p className="text-center text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">{tpl.relatedLabel}</p>
         <div className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-3">
-          {p.related.map((r) => (
+          {related.map((r) => (
             <motion.a
               key={r.slug}
               href={`#/${r.slug}`}

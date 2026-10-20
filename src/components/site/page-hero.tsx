@@ -2,13 +2,13 @@
 
 import { motion } from 'framer-motion';
 import { ChevronRight, CalendarClock } from 'lucide-react';
-import { getPageMeta } from '@/lib/pages-registry';
 import { SITE_URL, COMPANY } from '@/lib/company';
+import { useI18n, pageMeta } from '@/lib/i18n/context';
 
 /** JSON-LD BreadcrumbList per halaman */
-function BreadcrumbJsonLd({ slug, label }: { slug: string; label: string }) {
+function BreadcrumbJsonLd({ slug, label, homeLabel }: { slug: string; label: string; homeLabel: string }) {
   const items = [
-    { '@type': 'ListItem', position: 1, name: 'Beranda', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 1, name: homeLabel, item: `${SITE_URL}/` },
     {
       '@type': 'ListItem',
       position: 2,
@@ -40,7 +40,10 @@ export function PageHero({
   slug: string;
   showBreadcrumb?: boolean;
 }) {
-  const meta = getPageMeta(slug);
+  const { t } = useI18n();
+  const hs = t.ui.pageHero;
+  const meta = pageMeta(t, slug);
+  const navLabel = meta.navLabel ?? meta.h1;
 
   return (
     <section className="relative overflow-hidden bg-emerald-950 pt-32 pb-16 sm:pt-40 sm:pb-20" aria-labelledby="page-title">
@@ -71,13 +74,13 @@ export function PageHero({
             className="mx-auto mb-6 flex w-fit items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs text-emerald-100/85 backdrop-blur"
           >
             <a href="#/" className="transition-colors hover:text-white hover:underline">
-              Beranda
+              {hs.breadcrumbHome}
             </a>
             <ChevronRight className="h-3 w-3 text-gold" aria-hidden />
             <span className="font-semibold text-white" aria-current="page">
-              {meta.navLabel ?? meta.h1}
+              {navLabel}
             </span>
-            <BreadcrumbJsonLd slug={slug} label={meta.navLabel ?? meta.h1} />
+            <BreadcrumbJsonLd slug={slug} label={navLabel} homeLabel={hs.breadcrumbHome} />
           </motion.nav>
         )}
 
@@ -117,7 +120,7 @@ export function PageHero({
           className="mt-6 inline-flex items-center gap-2 text-xs text-emerald-100/60"
         >
           <CalendarClock className="h-3.5 w-3.5 text-gold/80" aria-hidden />
-          Diperbarui {meta.updated} • {COMPANY.domain}
+          {hs.updatedPrefix} {meta.updated} • {COMPANY.domain}
         </motion.p>
       </div>
     </section>

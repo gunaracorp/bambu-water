@@ -1,6 +1,6 @@
 import { COMPANY, FAQS, PRODUCTS, LEADERSHIP, OPERATIONS_MANAGERS } from '@/lib/company';
 
-export function JsonLd() {
+export function JsonLd({ locale = 'id' }: { locale?: string }) {
   const siteUrl = 'https://bambuwater.web.id';
 
   const organization = {
@@ -16,6 +16,7 @@ export function JsonLd() {
     email: COMPANY.email,
     telephone: COMPANY.phone,
     foundingDate: String(COMPANY.foundedYear),
+    inLanguage: locale === 'id' ? 'id-ID' : locale,
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Guntur Village No.50, Kampung Gunung Guntur, Desa Padasuka, Kecamatan Sukarame',

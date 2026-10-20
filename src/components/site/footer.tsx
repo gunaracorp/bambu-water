@@ -2,62 +2,92 @@
 
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { COMPANY, OFFICES, waLink } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 import { Logo } from './logo';
 
-/** Sitemap footer — 25 halaman bambuwater.web.id */
-const FOOTER_NAV = [
+type FooterLink = { slug: string; href: string; label: string };
+type FooterColumn = { key: string; heading: string; links: FooterLink[] };
+
+/** Sitemap footer — 25 halaman bambuwater.web.id (label id fallback; label aktif dari dictionary) */
+const FOOTER_NAV: FooterColumn[] = [
   {
+    key: 'explore',
     heading: 'Jelajahi',
     links: [
-      { label: 'Beranda', href: '#/' },
-      { label: 'Tentang Kami', href: '#/tentang-kami' },
-      { label: 'Testimoni', href: '#/testimoni' },
-      { label: 'FAQ', href: '#/faq' },
-      { label: 'Kontak', href: '#/kontak' },
+      { slug: 'beranda', href: '#/', label: 'Beranda' },
+      { slug: 'tentang-kami', href: '#/tentang-kami', label: 'Tentang Kami' },
+      { slug: 'testimoni', href: '#/testimoni', label: 'Testimoni' },
+      { slug: 'faq', href: '#/faq', label: 'FAQ' },
+      { slug: 'kontak', href: '#/kontak', label: 'Kontak' },
     ],
   },
   {
+    key: 'health',
     heading: 'Kesehatan',
     links: [
-      { label: 'Apa Itu Air Bambu', href: '#/apa-itu-air-bambu' },
-      { label: 'Manfaat Air Bambu', href: '#/manfaat-air-bambu' },
-      { label: 'Kandungan Nutrisi', href: '#/kandungan-nutrisi' },
-      { label: 'Untuk Pengobatan', href: '#/air-bambu-pengobatan' },
-      { label: 'Sejarah Air Bambu', href: '#/sejarah-air-bambu' },
+      { slug: 'apa-itu-air-bambu', href: '#/apa-itu-air-bambu', label: 'Apa Itu Air Bambu' },
+      { slug: 'manfaat-air-bambu', href: '#/manfaat-air-bambu', label: 'Manfaat Air Bambu' },
+      { slug: 'kandungan-nutrisi', href: '#/kandungan-nutrisi', label: 'Kandungan Nutrisi' },
+      { slug: 'air-bambu-pengobatan', href: '#/air-bambu-pengobatan', label: 'Untuk Pengobatan' },
+      { slug: 'sejarah-air-bambu', href: '#/sejarah-air-bambu', label: 'Sejarah Air Bambu' },
     ],
   },
   {
+    key: 'products',
     heading: 'Produk & Layanan',
     links: [
-      { label: 'Air Bambu Suling', href: '#/air-bambu-suling' },
-      { label: 'Air Bambu Tabib', href: '#/air-bambu-tabib' },
-      { label: 'Bambu Berkualitas', href: '#/bambu-berkualitas' },
-      { label: 'Harga & Paket', href: '#/harga-paket' },
-      { label: 'Pengiriman Massal', href: '#/pengiriman-massal' },
-      { label: 'Jangkauan Kota', href: '#/jangkauan-kota' },
-      { label: 'Proses Produksi', href: '#/proses-produksi' },
-      { label: 'Cara Pemesanan', href: '#/cara-pemesanan' },
+      { slug: 'air-bambu-suling', href: '#/air-bambu-suling', label: 'Air Bambu Suling' },
+      { slug: 'air-bambu-tabib', href: '#/air-bambu-tabib', label: 'Air Bambu Tabib' },
+      { slug: 'bambu-berkualitas', href: '#/bambu-berkualitas', label: 'Bambu Berkualitas' },
+      { slug: 'harga-paket', href: '#/harga-paket', label: 'Harga & Paket' },
+      { slug: 'pengiriman-massal', href: '#/pengiriman-massal', label: 'Pengiriman Massal' },
+      { slug: 'jangkauan-kota', href: '#/jangkauan-kota', label: 'Jangkauan Kota' },
+      { slug: 'proses-produksi', href: '#/proses-produksi', label: 'Proses Produksi' },
+      { slug: 'cara-pemesanan', href: '#/cara-pemesanan', label: 'Cara Pemesanan' },
     ],
   },
   {
+    key: 'articles',
     heading: 'Artikel Kesehatan',
     links: [
-      { label: 'Semua Artikel', href: '#/artikel' },
-      { label: 'Air Bambu & Gula Darah', href: '#/air-bambu-gula-darah' },
-      { label: 'Air Bambu & Batu Ginjal', href: '#/air-bambu-batu-ginjal' },
-      { label: 'Air Bambu & Kolesterol', href: '#/air-bambu-kolesterol' },
-      { label: 'Detoksifikasi Alami', href: '#/air-bambu-detoksifikasi' },
-      { label: 'Tulang & Sendi', href: '#/air-bambu-tulang-silika' },
-      { label: 'Kecantikan & Kulit', href: '#/air-bambu-kecantikan' },
+      { slug: 'artikel', href: '#/artikel', label: 'Semua Artikel' },
+      { slug: 'air-bambu-gula-darah', href: '#/air-bambu-gula-darah', label: 'Air Bambu & Gula Darah' },
+      { slug: 'air-bambu-batu-ginjal', href: '#/air-bambu-batu-ginjal', label: 'Air Bambu & Batu Ginjal' },
+      { slug: 'air-bambu-kolesterol', href: '#/air-bambu-kolesterol', label: 'Air Bambu & Kolesterol' },
+      { slug: 'air-bambu-detoksifikasi', href: '#/air-bambu-detoksifikasi', label: 'Detoksifikasi Alami' },
+      { slug: 'air-bambu-tulang-silika', href: '#/air-bambu-tulang-silika', label: 'Tulang & Sendi' },
+      { slug: 'air-bambu-kecantikan', href: '#/air-bambu-kecantikan', label: 'Kecantikan & Kulit' },
     ],
   },
 ];
 
 export function Footer() {
+  const { t } = useI18n();
+  const s = t.ui.footer;
+  const common = t.ui.common;
   const year = new Date().getFullYear();
 
+  /* Label aktif dari dictionary (t.pages[slug].navLabel / articleLinks); fallback label id */
+  const resolveLabel = (colKey: string, slug: string, index: number, fallback: string): string => {
+    if (colKey === 'articles') {
+      const arr = s.articleLinks;
+      if (Array.isArray(arr) && typeof arr[index] === 'string') return arr[index];
+      return fallback;
+    }
+    const overridden = s.labelOverrides?.[slug];
+    if (typeof overridden === 'string') return overridden;
+    const nav = t.pages?.[slug]?.navLabel;
+    if (typeof nav === 'string' && nav.length > 0) return nav;
+    return fallback;
+  };
+
+  const columns = FOOTER_NAV.map((col) => ({
+    heading: s.columns?.[col.key] ?? col.heading,
+    links: col.links.map((l, i) => ({ ...l, label: resolveLabel(col.key, l.slug, i, l.label) })),
+  }));
+
   return (
-    <footer className="relative mt-auto bg-emerald-950 text-emerald-50" aria-label="Footer situs">
+    <footer className="relative mt-auto bg-emerald-950 text-emerald-50" aria-label={s.ariaLabel}>
       {/* CTA band */}
       <div className="relative overflow-hidden border-b border-white/10">
         <div
@@ -72,28 +102,27 @@ export function Footer() {
         <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 py-14 text-center sm:px-6 md:flex-row md:text-left">
           <div>
             <h2 className="font-serif text-2xl font-bold text-white sm:text-3xl">
-              Mulai Hidup Sehat dengan <span className="text-shimmer-gold">Sari Bambu</span>
+              {s.ctaTitle} <span className="text-shimmer-gold">{s.ctaHighlight}</span>
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-emerald-100/75">
-              Pesan air bambu untuk keluarga Anda, atau jadikan mitra distribusi kami di kota
-              Anda. Konsultasi gratis via WhatsApp {COMPANY.whatsappDisplay}.
+              {s.ctaDesc} {s.ctaConsult} {COMPANY.whatsappDisplay}.
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <a
-              href={waLink('Halo Bambu Water Nusantara! Saya ingin konsultasi gratis tentang air bambu / bambu batang.')}
+              href={waLink(s.waMessage)}
               target="_blank"
               rel="noopener noreferrer external"
               className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-500 px-7 py-4 text-base font-bold text-white shadow-xl shadow-emerald-900/40 transition-all duration-300 hover:-translate-y-1 hover:bg-emerald-400 hover:shadow-2xl"
             >
               <MessageCircle className="h-5 w-5" aria-hidden />
-              WhatsApp {COMPANY.whatsappDisplay}
+              {s.waCta} {COMPANY.whatsappDisplay}
             </a>
             <a
               href="#/kontak"
               className="group inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 px-7 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:text-gold"
             >
-              Formulir Pemesanan
+              {s.ctaForm}
               <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
             </a>
           </div>
@@ -110,30 +139,30 @@ export function Footer() {
           <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs text-emerald-100/80">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden />
             <span className="font-semibold text-white">{COMPANY.domain}</span>
-            — situs resmi
+            — {common.officialSite}
           </p>
           <div className="mt-5 flex gap-3">
             {[
-              { icon: Instagram, href: COMPANY.social.instagram, label: 'Instagram Bambu Water Nusantara' },
-              { icon: Facebook, href: COMPANY.social.facebook, label: 'Facebook Bambu Water Nusantara' },
-              { icon: Linkedin, href: COMPANY.social.linkedin, label: 'LinkedIn Bambu Water Nusantara' },
-            ].map((s) => (
+              { icon: Instagram, href: COMPANY.social.instagram, label: s.socialLabels?.[0] ?? 'Instagram Bambu Water Nusantara' },
+              { icon: Facebook, href: COMPANY.social.facebook, label: s.socialLabels?.[1] ?? 'Facebook Bambu Water Nusantara' },
+              { icon: Linkedin, href: COMPANY.social.linkedin, label: s.socialLabels?.[2] ?? 'LinkedIn Bambu Water Nusantara' },
+            ].map((soc) => (
               <a
-                key={s.label}
-                href={s.href}
+                key={soc.label}
+                href={soc.href}
                 target="_blank"
                 rel="noopener noreferrer external"
-                aria-label={s.label}
+                aria-label={soc.label}
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-emerald-100 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:bg-gold/20 hover:text-gold"
               >
-                <s.icon className="h-4.5 w-4.5" aria-hidden />
+                <soc.icon className="h-4.5 w-4.5" aria-hidden />
               </a>
             ))}
           </div>
         </div>
 
-        {FOOTER_NAV.map((col) => (
-          <nav aria-label={`Navigasi footer ${col.heading}`} key={col.heading}>
+        {columns.map((col) => (
+          <nav aria-label={`${s.navAria} ${col.heading}`} key={col.heading}>
             <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-gold">{col.heading}</h3>
             <ul className="mt-5 space-y-2.5 text-sm">
               {col.links.map((l) => (
@@ -156,7 +185,7 @@ export function Footer() {
         <div className="mx-auto grid max-w-7xl gap-4 px-4 py-8 text-sm text-emerald-100/75 sm:px-6 md:grid-cols-3">
           <a href={`tel:${COMPANY.phone.replace(/[^+\d]/g, '')}`} className="flex items-center gap-3 transition-colors hover:text-white">
             <Phone className="h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
-            {COMPANY.phone} (telepon / WhatsApp)
+            {COMPANY.phone} ({s.phoneNote})
           </a>
           <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 break-all transition-colors hover:text-white">
             <Mail className="h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
@@ -167,7 +196,7 @@ export function Footer() {
             <span>
               <strong className="text-white">{OFFICES[0].label}:</strong> {OFFICES[0].address}
               <span className="mt-1 block text-xs text-emerald-100/60">
-                {OFFICES[1].label}: {OFFICES[1].city} • {OFFICES[2].label}: {OFFICES[2].city} — alamat lengkap di halaman Kontak
+                {OFFICES[1].label}: {OFFICES[1].city} • {OFFICES[2].label}: {OFFICES[2].city} — {s.fullAddressNote}
               </span>
             </span>
           </span>
@@ -178,15 +207,15 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-center text-xs text-emerald-100/60 sm:px-6 md:flex-row md:text-left">
           <p>
-            © {year} {COMPANY.legalName} • {COMPANY.domain}. Seluruh hak cipta dilindungi.
+            © {year} {COMPANY.legalName} • {COMPANY.domain}. {common.copyright}
           </p>
           <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden />
-              Badan Hukum PT Resmi
+              {common.legalPt}
             </span>
             <span aria-hidden className="hidden md:inline">•</span>
-            <span>Terapi alami pendamping — bukan pengganti nasihat medis</span>
+            <span>{common.notMedicalAdvice}</span>
           </p>
         </div>
       </div>

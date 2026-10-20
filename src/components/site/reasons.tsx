@@ -4,8 +4,17 @@ import { motion } from 'framer-motion';
 import { Crown, BookOpenText, Sparkles, Droplets, Leaf, ShieldCheck } from 'lucide-react';
 import { Reveal, StaggerContainer, StaggerItem } from './reveal';
 import { waLink } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 import { Button } from '@/components/ui/button';
 
+const BADGE_ICONS = {
+  droplets: Droplets,
+  leaf: Leaf,
+  'book-open-text': BookOpenText,
+  'shield-check': ShieldCheck,
+} as const;
+
+/** Fallback lokal — versi terjemahan live ada di t.data.reasons.items */
 const REASONS = [
   {
     title: 'Silika Organik Tertinggi di Alam',
@@ -49,11 +58,30 @@ const REASONS = [
   },
 ];
 
+/** Fallback lokal — versi terjemahan live ada di t.data.reasons.badges */
+const REASON_BADGES = [
+  { icon: 'droplets', label: 'Silika tertinggi' },
+  { icon: 'leaf', label: '100% alami' },
+  { icon: 'book-open-text', label: 'Warisan ribuan tahun' },
+  { icon: 'shield-check', label: 'Riset modern' },
+];
+
 /**
  * Section branding "Rahasia Kaisar China" + 10 alasan minum air bambu.
  * Dipakai di Beranda & halaman Manfaat.
  */
 export function ReasonsSection({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
+  const s = t.ui.reasons;
+  const items =
+    Array.isArray(t.data?.reasons?.items) && t.data.reasons.items.length > 0
+      ? t.data.reasons.items
+      : REASONS;
+  const badges =
+    Array.isArray(t.data?.reasons?.badges) && t.data.reasons.badges.length > 0
+      ? t.data.reasons.badges
+      : REASON_BADGES;
+
   return (
     <section
       className="relative overflow-hidden bg-emerald-950 py-20 sm:py-24"
@@ -69,38 +97,35 @@ export function ReasonsSection({ compact = false }: { compact?: boolean }) {
           <Reveal direction="down">
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
               <Crown className="h-3.5 w-3.5" aria-hidden />
-              Rahasia Kuno yang Nyaris Tergores Sejarah
+              {s.badge}
             </span>
           </Reveal>
 
           <Reveal delay={0.1}>
             <h2 id="reasons-title" className="mt-5 font-serif text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.75rem]">
-              Rahasia Awet Muda <span className="text-shimmer-gold">Kaisar China</span>
+              {s.title} <span className="text-shimmer-gold">{s.highlight}</span>
             </h2>
           </Reveal>
 
           <Reveal delay={0.2}>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-emerald-50/85 sm:text-lg">
               <p>
-                Sejak ribuan tahun lalu, tabib istana Dinasti China menyimpan satu rahasia
-                paling dijaga: <strong className="text-white">sari bambu</strong> — elixir yang
-                dipercaya menjaga awet muda kaisar dan para bangsawan. Terdokumentasi dalam
-                pengobatan tradisional Tiongkok sebagai <em>"Tian Zhu Li"</em> (天竹瀝),
-                sari bambu disuling dari ruas bambu muda untuk meredakan panas, menyegarkan
-                tubuh, dan merawat vitalitas sang penguasa.
+                {s.p1Lead}{' '}
+                <strong className="text-white">{s.p1Strong}</strong>{' '}
+                {s.p1Mid}{' '}
+                <em>{s.p1Em}</em> {s.p1Tail}
               </p>
               <p>
-                Namun seiring waktu, rahasia besar itu nyaris <strong className="text-white">tergores
-                sejarah</strong> — hanya diketahui segelintir pembantu istana dan tabib
-                warisan. Kini rahasia kuno itu kembali: riset modern membuktikan kandungan
-                silika organik tertinggi di alam dan antioksidan luar biasa dalam air bambu.
+                {s.p2Lead}{' '}
+                <strong className="text-white">{s.p2Strong}</strong>{' '}
+                {s.p2Tail}
               </p>
             </div>
           </Reveal>
 
           <Reveal delay={0.3}>
             <p className="mx-auto mt-6 w-fit rounded-2xl border border-gold/30 bg-gold/10 px-6 py-3 font-serif text-lg font-bold text-gold sm:text-xl">
-              Jadilah orang yang beruntung — Anda kini tahu rahasia besar ini. 🌿
+              {s.luckLine}
             </p>
           </Reveal>
         </div>
@@ -108,15 +133,15 @@ export function ReasonsSection({ compact = false }: { compact?: boolean }) {
         {/* 10 Alasan */}
         <Reveal delay={0.15} className="mx-auto mt-14 max-w-3xl text-center">
           <h3 className="font-serif text-2xl font-bold text-white sm:text-3xl">
-            10 Alasan Kenapa Anda <span className="text-shimmer-gold">Harus Minum Air Bambu</span>
+            {s.subheading} <span className="text-shimmer-gold">{s.subheadingHighlight}</span>
           </h3>
           <p className="mt-2 text-sm text-emerald-50/70 sm:text-base">
-            Dari rahasia kuno hingga pembuktian ilmiah modern.
+            {s.subDesc}
           </p>
         </Reveal>
 
         <StaggerContainer className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" stagger={0.07}>
-          {REASONS.map((r, i) => (
+          {items.map((r: { title: string; text: string }, i: number) => (
             <StaggerItem key={r.title}>
               <motion.div
                 whileHover={{ y: -6, scale: 1.02 }}
@@ -142,15 +167,19 @@ export function ReasonsSection({ compact = false }: { compact?: boolean }) {
         {!compact && (
           <Reveal delay={0.2} className="mx-auto mt-12 flex max-w-2xl flex-col items-center gap-4 text-center">
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-wider text-emerald-50/60">
-              <span className="inline-flex items-center gap-1.5"><Droplets className="h-4 w-4 text-teal-300" aria-hidden /> Silika tertinggi</span>
-              <span className="inline-flex items-center gap-1.5"><Leaf className="h-4 w-4 text-teal-300" aria-hidden /> 100% alami</span>
-              <span className="inline-flex items-center gap-1.5"><BookOpenText className="h-4 w-4 text-teal-300" aria-hidden /> Warisan ribuan tahun</span>
-              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-teal-300" aria-hidden /> Riset modern</span>
+              {badges.map((b: { icon: string; label: string }) => {
+                const Icon = BADGE_ICONS[b.icon as keyof typeof BADGE_ICONS] ?? ShieldCheck;
+                return (
+                  <span key={b.label} className="inline-flex items-center gap-1.5">
+                    <Icon className="h-4 w-4 text-teal-300" aria-hidden /> {b.label}
+                  </span>
+                );
+              })}
             </div>
             <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-gold to-amber-400 px-8 text-emerald-950 shadow-xl shadow-amber-900/30 hover:-translate-y-1">
-              <a href={waLink('Halo! Saya ingin mencoba air bambu — rahasia awet muda kaisar China 🌿')} target="_blank" rel="noopener noreferrer external" className="gap-2">
+              <a href={waLink(s.ctaMessage)} target="_blank" rel="noopener noreferrer external" className="gap-2">
                 <Sparkles className="h-5 w-5" aria-hidden />
-                Mulai Ritual Sehat Anda
+                {s.cta}
               </a>
             </Button>
           </Reveal>

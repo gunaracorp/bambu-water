@@ -6,6 +6,7 @@ import { PageHero, PageSection } from '@/components/site/page-hero';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal';
 import { CtaBand } from '@/components/site/cta-band';
+import { useI18n } from '@/lib/i18n/context';
 
 const TESTIMONIALS = [
   {
@@ -66,9 +67,9 @@ const TESTIMONIALS = [
   },
 ];
 
-function Stars({ n }: { n: number }) {
+function Stars({ n, label }: { n: number; label: string }) {
   return (
-    <div className="flex gap-0.5" aria-label={`Rating ${n} dari 5 bintang`}>
+    <div className="flex gap-0.5" aria-label={label}>
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
@@ -82,39 +83,46 @@ function Stars({ n }: { n: number }) {
 
 /** Halaman 23/25 — Testimoni */
 export function TestimoniPage() {
+  const { t } = useI18n();
+  const s = t.pages['testimoni'].s;
+  const list =
+    Array.isArray(t.data?.testimonials) && t.data.testimonials.length > 0
+      ? t.data.testimonials
+      : TESTIMONIALS;
+
   return (
     <>
       <PageHero slug="testimoni" />
 
       <PageSection bg="light">
         <SectionHeading
-          eyebrow="Kepercayaan Sejak 2007"
-          title="Cerita Mereka yang Sudah"
-          highlight="Merasakannya"
-          description="Dari dapur keluarga hingga klinik dan proyek konstruksi — 18+ tahun membangun kepercayaan di seluruh Indonesia."
+          eyebrow={s.headingEyebrow}
+          title={s.headingTitle}
+          highlight={s.headingHighlight}
+          description={s.headingDescription}
         />
 
         <StaggerContainer className="mt-14 grid gap-6 md:grid-cols-2">
-          {TESTIMONIALS.map((t) => (
-            <StaggerItem key={t.name}>
+          {list.map((tm: { name: string; role: string; city: string; rating: number; text: string }) => (
+            <StaggerItem key={tm.name}>
               <motion.div
                 whileHover={{ y: -5 }}
                 className="relative h-full rounded-3xl border border-primary/10 bg-white p-7 shadow-sm transition-shadow hover:shadow-xl hover:shadow-emerald-900/10"
               >
                 <Quote className="absolute right-6 top-6 h-8 w-8 text-primary/10" aria-hidden />
-                <Stars n={t.rating} />
-                <p className="mt-4 text-sm leading-relaxed text-foreground/85 sm:text-base">“{t.text}”</p>
+                <Stars n={tm.rating} label={s.ratingAria.replace('{n}', String(tm.rating))} />
+                <p className="mt-4 text-sm leading-relaxed text-foreground/85 sm:text-base">“{tm.text}”</p>
                 <div className="mt-5 flex items-center gap-3 border-t border-border pt-4">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 font-serif text-lg font-bold text-primary">
-                    {t.name.replace(/^(Ibu|Hj\.|Ir\.|Dra\.|Ki)\s+/, '').charAt(0)}
+                    {tm.name.replace(/^(Ibu|Hj\.|Ir\.|Dra\.|Ki)\s+/, '').charAt(0)}
                   </span>
                   <div>
                     <p className="flex items-center gap-1.5 text-sm font-bold text-foreground">
-                      {t.name}
-                      <BadgeCheck className="h-4 w-4 text-primary" aria-label="Pelanggan terverifikasi" />
+                      {tm.name}
+                      <BadgeCheck className="h-4 w-4 text-primary" aria-label={s.verified} />
                     </p>
                     <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      {t.role} • <MapPin className="h-3 w-3" aria-hidden /> {t.city}
+                      {tm.role} • <MapPin className="h-3 w-3" aria-hidden /> {tm.city}
                     </p>
                   </div>
                 </div>
@@ -127,15 +135,15 @@ export function TestimoniPage() {
           <div className="grid gap-4 rounded-3xl border border-primary/15 bg-secondary/50 p-7 text-center sm:grid-cols-3">
             <div>
               <p className="font-serif text-3xl font-bold text-primary">18+</p>
-              <p className="mt-1 text-xs text-muted-foreground">Tahun melayani sejak 2007</p>
+              <p className="mt-1 text-xs text-muted-foreground">{s.statYearsLabel}</p>
             </div>
             <div>
               <p className="font-serif text-3xl font-bold text-primary">38</p>
-              <p className="mt-1 text-xs text-muted-foreground">Provinsi terjangkau</p>
+              <p className="mt-1 text-xs text-muted-foreground">{s.statProvincesLabel}</p>
             </div>
             <div>
               <p className="font-serif text-3xl font-bold text-primary">4,9/5</p>
-              <p className="mt-1 text-xs text-muted-foreground">Rata-rata kepuasan pelanggan</p>
+              <p className="mt-1 text-xs text-muted-foreground">{s.statSatisfactionLabel}</p>
             </div>
           </div>
         </Reveal>
@@ -143,8 +151,8 @@ export function TestimoniPage() {
 
       <CtaBand
         waMessage="Halo! Saya ingin bergabung sebagai pelanggan air bambu BWN."
-        title="Gabung Bersama Ribuan Pelanggan Puas"
-        description="Mulai dari satu galon untuk keluarga, hingga kontrak pasokan untuk bisnis Anda."
+        title={s.ctaTitle}
+        description={s.ctaDescription}
       />
     </>
   );

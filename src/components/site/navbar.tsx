@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X, ChevronDown, Phone, MessageCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { NAV_GROUPS, getPageMeta } from '@/lib/pages-registry';
+import { NAV_GROUPS } from '@/lib/pages-registry';
 import { COMPANY, waLink } from '@/lib/company';
-import { useHashRoute } from '@/hooks/use-hash-route';
+import { useHashRoute, setCanonical } from '@/hooks/use-hash-route';
+import { useI18n, pageMeta } from '@/lib/i18n/context';
 import { Logo } from './logo';
+import { LanguageSwitcher } from './language-switcher';
 import { cn } from '@/lib/utils';
 
 /**
@@ -21,6 +23,8 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const { navigate } = useHashRoute();
+  const { t } = useI18n();
+  const ns = t.ui.nav;
 
   useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 40));
 
@@ -94,7 +98,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                         transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                       />
                     )}
-                    <span className="relative">{group.label}</span>
+                    <span className="relative">{ns.groups?.[group.label] ?? group.label}</span>
                     {group.children && (
                       <ChevronDown
                         className={cn(
@@ -117,7 +121,9 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                       >
                         <div className="overflow-hidden rounded-2xl border border-emerald-900/10 bg-white p-2 shadow-2xl shadow-emerald-950/20">
                           {group.children.map((child, i) => {
-                            const childMeta = getPageMeta(child.slug);
+                            const childMeta = pageMeta(t, child.slug);
+                            const childLabel = childMeta.navLabel ?? child.label;
+                            const childDesc = childMeta.menuDesc ?? child.desc;
                             const childActive = activeSlug === child.slug;
                             return (
                               <motion.a
@@ -151,10 +157,10 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                                       childActive ? 'text-primary' : 'text-foreground'
                                     )}
                                   >
-                                    {child.label}
+                                    {childLabel}
                                   </span>
                                   <span className="mt-0.5 block text-xs leading-snug text-muted-foreground">
-                                    {child.desc}
+                                    {childDesc}
                                   </span>
                                 </span>
                                 <ArrowRight
@@ -174,6 +180,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
           </nav>
 
           <div className="flex items-center gap-2">
+            <LanguageSwitcher onDark={onDark} />
             <Button
               asChild
               className={cn(
@@ -185,7 +192,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
             >
               <a href={`#/${'kontak'}`} onClick={(e) => { e.preventDefault(); go('kontak'); }} className="gap-2">
                 <Phone className="h-4 w-4" aria-hidden />
-                Pesan Sekarang
+                {ns.orderCta}
               </a>
             </Button>
             <button
@@ -197,7 +204,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                   ? 'border-white/25 bg-white/10 text-white'
                   : 'border-emerald-900/10 bg-white/80 text-foreground'
               )}
-              aria-label="Buka menu navigasi"
+              aria-label={ns.openMenu}
               aria-expanded={open}
             >
               <Menu className="h-5 w-5" aria-hidden />
@@ -233,7 +240,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                   type="button"
                   onClick={() => setOpen(false)}
                   className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-emerald-900/10 bg-white text-foreground"
-                  aria-label="Tutup menu"
+                  aria-label={ns.closeMenu}
                 >
                   <X className="h-5 w-5" aria-hidden />
                 </button>
@@ -256,7 +263,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                           aria-expanded={openGroup === group.label}
                           className="flex w-full items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold text-foreground transition-colors hover:bg-primary/5"
                         >
-                          {group.label}
+                          {ns.groups?.[group.label] ?? group.label}
                           <ChevronDown
                             className={cn(
                               'h-4 w-4 text-primary transition-transform duration-300',
@@ -289,7 +296,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                                         : 'text-foreground/75 hover:bg-primary/5 hover:text-primary'
                                     )}
                                   >
-                                    {child.label}
+                                    {pageMeta(t, child.slug).navLabel ?? child.label}
                                   </a>
                                 ))}
                               </div>
@@ -311,7 +318,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                             : 'text-foreground hover:bg-primary/5 hover:text-primary'
                         )}
                       >
-                        {group.label}
+                        {ns.groups?.[group.label] ?? group.label}
                       </a>
                     )}
                   </motion.div>
@@ -319,6 +326,7 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
               </nav>
 
               <div className="space-y-3 border-t border-emerald-900/10 p-5">
+                <LanguageSwitcher compact />
                 <Button asChild className="w-full rounded-full bg-primary text-primary-foreground">
                   <a
                     href={`#/${'kontak'}`}
@@ -326,13 +334,13 @@ export function Navbar({ activeSlug }: { activeSlug: string }) {
                     className="gap-2"
                   >
                     <Phone className="h-4 w-4" aria-hidden />
-                    Pesan Sekarang
+                    {ns.orderCta}
                   </a>
                 </Button>
                 <Button asChild variant="outline" className="w-full rounded-full border-emerald-600 text-emerald-700 hover:bg-emerald-50">
                   <a href={waLink()} target="_blank" rel="noopener noreferrer external" className="gap-2">
                     <MessageCircle className="h-4 w-4" aria-hidden />
-                    WA {COMPANY.whatsappDisplay}
+                    {ns.waCta} {COMPANY.whatsappDisplay}
                   </a>
                 </Button>
               </div>

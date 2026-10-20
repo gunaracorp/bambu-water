@@ -14,6 +14,7 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import { BENEFITS } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 import { StaggerContainer, StaggerItem, Reveal } from './reveal';
 import { SectionHeading } from './section-heading';
 
@@ -28,7 +29,7 @@ const ICONS = {
   'flower-2': Flower2,
 } as const;
 
-const SOURCES = [
+const SOURCES_FALLBACK = [
   {
     title: 'Journal of Medicinal Plant Research (2015)',
     detail:
@@ -43,12 +44,22 @@ const SOURCES = [
   },
 ];
 
+const SOURCE_HREFS = [
+  'https://pmc.ncbi.nlm.nih.gov/articles/PMC4659479',
+  'https://time.com/3821886/bamboo-water',
+];
+
 export function Benefits() {
+  const { t } = useI18n();
+  const s = t.ui.benefits;
+  const list = Array.isArray(t.data?.benefits) && t.data.benefits.length > 0 ? t.data.benefits : BENEFITS;
+  const sources = Array.isArray(s.sources) && s.sources.length > 0 ? s.sources : SOURCES_FALLBACK;
+
   return (
     <section
       id="manfaat"
       className="relative overflow-hidden bg-emerald-950 py-24 text-emerald-50 sm:py-28"
-      aria-label="Manfaat air bambu untuk kesehatan"
+      aria-label={s.ariaLabel}
     >
       {/* Ornamen latar */}
       <div
@@ -72,14 +83,14 @@ export function Benefits() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           dark
-          eyebrow="Manfaat & Terapi"
-          title="Warisan Penyembuhan"
-          highlight="Air Bambu"
-          description="Dipercaya tabib Nusantara selama berabad-abad, kini didukung kajian ilmiah internasional. Air bambu adalah pendamping alami menuju tubuh yang seimbang."
+          eyebrow={s.eyebrow}
+          title={s.title}
+          highlight={s.highlight}
+          description={s.description}
         />
 
         <StaggerContainer className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
-          {BENEFITS.map((b, i) => {
+          {list.map((b: { icon: string; title: string; description: string }, i: number) => {
             const Icon = ICONS[b.icon];
             return (
               <StaggerItem key={b.title}>
@@ -117,31 +128,29 @@ export function Benefits() {
                 <BookOpenCheck className="h-5.5 w-5.5" aria-hidden />
               </span>
               <div>
-                <h3 className="font-serif text-xl font-bold text-white">Didukung Riset Ilmiah</h3>
-                <p className="text-sm text-emerald-100/70">Kami transparan mengutip sumber kredibel.</p>
+                <h3 className="font-serif text-xl font-bold text-white">{s.research}</h3>
+                <p className="text-sm text-emerald-100/70">{s.researchSub}</p>
               </div>
             </div>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {SOURCES.map((s) => (
+              {sources.map((sr: { title: string; detail: string }, si: number) => (
                 <a
-                  key={s.title}
-                  href={s.href}
+                  key={si}
+                  href={SOURCE_HREFS[si] ?? SOURCE_HREFS[0]}
                   target="_blank"
                   rel="noopener noreferrer external"
                   className="group rounded-2xl border border-white/10 bg-emerald-900/40 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/40 hover:bg-emerald-900/70"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <p className="font-semibold text-teal-100">{s.title}</p>
+                    <p className="font-semibold text-teal-100">{sr.title}</p>
                     <ArrowUpRight className="h-5 w-5 shrink-0 text-gold transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-emerald-100/70">{s.detail}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-emerald-100/70">{sr.detail}</p>
                 </a>
               ))}
             </div>
             <p className="mt-5 text-xs leading-relaxed text-emerald-100/55">
-              * Air bambu Bambu Water Nusantara adalah minuman kesehatan alami dan pendamping
-              terapi — bukan pengganti obat resep dokter. Konsultasikan kondisi kesehatan Anda
-              dengan tenaga medis profesional.
+              {s.disclaimer}
             </p>
           </div>
         </Reveal>

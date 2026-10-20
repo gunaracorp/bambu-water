@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Leaf, Droplets, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { COMPANY } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 
 const DROPLETS = [
   { left: '8%', delay: 0, duration: 9, size: 10 },
@@ -19,6 +19,8 @@ const DROPLETS = [
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const { t } = useI18n();
+  const s = t.ui.hero;
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.22]);
@@ -30,14 +32,14 @@ export function Hero() {
       id="beranda"
       ref={ref}
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-emerald-950"
-      aria-label="Beranda Bambu Water Nusantara"
+      aria-label={s.ariaLabel}
     >
       {/* Latar foto hutan bambu + parallax */}
       <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0">
         { }
         <img
           src="/images/hero-bamboo.jpg"
-          alt="Hutan bambu Indonesia saat fajar — sinar keemasan menembus kabut dan tetesan air sadapan menetes dari ruas bambu muda"
+          alt={s.imageAlt}
           className="h-full w-full object-cover"
           loading="eager"
           fetchPriority="high"
@@ -98,9 +100,9 @@ export function Hero() {
             className="mx-auto mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-emerald-50 backdrop-blur-md sm:text-sm"
           >
             <Leaf className="h-4 w-4 text-gold" aria-hidden />
-            Terbesar & Pertama di Indonesia
+            {s.badge}
             <span className="hidden h-1 w-1 rounded-full bg-gold sm:block" />
-            <span className="hidden sm:block">Sejak 2007</span>
+            <span className="hidden sm:block">{s.badgeSince}</span>
           </motion.div>
 
           <h1 className="text-4xl font-bold leading-[1.08] text-white sm:text-6xl lg:text-7xl">
@@ -110,7 +112,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.3 }}
             >
-              Sari Bambu Murni,
+              {s.titleLine1}
             </motion.span>
             <motion.span
               className="animate-gradient-flow block bg-gradient-to-r from-emerald-200 via-teal-100 to-amber-200 bg-clip-text text-transparent"
@@ -118,7 +120,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.48 }}
             >
-              Kesehatan dari Alam
+              {s.titleLine2}
             </motion.span>
             <motion.span
               className="block"
@@ -126,7 +128,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.66 }}
             >
-              Nusantara
+              {s.titleLine3}
             </motion.span>
           </h1>
 
@@ -136,10 +138,9 @@ export function Hero() {
             transition={{ duration: 0.85, delay: 0.84 }}
             className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-emerald-50/90 sm:text-lg"
           >
-            Air sadapan bambu untuk terapi kesehatan alami — kaya silika organik, flavonoid,
-            dan mineral esensial. Kami juga melayani{' '}
-            <strong className="font-semibold text-white">distribusi air bambu & bambu berkualitas</strong>{' '}
-            dalam jumlah besar ke seluruh Indonesia.
+            {s.subtitle}{' '}
+            <strong className="font-semibold text-white">{s.subtitleHighlight}</strong>{' '}
+            {s.subtitleAfter}
           </motion.p>
 
           <motion.div
@@ -154,7 +155,7 @@ export function Hero() {
               className="group h-14 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-8 text-base font-semibold text-white shadow-xl shadow-emerald-900/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-800/40"
             >
               <a href="#/air-bambu-suling">
-                Jelajahi Produk
+                {s.ctaPrimary}
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden />
               </a>
             </Button>
@@ -166,7 +167,7 @@ export function Hero() {
             >
               <a href="#/pengiriman-massal" className="gap-2.5">
                 <Truck className="h-5 w-5" aria-hidden />
-                Pesan Grosir / Kargo
+                {s.ctaSecondary}
               </a>
             </Button>
           </motion.div>
@@ -180,15 +181,15 @@ export function Hero() {
           >
             <li className="flex items-center gap-2">
               <Droplets className="h-4.5 w-4.5 text-teal-300" aria-hidden />
-              Suling bertahap higienis
+              {s.trust[0]}
             </li>
             <li className="flex items-center gap-2">
               <Leaf className="h-4.5 w-4.5 text-emerald-300" aria-hidden />
-              100% alami tanpa pengawet
+              {s.trust[1]}
             </li>
             <li className="flex items-center gap-2">
               <Truck className="h-4.5 w-4.5 text-amber-300" aria-hidden />
-              Kirim ke 38 provinsi
+              {s.trust[2]}
             </li>
           </motion.ul>
         </div>
@@ -208,7 +209,7 @@ export function Hero() {
       {/* Indikator gulir */}
       <motion.a
         href="#/tentang-kami"
-        aria-label="Gulir ke bawah — Tentang kami"
+        aria-label={s.scrollAriaLabel}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6 }}

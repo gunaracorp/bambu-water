@@ -4,15 +4,18 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FlaskConical, Beaker, Microscope } from 'lucide-react';
 import { NUTRITION } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 import { Reveal } from './reveal';
 import { SectionHeading } from './section-heading';
+
+type Nutrient = { name: string; value: number; note: string };
 
 function NutrientBar({
   item,
   index,
   active,
 }: {
-  item: (typeof NUTRITION)[number];
+  item: Nutrient;
   index: number;
   active: boolean;
 }) {
@@ -45,17 +48,23 @@ function NutrientBar({
 }
 
 export function Science() {
+  const { t } = useI18n();
+  const s = t.ui.science;
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const nutrition =
+    Array.isArray(t.data?.science?.nutrition) && t.data.science.nutrition.length > 0
+      ? t.data.science.nutrition
+      : NUTRITION;
 
   return (
-    <section className="relative overflow-hidden py-24 sm:py-28" aria-label="Kandungan nutrisi air bambu">
+    <section className="relative overflow-hidden py-24 sm:py-28" aria-label={s.ariaLabel}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="Kandungan Alami"
-          title="Ilmu di Balik"
-          highlight="Setiap Tetes"
-          description="Silika organik bambu termasuk yang tertinggi di alam — dipadukan flavonoid, klorofil, asam amino, dan elektrolit esensial."
+          eyebrow={s.eyebrow}
+          title={s.title}
+          highlight={s.highlight}
+          description={s.description}
         />
 
         <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">
@@ -65,7 +74,7 @@ export function Science() {
               { }
               <img
                 src="/images/wellness.jpg"
-                alt="Segelas air bambu bening di atas batu alam dengan daun bambu segar — suasana tenang dan menyembuhkan"
+                alt={s.imgAlt}
                 className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
@@ -81,7 +90,7 @@ export function Science() {
               className="absolute -top-5 left-6 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-emerald-900 shadow-lg"
             >
               <Beaker className="h-4 w-4 text-primary" aria-hidden />
-              Kaya Elektrolit Alami
+              {s.electrolyteLabel}
             </motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -91,7 +100,7 @@ export function Science() {
               className="absolute bottom-6 right-4 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-emerald-900 shadow-lg sm:right-8"
             >
               <Microscope className="h-4 w-4 text-primary" aria-hidden />
-              Diuji Mikrobiologi
+              {s.microTestLabel}
             </motion.div>
           </Reveal>
 
@@ -106,12 +115,12 @@ export function Science() {
                   <FlaskConical className="h-5.5 w-5.5" aria-hidden />
                 </span>
                 <div>
-                  <h3 className="font-serif text-xl font-bold">Profil Nutrisi Air Bambu</h3>
-                  <p className="text-sm text-muted-foreground">Indeks kekayaan relatif per komponen alami</p>
+                  <h3 className="font-serif text-xl font-bold">{s.cardTitle}</h3>
+                  <p className="text-sm text-muted-foreground">{s.cardSub}</p>
                 </div>
               </div>
               <div className="mt-8 space-y-7">
-                {NUTRITION.map((item, i) => (
+                {nutrition.map((item: Nutrient, i: number) => (
                   <NutrientBar key={item.name} item={item} index={i} active={inView} />
                 ))}
               </div>

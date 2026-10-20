@@ -2,8 +2,9 @@
 
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useHashRoute, setMeta, setCanonical } from '@/hooks/use-hash-route';
-import { getPageMeta } from '@/lib/pages-registry';
+import { useHashRoute, setMeta, setCanonical, setHreflang } from '@/hooks/use-hash-route';
+import { I18nProvider, useI18n, pageMeta } from '@/lib/i18n/context';
+import { localeMeta, localeUrl, LOCALES, type Locale } from '@/lib/i18n/config';
 import { SITE_URL, COMPANY } from '@/lib/company';
 
 import { JsonLd } from '@/components/site/json-ld';
@@ -62,50 +63,75 @@ const PAGE_MAP: Record<string, () => React.ReactElement> = {
   kontak: () => <KontakPage />,
 };
 
-export function AppShell() {
+function Shell() {
   const { slug } = useHashRoute();
-  const meta = getPageMeta(slug);
+  const { locale, t } = useI18n();
 
-  /* ===== Metadata dinamis per halaman (SEO maksimal) =====
-   * CATATAN: <title> TIDAK dirender sebagai JSX — React 19 akan meng-hoist
-   * elemen hoistable ke <head> dan bertabrakan dengan sistem metadata
-   * Next.js (duplikat <title>/<meta description>, document.title salah,
-   * dan hydration mismatch radix-useId). Title dikelola via effect di bawah. */
+  /* ===== Metadata dinamis per halaman + per bahasa (SEO maksimal) =====
+   * <title> TIDAK dirender sebagai JSX — dikelola via effect di bawah. */
   useEffect(() => {
-    const title = meta.seoTitle;
-    const desc = meta.metaDescription;
-    const kw = meta.keywords.join(', ');
-    const url = slug === 'beranda' ? `${SITE_URL}/` : `${SITE_URL}/#/${slug}`;
+    const metaId = getPageMeta(slug);
+    const tm = pageMeta(t, slug);
+    const seoTitle = (tm.seoTitle as string) || metaId.seoTitle;
+    const desc = (tm.metaDescription as string) || metaId.metaDescription;
+    const kw = Array.isArray(tm.keywords) && tm.keywords.length > 0
+      ? (tm.keywords as string[]).join(', ')
+      : (metaId.keywords ?? []).join(', ');
+    const url = localeUrl(locale, slug, SITE_URL);
 
     setMeta('name', 'description', desc);
     setMeta('name', 'keywords', kw);
-    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:title', seoTitle);
     setMeta('name', 'twitter:description', desc);
-    setMeta('property', 'og:title', title);
+    setMeta('property', 'og:title', seoTitle);
     setMeta('property', 'og:description', desc);
     setMeta('property', 'og:url', url);
     setMeta('property', 'og:site_name', `${COMPANY.name} — bambuwater.web.id`);
-    if (meta.heroImage) setMeta('property', 'og:image', `${SITE_URL}${meta.heroImage}`);
+    setMeta('property', 'og:locale', localeMeta(locale).og);
+
+    /* og:locale:alternate — bahasa prioritas */
+    document.head
+      .querySelectorAll('meta[property="og:locale:alternate"][data-i18n="1"]')
+      .forEach((el) => el.remove());
+    for (const l of LOCALES.filter(
+      (x) => x.code !== locale && ['en', 'zh', 'es', 'ar', 'ja', 'hi'].includes(x.code)
+    )) {
+      const el = document.createElement('meta');
+      el.setAttribute('property', 'og:locale:alternate');
+      el.setAttribute('content', l.og);
+      el.setAttribute('data-i18n', '1');
+      document.head.appendChild(el);
+    }
+    if (metaId.heroImage) setMeta('property', 'og:image', `${SITE_URL}${metaId.heroImage}`);
     setCanonical(url);
+
+    /* hreflang — 30 locale + x-default */
+    setHreflang([
+      ...LOCALES.map((l) => ({ locale: l.code, url: localeUrl(l.code, slug, SITE_URL) })),
+      { locale: 'x-default', url: `${SITE_URL}/` },
+    ]);
+
+    /* <html lang> & <html dir> (RTL untuk arab, urdu, farsi, ibrani) */
+    const lm = localeMeta(locale);
+    document.documentElement.lang = lm.code;
+    document.documentElement.dir = lm.rtl ? 'rtl' : 'ltr';
 
     /* Bersihkan duplikat meta yang tersisa dari snapshot halaman sebelumnya */
     ['description', 'keywords'].forEach((n) => {
       const metas = Array.from(document.head.querySelectorAll<HTMLMetaElement>(`meta[name="${n}"]`));
-      metas.slice(1).forEach((m) => m.remove());
+      metas.slice(1).forEach((m2) => m2.remove());
     });
 
     /* Tulis <title> — pastikan hanya SATU title dengan teks benar.
-     * CATATAN: Next.js memulihkan elemen <title> dari payload RSC SETELAH
-     * hidrasi selesai (khusus <title>; meta lain tidak disentuh). Observer
-     * berumur 2 detik membalik restorasi tersebut sehingga title halaman
-     * aktif selalu menang, tanpa loop (guard same-value). */
-    const ours = `${title} | bambuwater.web.id`;
+     * Next.js memulihkan elemen <title> dari payload RSC SETELAH hidrasi;
+     * observer 2 detik membalik restorasi tersebut (guard same-value). */
+    const ours = `${seoTitle} | bambuwater.web.id`;
     const applyTitle = () => {
       const titles = document.head.querySelectorAll('title');
       if (titles.length === 0) {
-        const t = document.createElement('title');
-        t.textContent = ours;
-        document.head.prepend(t);
+        const el = document.createElement('title');
+        el.textContent = ours;
+        document.head.prepend(el);
       } else {
         if (titles[0].textContent !== ours) titles[0].textContent = ours;
         for (let i = 1; i < titles.length; i++) titles[i].remove();
@@ -124,7 +150,7 @@ export function AppShell() {
       window.clearTimeout(disarm);
       window.clearTimeout(sweep);
     };
-  }, [slug, meta]);
+  }, [slug, locale, t]);
 
   const renderPage = () => {
     if (PAGE_MAP[slug]) return PAGE_MAP[slug]();
@@ -134,14 +160,13 @@ export function AppShell() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Title & meta dikelola React via useEffect — sinkron per halaman tanpa duplikat <head> */}
-      <JsonLd />
+      <JsonLd locale={locale} />
       <Navbar activeSlug={slug} />
 
       <main className="flex-1" id="konten-utama">
         <AnimatePresence mode="wait">
           <motion.div
-            key={slug}
+            key={`${locale}|${slug}`}
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
@@ -155,5 +180,13 @@ export function AppShell() {
       <Footer />
       <WhatsAppFloat />
     </div>
+  );
+}
+
+export function AppShell() {
+  return (
+    <I18nProvider>
+      <Shell />
+    </I18nProvider>
   );
 }

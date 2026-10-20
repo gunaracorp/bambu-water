@@ -7,47 +7,56 @@ import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal';
 import { Leadership } from '@/components/site/leadership';
 import { CtaBand } from '@/components/site/cta-band';
+import { useI18n } from '@/lib/i18n/context';
 import { COMPANY, BRAND_CLAIM, OFFICES, PRODUCTION_TEAM_NOTE } from '@/lib/company';
 
-const VALUES = [
+const VALUE_ICONS = [Leaf, Factory, Truck, Users];
+const LEGAL_ICONS = [BadgeCheck, Award, GraduationCap, ShieldCheck];
+
+const VALUES_FALLBACK = [
   {
-    icon: Leaf,
     title: 'Berkelanjutan',
     description: 'Panen tanpa merusak rumpun — hutan bambu rakyat kami jaga agar tetap lestari untuk generasi berikutnya.',
   },
   {
-    icon: Factory,
     title: 'Higienis & Standar',
     description: 'Distilasi bertahap, uji mikrobiologi, dan kemasan food-grade pada setiap batch produksi.',
   },
   {
-    icon: Truck,
     title: 'Jangkauan Nasional',
     description: 'Jaringan kargo darat, laut, dan udara menjangkau 38 provinsi Indonesia.',
   },
   {
-    icon: Users,
     title: 'Memberdayakan Rakyat',
     description: 'Berkemitran dengan petani hutan rakyat di Jawa Barat dan Nusantara.',
   },
 ];
 
-const MILESTONES = [
+const MILESTONES_FALLBACK = [
   { year: '2007', title: 'Awal Mula', text: 'BWN lahir sebagai pionir penyediaan air bambu untuk pengobatan tradisional — yang pertama di Indonesia.' },
   { year: '2012', title: 'Distilasi Modern', text: 'Fasilitas distilasi pertama kami beroperasi — memadukan kearifan tabib dengan standar higienis modern.' },
   { year: '2017', title: 'Jangkauan Nasional', text: 'Distribusi massal bambu & air bambu menjangkau seluruh provinsi, dari Sabang sampai Merauke.' },
   { year: '2025', title: 'Badan Hukum Resmi', text: 'PT Bambu Water Nusantara resmi berbadan hukum dengan akta pendirian tercatat — fondasi ekspansi lebih besar.' },
 ];
 
-const LEGAL = [
-  { icon: BadgeCheck, label: 'Status', value: 'Badan Hukum PT Resmi (Akta Pendirian)' },
-  { icon: Award, label: 'Pengalaman', value: `Sejak 2007 (${new Date().getFullYear() - 2007}+ tahun)` },
-  { icon: GraduationCap, label: 'Produksi', value: 'Disuling santri berpengalaman' },
-  { icon: ShieldCheck, label: 'Pengawasan', value: 'Dewan pakar lintas bidang' },
+const LEGAL_FALLBACK = [
+  { label: 'Status', value: 'Badan Hukum PT Resmi (Akta Pendirian)' },
+  { label: 'Pengalaman', value: 'Sejak 2007 ({years}+ tahun)' },
+  { label: 'Produksi', value: 'Disuling santri berpengalaman' },
+  { label: 'Pengawasan', value: 'Dewan pakar lintas bidang' },
 ];
 
 /** Halaman 2/25 — Tentang Kami */
 export function TentangKamiPage() {
+  const { t } = useI18n();
+  const s = t.pages['tentang-kami'].s;
+  const brandClaim = t.data?.brandClaim ?? BRAND_CLAIM;
+  const productionNote = t.data?.productionNote ?? PRODUCTION_TEAM_NOTE;
+  const values = Array.isArray(s.values) && s.values.length > 0 ? s.values : VALUES_FALLBACK;
+  const milestones = Array.isArray(s.milestones) && s.milestones.length > 0 ? s.milestones : MILESTONES_FALLBACK;
+  const legal = Array.isArray(s.legal) && s.legal.length > 0 ? s.legal : LEGAL_FALLBACK;
+  const years = new Date().getFullYear() - 2007;
+
   return (
     <>
       <PageHero slug="tentang-kami" />
@@ -58,38 +67,35 @@ export function TentangKamiPage() {
           <Reveal direction="right">
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-amber-700">
               <Award className="h-3.5 w-3.5" aria-hidden />
-              {BRAND_CLAIM}
+              {brandClaim}
             </span>
             <h2 className="mt-4 font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-              18+ Tahun Menghadirkan <span className="text-primary">Sari Bambu Nusantara</span> untuk Kesehatan
+              {s.story_title} <span className="text-primary">{s.story_highlight}</span> {s.story_title_end}
             </h2>
             <div className="mt-5 space-y-4 text-base leading-relaxed text-muted-foreground">
               <p>
-                PT Bambu Water Nusantara (BWN) adalah perusahaan penyedia air bambu untuk
-                pengobatan dan terapi kesehatan alami — <strong className="text-foreground">yang pertama dan
-                terbesar di Indonesia sejak 2007</strong>. Kami memanen sadapan bambu muda dari hutan
-                bambu rakyat terkurasi, memurnikannya dengan distilasi higienis, lalu mengantarnya
-                hingga ke rumah-rumah, klinik terapis, dan mitra distributor di seluruh Nusantara.
+                {s.p1_a} <strong className="text-foreground">{s.p1_strong}</strong>
+                {s.p1_b}
               </p>
               <p>
-                Lebih dari sekadar minuman, air bambu adalah warisan pengobatan leluhur yang kini
-                didukung riset ilmiah modern. Di samping air bambu, kami juga menyediakan{' '}
-                <strong className="text-foreground">bambu berkualitas</strong> (Petung, Wulung, Apus, Ori)
-                dalam jumlah besar untuk konstruksi, kerajinan, dan industri.
+                {s.p2_a} <strong className="text-foreground">{s.p2_strong}</strong> {s.p2_b}
               </p>
             </div>
 
             {/* Kartu legal */}
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {LEGAL.map((l) => (
-                <div key={l.label} className="flex items-start gap-3 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
-                  <l.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{l.label}</p>
-                    <p className="mt-0.5 text-sm font-semibold text-foreground">{l.value}</p>
+              {legal.map((l: { label: string; value: string }, i: number) => {
+                const Icon = LEGAL_ICONS[i] ?? BadgeCheck;
+                return (
+                  <div key={l.label} className="flex items-start gap-3 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
+                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{l.label}</p>
+                      <p className="mt-0.5 text-sm font-semibold text-foreground">{l.value.replace('{years}', String(years))}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </Reveal>
 
@@ -98,14 +104,14 @@ export function TentangKamiPage() {
               { }
               <img
                 src="/images/about-plantation.jpg"
-                alt="Hamparan perkebunan bambu berkelanjutan di perbukitan hijau Indonesia yang dijaga PT Bambu Water Nusantara sejak 2007"
+                alt={s.img_alt}
                 className="aspect-[4/3] w-full object-cover"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/70 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5">
                 <p className="rounded-2xl bg-white/90 px-4 py-3 text-sm font-semibold text-emerald-900 backdrop-blur">
-                  Hutan bambu rakyat mitra BWN — sumber sadapan & bambu berkualitas kami
+                  {s.img_caption}
                 </p>
               </div>
             </div>
@@ -114,16 +120,16 @@ export function TentangKamiPage() {
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-primary/10 bg-secondary/50 p-5">
                 <Eye className="h-6 w-6 text-primary" aria-hidden />
-                <h3 className="mt-3 font-serif text-lg font-bold text-foreground">Visi</h3>
+                <h3 className="mt-3 font-serif text-lg font-bold text-foreground">{s.vision_title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  Menjadi rujukan utama air bambu terapi dunia — membawa kesehatan alam Nusantara ke panggung global.
+                  {s.vision_text}
                 </p>
               </div>
               <div className="rounded-2xl border border-primary/10 bg-secondary/50 p-5">
                 <Target className="h-6 w-6 text-primary" aria-hidden />
-                <h3 className="mt-3 font-serif text-lg font-bold text-foreground">Misi</h3>
+                <h3 className="mt-3 font-serif text-lg font-bold text-foreground">{s.mission_title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  Menyediakan air bambu & bambu berkualitas terbaik, memberdayakan petani rakyat, dan mengedukasi masyarakat.
+                  {s.mission_text}
                 </p>
               </div>
             </div>
@@ -134,13 +140,13 @@ export function TentangKamiPage() {
       {/* Perjalanan */}
       <PageSection bg="cream" id="perjalanan">
         <SectionHeading
-          eyebrow="Perjalanan Kami"
-          title="18+ Tahun Membangun Kepercayaan"
-          highlight="Sejak 2007"
-          description="Dari panen pertama di lereng Jawa Barat hingga jaringan distribusi nasional."
+          eyebrow={s.journey_eyebrow}
+          title={s.journey_title}
+          highlight={s.journey_highlight}
+          description={s.journey_desc}
         />
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {MILESTONES.map((m, i) => (
+          {milestones.map((m: { year: string; title: string; text: string }, i: number) => (
             <Reveal key={m.year} delay={i * 0.1}>
               <motion.div
                 whileHover={{ y: -6 }}
@@ -159,32 +165,35 @@ export function TentangKamiPage() {
       {/* Nilai */}
       <PageSection bg="light">
         <SectionHeading
-          eyebrow="Nilai Kami"
-          title="Prinsip yang Kami"
-          highlight="Pegang Teguh"
+          eyebrow={s.values_eyebrow}
+          title={s.values_title}
+          highlight={s.values_highlight}
         />
         <StaggerContainer className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {VALUES.map((v) => (
-            <StaggerItem key={v.title}>
-              <div className="group h-full rounded-3xl border border-primary/10 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-emerald-900/10">
-                <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                  <v.icon className="h-7 w-7" aria-hidden />
-                </span>
-                <h3 className="mt-4 font-serif text-lg font-bold text-foreground">{v.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.description}</p>
-              </div>
-            </StaggerItem>
-          ))}
+          {values.map((v: { title: string; description: string }, i: number) => {
+            const Icon = VALUE_ICONS[i] ?? Leaf;
+            return (
+              <StaggerItem key={v.title}>
+                <div className="group h-full rounded-3xl border border-primary/10 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:shadow-emerald-900/10">
+                  <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                    <Icon className="h-7 w-7" aria-hidden />
+                  </span>
+                  <h3 className="mt-4 font-serif text-lg font-bold text-foreground">{v.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.description}</p>
+                </div>
+              </StaggerItem>
+            );
+          })}
         </StaggerContainer>
       </PageSection>
 
       {/* Kantor Pusat & Branch Office */}
       <PageSection bg="cream" id="kantor">
         <SectionHeading
-          eyebrow="Alamat Kami"
-          title="Kantor Pusat &"
-          highlight="Branch Office"
-          description="Kunjungi kantor kami di Tasikmalaya dan Bandung — pintu selalu terbuka untuk mitra dan pelanggan."
+          eyebrow={s.offices_eyebrow}
+          title={s.offices_title}
+          highlight={s.offices_highlight}
+          description={s.offices_desc}
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {OFFICES.map((o, i) => (
@@ -207,7 +216,7 @@ export function TentangKamiPage() {
         <Reveal delay={0.2} className="mx-auto mt-10 max-w-3xl">
           <div className="flex items-start gap-3 rounded-2xl border-l-4 border-gold bg-gold/10 p-5">
             <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden />
-            <p className="text-sm leading-relaxed text-foreground">{PRODUCTION_TEAM_NOTE}</p>
+            <p className="text-sm leading-relaxed text-foreground">{productionNote}</p>
           </div>
         </Reveal>
       </PageSection>
@@ -216,9 +225,9 @@ export function TentangKamiPage() {
       <Leadership />
 
       <CtaBand
-        title="Mau Jadi Mitra Distribusi BWN?"
-        description="Bergabung dengan jaringan distributor resmi kami — dukungan produk, harga khusus, dan materi edukasi lengkap."
-        waMessage="Halo Bambu Water Nusantara! Saya tertarik menjadi mitra distributor di kota saya."
+        title={s.cta_title}
+        description={s.cta_desc}
+        waMessage={s.cta_wa}
       />
     </>
   );

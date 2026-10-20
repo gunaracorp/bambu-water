@@ -12,13 +12,14 @@ import { Button } from '@/components/ui/button';
 import { Reveal } from '@/components/site/reveal';
 import { CtaBand } from '@/components/site/cta-band';
 import { getPageMeta } from '@/lib/pages-registry';
-import { getArticle, type ArticleData } from '@/lib/articles';
+import { getArticle } from '@/lib/articles';
+import { useI18n } from '@/lib/i18n/context';
+import { useArticleTranslations, mergedArticle } from '@/lib/i18n/articles';
 import { SITE_URL, waLink } from '@/lib/company';
 import { PageHero, PageSection } from '@/components/site/page-hero';
 
 /** JSON-LD BlogPosting + FAQPage per artikel */
-function ArticleJsonLd({ article }: { article: ArticleData }) {
-  const meta = getPageMeta(article.slug);
+function ArticleJsonLd({ article, locale }: { article: any; locale: string }) {
   const url = `${SITE_URL}/#/${article.slug}`;
   const blogPosting = {
     '@context': 'https://schema.org',
@@ -27,8 +28,7 @@ function ArticleJsonLd({ article }: { article: ArticleData }) {
     headline: article.title,
     description: article.metaDescription,
     image: `${SITE_URL}${article.heroImage}`,
-    inLanguage: 'id-ID',
-    dateModified: meta.updated,
+    inLanguage: locale === 'id' ? 'id-ID' : locale,
     author: { '@type': 'Organization', name: 'PT Bambu Water Nusantara' },
     publisher: { '@type': 'Organization', name: 'PT Bambu Water Nusantara' },
     mainEntityOfPage: url,
@@ -53,19 +53,23 @@ function ArticleJsonLd({ article }: { article: ArticleData }) {
 
 /** Halaman artikel (7/25 s.d. 13/25) — dirender dari data ArticleData */
 export function ArticlePage({ slug }: { slug: string }) {
-  const article = getArticle(slug);
+  const { t, locale } = useI18n();
+  const tr = useArticleTranslations();
+  const s = t.ui.article;
+  const raw = getArticle(slug);
+  const article = mergedArticle(raw, tr);
 
-  if (!article) {
+  if (!raw || !article) {
     return (
       <PageSection bg="light">
-        <p className="text-center text-muted-foreground">Artikel tidak ditemukan.</p>
+        <p className="text-center text-muted-foreground">{s.notFound}</p>
       </PageSection>
     );
   }
 
   return (
     <>
-      <ArticleJsonLd article={article} />
+      <ArticleJsonLd article={article} locale={locale} />
 
       {/* Hero artikel */}
       <PageHero slug={slug} showBreadcrumb={true} />
@@ -79,11 +83,11 @@ export function ArticlePage({ slug }: { slug: string }) {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Clock className="h-4 w-4 text-primary" aria-hidden />
-            {article.readMinutes} menit baca
+            {article.readMinutes} {t.ui.common.minutes}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <CalendarClock className="h-4 w-4 text-primary" aria-hidden />
-            Diperbarui {article.updated}
+            {t.ui.common.updated} {article.updated}
           </span>
         </div>
       </div>
@@ -118,7 +122,7 @@ export function ArticlePage({ slug }: { slug: string }) {
             <div className="rounded-3xl border border-primary/15 bg-secondary/50 p-6 sm:p-8">
               <h2 className="flex items-center gap-2 font-serif text-xl font-bold text-foreground">
                 <ListTree className="h-5 w-5 text-primary" aria-hidden />
-                Poin Utama
+                {s.poinUtama}
               </h2>
               <ul className="mt-4 space-y-2.5">
                 {article.keyPoints.map((kp) => (
@@ -179,7 +183,7 @@ export function ArticlePage({ slug }: { slug: string }) {
           {/* Kesimpulan */}
           <Reveal>
             <div className="rounded-3xl bg-primary p-7 text-primary-foreground sm:p-8">
-              <h2 className="font-serif text-2xl font-bold">Kesimpulan</h2>
+              <h2 className="font-serif text-2xl font-bold">{s.kesimpulan}</h2>
               <p className="mt-3 text-sm leading-relaxed text-primary-foreground/90 sm:text-base">
                 {article.conclusion}
               </p>
@@ -192,7 +196,7 @@ export function ArticlePage({ slug }: { slug: string }) {
       <PageSection bg="light">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-center font-serif text-2xl font-bold text-foreground sm:text-3xl">
-            Pertanyaan Umum <span className="text-primary">Terkait</span>
+            {s.faqTitle} <span className="text-primary">{s.faqHighlight}</span>
           </h2>
           <Accordion type="single" collapsible className="mt-8 space-y-3">
             {article.faqs.map((f, i) => (
@@ -216,13 +220,13 @@ export function ArticlePage({ slug }: { slug: string }) {
       {/* Artikel terkait */}
       <PageSection bg="cream">
         <h2 className="text-center font-serif text-2xl font-bold text-foreground sm:text-3xl">
-          Baca Juga <span className="text-primary">Artikel Lainnya</span>
+          {s.relatedTitle} <span className="text-primary">{s.relatedHighlight}</span>
         </h2>
         <div className="mx-auto mt-10 grid max-w-4xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {article.related
-            .map((r) => ({ rel: getArticle(r), meta: getPageMeta(r) }))
-            .filter((x) => x.rel)
-            .map(({ rel, meta }) => (
+            .map((r: string) => ({ rel: getArticle(r), trRel: tr?.articles?.[r], meta: getPageMeta(r) }))
+            .filter((x: { rel: unknown }) => x.rel)
+            .map(({ rel, trRel, meta }: { rel: any; trRel: any; meta: any }) => (
               <motion.a
                 key={rel!.slug}
                 href={`#/${rel!.slug}`}
@@ -239,11 +243,11 @@ export function ArticlePage({ slug }: { slug: string }) {
                   />
                 </div>
                 <div className="p-5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary">{rel!.category}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-primary">{trRel?.category ?? rel.category}</span>
                   <h3 className="mt-1.5 font-serif text-base font-bold leading-snug text-foreground group-hover:text-primary">
-                    {rel!.title}
+                    {trRel?.title ?? rel.title}
                   </h3>
-                  <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{rel!.excerpt}</p>
+                  <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{trRel?.excerpt ?? rel.excerpt}</p>
                 </div>
               </motion.a>
             ))}
@@ -253,14 +257,14 @@ export function ArticlePage({ slug }: { slug: string }) {
       {/* Referensi */}
       <PageSection bg="light" className="!py-10">
         <div className="mx-auto max-w-3xl">
-          <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-primary">Referensi</h3>
+          <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-primary">{s.referensi}</h3>
           <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-xs leading-relaxed text-muted-foreground">
             {article.references.map((r) => (
               <li key={r}>{r}</li>
             ))}
           </ol>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground/80">
-            Disclaimer: Konten ini bersifat edukatif dan bukan pengganti nasihat medis profesional.
+            {s.disclaimer}
           </p>
         </div>
       </PageSection>
@@ -268,19 +272,19 @@ export function ArticlePage({ slug }: { slug: string }) {
       {/* CTA artikel */}
       <PageSection bg="cream" className="!py-10">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 rounded-3xl border border-primary/15 bg-white p-8 text-center shadow-lg shadow-emerald-900/5 sm:p-10">
-          <h2 className="font-serif text-2xl font-bold text-foreground">Tertarik Mencoba Air Bambu?</h2>
+          <h2 className="font-serif text-2xl font-bold text-foreground">{s.ctaTitle}</h2>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-            Mulai dari botol kecil untuk keluarga, atau tanya paket grosir untuk praktik terapi Anda.
+            {s.ctaDesc}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild className="rounded-full bg-emerald-600 px-7 py-6 text-white hover:bg-emerald-700">
-              <a href={waLink(`Halo! Saya baca artikel "${article.title}" dan ingin mencoba produk air bambu.`)} target="_blank" rel="noopener noreferrer external" className="gap-2">
+              <a href={waLink((s.waMessage ?? '').replace('{title}', article.title))} target="_blank" rel="noopener noreferrer external" className="gap-2">
                 <MessageCircle className="h-5 w-5" aria-hidden />
-                Tanya via WhatsApp
+                {s.ctaWa}
               </a>
             </Button>
             <Button asChild variant="outline" className="rounded-full border-primary/40 px-7 py-6 text-primary hover:bg-primary/10">
-              <a href="#/harga-paket">Lihat Harga & Paket</a>
+              <a href="#/harga-paket">{s.ctaPricing}</a>
             </Button>
           </div>
         </div>

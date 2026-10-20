@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SectionHeading } from './section-heading';
+import { useI18n } from '@/lib/i18n/context';
 import { cn } from '@/lib/utils';
 
+/** Fallback lokal — versi terjemahan live ada di t.data.testimonials */
 const TESTIMONIALS = [
   {
     name: 'Bpk. Hendra Wijaya',
@@ -40,28 +42,34 @@ const TESTIMONIALS = [
 ];
 
 export function Testimonials() {
+  const { t } = useI18n();
+  const s = t.ui.testimonials;
+  const list =
+    Array.isArray(t.data?.testimonials) && t.data.testimonials.length > 0
+      ? t.data.testimonials
+      : TESTIMONIALS;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     if (paused) return;
-    const t = setInterval(() => setIndex((i) => (i + 1) % TESTIMONIALS.length), 5200);
-    return () => clearInterval(t);
-  }, [paused]);
+    const timer = setInterval(() => setIndex((i) => (i + 1) % list.length), 5200);
+    return () => clearInterval(timer);
+  }, [paused, list.length]);
 
-  const current = TESTIMONIALS[index];
+  const current = list[index];
 
   return (
     <section
       className="relative overflow-hidden bg-gradient-to-b from-background via-emerald-50/50 to-background py-24 sm:py-28"
-      aria-label="Testimoni pelanggan"
+      aria-label={s.ariaLabel}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="Cerita Mereka"
-          title="Kepercayaan yang"
-          highlight="Mengalir"
-          description="Dari dapur keluarga hingga proyek konstruksi nasional — inilah pengalaman pelanggan Bambu Water Nusantara."
+          eyebrow={s.eyebrow}
+          title={s.title}
+          highlight={s.highlight}
+          description={s.description}
         />
 
         <div
@@ -85,7 +93,7 @@ export function Testimonials() {
                 transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className="rounded-3xl border border-emerald-900/10 bg-white p-8 text-center shadow-xl shadow-emerald-900/10 sm:p-10"
               >
-                <div className="flex justify-center gap-1" aria-label={`Rating ${current.rating} dari 5`}>
+                <div className="flex justify-center gap-1" aria-label={s.ratingAria.replace('{rating}', String(current.rating))}>
                   {Array.from({ length: current.rating }).map((_, i) => (
                     <Star key={i} className="h-5 w-5 fill-gold text-gold" aria-hidden />
                   ))}
@@ -105,19 +113,19 @@ export function Testimonials() {
           <div className="mt-8 flex items-center justify-center gap-4">
             <button
               type="button"
-              onClick={() => setIndex((index - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
+              onClick={() => setIndex((index - 1 + list.length) % list.length)}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-emerald-900/15 bg-white text-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
-              aria-label="Testimoni sebelumnya"
+              aria-label={s.prevAria}
             >
               <ChevronLeft className="h-5 w-5" aria-hidden />
             </button>
             <div className="flex gap-2">
-              {TESTIMONIALS.map((t, i) => (
+              {list.map((tm: { name: string }, i: number) => (
                 <button
-                  key={t.name}
+                  key={tm.name}
                   type="button"
                   onClick={() => setIndex(i)}
-                  aria-label={`Tampilkan testimoni ${i + 1}`}
+                  aria-label={s.dotAria.replace('{n}', String(i + 1))}
                   className={cn(
                     'h-2.5 rounded-full transition-all duration-300',
                     i === index ? 'w-8 bg-primary' : 'w-2.5 bg-emerald-900/20 hover:bg-emerald-900/40'
@@ -127,9 +135,9 @@ export function Testimonials() {
             </div>
             <button
               type="button"
-              onClick={() => setIndex((index + 1) % TESTIMONIALS.length)}
+              onClick={() => setIndex((index + 1) % list.length)}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-emerald-900/15 bg-white text-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
-              aria-label="Testimoni berikutnya"
+              aria-label={s.nextAria}
             >
               <ChevronRight className="h-5 w-5" aria-hidden />
             </button>

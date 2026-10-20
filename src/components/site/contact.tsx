@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { COMPANY, OFFICES, CITIES } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 import { Reveal } from './reveal';
 import { SectionHeading } from './section-heading';
 import { cn } from '@/lib/utils';
@@ -40,7 +41,17 @@ const ORDER_TYPES: { value: OrderType; label: string; icon: typeof Droplets }[] 
   { value: 'korporat', label: 'Korporat / Proyek', icon: ShoppingBag },
 ];
 
+/** Fallback id — label aktif dari t.ui.contact.guarantees */
+const GUARANTEES_FALLBACK: { title: string; text: string }[] = [
+  { title: 'Balasan < 24 Jam', text: 'Respons cepat tim kami' },
+  { title: 'Dokumen Lengkap', text: 'Untuk tender & pengadaan' },
+  { title: 'Kemasan Aman', text: 'Standar ekspedisi nasional' },
+  { title: 'Garansi Mutu', text: 'Retur bila tidak sesuai' },
+];
+
 export function Contact() {
+  const { t } = useI18n();
+  const s = t.ui.contact;
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
@@ -52,13 +63,15 @@ export function Contact() {
     city: '',
     message: '',
   });
+  const guarantees =
+    Array.isArray(s.guarantees) && s.guarantees.length > 0 ? s.guarantees : GUARANTEES_FALLBACK;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim() || !form.message.trim()) {
       toast({
-        title: 'Data belum lengkap',
-        description: 'Mohon isi nama, nomor telepon, dan pesan Anda.',
+        title: s.toastIncompleteTitle,
+        description: s.toastIncompleteDesc,
         variant: 'destructive',
       });
       return;
@@ -71,16 +84,16 @@ export function Contact() {
         body: JSON.stringify({ ...form, orderType }),
       });
       const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.error ?? 'Gagal mengirim');
+      if (!res.ok || !data.success) throw new Error(data.error ?? s.errorFallback);
       setSent(true);
       toast({
-        title: 'Pesan terkirim! 🌿',
-        description: 'Terima kasih! Tim kami akan menghubungi Anda dalam 1×24 jam kerja.',
+        title: s.toastSuccessTitle,
+        description: s.toastSuccessDesc,
       });
     } catch (err) {
       toast({
-        title: 'Gagal mengirim pesan',
-        description: (err as Error).message ?? 'Silakan coba lagi atau hubungi WhatsApp kami.',
+        title: s.toastFailTitle,
+        description: (err as Error).message ?? s.toastFailDesc,
         variant: 'destructive',
       });
     } finally {
@@ -89,7 +102,7 @@ export function Contact() {
   };
 
   return (
-    <section id="kontak" className="relative overflow-hidden py-24 sm:py-28" aria-label="Kontak dan pemesanan">
+    <section id="kontak" className="relative overflow-hidden py-24 sm:py-28" aria-label={s.ariaLabel}>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.05]"
@@ -100,10 +113,10 @@ export function Contact() {
       />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="Hubungi Kami"
-          title="Pesan Sekarang,"
-          highlight="Kirim ke Mana Saja"
-          description="Ceritakan kebutuhan Anda — tim kami akan membalas dengan penawaran terbaik dalam 1×24 jam kerja."
+          eyebrow={s.eyebrow}
+          title={s.title}
+          highlight={s.highlight}
+          description={s.description}
         />
 
         <div className="mt-16 grid gap-10 lg:grid-cols-5">
@@ -111,7 +124,7 @@ export function Contact() {
           <Reveal direction="right" className="lg:col-span-2">
             <div className="flex h-full flex-col gap-5">
               <div className="rounded-3xl bg-gradient-to-br from-emerald-800 to-emerald-950 p-7 text-emerald-50 shadow-xl shadow-emerald-900/25 sm:p-8">
-                <h3 className="font-serif text-2xl font-bold text-white">Kantor Pemasaran</h3>
+                <h3 className="font-serif text-2xl font-bold text-white">{s.officeTitle}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-emerald-100/80">
                   {COMPANY.legalName} — {COMPANY.city}, {COMPANY.province}
                 </p>
@@ -121,7 +134,7 @@ export function Contact() {
                       <Phone className="h-5 w-5" aria-hidden />
                     </span>
                     <div>
-                      <p className="font-semibold text-white">Telepon / WhatsApp</p>
+                      <p className="font-semibold text-white">{s.phoneLabel}</p>
                       <a href={`tel:${COMPANY.phone.replace(/[^+\d]/g, '')}`} className="mt-0.5 block text-emerald-100/85 transition-colors hover:text-white">
                         {COMPANY.phone}
                       </a>
@@ -132,7 +145,7 @@ export function Contact() {
                       <Mail className="h-5 w-5" aria-hidden />
                     </span>
                     <div>
-                      <p className="font-semibold text-white">Email</p>
+                      <p className="font-semibold text-white">{s.emailLabel}</p>
                       <a href={`mailto:${COMPANY.email}`} className="mt-0.5 block text-emerald-100/85 transition-colors hover:text-white">
                         {COMPANY.email}
                       </a>
@@ -146,11 +159,9 @@ export function Contact() {
                       <MapPin className="h-5 w-5" aria-hidden />
                     </span>
                     <div>
-                      <p className="font-semibold text-white">Alamat</p>
+                      <p className="font-semibold text-white">{s.addressLabel}</p>
                       <p className="mt-0.5 text-emerald-100/85">{OFFICES[0].address}</p>
-                      <p className="mt-1 text-xs text-emerald-100/60">
-                        Branch 2: Mangkubumi, Tasikmalaya • Branch 3: Cihaurgeulis, Bandung
-                      </p>
+                      <p className="mt-1 text-xs text-emerald-100/60">{s.branchesNote}</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3.5">
@@ -158,7 +169,7 @@ export function Contact() {
                       <Clock className="h-5 w-5" aria-hidden />
                     </span>
                     <div>
-                      <p className="font-semibold text-white">Jam Operasional</p>
+                      <p className="font-semibold text-white">{s.hoursLabel}</p>
                       <p className="mt-0.5 text-emerald-100/85">{COMPANY.operationalHours}</p>
                     </div>
                   </li>
@@ -167,15 +178,10 @@ export function Contact() {
 
               {/* Jaminan */}
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { t: 'Balasan < 24 Jam', d: 'Respons cepat tim kami' },
-                  { t: 'Dokumen Lengkap', d: 'Untuk tender & pengadaan' },
-                  { t: 'Kemasan Aman', d: 'Standar ekspedisi nasional' },
-                  { t: 'Garansi Mutu', d: 'Retur bila tidak sesuai' },
-                ].map((g) => (
-                  <div key={g.t} className="rounded-2xl border border-emerald-900/10 bg-white/80 p-4 shadow-sm backdrop-blur">
-                    <p className="text-sm font-bold text-foreground">{g.t}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{g.d}</p>
+                {guarantees.map((g: { title: string; text: string }) => (
+                  <div key={g.title} className="rounded-2xl border border-emerald-900/10 bg-white/80 p-4 shadow-sm backdrop-blur">
+                    <p className="text-sm font-bold text-foreground">{g.title}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{g.text}</p>
                   </div>
                 ))}
               </div>
@@ -199,11 +205,10 @@ export function Contact() {
                   >
                     <CheckCircle2 className="h-10 w-10" aria-hidden />
                   </motion.span>
-                  <h3 className="mt-6 font-serif text-2xl font-bold">Pesan Anda Terkirim!</h3>
+                  <h3 className="mt-6 font-serif text-2xl font-bold">{s.sentTitle}</h3>
                   <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                    Terima kasih, <strong className="text-foreground">{form.name}</strong>. Tim
-                    Bambu Water Nusantara akan menghubungi Anda melalui telepon/WhatsApp dalam
-                    1×24 jam kerja.
+                    {s.sentThanks} <strong className="text-foreground">{form.name}</strong>.{' '}
+                    {s.sentBody}
                   </p>
                   <Button
                     type="button"
@@ -214,36 +219,34 @@ export function Contact() {
                     variant="outline"
                     className="mt-8 rounded-full border-primary/40 px-6 font-semibold text-primary hover:bg-primary/10"
                   >
-                    Kirim Pesan Lain
+                    {s.sendAnother}
                   </Button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate>
-                  <h3 className="font-serif text-2xl font-bold">Formulir Pemesanan & Konsultasi</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">
-                    Isi kebutuhan Anda — retail maupun jumlah besar (grosir/kargo).
-                  </p>
+                  <h3 className="font-serif text-2xl font-bold">{s.formTitle}</h3>
+                  <p className="mt-1.5 text-sm text-muted-foreground">{s.formSubtitle}</p>
 
                   <fieldset className="mt-6">
                     <legend className="mb-2.5 text-sm font-semibold text-foreground">
-                      Saya ingin memesan <span className="text-destructive">*</span>
+                      {s.orderLegend} <span className="text-destructive">*</span>
                     </legend>
                     <div className="grid grid-cols-2 gap-2.5">
-                      {ORDER_TYPES.map((t) => (
+                      {ORDER_TYPES.map((ot, i) => (
                         <button
-                          key={t.value}
+                          key={ot.value}
                           type="button"
-                          onClick={() => setOrderType(t.value)}
-                          aria-pressed={orderType === t.value}
+                          onClick={() => setOrderType(ot.value)}
+                          aria-pressed={orderType === ot.value}
                           className={cn(
                             'flex items-center gap-2.5 rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all duration-300',
-                            orderType === t.value
+                            orderType === ot.value
                               ? 'border-primary bg-primary/10 text-primary shadow-sm'
                               : 'border-emerald-900/10 bg-white text-foreground/70 hover:border-primary/40'
                           )}
                         >
-                          <t.icon className="h-4.5 w-4.5 shrink-0" aria-hidden />
-                          {t.label}
+                          <ot.icon className="h-4.5 w-4.5 shrink-0" aria-hidden />
+                          {s.orderTypeLabels?.[i] ?? ot.label}
                         </button>
                       ))}
                     </div>
@@ -252,13 +255,13 @@ export function Contact() {
                   <div className="mt-6 grid gap-5 sm:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="name">
-                        Nama Lengkap <span className="text-destructive">*</span>
+                        {s.nameLabel} <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="name"
                         name="name"
                         required
-                        placeholder="cth. Ahmad Setiawan"
+                        placeholder={s.namePlaceholder}
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         className="h-12 rounded-xl"
@@ -266,7 +269,7 @@ export function Contact() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="phone">
-                        Telepon / WhatsApp <span className="text-destructive">*</span>
+                        {s.phoneLabel} <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="phone"
@@ -274,29 +277,29 @@ export function Contact() {
                         type="tel"
                         required
                         inputMode="tel"
-                        placeholder="cth. 0812-3456-7890"
+                        placeholder={s.phonePlaceholder}
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         className="h-12 rounded-xl"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{s.emailLabel}</Label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="nama@email.com"
+                        placeholder={s.emailPlaceholder}
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         className="h-12 rounded-xl"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="city">Kota Tujuan Pengiriman</Label>
+                      <Label htmlFor="city">{s.cityLabel}</Label>
                       <Select value={form.city} onValueChange={(v) => setForm({ ...form, city: v })}>
                         <SelectTrigger id="city" className="h-12 w-full rounded-xl">
-                          <SelectValue placeholder="Pilih kota" />
+                          <SelectValue placeholder={s.cityPlaceholder} />
                         </SelectTrigger>
                         <SelectContent className="max-h-64">
                           {CITIES.map((c) => (
@@ -304,20 +307,20 @@ export function Contact() {
                               {c}
                             </SelectItem>
                           ))}
-                          <SelectItem value="lainnya">Kota lainnya</SelectItem>
+                          <SelectItem value="lainnya">{s.cityOther}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2 sm:col-span-2">
                       <Label htmlFor="message">
-                        Detail Kebutuhan <span className="text-destructive">*</span>
+                        {s.messageLabel} <span className="text-destructive">*</span>
                       </Label>
                       <Textarea
                         id="message"
                         name="message"
                         required
                         rows={4}
-                        placeholder="cth. Butuh air bambu suling 50 galon/bulan untuk kafe di Bandung, kirim tiap Senin."
+                        placeholder={s.messagePlaceholder}
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
                         className="resize-none rounded-xl"
@@ -333,18 +336,16 @@ export function Contact() {
                     {loading ? (
                       <>
                         <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
-                        Mengirim…
+                        {s.submitting}
                       </>
                     ) : (
                       <>
                         <Send className="h-5 w-5" aria-hidden />
-                        Kirim Permintaan Penawaran
+                        {s.submitCta}
                       </>
                     )}
                   </Button>
-                  <p className="mt-3 text-center text-xs text-muted-foreground">
-                    Dengan mengirim formulir, Anda setuju dihubungi oleh tim kami.
-                  </p>
+                  <p className="mt-3 text-center text-xs text-muted-foreground">{s.submitNote}</p>
                 </form>
               )}
             </div>

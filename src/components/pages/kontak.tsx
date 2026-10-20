@@ -7,41 +7,38 @@ import { Reveal } from '@/components/site/reveal';
 import { QuoteForm } from '@/components/site/quote-form';
 import { CtaBand } from '@/components/site/cta-band';
 import { COMPANY, OFFICES, waLink } from '@/lib/company';
+import { useI18n } from '@/lib/i18n/context';
 
 const CONTACT_CARDS = [
   {
     icon: MessageCircle,
-    title: 'WhatsApp (Tercepat)',
     value: COMPANY.whatsappDisplay,
     href: waLink(),
-    note: 'Balasan rata-rata < 15 menit di jam kerja',
     highlight: true,
   },
   {
     icon: Phone,
-    title: 'Telepon',
     value: COMPANY.phone,
     href: `tel:${COMPANY.phone.replace(/[^+\d]/g, '')}`,
     note: COMPANY.operationalHours,
   },
   {
     icon: Mail,
-    title: 'Email Umum',
     value: COMPANY.email,
     href: `mailto:${COMPANY.email}`,
-    note: 'Pertanyaan umum & kerja sama',
   },
   {
     icon: Mail,
-    title: 'Email Sales',
     value: COMPANY.emailSales,
     href: `mailto:${COMPANY.emailSales}`,
-    note: 'Penawaran grosir, kargo & kontrak',
   },
 ];
 
 /** Halaman 25/25 — Kontak */
 export function KontakPage() {
+  const { t } = useI18n();
+  const s = t.pages['kontak'].s;
+
   return (
     <>
       <PageHero slug="kontak" />
@@ -50,7 +47,7 @@ export function KontakPage() {
         {/* Kartu kontak */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {CONTACT_CARDS.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.08}>
+            <Reveal key={c.value} delay={i * 0.08}>
               <a
                 href={c.href}
                 target={c.href.startsWith('http') ? '_blank' : undefined}
@@ -65,13 +62,13 @@ export function KontakPage() {
                   <c.icon className="h-6 w-6" aria-hidden />
                 </span>
                 <h2 className={`mt-4 text-sm font-bold uppercase tracking-wider ${c.highlight ? 'text-emerald-50' : 'text-muted-foreground'}`}>
-                  {c.title}
+                  {s.cards[i].title}
                 </h2>
                 <p className={`mt-1 break-all font-serif text-lg font-bold ${c.highlight ? 'text-white' : 'text-foreground'}`}>
                   {c.value}
                 </p>
                 <p className={`mt-2 text-xs leading-relaxed ${c.highlight ? 'text-emerald-50/80' : 'text-muted-foreground'}`}>
-                  {c.note}
+                  {c.note ?? s.cards[i].note}
                 </p>
               </a>
             </Reveal>
@@ -89,19 +86,19 @@ export function KontakPage() {
               <div className="rounded-3xl border border-primary/15 bg-white p-6 shadow-sm">
                 <h2 className="flex items-center gap-2 font-serif text-lg font-bold text-foreground">
                   <Building2 className="h-5 w-5 text-primary" aria-hidden />
-                  Identitas Perusahaan
+                  {s.identityTitle}
                 </h2>
                 <dl className="mt-4 space-y-3 text-sm">
                   <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Badan Hukum</dt>
-                    <dd className="mt-0.5 font-semibold text-foreground">{COMPANY.legalName} — PT resmi, akta tercatat</dd>
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.legalLabel}</dt>
+                    <dd className="mt-0.5 font-semibold text-foreground">{COMPANY.legalName} — {s.legalValue}</dd>
                   </div>
                   <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Berdiri</dt>
-                    <dd className="mt-0.5 font-semibold text-foreground">Pionir sejak 2007 — terbesar & pertama di Indonesia</dd>
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.foundedLabel}</dt>
+                    <dd className="mt-0.5 font-semibold text-foreground">{s.foundedValue}</dd>
                   </div>
                   <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Situs Resmi</dt>
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.siteLabel}</dt>
                     <dd className="mt-0.5 font-semibold text-foreground">{COMPANY.domain}</dd>
                   </div>
                 </dl>
@@ -112,7 +109,7 @@ export function KontakPage() {
               <div className="rounded-3xl border border-primary/15 bg-white p-6 shadow-sm">
                 <h2 className="flex items-center gap-2 font-serif text-lg font-bold text-foreground">
                   <MapPin className="h-5 w-5 text-primary" aria-hidden />
-                  Alamat & Area Layanan
+                  {s.addressTitle}
                 </h2>
                 <div className="mt-4 space-y-3">
                   {OFFICES.map((o) => (
@@ -127,8 +124,7 @@ export function KontakPage() {
                   {COMPANY.operationalHours}
                 </p>
                 <div className="mt-4 rounded-2xl bg-secondary/50 p-4 text-sm leading-relaxed text-muted-foreground">
-                  <strong className="text-foreground">Area layanan:</strong> seluruh 38 provinsi
-                  Indonesia — kirim reguler, kargo laut, dan ekspres udara.
+                  <strong className="text-foreground">{s.areaLabel}</strong> {s.areaText}
                 </div>
               </div>
             </Reveal>
@@ -138,8 +134,8 @@ export function KontakPage() {
 
       <CtaBand
         waMessage="Halo Bambu Water Nusantara! Saya ingin berkonsultasi."
-        title="Kami Balas Secepat Mungkin"
-        description={`WhatsApp ${COMPANY.whatsappDisplay} adalah jalur tercepat — konsultasi gratis untuk semua kebutuhan.`}
+        title={s.ctaTitle}
+        description={s.ctaDescription.replace('{wa}', COMPANY.whatsappDisplay)}
       />
     </>
   );
