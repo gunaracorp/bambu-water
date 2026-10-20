@@ -38,3 +38,23 @@ Stage Summary:
 - Data akta (pengurus & modal) terintegrasi di section Pimpinan & kartu legal
 - File kunci: src/app/page.tsx, src/lib/company.ts, src/components/site/* (17 file), src/app/api/contact/route.ts, prisma/schema.prisma
 - Screenshot verifikasi: research/screenshots/ (20 file)
+
+---
+Task ID: 3-a
+Agent: general-purpose (penulis konten SEO subagent)
+Task: Menulis 4 artikel data (gula darah, batu ginjal, kolesterol, detoksifikasi)
+
+Work Log:
+- Membaca worklog.md, src/lib/articles.ts (tipe ArticleData/ArticleSection/ArticleFaq + ARTICLE_SLUGS), dan pages-registry.ts (PAGES_META untuk 4 slug)
+- Membuat src/lib/articles-a.ts berisi export const ARTICLES_A: ArticleData[] (TEPAT 4 artikel, urutan sesuai ARTICLE_SLUGS)
+- Metadata disalin PERSIS dari PAGES_META (seoTitle, metaDescription, keywords, heroImage, updated=Juni 2025, title=h1); category=Artikel Kesehatan; intro registry diperluas jadi 3 paragraf
+- Konten per artikel: excerpt ≤180 karakter, readMinutes 6, heroImageAlt SEO, keyPoints 6 poin, 5 section (H2 unik, paragraf 60-125 kata), minimal 1 list (5-6 item) + 1 callout, conclusion + CTA halus WA 0813-1651-6524 (tepat 1x/artikel), 4 FAQ (jawaban 40-80 kata), 3 related slug valid, 4 referensi (PMC4659479, TIME 2015, Klikdokter, RRI)
+- Disclaimer wajib terpasang di callout: air bambu = terapi pendamping BUKAN pengganti obat/dokter; batasan cairan penderita ginjal lanjut disorot di artikel ginjal & detoks
+- Branding anti-plagiat: konteks Indonesia + sebut produk "Air Bambu Suling"/"Air Bambu Tabib" natural 1-2x per artikel
+- Verifikasi via transpile TypeScript (tanpa build/lint): 0 error sintaks; validasi programatik: jumlah kata 1248-1289/artikel (rentang 900-1300), heading unik, FAQ in-range, related valid, WA 1x, sebutan produk 1-2x, meta 100% identik dengan PAGES_META
+- Tidak memodifikasi file lain; tidak menjalankan build/lint
+
+Stage Summary:
+- ARTICLES_A siap dipakai: 4 artikel (air-bambu-gula-darah 1289 kata, air-bambu-batu-ginjal 1270, air-bambu-kolesterol 1248, air-bambu-detoksifikasi 1253) — masing-masing 5 section + 1 list + 1 callout + 4 FAQ
+- File: src/lib/articles-a.ts (satu-satunya ekspor ARTICLES_A, import type saja, tanpa import tak terpakai)
+- articles.ts (Task 2) sudah mengimpor ARTICLES_A — menunggu articles-b.ts (Task 3-b) agar ARTICLES lengkap 7 artikel

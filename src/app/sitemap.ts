@@ -1,13 +1,19 @@
 import type { MetadataRoute } from 'next';
+import { SITE_URL, PAGES_META } from '@/lib/pages-registry';
 
+/** Sitemap 25 halaman bambuwater.web.id */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = 'https://bambuwater.co.id';
-  const sections = ['', '#tentang', '#manfaat', '#produk', '#proses', '#pengiriman', '#pimpinan', '#faq', '#kontak'];
+  const now = new Date();
+  const pages = Object.values(PAGES_META);
 
-  return sections.map((section) => ({
-    url: `${siteUrl}/${section}`,
-    lastModified: new Date(),
-    changeFrequency: section === '' ? ('weekly' as const) : ('monthly' as const),
-    priority: section === '' ? 1 : 0.8,
-  }));
+  return pages
+    .sort((a, b) => b.priority - a.priority)
+    .map((p) => ({
+      url: p.slug === 'beranda' ? `${SITE_URL}/` : `${SITE_URL}/#/${p.slug}`,
+      lastModified: now,
+      changeFrequency: (p.slug === 'beranda' || p.slug === 'artikel'
+        ? 'weekly'
+        : 'monthly') as MetadataRoute.Sitemap[number]['changeFrequency'],
+      priority: p.priority as MetadataRoute.Sitemap[number]['priority'],
+    }));
 }

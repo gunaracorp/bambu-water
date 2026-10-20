@@ -19,7 +19,7 @@ export function LogoMark({ className }: { className?: string }) {
 export function Logo({ dark = false }: { dark?: boolean }) {
   return (
     <a
-      href="#beranda"
+      href="#/"
       className="group flex items-center gap-3"
       aria-label="Bambu Water Nusantara — kembali ke beranda"
     >

@@ -1,10 +1,57 @@
 'use client';
 
-import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
-import { COMPANY, NAV_LINKS, PRODUCTS } from '@/lib/company';
+import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { COMPANY, waLink } from '@/lib/company';
 import { Logo } from './logo';
 
-const PRODUCT_LINKS = PRODUCTS.map((p) => ({ label: p.name, href: '#produk' }));
+/** Sitemap footer — 25 halaman bambuwater.web.id */
+const FOOTER_NAV = [
+  {
+    heading: 'Jelajahi',
+    links: [
+      { label: 'Beranda', href: '#/' },
+      { label: 'Tentang Kami', href: '#/tentang-kami' },
+      { label: 'Testimoni', href: '#/testimoni' },
+      { label: 'FAQ', href: '#/faq' },
+      { label: 'Kontak', href: '#/kontak' },
+    ],
+  },
+  {
+    heading: 'Kesehatan',
+    links: [
+      { label: 'Apa Itu Air Bambu', href: '#/apa-itu-air-bambu' },
+      { label: 'Manfaat Air Bambu', href: '#/manfaat-air-bambu' },
+      { label: 'Kandungan Nutrisi', href: '#/kandungan-nutrisi' },
+      { label: 'Untuk Pengobatan', href: '#/air-bambu-pengobatan' },
+      { label: 'Sejarah Air Bambu', href: '#/sejarah-air-bambu' },
+    ],
+  },
+  {
+    heading: 'Produk & Layanan',
+    links: [
+      { label: 'Air Bambu Suling', href: '#/air-bambu-suling' },
+      { label: 'Air Bambu Tabib', href: '#/air-bambu-tabib' },
+      { label: 'Bambu Berkualitas', href: '#/bambu-berkualitas' },
+      { label: 'Harga & Paket', href: '#/harga-paket' },
+      { label: 'Pengiriman Massal', href: '#/pengiriman-massal' },
+      { label: 'Jangkauan Kota', href: '#/jangkauan-kota' },
+      { label: 'Proses Produksi', href: '#/proses-produksi' },
+      { label: 'Cara Pemesanan', href: '#/cara-pemesanan' },
+    ],
+  },
+  {
+    heading: 'Artikel Kesehatan',
+    links: [
+      { label: 'Semua Artikel', href: '#/artikel' },
+      { label: 'Air Bambu & Gula Darah', href: '#/air-bambu-gula-darah' },
+      { label: 'Air Bambu & Batu Ginjal', href: '#/air-bambu-batu-ginjal' },
+      { label: 'Air Bambu & Kolesterol', href: '#/air-bambu-kolesterol' },
+      { label: 'Detoksifikasi Alami', href: '#/air-bambu-detoksifikasi' },
+      { label: 'Tulang & Sendi', href: '#/air-bambu-tulang-silika' },
+      { label: 'Kecantikan & Kulit', href: '#/air-bambu-kecantikan' },
+    ],
+  },
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -29,25 +76,41 @@ export function Footer() {
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-emerald-100/75">
               Pesan air bambu untuk keluarga Anda, atau jadikan mitra distribusi kami di kota
-              Anda. Kesempatan bisnis minuman sehat sedang tumbuh pesat.
+              Anda. Konsultasi gratis via WhatsApp {COMPANY.whatsappDisplay}.
             </p>
           </div>
-          <a
-            href="#kontak"
-            className="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 px-8 py-4 text-base font-bold text-emerald-950 shadow-xl shadow-emerald-900/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-          >
-            Jadwal Konsultasi Gratis
-            <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
-          </a>
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <a
+              href={waLink('Halo Bambu Water Nusantara! Saya ingin konsultasi gratis tentang air bambu / bambu batang.')}
+              target="_blank"
+              rel="noopener noreferrer external"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-500 px-7 py-4 text-base font-bold text-white shadow-xl shadow-emerald-900/40 transition-all duration-300 hover:-translate-y-1 hover:bg-emerald-400 hover:shadow-2xl"
+            >
+              <MessageCircle className="h-5 w-5" aria-hidden />
+              WhatsApp {COMPANY.whatsappDisplay}
+            </a>
+            <a
+              href="#/kontak"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-full border border-white/25 px-7 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:text-gold"
+            >
+              Formulir Pemesanan
+              <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+            </a>
+          </div>
         </div>
       </div>
 
       {/* Kolom footer */}
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
-        <div>
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-6">
+        <div className="lg:col-span-2">
           <Logo dark />
           <p className="mt-4 text-sm leading-relaxed text-emerald-100/70">
             {COMPANY.description}
+          </p>
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs text-emerald-100/80">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden />
+            <span className="font-semibold text-white">{COMPANY.domain}</span>
+            — situs resmi
           </p>
           <div className="mt-5 flex gap-3">
             {[
@@ -69,57 +132,40 @@ export function Footer() {
           </div>
         </div>
 
-        <nav aria-label="Navigasi footer">
-          <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-gold">Navigasi</h3>
-          <ul className="mt-5 space-y-2.5 text-sm">
-            {NAV_LINKS.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="text-emerald-100/75 transition-colors hover:text-white hover:underline hover:decoration-gold/60 hover:underline-offset-4">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        {FOOTER_NAV.map((col) => (
+          <nav aria-label={`Navigasi footer ${col.heading}`} key={col.heading}>
+            <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-gold">{col.heading}</h3>
+            <ul className="mt-5 space-y-2.5 text-sm">
+              {col.links.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="text-emerald-100/75 transition-colors hover:text-white hover:underline hover:decoration-gold/60 hover:underline-offset-4"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
 
-        <nav aria-label="Produk">
-          <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-gold">Produk</h3>
-          <ul className="mt-5 space-y-2.5 text-sm">
-            {PRODUCT_LINKS.map((l) => (
-              <li key={l.label}>
-                <a href={l.href} className="text-emerald-100/75 transition-colors hover:text-white hover:underline hover:decoration-gold/60 hover:underline-offset-4">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a href="#pengiriman" className="text-emerald-100/75 transition-colors hover:text-white hover:underline hover:decoration-gold/60 hover:underline-offset-4">
-                Pengiriman Grosir & Kargo
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <div>
-          <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-gold">Kontak</h3>
-          <ul className="mt-5 space-y-3.5 text-sm text-emerald-100/75">
-            <li className="flex items-start gap-3">
-              <Phone className="mt-0.5 h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
-              <a href={`tel:${COMPANY.phone.replace(/[^+\d]/g, '')}`} className="transition-colors hover:text-white">
-                {COMPANY.phone}
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <Mail className="mt-0.5 h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
-              <a href={`mailto:${COMPANY.email}`} className="break-all transition-colors hover:text-white">
-                {COMPANY.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
-              <span>{COMPANY.address}</span>
-            </li>
-          </ul>
+      {/* Kontak baris */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto grid max-w-7xl gap-4 px-4 py-8 text-sm text-emerald-100/75 sm:px-6 md:grid-cols-3">
+          <a href={`tel:${COMPANY.phone.replace(/[^+\d]/g, '')}`} className="flex items-center gap-3 transition-colors hover:text-white">
+            <Phone className="h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
+            {COMPANY.phone} (telepon / WhatsApp)
+          </a>
+          <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-3 break-all transition-colors hover:text-white">
+            <Mail className="h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
+            {COMPANY.email}
+          </a>
+          <span className="flex items-center gap-3">
+            <MapPin className="h-4.5 w-4.5 shrink-0 text-teal-300" aria-hidden />
+            {COMPANY.address} — {COMPANY.operationalHours}
+          </span>
         </div>
       </div>
 
@@ -127,8 +173,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-center text-xs text-emerald-100/60 sm:px-6 md:flex-row md:text-left">
           <p>
-            © {year} {COMPANY.legalName}. Seluruh hak cipta dilindungi. Modal disetor{' '}
-            {COMPANY.modalDisetor}.
+            © {year} {COMPANY.legalName} • {COMPANY.domain}. Seluruh hak cipta dilindungi.
           </p>
           <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             <span className="inline-flex items-center gap-1.5">

@@ -39,10 +39,10 @@ export function About() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="Tentang Kami"
-          title="Perusahaan Air Bambu"
-          highlight="Pertama Nusantara"
-          description="Kami membawa tradisi penyembuhan air bambu Nusantara ke era modern — dengan standar produksi higienis dan jaringan distribusi nasional."
+          eyebrow="Tentang Kami — Sejak 2007"
+          title="Pionir Air Bambu"
+          highlight="Terbesar & Pertama di Indonesia"
+          description="Sejak 2007 kami membawa tradisi penyembuhan air bambu Nusantara ke era modern — dengan standar produksi higienis dan jaringan distribusi nasional ke seluruh Indonesia."
         />
 
         <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">

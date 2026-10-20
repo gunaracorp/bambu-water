@@ -98,9 +98,9 @@ export function Hero() {
             className="mx-auto mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-emerald-50 backdrop-blur-md sm:text-sm"
           >
             <Leaf className="h-4 w-4 text-gold" aria-hidden />
-            PT Bambu Water Nusantara
+            Terbesar & Pertama di Indonesia
             <span className="hidden h-1 w-1 rounded-full bg-gold sm:block" />
-            <span className="hidden sm:block">Sejak 2025</span>
+            <span className="hidden sm:block">Sejak 2007</span>
           </motion.div>
 
           <h1 className="text-4xl font-bold leading-[1.08] text-white sm:text-6xl lg:text-7xl">
@@ -153,7 +153,7 @@ export function Hero() {
               size="lg"
               className="group h-14 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-8 text-base font-semibold text-white shadow-xl shadow-emerald-900/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-800/40"
             >
-              <a href="#produk">
+              <a href="#/air-bambu-suling">
                 Jelajahi Produk
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden />
               </a>
@@ -164,7 +164,7 @@ export function Hero() {
               variant="outline"
               className="h-14 rounded-full border-white/40 bg-white/5 px-8 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/15 hover:text-white"
             >
-              <a href="#pengiriman" className="gap-2.5">
+              <a href="#/pengiriman-massal" className="gap-2.5">
                 <Truck className="h-5 w-5" aria-hidden />
                 Pesan Grosir / Kargo
               </a>
@@ -207,7 +207,7 @@ export function Hero() {
 
       {/* Indikator gulir */}
       <motion.a
-        href="#tentang"
+        href="#/tentang-kami"
         aria-label="Gulir ke bawah — Tentang kami"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

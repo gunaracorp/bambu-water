@@ -5,20 +5,29 @@
  * (Journal of Medicinal Plant Research 2015 / PMC4659479, TIME, RRI, Klikdokter, dsb).
  */
 
+/** Domain resmi situs — bambuwater.web.id */
+export const SITE_URL = 'https://bambuwater.web.id';
+
+/** Klaim keunggulan utama brand */
+export const BRAND_CLAIM = 'Sejak 2007 — Terbesar & Pertama di Indonesia';
+export const YEARS_OF_EXPERIENCE = new Date().getFullYear() - 2007;
+
 export const COMPANY = {
   legalName: 'PT Bambu Water Nusantara',
   name: 'Bambu Water Nusantara',
   shortName: 'BWN',
-  tagline: 'Sari Bambu Murni, Kesehatan dari Alam Nusantara',
+  domain: 'bambuwater.web.id',
+  tagline: 'Pionir Air Bambu Indonesia Sejak 2007',
   description:
-    'PT Bambu Water Nusantara adalah produsen dan distributor air bambu alami untuk terapi kesehatan serta penyedia bambu berkualitas dalam jumlah besar dengan jangkauan pengiriman ke seluruh Indonesia.',
-  foundedYear: 2025,
+    'PT Bambu Water Nusantara — sejak 2007 pionir, terbesar, dan pertama di Indonesia dalam penyediaan air bambu alami untuk pengobatan serta distribusi bambu berkualitas dalam jumlah besar ke seluruh Indonesia.',
+  foundedYear: 2007,
   modalDasar: 'Rp 700.000.000',
   modalDisetor: 'Rp 300.000.000',
-  email: 'halo@bambuwater.co.id',
-  emailSales: 'sales@bambuwater.co.id',
-  phone: '+62 812-3456-7890',
-  whatsapp: '6281234567890',
+  email: 'halo@bambuwater.web.id',
+  emailSales: 'sales@bambuwater.web.id',
+  phone: '+62 813-1651-6524',
+  whatsapp: '6281316516524',
+  whatsappDisplay: '+62 813-1651-6524',
   address: 'Jawa Barat, Indonesia',
   city: 'Bandung',
   province: 'Jawa Barat',
@@ -183,11 +192,17 @@ export const CITIES = [
 
 /** Statistik highlight (berdasar riset) */
 export const STATS = [
-  { value: 2100000, suffix: ' ha', label: 'Lahan bambu Indonesia — terluas di dunia' },
-  { value: 70, suffix: '%', label: 'Kandungan silika organik ekstrak daun bambu' },
-  { value: 34, suffix: ' Provinsi', label: 'Jangkauan pengiriman seluruh Indonesia' },
-  { value: 60, prefix: 'US$ ', suffix: ' M', label: 'Nilai pasar bambu global' },
+  { prefix: '', value: YEARS_OF_EXPERIENCE, suffix: '+', label: 'Tahun pengalaman — Terbesar & Pertama di Indonesia sejak 2007' },
+  { prefix: '', value: 2100000, suffix: ' ha', label: 'Lahan bambu Indonesia — terluas di dunia' },
+  { prefix: '', value: 70, suffix: '%', label: 'Kandungan silika organik ekstrak daun bambu' },
+  { prefix: '', value: 34, suffix: ' Provinsi', label: 'Jangkauan pengiriman seluruh Indonesia' },
 ] as const;
+
+/** Link WhatsApp resmi dengan pesan siap kirim */
+export const waLink = (message?: string) =>
+  `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
+    message ?? 'Halo Bambu Water Nusantara! Saya ingin bertanya tentang air bambu / bambu batang.'
+  )}`;
 
 /** FAQ — juga dipakai untuk JSON-LD FAQPage */
 export const FAQS = [
@@ -219,15 +234,66 @@ export const FAQS = [
     q: 'Apakah PT Bambu Water Nusantara badan hukum resmi?',
     a: 'Ya, kami badan hukum Perseroan Terbatas resmi dengan Akta Pendirian yang tercatat — modal dasar Rp 700.000.000 dan modal disetor Rp 300.000.000 — didukung susunan direksi dan komisaris yang lengkap.',
   },
+  {
+    q: 'Apa perbedaan Air Bambu Suling dan Air Bambu Tabib?',
+    a: 'Air Bambu Suling adalah sadapan bambu yang dimurnikan melalui distilasi bertahap — aman untuk konsumsi harian dengan daya tahan lebih lama. Air Bambu Tabib adalah sadapan mentah segar langsung dari ruas bambu, dipanen dengan teknik tradisional untuk kebutuhan terapis, tabib, dan praktik pengobatan komplementer.',
+  },
+  {
+    q: 'Apakah air bambu bisa menjadi pengganti obat dokter?',
+    a: 'Tidak. Air bambu adalah minuman terapi alami pendamping pola hidup sehat, bukan obat. Untuk kondisi medis tertentu seperti diabetes, hipertensi, atau penyakit ginjal, tetap konsultasikan dengan dokter atau tenaga kesehatan Anda sebelum menjadikan air bambu bagian dari program kesehatan.',
+  },
+  {
+    q: 'Apakah melayani pengiriman ke luar Pulau Jawa?',
+    a: 'Melayani. Kami mengirim ke 34 provinsi di seluruh Indonesia — Sumatera, Kalimantan, Sulawesi, Bali & Nusa Tenggara, Maluku, hingga Papua — melalui jaringan kargo darat, laut, dan udara dengan packing aman untuk pengiriman jarak jauh.',
+  },
 ] as const;
 
-export const NAV_LINKS = [
-  { href: '#beranda', label: 'Beranda' },
-  { href: '#tentang', label: 'Tentang' },
-  { href: '#manfaat', label: 'Manfaat' },
-  { href: '#produk', label: 'Produk' },
-  { href: '#proses', label: 'Proses' },
-  { href: '#pengiriman', label: 'Pengiriman' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#kontak', label: 'Kontak' },
+/** Tipe layanan pengiriman */
+export const DELIVERY_TIERS = [
+  {
+    name: 'Reguler',
+    area: 'Jabodetabek & Jawa Barat',
+    eta: '1–3 hari kerja',
+    icon: 'truck',
+    description: 'Kurir terpercaya dengan packing food-grade aman untuk pesanan botol hingga jerigen.',
+    features: ['Min. pemesanan bebas', 'Packing food-grade', 'Lacak pengiriman'],
+  },
+  {
+    name: 'Kargo Antar Pulau',
+    area: 'Seluruh Jawa, Sumatera, Kalimantan, Sulawesi, Bali & NT',
+    eta: '3–7 hari kerja',
+    icon: 'ship',
+    description: 'Kargo darat & laut dengan volume besar untuk distributor, reseller, dan proyek.',
+    features: ['Min. 1 jerigen / 10 batang', 'Segel kayu & strapping', 'Asuransi kargo opsional'],
+  },
+  {
+    name: 'Ekspres Udara',
+    area: 'Maluku, Papua & NTT',
+    eta: '2–5 hari kerja',
+    icon: 'plane',
+    description: 'Pengiriman udara untuk wilayah timur Indonesia — segar sampai tujuan.',
+    features: ['Prioritas penerbangan', 'Cold-pack opsional', 'Cocok untuk terapis & klinik'],
+  },
 ] as const;
+
+/** Rentang harga indikatif (negosiasi untuk volume besar) */
+export const PRICING = {
+  airBambu: [
+    { product: 'Botol 600 ml', price: 'Rp 15.000', unit: 'per botol', note: 'Karton isi 24 botol' },
+    { product: 'Botol 1,5 L', price: 'Rp 32.000', unit: 'per botol', note: 'Karton isi 12 botol' },
+    { product: 'Galon 19 L', price: 'Rp 95.000', unit: 'per galon', note: 'Termasuk galon food-grade' },
+    { product: 'Jerigen 10 L', price: 'Rp 60.000', unit: 'per jerigen', note: 'Grosir min. 10 pcs' },
+    { product: 'Drum 30 L', price: 'Rp 165.000', unit: 'per drum', note: 'Grosir min. 5 drum' },
+  ],
+  airTabib: [
+    { product: 'Jerigen 5 L', price: 'Rp 85.000', unit: 'per jerigen', note: 'Sadapan segar harian' },
+    { product: 'Jerigen 10 L', price: 'Rp 160.000', unit: 'per jerigen', note: 'Sadapan segar harian' },
+    { product: 'Drum 30 L', price: 'Rp 450.000', unit: 'per drum', note: 'Untuk klinik & komunitas tabib' },
+  ],
+  bambu: [
+    { product: 'Bambu Petung (konstruksi)', price: 'Rp 85.000 – 150.000', unit: 'per batang', note: 'Panjang 8–12 m, Ø 10–18 cm' },
+    { product: 'Bambu Wulung (hitam)', price: 'Rp 120.000 – 250.000', unit: 'per batang', note: 'Estetika premium, treatment kilau' },
+    { product: 'Bambu Apus (tali & anyam)', price: 'Rp 45.000 – 90.000', unit: 'per batang', note: 'Serat kuat, lentur' },
+    { product: 'Bambu Ori (rangka ringan)', price: 'Rp 55.000 – 110.000', unit: 'per batang', note: 'Ramping untuk furniture' },
+  ],
+} as const;

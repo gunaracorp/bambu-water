@@ -125,7 +125,7 @@ export function Products() {
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button asChild className="flex-1 rounded-full bg-primary py-6 text-base font-semibold shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90">
-                    <a href="#kontak">Minta Penawaran</a>
+                    <a href="#/kontak">Minta Penawaran</a>
                   </Button>
                   <Button
                     asChild
