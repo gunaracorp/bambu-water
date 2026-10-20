@@ -3,6 +3,7 @@ import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { COMPANY, SITE_URL } from '@/lib/company';
+import { PRINCIPAL, SUPPORT_SYSTEMS, ENTITY_KEYWORDS } from '@/lib/branding';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -63,6 +64,7 @@ const SITE_KEYWORDS = [
   'pabrik air bambu',
   'produsen air bambu',
   'bambu water indonesia',
+  ...ENTITY_KEYWORDS,
 ];
 
 export const metadata: Metadata = {
@@ -76,8 +78,11 @@ export const metadata: Metadata = {
     'Situs resmi PT Bambu Water Nusantara (bambuwater.web.id) — produsen air bambu suling & air bambu tabib untuk pengobatan dan terapi kesehatan alami. Distribusi air bambu serta bambu berkualitas (Petung, Wulung, Apus, Ori) dalam jumlah besar ke seluruh kota Indonesia. WhatsApp 0813-1651-6524.',
   keywords: SITE_KEYWORDS,
   applicationName: COMPANY.name,
-  authors: [{ name: COMPANY.legalName, url: SITE_URL }],
-  creator: COMPANY.legalName,
+  authors: [
+    { name: COMPANY.legalName, url: SITE_URL },
+    { name: PRINCIPAL.name, url: SUPPORT_SYSTEMS[0].url },
+  ],
+  creator: `${SUPPORT_SYSTEMS[1].legalName} (${SUPPORT_SYSTEMS[1].domain})`,
   publisher: COMPANY.legalName,
   category: 'Kesehatan & Minuman Herbal',
   classification: 'Health & Wellness, Food & Beverage, Construction Materials',
@@ -153,6 +158,8 @@ export const metadata: Metadata = {
     'revisit-after': '7 days',
     'language': 'Indonesian',
     'contact': COMPANY.whatsappDisplay,
+    'creator': `${SUPPORT_SYSTEMS[1].legalName} — ${SUPPORT_SYSTEMS[1].roleEn}`,
+    'owner': PRINCIPAL.formalName,
   },
 };
 

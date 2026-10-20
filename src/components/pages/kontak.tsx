@@ -47,7 +47,7 @@ export function KontakPage() {
         {/* Kartu kontak */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {CONTACT_CARDS.map((c, i) => (
-            <Reveal key={c.value} delay={i * 0.08}>
+            <Reveal key={`${c.value}-${i}`} delay={i * 0.08}>
               <a
                 href={c.href}
                 target={c.href.startsWith('http') ? '_blank' : undefined}

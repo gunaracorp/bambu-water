@@ -59,56 +59,56 @@
    "ariaLabel": "关于公司",
    "eyebrow": "关于我们—自2007年起",
    "title": "竹水先驱",
-   "highlight": "印度尼西亚最大和首家",
-   "description": "自2007年以来，我们将印度尼西亚竹子治疗传统带入现代—采用卫生生产标准和全国分销网络覆盖整个印度尼西亚。",
-   "imgAlt": "PT Bambu Water Nusantara管理的印度尼西亚绿色山坡上的可持续竹林",
-   "landChip": "印度尼西亚210万公顷竹林",
+   "highlight": "印度尼西亚最大与首家",
+   "description": "自2007年以来，我们将印度尼西亚竹水治疗传统带入现代时代——采用卫生生产标准和全国分销网络覆盖整个印度尼西亚。",
+   "imgAlt": "PT Bambu Water Nusantara 守护的印度尼西亚绿色山坡上的可持续竹林",
+   "landChip": "印度尼西亚拥有210万公顷的竹林",
    "expLabel": "经验",
-   "expSince": "自2007年起",
-   "expHighlight": "最大和首家",
-   "expYears": "在印度尼西亚—{years}+年服务",
-   "narrLead": "源于一个信念，即印度尼西亚保存着最简单的治愈财富：",
-   "narrEm": "竹子中流动的水",
-   "narrAfter": "几个世纪以来，传统医生收获嫩竹来退烧、缓解咳嗽和恢复体力。如今，我们以现代生产标准带来这种智慧—由经验丰富的学生蒸馏，并由跨领域专家委员会监督，从可持续收获到全国运输。",
+   "expSince": "自2007年",
+   "expHighlight": "最大与首家",
+   "expYears": "在印度尼西亚 — {years}+ 年服务",
+   "narrLead": "源于这样一种信念：群岛蕴含着最简单的治愈财富：",
+   "narrEm": "竹子内部流动的水",
+   "narrAfter": "几个世纪以来，传统医师收获幼嫩的竹子来退烧、缓解咳嗽和恢复体力。如今，我们以现代生产标准呈现这一智慧——由经验丰富的学生提炼，并由跨领域专家委员会监督，从可持续收获到全国配送。",
    "visionTitle": "愿景",
-   "visionText": "成为东南亚领先的竹子治疗水供应商，同时成为印度尼西亚竹子经济的支柱。",
+   "visionText": "成为东南亚领先的竹疗水供应商，同时成为印度尼西亚竹产业的支柱。",
    "missionTitle": "使命",
-   "missionText": "Menyediakan air bambu murni berkualitas farmasi, memasok bambu konstruksi nasional, dan mengangkat kesejahteraan petani bambu."
+   "missionText": "提供制药级纯竹水，供应全国建筑用竹，并提升竹农的福祉。"
   },
   "science": {
-   "ariaLabel": "Kandungan nutrisi air bambu",
-   "eyebrow": "Kandungan Alami",
-   "title": "Ilmu di Balik",
-   "highlight": "Setiap Tetes",
-   "description": "Silika organik bambu termasuk yang tertinggi di alam — dipadukan flavonoid, klorofil, asam amino, dan elektrolit esensial.",
-   "imgAlt": "Segelas air bambu bening di atas batu alam dengan daun bambu segar — suasana tenang dan menyembuhkan",
-   "electrolyteLabel": "Kaya Elektrolit Alami",
-   "microTestLabel": "Diuji Mikrobiologi",
-   "cardTitle": "Profil Nutrisi Air Bambu",
-   "cardSub": "Indeks kekayaan relatif per komponen alami"
+   "ariaLabel": "竹水营养成分",
+   "eyebrow": "天然成分",
+   "title": "背后的科学",
+   "highlight": "每一滴",
+   "description": "竹子的有机硅含量在自然界中是最高的——配以类黄酮、叶绿素、氨基酸和必需电解质。",
+   "imgAlt": "一块天然石头上放着一杯清澈的竹水，旁边有新鲜的竹叶——宁静治愈的氛围",
+   "electrolyteLabel": "富含天然电解质",
+   "microTestLabel": "微生物检测",
+   "cardTitle": "竹水营养成分谱",
+   "cardSub": "各天然成分的相对丰富度指数"
   },
   "reasons": {
-   "ariaLabel": "Rahasia awet muda kaisar China dan 10 alasan minum air bambu",
-   "badge": "Rahasia Kuno yang Nyaris Tergores Sejarah",
-   "title": "Rahasia Awet Muda",
-   "highlight": "Kaisar China",
-   "p1Lead": "Sejak ribuan tahun lalu, tabib istana Dinasti China menyimpan satu rahasia paling dijaga:",
-   "p1Strong": "sari bambu",
-   "p1Mid": "— elixir yang dipercaya menjaga awet muda kaisar dan para bangsawan. Terdokumentasi dalam pengobatan tradisional Tiongkok sebagai",
-   "p1Em": "\"Tian Zhu Li\"",
-   "p1Tail": "(天竹瀝), sari bambu disuling dari ruas bambu muda untuk meredakan panas, menyegarkan tubuh, dan merawat vitalitas sang penguasa.",
-   "p2Lead": "Namun seiring waktu, rahasia besar itu nyaris",
-   "p2Strong": "tergores sejarah",
-   "p2Tail": "— hanya diketahui segelintir pembantu istana dan tabib warisan. Kini rahasia kuno itu kembali: riset modern membuktikan kandungan silika organik tertinggi di alam dan antioksidan luar biasa dalam air bambu.",
-   "luckLine": "Jadilah orang yang beruntung — Anda kini tahu rahasia besar ini. 🌿",
-   "subheading": "10 Alasan Kenapa Anda",
-   "subheadingHighlight": "Harus Minum Air Bambu",
-   "subDesc": "Dari rahasia kuno hingga pembuktian ilmiah modern.",
-   "cta": "Mulai Ritual Sehat Anda",
-   "ctaMessage": "Halo! Saya ingin mencoba air bambu — rahasia awet muda kaisar China 🌿"
+   "ariaLabel": "中国皇帝的青春秘诀和饮用竹水的10个理由",
+   "badge": "几乎被历史遗忘的古老秘密",
+   "title": "青春秘诀",
+   "highlight": "中国皇帝",
+   "p1Lead": "数千年来，中国王朝宫廷医师守护着一个最严守的秘密：",
+   "p1Strong": "竹汁",
+   "p1Mid": "— 一种被认为能使皇帝和贵族保持青春的灵丹妙药。在中国传统医学中记载为",
+   "p1Em": "\"天竹沥\"",
+   "p1Tail": "(天竹瀝)，从嫩竹节中蒸馏出的竹汁，用于清热、提神和保养统治者的活力。",
+   "p2Lead": "但随着时间的推移，这个伟大的秘密几乎",
+   "p2Strong": "被历史遗忘",
+   "p2Tail": "— 只有少数宫廷仆人和传承医师知晓。如今，这个古老秘密重见天日：现代研究证明了竹水中自然界最高的有机硅含量和非凡的抗氧化剂。",
+   "luckLine": "成为幸运的人——您现在知道了这个伟大的秘密。🌿",
+   "subheading": "您为什么必须",
+   "subheadingHighlight": "饮用竹水的10个理由",
+   "subDesc": "从古老秘密到现代科学证明。",
+   "cta": "开始您的健康仪式",
+   "ctaMessage": "您好！我想尝试竹水——中国皇帝的青春秘诀 🌿"
   },
   "testimonials": {
-   "ariaLabel": "Testimoni pelanggan",
+   "ariaLabel": "客户评价",
    "eyebrow": "Cerita Mereka",
    "title": "Kepercayaan yang",
    "highlight": "Mengalir",
@@ -168,218 +168,218 @@
    "officeTitle": "Kantor Pemasaran",
    "phoneLabel": "Telepon / WhatsApp",
    "emailLabel": "Email",
-   "addressLabel": "Alamat",
-   "hoursLabel": "Jam Operasional",
-   "branchesNote": "Branch 2: Mangkubumi, Tasikmalaya • Branch 3: Cihaurgeulis, Bandung",
+   "addressLabel": "地址",
+   "hoursLabel": "营业时间",
+   "branchesNote": "分店2：Mangkubumi，Tasikmalaya • 分店3：Cihaurgeulis，Bandung",
    "guarantees": [
     {
-     "title": "Balasan < 24 Jam",
-     "text": "Respons cepat tim kami"
+     "title": "< 24小时回复",
+     "text": "我们团队的快速响应"
     },
     {
-     "title": "Dokumen Lengkap",
-     "text": "Untuk tender & pengadaan"
+     "title": "完整文件",
+     "text": "用于投标和采购"
     },
     {
-     "title": "Kemasan Aman",
-     "text": "Standar ekspedisi nasional"
+     "title": "安全包装",
+     "text": "国家运输标准"
     },
     {
-     "title": "Garansi Mutu",
-     "text": "Retur bila tidak sesuai"
+     "title": "质量保证",
+     "text": "不符合可退货"
     }
    ],
-   "formTitle": "Formulir Pemesanan & Konsultasi",
-   "formSubtitle": "Isi kebutuhan Anda — retail maupun jumlah besar (grosir/kargo).",
-   "orderLegend": "Saya ingin memesan",
+   "formTitle": "订单和咨询表单",
+   "formSubtitle": "填写您的需求 — 零售或大批量（批发/货运）。",
+   "orderLegend": "我想订购",
    "orderTypeLabels": [
-    "Air Bambu (Retail)",
-    "Bambu Batang",
-    "Grosir / Reseller",
-    "Korporat / Proyek"
+    "竹子水（零售）",
+    "竹竿",
+    "批发/经销商",
+    "企业/项目"
    ],
-   "nameLabel": "Nama Lengkap",
-   "namePlaceholder": "cth. Ahmad Setiawan",
-   "phonePlaceholder": "cth. 0812-3456-7890",
+   "nameLabel": "全名",
+   "namePlaceholder": "例如：Ahmad Setiawan",
+   "phonePlaceholder": "例如：0812-3456-7890",
    "emailPlaceholder": "nama@email.com",
-   "cityLabel": "Kota Tujuan Pengiriman",
-   "cityPlaceholder": "Pilih kota",
-   "cityOther": "Kota lainnya",
-   "messageLabel": "Detail Kebutuhan",
-   "messagePlaceholder": "cth. Butuh air bambu suling 50 galon/bulan untuk kafe di Bandung, kirim tiap Senin.",
-   "submitting": "Mengirim…",
-   "submitCta": "Kirim Permintaan Penawaran",
-   "submitNote": "Dengan mengirim formulir, Anda setuju dihubungi oleh tim kami.",
-   "sentTitle": "Pesan Anda Terkirim!",
-   "sentThanks": "Terima kasih,",
-   "sentBody": "Tim Bambu Water Nusantara akan menghubungi Anda melalui telepon/WhatsApp dalam 1×24 jam kerja.",
-   "sendAnother": "Kirim Pesan Lain",
-   "toastIncompleteTitle": "Data belum lengkap",
-   "toastIncompleteDesc": "Mohon isi nama, nomor telepon, dan pesan Anda.",
-   "errorFallback": "Gagal mengirim",
-   "toastSuccessTitle": "Pesan terkirim! 🌿",
-   "toastSuccessDesc": "Terima kasih! Tim kami akan menghubungi Anda dalam 1×24 jam kerja.",
-   "toastFailTitle": "Gagal mengirim pesan",
-   "toastFailDesc": "Silakan coba lagi atau hubungi WhatsApp kami."
+   "cityLabel": "配送城市",
+   "cityPlaceholder": "选择城市",
+   "cityOther": "其他城市",
+   "messageLabel": "需求详情",
+   "messagePlaceholder": "例如：Bandung的咖啡馆每月需要50加仑蒸馏竹子水，每周一发货。",
+   "submitting": "发送中...",
+   "submitCta": "发送报价请求",
+   "submitNote": "提交表单即表示您同意被我们的团队联系。",
+   "sentTitle": "您的消息已发送！",
+   "sentThanks": "感谢，",
+   "sentBody": "Bambu Water Nusantara团队将在1×24个工作小时内通过电话/WhatsApp联系您。",
+   "sendAnother": "发送另一条消息",
+   "toastIncompleteTitle": "数据不完整",
+   "toastIncompleteDesc": "请填写您的姓名、电话和消息。",
+   "errorFallback": "发送失败",
+   "toastSuccessTitle": "消息已发送！🌿",
+   "toastSuccessDesc": "感谢！我们的团队将在1×24个工作小时内联系您。",
+   "toastFailTitle": "消息发送失败",
+   "toastFailDesc": "请重试或通过WhatsApp联系我们。"
   },
   "quoteForm": {
-   "ariaLabel": "Formulir pemesanan air bambu",
-   "title": "Formulir Pemesanan & Konsultasi",
-   "subtitle": "Gratis, tanpa komitmen — balasan dalam 1×24 jam kerja.",
-   "nameLabel": "Nama Lengkap",
-   "namePlaceholder": "cth. Budi Santoso",
-   "phoneLabel": "No. WhatsApp / Telepon",
-   "phonePlaceholder": "cth. 0812 3456 7890",
-   "emailLabel": "Email (opsional)",
-   "emailPlaceholder": "nama@email.com",
-   "cityLabel": "Kota Pengiriman",
-   "cityPlaceholder": "cth. Surabaya",
-   "needTypeLabel": "Jenis Kebutuhan",
+   "ariaLabel": "竹子水订购表单",
+   "title": "订单和咨询表单",
+   "subtitle": "免费，无承诺 — 1×24个工作小时内回复。",
+   "nameLabel": "全名",
+   "namePlaceholder": "例如 Budi Santoso",
+   "phoneLabel": "WhatsApp / 电话号码",
+   "phonePlaceholder": "例如 0812 3456 7890",
+   "emailLabel": "邮箱（可选）",
+   "emailPlaceholder": "name@email.com",
+   "cityLabel": "配送城市",
+   "cityPlaceholder": "例如 泗水",
+   "needTypeLabel": "需求类型",
    "orderTypeLabels": [
-    "Air Bambu (Retail)",
-    "Bambu Batang",
-    "Grosir / Reseller",
-    "Korporat / Proyek"
+    "竹子水（零售）",
+    "竹竿",
+    "批发 / 经销商",
+    "企业 / 项目"
    ],
-   "messageLabel": "Pesan / Kebutuhan",
-   "messagePlaceholder": "cth. Saya ingin pesan galon air bambu suling 19L sebanyak 10 galon ke Surabaya...",
-   "submitting": "Mengirim...",
-   "submitCta": "Kirim Permintaan",
-   "privacyNote": "Data Anda aman & hanya digunakan untuk memproses pesanan.",
-   "sentTitle": "Terima Kasih",
-   "sentBody": "Permintaan Anda sudah kami terima. Tim Bambu Water Nusantara akan menghubungi Anda melalui WhatsApp atau telepon dalam 1×24 jam kerja.",
-   "waConfirmCta": "Konfirmasi via WhatsApp",
-   "waMessage": "Halo, saya {name} baru saja mengirim permintaan ({type}). Mohon diproses ya!",
-   "toastIncompleteTitle": "Data belum lengkap",
-   "toastIncompleteDesc": "Mohon isi nama, nomor telepon/WhatsApp, dan pesan Anda.",
-   "errorFallback": "Gagal mengirim",
-   "toastSuccessTitle": "Permintaan terkirim! 🌿",
-   "toastSuccessDesc": "Terima kasih! Tim kami akan menghubungi Anda dalam 1×24 jam kerja.",
-   "toastFailTitle": "Gagal mengirim",
-   "toastFailDesc": "Silakan coba lagi atau hubungi via WhatsApp."
+   "messageLabel": "留言 / 需求",
+   "messagePlaceholder": "例如 我想订购10桶19L的蒸馏竹子水送到泗水...",
+   "submitting": "发送中...",
+   "submitCta": "提交请求",
+   "privacyNote": "您的数据安全，仅用于处理订单。",
+   "sentTitle": "谢谢",
+   "sentBody": "我们已收到您的请求。Bambu Water Nusantara团队将在1×24个工作小时内通过WhatsApp或电话与您联系。",
+   "waConfirmCta": "通过WhatsApp确认",
+   "waMessage": "您好，我是{name}，刚刚提交了{type}请求。请处理！",
+   "toastIncompleteTitle": "信息不完整",
+   "toastIncompleteDesc": "请填写您的姓名、电话/WhatsApp和留言。",
+   "errorFallback": "发送失败",
+   "toastSuccessTitle": "请求已发送！🌿",
+   "toastSuccessDesc": "谢谢！我们的团队将在1×24个工作小时内与您联系。",
+   "toastFailTitle": "发送失败",
+   "toastFailDesc": "请重试或通过WhatsApp联系我们。"
   },
   "footer": {
-   "ariaLabel": "Footer situs",
-   "ctaTitle": "Mulai Hidup Sehat dengan",
-   "ctaHighlight": "Sari Bambu",
-   "ctaDesc": "Pesan air bambu untuk keluarga Anda, atau jadikan mitra distribusi kami di kota Anda.",
-   "ctaConsult": "Konsultasi gratis via WhatsApp",
+   "ariaLabel": "网站页脚",
+   "ctaTitle": "开始健康生活，享用",
+   "ctaHighlight": "竹子精华",
+   "ctaDesc": "为您的家人订购竹子水，或成为您所在城市的分销合作伙伴。",
+   "ctaConsult": "通过WhatsApp免费咨询",
    "waCta": "WhatsApp",
-   "ctaForm": "Formulir Pemesanan",
-   "waMessage": "Halo Bambu Water Nusantara! Saya ingin konsultasi gratis tentang air bambu / bambu batang.",
+   "ctaForm": "订购表单",
+   "waMessage": "您好 Bambu Water Nusantara！我想就竹子水/竹竿进行免费咨询。",
    "columns": {
-    "explore": "Jelajahi",
-    "health": "Kesehatan",
-    "products": "Produk & Layanan",
-    "articles": "Artikel Kesehatan"
+    "explore": "探索",
+    "health": "健康",
+    "products": "产品与服务",
+    "articles": "健康文章"
    },
-   "navAria": "Navigasi footer",
+   "navAria": "页脚导航",
    "articleLinks": [
-    "Semua Artikel",
-    "Air Bambu & Gula Darah",
-    "Air Bambu & Batu Ginjal",
-    "Air Bambu & Kolesterol",
-    "Detoksifikasi Alami",
-    "Tulang & Sendi",
-    "Kecantikan & Kulit"
+    "所有文章",
+    "竹子水与血糖",
+    "竹子水与肾结石",
+    "竹子水与胆固醇",
+    "天然排毒",
+    "骨骼与关节",
+    "美容与肌肤"
    ],
    "labelOverrides": {
-    "sejarah-air-bambu": "Sejarah Air Bambu"
+    "sejarah-air-bambu": "竹子水历史"
    },
    "socialLabels": [
     "Instagram Bambu Water Nusantara",
     "Facebook Bambu Water Nusantara",
     "LinkedIn Bambu Water Nusantara"
    ],
-   "phoneNote": "telepon / WhatsApp",
-   "fullAddressNote": "alamat lengkap di halaman Kontak"
+   "phoneNote": "电话 / WhatsApp",
+   "fullAddressNote": "完整地址在联系我们页面"
   },
   "hero": {
-   "ariaLabel": "Beranda Bambu Water Nusantara",
-   "imageAlt": "Hutan bambu Indonesia saat fajar — sinar keemasan menembus kabut dan tetesan air sadapan menetes dari ruas bambu muda",
-   "badge": "Terbesar & Pertama di Indonesia",
-   "badgeSince": "Sejak 2007",
-   "titleLine1": "Sari Bambu Murni,",
-   "titleLine2": "Kesehatan dari Alam",
-   "titleLine3": "Nusantara",
-   "subtitle": "Air sadapan bambu untuk terapi kesehatan alami — kaya silika organik, flavonoid, dan mineral esensial. Kami juga melayani",
-   "subtitleHighlight": "distribusi air bambu & bambu berkualitas",
-   "subtitleAfter": "dalam jumlah besar ke seluruh Indonesia.",
-   "ctaPrimary": "Jelajahi Produk",
-   "ctaSecondary": "Pesan Grosir / Kargo",
+   "ariaLabel": "Bambu Water Nusantara 首页",
+   "imageAlt": "印尼竹林在黎明时——金色光芒穿透薄雾，竹滴从嫩竹节滴落",
+   "badge": "印尼最大&首家",
+   "badgeSince": "自2007年起",
+   "titleLine1": "纯净竹汁，",
+   "titleLine2": "源自自然的健康",
+   "titleLine3": "努山塔拉",
+   "subtitle": "竹子滴落的水，用于自然健康疗法——富含有机硅、黄酮和必需矿物质。我们还提供",
+   "subtitleHighlight": "竹子水和优质竹子的分销",
+   "subtitleAfter": "服务，批量运往印尼各地。",
+   "ctaPrimary": "探索产品",
+   "ctaSecondary": "批发/货运订单",
    "trust": [
-    "Suling bertahap higienis",
-    "100% alami tanpa pengawet",
-    "Kirim ke 38 provinsi"
+    "卫生渐进式过滤",
+    "100%天然无防腐剂",
+    "配送至38个省份"
    ],
-   "scrollAriaLabel": "Gulir ke bawah — Tentang kami"
+   "scrollAriaLabel": "向下滚动 — 关于我们"
   },
   "stats": {
-   "millionSuffix": " jt",
-   "thousandSuffix": "rb"
+   "millionSuffix": "百万",
+   "thousandSuffix": "千"
   },
   "cta": {
-   "ariaLabel": "Ajakan bertindak",
-   "title": "Siap Merasakan Manfaat Air Bambu?",
-   "description": "Konsultasi gratis dengan tim kami — untuk kebutuhan terapi keluarga, grosir, hingga kargo bambu massal ke kota Anda.",
-   "legal": "Badan hukum resmi",
-   "chatCta": "Chat WhatsApp",
-   "formCta": "Isi Formulir"
+   "ariaLabel": "行动号召",
+   "title": "准备好体验竹子水的益处了吗？",
+   "description": "免费咨询我们的团队——无论是家庭疗法需求、批发，还是将大批竹子运往您所在的城市。",
+   "legal": "合法实体",
+   "chatCta": "WhatsApp聊天",
+   "formCta": "填写表格"
   },
   "productTemplate": {
-   "packaging": "Pilihan Kemasan",
-   "orderWa": "Pesan via WhatsApp",
-   "viewPrice": "Lihat Harga",
-   "usesEyebrow": "Untuk Apa",
-   "usesTitle": "Kegunaan &",
-   "usesHighlight": "Manfaatnya",
-   "guideTitle": "Panduan",
-   "guideHighlight": "Penggunaan",
-   "faqTitle": "Pertanyaan",
-   "faqHighlight": "Umum",
-   "safetyNote": "Produk food-grade, diproses higienis, tanpa pengawet.",
-   "relatedLabel": "Produk Lainnya"
+   "packaging": "包装选择",
+   "orderWa": "通过WhatsApp订购",
+   "viewPrice": "查看价格",
+   "usesEyebrow": "用途",
+   "usesTitle": "用途与",
+   "usesHighlight": "益处",
+   "guideTitle": "指南",
+   "guideHighlight": "使用方法",
+   "faqTitle": "常见",
+   "faqHighlight": "问题",
+   "safetyNote": "食品级产品，卫生加工，无防腐剂。",
+   "relatedLabel": "其他产品"
   }
  },
  "pages": {
   "beranda": {
-   "navLabel": "Beranda",
-   "seoTitle": "Bambu Water Nusantara — Air Bambu Terapi Pengobatan Alami & Distribusi Bambu Se-Indonesia",
-   "metaDescription": "Produsen air bambu suling & air bambu tabib untuk pengobatan alami. Distribusi bambu berkualitas massal ke seluruh kota Indonesia. WA 0813-1651-6524.",
-   "h1": "Sari Bambu Murni untuk Kesehatan Sejak Dalam",
-   "eyebrow": "PT Bambu Water Nusantara — bambuwater.web.id",
-   "intro": "Air sadapan bambu pilihan untuk pengobatan & terapi kesehatan alami, serta bambu berkualitas dalam jumlah besar — dikirim ke seluruh Indonesia.",
+   "navLabel": "首页",
+   "seoTitle": "努山塔拉竹子 — 天然治疗竹子饮用水和全印尼竹子分销",
+   "metaDescription": "竹子蒸馏水和治疗竹子水生产商，用于天然治疗。向印尼各城市提供优质竹子批发服务。WA 0813-1651-6524。",
+   "h1": "纯竹汁，源自内部健康",
+   "eyebrow": "努山塔拉竹子水有限公司 — bambuwater.web.id",
+   "intro": "精选竹子饮用水，用于治疗和天然健康疗法，以及大批量优质竹子 — 发送到整个印度尼西亚。",
    "keywords": [
-    "air bambu",
-    "air bambu pengobatan",
-    "terapi air bambu",
-    "air bambu suling",
-    "distribusi bambu indonesia",
-    "bambu water nusantara"
+    "竹子水",
+    "治疗竹子水",
+    "竹子水疗法",
+    "蒸馏竹子水",
+    "印尼竹子分销",
+    "努山塔拉竹子水"
    ],
-   "menuDesc": ""
+   "menuDesc": "竹子水疗法，来自印度尼西亚竹子水专家的专业健康解决方案。"
   },
   "tentang-kami": {
-   "navLabel": "Tentang Kami",
-   "seoTitle": "Tentang Kami — PT Bambu Water Nusantara, Badan Hukum Resmi Terpercaya",
-   "metaDescription": "Kenali PT Bambu Water Nusantara: profil perusahaan, visi misi, legalitas akta pendirian, susunan pimpinan, dan komitmen kualitas kami.",
-   "h1": "Tentang PT Bambu Water Nusantara",
-   "eyebrow": "Profil Perusahaan",
-   "intro": "Perusahaan badan hukum resmi yang menghadirkan air bambu terapi berkualitas dan bambu premium Nusantara — dari hutan rakyat terkurasi ke rumah Anda.",
+   "navLabel": "关于我们",
+   "seoTitle": "关于我们 — 努山塔拉竹子水有限公司，值得信赖的合法实体",
+   "metaDescription": "了解努山塔拉竹子水有限公司：公司简介、愿景使命、合法成立证书、管理层结构和我们的质量承诺。",
+   "h1": "关于努山塔拉竹子水有限公司",
+   "eyebrow": "公司简介",
+   "intro": "合法实体公司，提供优质的治疗竹水和努山塔拉优质竹子 — 从受监管的民间森林到您的家。",
    "keywords": [
-    "tentang bambu water nusantara",
-    "PT Bambu Water Nusantara",
-    "profil perusahaan air bambu",
-    "legalitas PT bambu water",
-    "badan hukum air bambu"
+    "关于努山塔拉竹子水",
+    "努山塔拉竹子水有限公司",
+    "竹子水公司简介",
+    "竹子水公司合法地位",
+    "竹子水合法实体"
    ],
-   "menuDesc": "Profil, visi misi & legalitas",
+   "menuDesc": "简介、愿景使命和合法地位",
    "s": {
-    "story_title": "18+ Tahun Menghadirkan",
-    "story_highlight": "Sari Bambu Nusantara",
-    "story_title_end": "untuk Kesehatan",
-    "p1_a": "PT Bambu Water Nusantara (BWN) adalah perusahaan penyedia air bambu untuk pengobatan dan terapi kesehatan alami —",
-    "p1_strong": "yang pertama dan terbesar di Indonesia sejak 2007",
+    "story_title": "18+ 年带来",
+    "story_highlight": "努山塔拉竹汁",
+    "story_title_end": "为健康",
+    "p1_a": "努山塔拉竹子水有限公司（BWN）是提供竹子饮用水用于治疗和天然健康疗法的公司 —",
+    "p1_strong": "自2007年以来印尼首家也是最大的",
     "p1_b": ". Kami memanen sadapan bambu muda dari hutan bambu rakyat terkurasi, memurnikannya dengan distilasi higienis, lalu mengantarnya hingga ke rumah-rumah, klinik terapis, dan mitra distributor di seluruh Nusantara.",
     "p2_a": "Lebih dari sekadar minuman, air bambu adalah warisan pengobatan leluhur yang kini didukung riset ilmiah modern. Di samping air bambu, kami juga menyediakan",
     "p2_strong": "bambu berkualitas",
@@ -400,212 +400,212 @@
       "value": "Sejak 2007 ({years}+ tahun)"
      },
      {
-      "label": "Produksi",
-      "value": "Disuling santri berpengalaman"
+      "value": "经验丰富的蒸馏师",
+      "label": "Produksi"
      },
      {
-      "label": "Pengawasan",
-      "value": "Dewan pakar lintas bidang"
+      "label": "监管",
+      "value": "跨领域专家委员会"
      }
     ],
-    "journey_eyebrow": "Perjalanan Kami",
-    "journey_title": "18+ Tahun Membangun Kepercayaan",
-    "journey_highlight": "Sejak 2007",
-    "journey_desc": "Dari panen pertama di lereng Jawa Barat hingga jaringan distribusi nasional.",
+    "journey_eyebrow": "我们的历程",
+    "journey_title": "18+ 年建立信任",
+    "journey_highlight": "自 2007 年起",
+    "journey_desc": "从西爪哇山坡的首次收获到全国分销网络。",
     "milestones": [
      {
       "year": "2007",
-      "title": "Awal Mula",
-      "text": "BWN lahir sebagai pionir penyediaan air bambu untuk pengobatan tradisional — yang pertama di Indonesia."
+      "title": "起源",
+      "text": "BWN 作为竹子水供应的先驱诞生，用于传统医疗 — 印度尼西亚第一家。"
      },
      {
       "year": "2012",
-      "title": "Distilasi Modern",
-      "text": "Fasilitas distilasi pertama kami beroperasi — memadukan kearifan tabib dengan standar higienis modern."
+      "title": "现代蒸馏",
+      "text": "我们的第一家蒸馏设施投入运营 — 将医者的智慧与现代卫生标准相结合。"
      },
      {
       "year": "2017",
-      "title": "Jangkauan Nasional",
-      "text": "Distribusi massal bambu & air bambu menjangkau seluruh provinsi, dari Sabang sampai Merauke."
+      "title": "全国范围",
+      "text": "竹子和竹子水的批量分销覆盖所有省份，从亚齐到马老奇。"
      },
      {
       "year": "2025",
-      "title": "Badan Hukum Resmi",
-      "text": "PT Bambu Water Nusantara resmi berbadan hukum dengan akta pendirian tercatat — fondasi ekspansi lebih besar."
+      "title": "正式法律实体",
+      "text": "PT Bambu Water Nusantara 正式注册成立 — 为更大扩张奠定基础。"
      }
     ],
-    "values_eyebrow": "Nilai Kami",
-    "values_title": "Prinsip yang Kami",
-    "values_highlight": "Pegang Teguh",
+    "values_eyebrow": "我们的价值观",
+    "values_title": "我们坚守的原则",
+    "values_highlight": "坚定不移",
     "values": [
      {
-      "title": "Berkelanjutan",
-      "description": "Panen tanpa merusak rumpun — hutan bambu rakyat kami jaga agar tetap lestari untuk generasi berikutnya."
+      "title": "可持续性",
+      "description": "不破坏竹丛收获 — 我们守护着平民的竹林，使其为后代保持可持续。"
      },
      {
-      "title": "Higienis & Standar",
-      "description": "Distilasi bertahap, uji mikrobiologi, dan kemasan food-grade pada setiap batch produksi."
+      "title": "卫生与标准",
+      "description": "分步蒸馏、微生物测试和每批次生产的食品级包装。"
      },
      {
-      "title": "Jangkauan Nasional",
-      "description": "Jaringan kargo darat, laut, dan udara menjangkau 38 provinsi Indonesia."
+      "title": "全国范围",
+      "description": "陆路、海路和空运网络覆盖印度尼西亚 38 个省份。"
      },
      {
-      "title": "Memberdayakan Rakyat",
-      "description": "Berkemitran dengan petani hutan rakyat di Jawa Barat dan Nusantara."
+      "title": "赋能人民",
+      "description": "与西爪哇和印度尼西亚的平民森林农民合作。"
      }
     ],
-    "offices_eyebrow": "Alamat Kami",
-    "offices_title": "Kantor Pusat &",
-    "offices_highlight": "Branch Office",
-    "offices_desc": "Kunjungi kantor kami di Tasikmalaya dan Bandung — pintu selalu terbuka untuk mitra dan pelanggan.",
-    "cta_title": "Mau Jadi Mitra Distribusi BWN?",
-    "cta_desc": "Bergabung dengan jaringan distributor resmi kami — dukungan produk, harga khusus, dan materi edukasi lengkap.",
-    "cta_wa": "Halo Bambu Water Nusantara! Saya tertarik menjadi mitra distributor di kota saya."
+    "offices_eyebrow": "我们的地址",
+    "offices_title": "总部与",
+    "offices_highlight": "分公司",
+    "offices_desc": "访问我们在芝玛加拉和万隆的办公室 — 门始终向合作伙伴和客户敞开。",
+    "cta_title": "想成为 BWN 的分销合作伙伴吗？",
+    "cta_desc": "加入我们的官方分销网络 — 产品支持、专属价格和完整的教育材料。",
+    "cta_wa": "你好 Bambu Water Nusantara！我想成为我所在城市的分销合作伙伴。"
    }
   },
   "apa-itu-air-bambu": {
-   "navLabel": "Apa Itu Air Bambu",
-   "seoTitle": "Apa Itu Air Bambu? Panduan Lengkap Air Sadapan Bambu & Manfaatnya",
-   "metaDescription": "Pahami apa itu air bambu (air tuak bambu): asal usul sadapan ruas bambu muda, cara pengambilan teknik mata tunas, jenis, hingga proses distilasi.",
-   "h1": "Apa Itu Air Bambu?",
-   "eyebrow": "Panduan Lengkap",
-   "intro": "Mengenal air sadapan bambu — harta alam Nusantara yang kaya silika dan antioksidan, dari proses terbentuknya hingga sampai ke gelas Anda.",
+   "navLabel": "什么是竹子水",
+   "seoTitle": "什么是竹子水？竹心水完整指南及其益处",
+   "metaDescription": "了解什么是竹子水（竹酒）：年轻竹节竹心水的起源、取芽技术、种类直至蒸馏过程。",
+   "h1": "什么是竹子水？",
+   "eyebrow": "完整指南",
+   "intro": "认识竹心水 — 富含硅和抗氧化剂的印度尼西亚自然宝藏，从形成过程到您的杯中。",
    "keywords": [
-    "apa itu air bambu",
-    "air tuak bambu",
-    "air sadapan bambu",
-    "asal usul air bambu",
-    "cara mengambil air bambu",
-    "teknik mata tunas bambu"
+    "什么是竹子水",
+    "竹酒",
+    "竹子饮用水",
+    "竹子饮水的起源",
+    "采集竹子水的方法",
+    "竹芽眼技术"
    ],
-   "menuDesc": "Pengertian, asal usul & jenis air bambu",
+   "menuDesc": "竹子饮水的定义、起源与种类",
    "s": {
-    "p1_strong1": "Air bambu",
-    "p1_a": "— sering disebut",
-    "p1_em1": "air tuak bambu",
-    "p1_b": "atau",
-    "p1_em2": "air sadapan bambu",
-    "p1_c": "— adalah cairan bening semirair yang terbentuk secara alami di dalam ruas bambu muda. Selama berabad-abad, cairan ini menjadi rahasia penyembuhan tabib Nusantara, dan kini dikaji ilmu modern sebagai minuman dengan",
-    "p1_strong2": "kandungan silika organik tertinggi di alam",
-    "p1_d": "(hingga ~70% pada ekstrak daun bambu) serta antioksidan flavonoid dan polifenol.",
-    "p2": "Di Indonesia — negara dengan lahan bambu terluas di dunia (2,1 juta hektare, 157 spesies) — air bambu tumbuh melimpah namun belum banyak dimanfaatkan. Bambu Water Nusantara hadir sejak 2007 untuk memanen kekayaan ini secara berkelanjutan, memurnikannya dengan standar modern, dan mengantarnya ke seluruh Indonesia.",
-    "origin_eyebrow": "Asal Usul",
-    "origin_title": "Bagaimana Air Bambu",
-    "origin_highlight": "Terbentuk?",
+    "p1_strong1": "竹子水",
+    "p1_a": "— 常被称为",
+    "p1_em1": "竹酒",
+    "p1_b": "或",
+    "p1_em2": "竹子饮用水",
+    "p1_c": "— 是在嫩竹节中自然形成的半透明液体。几个世纪以来，这种液体已成为群岛（Nusantara）传统医师的治疗秘密，如今现代科学研究将其视为一种含有自然界中",
+    "p1_strong2": "最高有机硅含量",
+    "p1_d": "（竹叶提取物中高达约70%）以及抗氧化剂类黄酮和多酚的饮料。",
+    "p2": "在印度尼西亚——这个拥有世界最广泛竹林的国家（210万公顷，157个物种）——竹子水资源丰富但尚未充分利用。Bambu Water Nusantara 自2007年以来，持续收获这一资源，以现代标准进行净化，并将其送达印尼各地。",
+    "origin_eyebrow": "起源",
+    "origin_title": "竹子水如何",
+    "origin_highlight": "形成？",
     "origin_steps": [
      {
-      "title": "Terbentuk di Dalam Ruas",
-      "text": "Air hujan dan kelembapan diserap akar rizoma bambu, naik melalui batang, lalu berkondensasi menjadi sadapan murni di ruas bambu muda."
+      "title": "在竹节中形成",
+      "text": "雨水和湿度被竹子的根茎吸收，通过竹竿上升，然后在嫩竹节中凝结成纯净的饮用水。"
      },
      {
-      "title": "Momentum Panen",
-      "text": "Kandungan mineral paling optimal saat bambu berumur 1–3 tahun — dipanen subuh saat sadapan segar."
+      "title": "收获时机",
+      "text": "竹子生长1-3年时矿物质含量最丰富——在清晨饮用水新鲜时收获。"
      },
      {
-      "title": "Teknik Mata Tunas",
-      "text": "Tabib tradisional membuka \"mata tunas\" di ruas untuk mengalirkan sadapan tanpa merusak pohon — warisan Nusantara."
+      "title": "竹芽眼技术",
+      "text": "传统医师在竹节上打开\"竹芽眼\"让水流淌而不损害树木——这是群岛的遗产。"
      },
      {
-      "title": "Distilasi Higienis",
-      "text": "Untuk konsumsi harian, sadapan disuling bertahap agar mineral terjaga dan mikrobiologi terjamin."
+      "title": "卫生蒸馏",
+      "text": "日常饮用时，饮用水需逐步蒸馏，以保持矿物质并确保微生物安全。"
      }
     ],
-    "types_eyebrow": "Jenis-Jenis",
-    "types_title": "Tiga Wujud",
-    "types_highlight": "Air Bambu",
-    "types_desc": "Dari tradisi tabib hingga laboratorium modern — tiga bentuk pemanfaatan air bambu.",
+    "types_eyebrow": "种类",
+    "types_title": "三种形态",
+    "types_highlight": "竹子水",
+    "types_desc": "从传统医师到现代实验室——竹子水的三种利用形式。",
     "types": [
      {
-      "name": "Air Sadapan Mentah (Tabib)",
-      "desc": "Langsung dari ruas — dipakai tabib untuk terapi, harus segar & diolah tepat.",
-      "badge": "Tradisional"
+      "name": "原竹饮用水（传统医师）",
+      "desc": "直接从竹节中获取——传统医师用于治疗，必须新鲜且正确加工。",
+      "badge": "传统"
      },
      {
-      "name": "Air Bambu Suling",
-      "desc": "Dimurnikan bertahap — aman harian, tahan simpan, mineral & silika terjaga.",
-      "badge": "Populer"
+      "name": "蒸馏竹子水",
+      "desc": "逐步净化——日常安全，可储存，保持矿物质和硅。",
+      "badge": "流行"
      },
      {
-      "name": "Ekstrak Daun Bambu",
-      "desc": "Sumber riset ilmiah modern — silika hingga 70% dan antioksidan tinggi.",
-      "badge": "Riset"
+      "name": "竹叶提取物",
+      "desc": "现代科学研究来源——硅含量高达70%且抗氧化性强。",
+      "badge": "研究"
      }
     ],
-    "diffs_eyebrow": "Perbandingan",
-    "diffs_title": "Mengapa Memilih",
-    "diffs_highlight": "Air Bambu?",
+    "diffs_eyebrow": "比较",
+    "diffs_title": "为何选择",
+    "diffs_highlight": "竹子水？",
     "diffs": [
      {
-      "label": "vs Air Mineral",
-      "text": "Air bambu unggul kandungan silika organik & flavonoid unik yang tidak dimiliki air mineral biasa."
+      "label": "vs 矿泉水",
+      "text": "竹子水在有机硅和独特类黄酮含量上优于普通矿泉水。"
      },
      {
-      "label": "vs Air Kelapa",
-      "text": "Keduanya minuman alami; air bambu lebih rendah gula alami dan kaya silika untuk tulang & kulit."
+      "label": "vs 椰子水",
+      "text": "两者都是天然饮料；竹子水天然糖分更低，富含硅，有益骨骼和皮肤。"
      },
      {
-      "label": "vs Teh Daun",
-      "text": "Tanpa kafein — cocok dikonsumsi kapan saja, bahkan untuk anak dan ibu hamil (dengan anjuran)."
+      "label": "与茶对比",
+      "text": "不含咖啡因 — 适合随时饮用，甚至儿童和孕妇（建议在医生指导下饮用）。"
      }
     ],
-    "fact_strong": "Tahukah Anda?",
-    "fact_a": "TIME (2015) meliput munculnya",
+    "fact_strong": "你知道吗？",
+    "fact_a": "TIME (2015) 报道了",
     "fact_em": "bamboo water",
-    "fact_b": "sebagai tren minuman kesehatan dunia — dan Indonesia adalah rumah terbesar bagi bahan bakunya.",
-    "cta_title": "Ingin Mencoba Air Bambu Asli Nusantara?",
-    "cta_desc": "Konsultasi gratis dengan tim kami — pilih air bambu suling untuk harian, atau air bambu tabib untuk kebutuhan terapi.",
-    "cta_wa": "Halo! Saya ingin tahu lebih banyak tentang air bambu dan produknya."
+    "fact_b": "作为全球健康饮料趋势的出现 — 而印尼是其原料的最大家园。",
+    "cta_title": "想尝试正宗的群岛竹水吗？",
+    "cta_desc": "免费咨询我们的团队 — 选择日常饮用的蒸馏竹水，或用于治疗需求的药用竹水。",
+    "cta_wa": "你好！我想了解更多关于竹水及其产品的信息。"
    }
   },
   "manfaat-air-bambu": {
-   "navLabel": "Manfaat Air Bambu",
-   "seoTitle": "8 Manfaat Air Bambu untuk Kesehatan & Pengobatan Alami Terbukti",
-   "metaDescription": "8 manfaat air bambu untuk kesehatan: turunkan demam, legakan batuk, jaga jantung, gula darah, pencernaan, imun, kulit, hingga nyeri haid.",
-   "h1": "8 Manfaat Air Bambu untuk Kesehatan",
-   "eyebrow": "Manfaat & Khasiat",
-   "intro": "Dari tradisi tabib Nusantara hingga kajian ilmiah modern — manfaat lengkap air bambu untuk tubuh, dari dalam hingga luar.",
+   "navLabel": "竹水的好处",
+   "seoTitle": "8种经证实的竹水对健康与自然疗法的益处",
+   "metaDescription": "竹水对健康的8种好处：退烧、缓解咳嗽、保护心脏、血糖、消化、免疫力、皮肤，甚至缓解痛经。",
+   "h1": "竹水的8种健康益处",
+   "eyebrow": "益处与功效",
+   "intro": "从传统群岛医学到现代科学研究 — 竹水对人体的全面益处，从内到外。",
    "keywords": [
-    "manfaat air bambu",
-    "khasiat air bambu",
-    "air bambu untuk kesehatan",
-    "air bambu pengobatan",
-    "manfaat air tuak bambu",
-    "air bambu untuk demam"
+    "竹水的好处",
+    "竹水的功效",
+    "竹水对健康",
+    "竹水治疗",
+    "竹米酒的好处",
+    "竹水退烧"
    ],
-   "menuDesc": "8 manfaat utama untuk tubuh",
+   "menuDesc": "对身体的8个主要好处",
    "s": {
-    "benefits_eyebrow": "Manfaat & Khasiat",
-    "benefits_title": "Delapan Manfaat Utama",
-    "benefits_highlight": "Air Bambu",
-    "benefits_desc": "Dirangkum dari pengobatan tradisional Nusantara dan kajian ilmiah ekstrak bambu modern.",
-    "inner_title": "Untuk Dalam Tubuh:",
-    "inner_highlight": "Terapi & Pemulihan",
-    "outer_title": "Untuk Luar Tubuh:",
-    "outer_highlight": "Vitalitas & Kecantikan",
-    "guide_eyebrow": "Panduan Harian",
-    "guide_title": "Cara Konsumsi yang",
-    "guide_highlight": "Tepat",
-    "guide_desc": "Sederhana namun konsisten — itulah kunci mendapatkan manfaat penuh air bambu.",
+    "benefits_eyebrow": "益处与功效",
+    "benefits_title": "八大主要益处",
+    "benefits_highlight": "竹水",
+    "benefits_desc": "总结自群岛传统医学和现代竹提取物科学研究。",
+    "inner_title": "体内：",
+    "inner_highlight": "治疗与恢复",
+    "outer_title": "体外：",
+    "outer_highlight": "活力与美容",
+    "guide_eyebrow": "日常指南",
+    "guide_title": "正确的饮用方式",
+    "guide_highlight": "正确",
+    "guide_desc": "简单但坚持 — 这是获得竹水全部益处的关键。",
     "daily_guide": [
      {
-      "time": "Pagi (kamar mandi)",
-      "text": "1 gelas (±250 ml) air bambu suling saat perut kosong — membantu detoks & pencernaan."
+      "time": "早晨（浴室）",
+      "text": "空腹饮用1杯（约250毫升）蒸馏竹水 — 有助于排毒和消化。"
      },
      {
-      "time": "Siang",
-      "text": "1 gelas setelah makan — melancarkan metabolisme dan menjaga hidrasi mineral."
+      "time": "中午",
+      "text": "饭后1杯 — 促进新陈代谢并保持矿物质水分。"
      },
      {
-      "time": "Sore/Senja",
-      "text": "1 gelas hangat — menenangkan dan mendukung pemulihan tubuh."
+      "time": "傍晚/黄昏",
+      "text": "1杯温水 — 平静身心并支持身体恢复。"
      }
     ],
-    "note_strong": "Catatan penting:",
-    "note_a": "air bambu adalah minuman terapi alami",
-    "note_strong2": "pendamping",
-    "note_b": "— bukan pengganti obat resep dokter. Penderita kondisi medis (diabetes, ginjal, hipertensi) sebaiknya berkonsultasi terlebih dahulu dengan tenaga kesehatan.",
-    "cta_title": "Rasakan Manfaatnya Sendiri",
+    "note_strong": "重要提示：",
+    "note_a": "竹水是天然治疗饮料",
+    "note_strong2": "辅助品",
+    "note_b": "— 不是处方药的替代品。患有疾病（糖尿病、肾脏、高血压）的患者应先咨询医疗专业人员。",
+    "cta_title": "亲身体验其益处",
     "cta_desc": "Air Bambu Suling tersedia botol 600ml hingga drum 30L — dikirim ke seluruh Indonesia.",
     "cta_wa": "Halo! Saya ingin memesan air bambu untuk kesehatan keluarga."
    }
@@ -675,135 +675,135 @@
       "text": "Ekstrak daun bambu (Bambusa vulgaris) mencatat kandungan silika organik hingga 70% — tertinggi di antara tanaman yang dikaji."
      },
      {
-      "title": "TIME 2015 — Tren Dunia",
-      "text": "\"Bamboo Water Is Now a Thing\" — media global menyoroti bambu sebagai sumber minuman fungsional masa depan."
+      "title": "TIME 2015 — 全球趋势",
+      "text": "\"竹子水现已流行\" — 全球媒体将竹子誉为未来功能性饮料的来源。"
      }
     ],
-    "disclaimer": "*Nilai kandungan bersifat indikatif berdasarkan publikasi riset ekstrak bambu dan dapat bervariasi antar panen. Air bambu bukan obat — konsultasikan kondisi kesehatan Anda dengan tenaga medis.",
-    "cta_title": "Mineral Alami, Terverifikasi Higienis",
-    "cta_desc": "Setiap batch air bambu BWN melewati distilasi bertahap dan uji mutu sebelum dikirim ke Anda.",
-    "cta_wa": "Halo! Saya ingin tahu detail kandungan & uji mutu air bambu BWN."
+    "disclaimer": "*数值为基于竹子提取物研究发表的参考值，不同收获批次可能有所差异。竹子水不是药物 — 请咨询您的医疗专业人士健康状况。",
+    "cta_title": "天然矿物质，卫生认证",
+    "cta_desc": "每批BWN竹子水在送达您之前都经过分步蒸馏和质量检测。",
+    "cta_wa": "您好！我想了解BWN竹子水的成分和质量检测详情。"
    }
   },
   "air-bambu-pengobatan": {
-   "navLabel": "Untuk Pengobatan",
-   "seoTitle": "Air Bambu untuk Pengobatan Tradisional & Terapi Komplementer",
-   "metaDescription": "Peran air bambu dalam pengobatan tradisional Nusantara: demam, batuk, diabetes, kolesterol, hingga nyeri haid — panduan aman & tepat.",
-   "h1": "Air Bambu untuk Pengobatan Tradisional",
-   "eyebrow": "Terapi Komplementer",
-   "intro": "Warisan pengobatan leluhur yang kini didukung riset — cara tepat memanfaatkan air bambu sebagai pendamping terapi kesehatan.",
+   "navLabel": "用于治疗",
+   "seoTitle": "竹子水用于传统医学与补充疗法",
+   "metaDescription": "竹子水在群岛传统医学中的作用：发烧、咳嗽、糖尿病、胆固醇，甚至经痛 — 安全有效的指南。",
+   "h1": "竹子水用于传统医学",
+   "eyebrow": "补充疗法",
+   "intro": "祖先的医学遗产如今得到研究的支持 — 如何正确利用竹子水作为健康疗法的辅助。",
    "keywords": [
-    "air bambu pengobatan",
-    "terapi air bambu",
-    "pengobatan tradisional air bambu",
-    "air bambu tabib",
-    "obat tradisional air bambu",
-    "air bambu untuk terapi"
+    "竹子水治疗",
+    "竹子水疗法",
+    "传统竹子水治疗",
+    "竹子水医生",
+    "传统竹子水药物",
+    "竹子水用于治疗"
    ],
-   "menuDesc": "Terapi tradisional & komplementer",
+   "menuDesc": "传统与补充疗法",
    "s": {
-    "p1_a": "Dalam khazanah",
-    "p1_strong1": "pengobatan tradisional Nusantara",
-    "p1_b": ", air bambu dikenal sebagai",
-    "p1_em": "\"air kehidupan\"",
-    "p1_c": "— disarankan tabib untuk meredakan demam, melapangkan napas, melancarkan pencernaan, hingga mendampingi program penurunan gula darah dan kolesterol. Tradisi ini kini diperkaya bukti ilmiah: kajian 2015 (Journal of Medicinal Plant Research) mencatat ekstrak bambu memiliki efek",
-    "p1_strong2": "antioksidan, anti-inflamasi, dan proteksi kardiovaskular",
-    "principle_strong": "Prinsip kami:",
-    "principle_a": "air bambu adalah",
-    "principle_strong2": "terapi komplementer pendamping",
-    "principle_b": "— mendukung, bukan menggantikan pengobatan medis. Selalu konsultasikan dengan dokter atau tabib Anda.",
-    "therapy_eyebrow": "Aplikasi Terapi",
-    "therapy_title": "Untuk Siapa &",
-    "therapy_highlight": "Untuk Apa?",
+    "p1_a": "在",
+    "p1_strong1": "群岛传统医学",
+    "p1_b": "中，竹子水被称为",
+    "p1_em": "\"生命之水\"",
+    "p1_c": "— 医生推荐用于缓解发烧、畅通呼吸、促进消化，并辅助降低血糖和胆固醇的计划。这一传统如今得到科学证据的补充：2015年研究（药用植物研究杂志）记录显示竹子提取物具有",
+    "p1_strong2": "抗氧化、抗炎和心血管保护",
+    "principle_strong": "我们的原则：",
+    "principle_a": "竹子水是",
+    "principle_strong2": "辅助补充疗法",
+    "principle_b": "— 支持而非替代医疗。请始终咨询您的医生或治疗师。",
+    "therapy_eyebrow": "疗法应用",
+    "therapy_title": "为谁及",
+    "therapy_highlight": "为何？",
     "therapy_uses": [
      {
-      "title": "Demam & Panas Dalam",
-      "text": "Sifat mendinginkan alami air bambu dipakai tabib Nusantara menurunkan suhu tubuh — diminum hangat perlahan.",
-      "audience": "Keluarga"
+      "title": "发烧与内热",
+      "text": "竹子水的天然降温特性被群岛医生用于降低体温 — 温热缓慢饮用。",
+      "audience": "家庭"
      },
      {
-      "title": "Batuk & Dahak",
-      "text": "Membantu melapangkan saluran napas dan melunakkan dahak secara alami tanpa kafein.",
-      "audience": "Keluarga"
+      "title": "咳嗽与痰",
+      "text": "帮助自然畅通呼吸道并稀释痰液，不含咖啡因。",
+      "audience": "家庭"
      },
      {
-      "title": "Pendamping Diabetes & Kolesterol",
-      "text": "Dikonsumsi sebagai minuman rendah gula pengganti minuman manis, dalam program pola hidup sehat penderita.",
-      "audience": "Dengan pengawasan medis"
+      "title": "糖尿病与胆固醇的辅助",
+      "text": "作为低糖饮料替代甜饮，在患者健康生活方式计划中饮用。",
+      "audience": "在医疗监督下"
      },
      {
-      "title": "Pemulihan & Daya Tahan",
-      "text": "Mineral, asam amino, dan antioksidan mendukung pemulihan tubuh pasien sakit atau pasca operasi (sesuai anjuran).",
-      "audience": "Pasien & lansia"
+      "title": "恢复与耐力",
+      "text": "矿物质、氨基酸和抗氧化剂支持病人或术后患者的身体恢复（按建议）。",
+      "audience": "患者与老年人"
      }
     ],
-    "pract_eyebrow": "Mitra Praktisi",
-    "pract_title": "Dipercaya Para",
-    "pract_highlight": "Penyembuh Tradisional",
-    "pract_desc": "Sejak 2007, tabib dan praktisi di berbagai kota mempercayakan pasokan air bambu kepada kami.",
+    "pract_eyebrow": "从业者合作伙伴",
+    "pract_title": "受到",
+    "pract_highlight": "传统治疗师",
+    "pract_desc": "自2007年以来，各地的医生和从业者都信任我们供应竹子水。",
     "practitioners": [
      {
-      "title": "Tabib & Praktisi Tradisional",
-      "text": "Air Bambu Tabib (sadapan mentah) untuk praktik pengobatan komplementer sesuai tradisi."
+      "title": "医生和传统从业者",
+      "text": "生竹水（生饮）用于传统辅助治疗实践。"
      },
      {
-      "title": "Klinik Terapi & Spa",
-      "text": "Pasokan rutin air bambu suling untuk program detoks & terapi minum klien."
+      "title": "治疗中心和水疗中心",
+      "text": "定期供应蒸馏竹子水用于排毒计划和客户饮水疗法。"
      },
      {
-      "title": "Komunitas Herbal & Edukasi",
-      "text": "Materi edukasi + sampel untuk sosialisasi pengobatan tradisional di komunitas."
+      "title": "草药和教育社区",
+      "text": "教育材料+样品，用于在社区中宣传传统医学。"
      },
      {
-      "title": "Rumah Sehat & Panti",
-      "text": "Kemitraan pasokan minuman sehat alami bagi penghuni program pemulihan."
+      "title": "健康之家和养老院",
+      "text": "为康复项目居民提供天然健康饮料供应合作伙伴关系。"
      }
     ],
-    "quality_eyebrow": "Standar Terapi",
-    "quality_title": "Kualitas yang Layak untuk",
-    "quality_highlight": "Penyembuhan",
-    "cta_title": "Butuh Pasokan Rutin untuk Praktik Anda?",
-    "cta_desc": "Harga khusus tabib, terapis & klinik — kontrak bulanan fleksibel dengan pengiriman terjadwal.",
-    "cta_wa": "Halo! Saya tabib/terapis dan ingin memesan Air Bambu Tabib secara rutin."
+    "quality_eyebrow": "治疗标准",
+    "quality_title": "值得信赖的",
+    "quality_highlight": "治愈",
+    "cta_title": "需要定期供应用于您的实践？",
+    "cta_desc": "医生、治疗师和诊所的专属价格—灵活的月度合同和定期送货。",
+    "cta_wa": "你好！我是医生/治疗师，想要定期订购生竹水。"
    }
   },
   "air-bambu-gula-darah": {
-   "navLabel": "Air Bambu untuk Gula Darah & Diabetes",
-   "seoTitle": "Air Bambu untuk Gula Darah & Diabetes — Fakta, Riset, dan Cara Aman",
-   "metaDescription": "Apakah air bambu membantu menstabilkan gula darah penderita diabetes? Simak fakta ilmiah, tradisi, cara konsumsi aman, dan batasannya.",
-   "h1": "Air Bambu untuk Gula Darah & Diabetes",
-   "eyebrow": "Artikel Kesehatan",
-   "intro": "Jutaan orang Indonesia hidup dengan diabetes. Bisakah air bambu menjadi pendamping minuman yang membantu? Ini jawaban berdasarkan riset.",
+   "navLabel": "竹子水用于血糖和糖尿病",
+   "seoTitle": "竹子水用于血糖和糖尿病—事实、研究和安全方法",
+   "metaDescription": "竹子水是否有助于稳定糖尿病患者的血糖？了解科学事实、传统、安全食用方法和限制。",
+   "h1": "竹子水用于血糖和糖尿病",
+   "eyebrow": "健康文章",
+   "intro": "数百万印度尼西亚人患有糖尿病。竹子水能否成为帮助患者的饮料伴侣？这是基于研究的答案。",
    "keywords": [
-    "air bambu diabetes",
-    "air bambu gula darah",
-    "minuman untuk diabetes",
-    "air bambu untuk penderita diabetes",
-    "minuman rendah gula alami"
+    "竹子水糖尿病",
+    "竹子水血糖",
+    "糖尿病饮料",
+    "糖尿病患者的竹子水",
+    "天然低糖饮料"
    ],
-   "menuDesc": "Pendamping penderita diabetes"
+   "menuDesc": "糖尿病患者的伴侣"
   },
   "air-bambu-batu-ginjal": {
-   "navLabel": "Air Bambu untuk Batu Ginjal & Kesehatan Ginjal",
-   "seoTitle": "Air Bambu untuk Batu Ginjal & Kesehatan Ginjal — Manfaat & Tips Aman",
-   "metaDescription": "Air bambu sebagai minuman pendukung kesehatan ginjal: hidrasi optimal, mineral alami, dan tradisi melancarkan buang air kecil secara aman.",
-   "h1": "Air Bambu untuk Batu Ginjal & Kesehatan Ginjal",
-   "eyebrow": "Artikel Kesehatan",
-   "intro": "Ginjal adalah filter tubuh. Beginilah cara air bambu membantu menjaga ginjal tetap bersih dan bekerja optimal.",
+   "navLabel": "竹子水用于肾结石和肾脏健康",
+   "seoTitle": "竹子水用于肾结石和肾脏健康—益处和安全提示",
+   "metaDescription": "竹子水作为肾脏健康的辅助饮料：最佳水合作用、天然矿物质，以及安全促进排尿的传统。",
+   "h1": "竹子水用于肾结石和肾脏健康",
+   "eyebrow": "健康文章",
+   "intro": "肾脏是身体的过滤器。这就是竹子水帮助肾脏保持清洁和最佳运作的方式。",
    "keywords": [
-    "air bambu batu ginjal",
-    "air bambu untuk ginjal",
-    "minuman melancarkan ginjal",
-    "air bambu kencing batu",
-    "minuman kesehatan ginjal"
+    "竹子水肾结石",
+    "竹子水肾脏",
+    "促进排尿的饮料",
+    "竹子水尿结石",
+    "肾脏健康饮料"
    ],
-   "menuDesc": "Menjaga ginjal tetap bersih"
+   "menuDesc": "保持肾脏清洁"
   },
   "air-bambu-kolesterol": {
-   "navLabel": "Air Bambu untuk Kolesterol & Kesehatan Jantung",
-   "seoTitle": "Air Bambu untuk Kolesterol & Kesehatan Jantung — Panduan Lengkap",
-   "metaDescription": "Flavonoid & polifenol air bambu membantu melawan kolesterol jahat dan melindungi jantung. Simak mekanisme, riset, dan cara konsumsinya.",
-   "h1": "Air Bambu untuk Kolesterol & Kesehatan Jantung",
+   "navLabel": "竹子水用于胆固醇和心脏健康",
+   "seoTitle": "竹子水用于胆固醇和心脏健康—全面指南",
+   "metaDescription": "竹子水的类黄酮和多酚有助于对抗坏胆固醇和保护心脏。了解其机制、研究和食用方法。",
+   "h1": "竹子水用于胆固醇和心脏健康",
    "eyebrow": "Artikel Kesehatan",
    "intro": "Penyakit kardiovaskular adalah pembunuh nomor satu. Bagaimana antioksidan air bambu membantu melindungi jantung dan pembuluh darah?",
    "keywords": [
@@ -865,73 +865,73 @@
    "menuDesc": "Kolagen alami dari dalam"
   },
   "sejarah-air-bambu": {
-   "navLabel": "Sejarah & Tradisi Air Bambu Nusantara",
-   "seoTitle": "Sejarah Air Bambu — Warisan Pengobatan Tradisional Nusantara",
-   "metaDescription": "Menelusuri sejarah air bambu: dari tradisi tabib Sunda & Jawa, tamoe barang bamboo Tiongkok, hingga tren minuman kesehatan dunia saat ini.",
-   "h1": "Sejarah & Tradisi Air Bambu Nusantara",
-   "eyebrow": "Artikel Budaya",
-   "intro": "Berabad-abad sebelum jadi tren dunia, air bambu sudah menjadi rahasia penyembuhan leluhur Nusantara. Inilah perjalanannya.",
+   "navLabel": "竹岛水的历史与传统",
+   "seoTitle": "竹岛水的历史 — 印度尼西亚传统医学的遗产",
+   "metaDescription": "探索竹岛水的历史：从巽他和爪哇的传统医师，到中国的竹筒水，再到当今全球的健康饮品趋势。",
+   "h1": "竹岛水的历史与传统",
+   "eyebrow": "文化文章",
+   "intro": "在成为世界潮流之前数百年，竹岛水已成为印度尼西亚祖先的治愈秘密。这就是它的历程。",
    "keywords": [
-    "sejarah air bambu",
-    "air bambu tradisional",
-    "tabib bambu",
-    "air bambu sunda",
-    "minuman tradisional nusantara",
+    "竹岛水的历史",
+    "传统竹岛水",
+    "竹医师",
+    "巽他竹岛水",
+    "印度尼西亚传统饮品",
     "bamboo water history"
    ],
-   "menuDesc": "Warisan tabib Nusantara"
+   "menuDesc": "印度尼西亚医师的遗产"
   },
   "air-bambu-suling": {
-   "navLabel": "Air Bambu Suling",
-   "seoTitle": "Air Bambu Suling Premium — Minuman Terapi Harian 600ml–19L",
-   "metaDescription": "Air bambu suling premium: sadapan bambu muda dimurnikan dengan distilasi bertahap. Botol 600ml, 1,5L, galon 19L hingga drum 30L grosir.",
-   "h1": "Air Bambu Suling Premium",
-   "eyebrow": "Produk Unggulan",
-   "intro": "Sari sadapan bambu muda yang dimurnikan dengan distilasi bertahap — mineral & silika alaminya terjaga, keamanannya terjamin.",
+   "navLabel": "蒸馏竹岛水",
+   "seoTitle": "优质蒸馏竹岛水 — 600ml–19升每日治疗饮品",
+   "metaDescription": "优质蒸馏竹岛水：精选嫩竹笋，经过逐步蒸馏纯化。600ml瓶装、1.5升、19升加仑桶装至30升散装批发。",
+   "h1": "优质蒸馏竹岛水",
+   "eyebrow": "旗舰产品",
+   "intro": "精选嫩竹笋经过逐步蒸馏纯化 — 其天然矿物质和硅得以保留，安全有保障。",
    "keywords": [
-    "air bambu suling",
-    "air bambu premium",
-    "jual air bambu suling",
-    "air bambu botol",
-    "galon air bambu",
-    "air bambu grosir",
-    "harga air bambu suling"
+    "蒸馏竹岛水",
+    "优质竹岛水",
+    "购买蒸馏竹岛水",
+    "瓶装竹岛水",
+    "竹岛水加仑",
+    "竹岛水批发",
+    "蒸馏竹岛水价格"
    ],
-   "menuDesc": "Minuman terapi harian premium",
+   "menuDesc": "优质每日治疗饮品",
    "s": {
-    "imageAlt": "Botol Air Bambu Suling Premium Bambu Water Nusantara — minuman terapi harian",
-    "tagline": "Sari Sadapan Bambu yang Dimurnikan untuk Konsumsi Harian",
+    "imageAlt": "Bambu Water Nusantara 优质蒸馏竹岛水瓶 — 每日治疗饮品",
+    "tagline": "为日常消费而纯化的竹笋精华",
     "description": [
-     "Air Bambu Suling Premium adalah sadapan bambu muda pilihan yang dimurnikan melalui distilasi bertahap — membuang mikroorganisme tanpa menghilangkan silika organik, mineral, dan rasa segar alaminya.",
-     "Hasilnya: minuman terapi lembut dengan pH seimbang alami, bebas klorin dan logam berat, aman dikonsumsi setiap hari oleh seluruh anggota keluarga. Tersedia dari botol praktis 600 ml hingga drum 30 L untuk kebutuhan grosir."
+     "优质蒸馏竹岛水是经过逐步蒸馏纯化的精选嫩竹笋精华 — 去除微生物，保留有机硅、矿物质和天然清爽口感。",
+     "结果：一种温和的治疗饮品，具有天然平衡的pH值，无氯和重金属，全家可每日安全饮用。从方便的600ml瓶装到30升散装桶，满足批发需求。"
     ],
     "sizes": [
      {
-      "name": "Botol 600 ml",
-      "note": "Karton isi 24 — cocok untuk acara & kantor"
+      "name": "600ml 瓶装",
+      "note": "24箱装 — 适合活动及办公室"
      },
      {
-      "name": "Botol 1,5 L",
-      "note": "Untuk keluarga kecil"
+      "name": "1.5L 瓶装",
+      "note": "适合小型家庭"
      },
      {
-      "name": "Galon 19 L",
-      "note": "Dispenser rumah & kantor"
+      "name": "19L 加仑",
+      "note": "家庭及办公室饮水机"
      },
      {
-      "name": "Jerigen 10 L",
-      "note": "Grosir min. 10 pcs"
+      "name": "10L 桶装",
+      "note": "批发最少10件"
      },
      {
-      "name": "Drum 30 L",
-      "note": "Distributor & klinik"
+      "name": "30L 桶装",
+      "note": "经销商及诊所"
      }
     ],
     "features": [
-     "Distilasi bertahap higienis",
-     "Bebas klorin & logam berat",
-     "pH seimbang alami",
-     "Kemasan food-grade",
+     "卫生逐步蒸馏",
+     "无氯及重金属",
+     "天然平衡pH值",
+     "食品级包装",
      "Tanpa pengawet & pemanis",
      "Uji mutu per batch"
     ],
@@ -1025,1023 +1025,1023 @@
    "seoTitle": "Air Bambu Tabib — Sadapan Mentah Segar untuk Terapi & Pengobatan",
    "metaDescription": "Air Bambu Tabib: sadapan mentah segar langsung dari ruas bambu muda, dipanen teknik mata tunas untuk terapis, tabib & praktik pengobatan.",
    "h1": "Air Bambu Tabib — Sadapan Mentah untuk Terapi",
-   "eyebrow": "Produk Terapi",
-   "intro": "Air sadapan murni sebagaimana dikenal tradisi tabib Nusantara — dipanen segar per pesanan dengan teknik mata tunas.",
+   "eyebrow": "治疗产品",
+   "intro": "如同努桑塔拉传统医师所熟知的纯净甘露——使用嫩芽技术按订单新鲜采集。",
    "keywords": [
-    "air bambu tabib",
-    "air sadapan bambu mentah",
-    "air bambu segar",
-    "air bambu terapi",
-    "air bambu pengobatan komplementer",
-    "air bambu untuk tabib"
+    "竹医师水",
+    "原始竹甘露",
+    "新鲜竹水",
+    "治疗竹水",
+    "辅助治疗竹水",
+    "医师专用竹水"
    ],
-   "menuDesc": "Sadapan mentah segar untuk terapi",
+   "menuDesc": "原始新鲜甘露，用于治疗",
    "s": {
-    "imageAlt": "Panen Air Bambu Tabib — sadapan mentah segar langsung dari ruas bambu muda",
-    "tagline": "Sadapan Mentah Segar Sesuai Tradisi Tabib Nusantara",
+    "imageAlt": "竹医师水采集——直接从嫩竹节中获取的原始新鲜甘露",
+    "tagline": "遵循努桑塔拉医师传统的原始新鲜甘露",
     "description": [
-     "Air Bambu Tabib adalah sadapan mentah murni yang diambil langsung dari ruas bambu muda menggunakan teknik mata tunas — persis seperti yang dipraktikkan tabib Nusantara berabad-abad lamanya.",
-     "Dipanen segar per pesanan subuh dan dikirim dengan prioritas kecepatan. Tanpa proses apa pun — tanpa suling, tanpa pengawet — agar energi dan kandungan alaminya utuh untuk praktik pengobatan komplementer Anda."
+     "竹医师水是直接从嫩竹节中使用嫩芽技术采集的原始纯甘露——正如努桑塔拉医师几个世纪以来所实践的那样。",
+     "清晨按订单新鲜采集，并优先快速配送。不经过任何处理——不蒸馏，不添加防腐剂——以保持其能量和天然成分的完整性，用于您的辅助治疗实践。"
     ],
     "sizes": [
      {
-      "name": "Jerigen 5 L",
-      "note": "Sadapan segar harian"
+      "name": "5升罐",
+      "note": "每日新鲜甘露"
      },
      {
-      "name": "Jerigen 10 L",
-      "note": "Praktik tabib / keluarga terapi"
+      "name": "10升罐",
+      "note": "医师实践/家庭治疗"
      },
      {
-      "name": "Drum 30 L",
-      "note": "Klinik & komunitas tabib"
+      "name": "30升桶",
+      "note": "医师诊所&社区"
      }
     ],
     "features": [
-     "Panen segar per pesanan (subuh)",
-     "Teknik mata tunas tradisional",
-     "100% tanpa pengawet & proses",
-     "Untuk terapis & tabib",
-     "Pengiriman prioritas / cold-pack",
-     "Ketersediaan terbatas harian"
+     "清晨按订单采集",
+     "传统嫩芽技术",
+     "100%无防腐剂&加工",
+     "治疗师&医师专用",
+     "优先配送/冷链包装",
+     "每日限量供应"
     ],
     "specs": [
      {
-      "label": "Asal",
-      "value": "Rumpun Terkurasi"
+      "label": "来源",
+      "value": "认证竹种"
      },
      {
-      "label": "Proses",
-      "value": "Mentah — Tanpa Proses"
+      "label": "加工",
+      "value": "原始—无加工"
      },
      {
-      "label": "Panen",
-      "value": "Subuh, Per Pesanan"
+      "label": "采集",
+      "value": "清晨，按订单"
      },
      {
-      "label": "Simpan",
-      "value": "1–3 Hari (Segar)"
+      "label": "保存",
+      "value": "1-3天（新鲜）"
      }
     ],
     "uses": [
      {
-      "title": "Praktik Tabib Tradisional",
-      "text": "Bahan utama terapi minum sesuai metode tabib — demam, panas dalam, dan pemulihan."
+      "title": "传统医师实践",
+      "text": "医师治疗方法的主要材料——发烧、内热和康复。"
      },
      {
-      "title": "Klinik Terapi Komplementer",
-      "text": "Pasokan rutin untuk klinik yang mengintegrasikan terapi alami."
+      "title": "辅助治疗诊所",
+      "text": "为整合自然疗法的诊所提供常规供应。"
      },
      {
-      "title": "Terapi Keluarga Tradisional",
-      "text": "Untuk keluarga yang menjalankan tradisi pengobatan leluhur di rumah."
+      "title": "传统家庭治疗",
+      "text": "用于在家中传承祖先医疗传统的家庭。"
      },
      {
-      "title": "Riset & Edukasi",
-      "text": "Sampel murni untuk penelitian dan pembelajaran pengobatan tradisional."
+      "title": "研究与教育",
+      "text": "传统医学研究和学习的纯样本。"
      },
      {
-      "title": "Ritual & Budaya",
-      "text": "Upacara adat dan tradisi kesehatan komunitas."
+      "title": "仪式与文化",
+      "text": "传统仪式和社区健康传统。"
      },
      {
-      "title": "Grosir Terapis",
-      "text": "Kontrak bulanan untuk jaringan tabib di kota Anda."
+      "title": "治疗师批发",
+      "text": "为您所在城市的医师网络提供月度合同。"
      }
     ],
     "howTo": [
-     "Pesan sebelum pukul 15.00 WIB untuk panen subuh besoknya.",
-     "Terima dengan segel utuh — cek kondisi segera saat tiba.",
-     "Simpan dingin (kulkas) dan gunakan dalam 1–3 hari untuk kualitas terbaik.",
-     "Gunakan sesuai anjuran tabib atau tenaga kesehatan Anda."
+     "请在下午15:00前下单，次日清晨即可收获。",
+     "收到时请检查密封是否完好，抵达后请立即检查状况。",
+     "冷藏保存（冰箱内），并在1-3天内使用以获得最佳品质。",
+     "请按照您的医生或健康专业人士的建议使用。"
     ],
     "faqs": [
      {
-      "q": "Mengapa daya tahan simpannya pendek?",
-      "a": "Karena 100% mentah tanpa proses apa pun — persis seperti keluar dari ruas bambu. Ini justru bukti keasliannya. Untuk konsumsi harian dengan simpan lama, pilih Air Bambu Suling."
+      "q": "为什么保质期很短？",
+      "a": "因为是100%未经任何处理的原始状态——就像刚从竹节中流出一样。这恰恰是其真实性的证明。如需长期保存的日常饮用，请选择蒸馏竹水。"
      },
      {
-      "q": "Apakah tersedia setiap hari?",
-      "a": "Ketersediaan mengikuti panen dan cuaca. Kami sarankan pesan H-1 dan untuk kebutuhan besar (drum), hubungi kami untuk jadwal pasokan."
+      "q": "每天都有供应吗？",
+      "a": "供应情况取决于收获和天气。我们建议提前一天预订，大宗需求（桶装）请联系我们安排供应时间。"
      },
      {
-      "q": "Bisa dikirim ke luar kota?",
-      "a": "Bisa — menggunakan ekspedisi prioritas dengan cold-pack (opsional). Untuk jarak jauh, kami rekomendasikan Air Bambu Tabib dikonsumsi dalam 1–2 hari setelah tiba."
+      "q": "可以寄送到外地吗？",
+      "a": "可以——使用优先快递服务，可选择配备冰袋。对于长途运输，我们建议收到后在1-2天内饮用完毕。"
      },
      {
-      "q": "Apakah ada garansi kualitas?",
-      "a": "Ya. Jika sadapan tiba dalam kondisi tidak layak (busuk/tercemar), kami ganti atau kembalikan dana. Kepuasan praktisi adalah prioritas kami."
+      "q": "有质量保证吗？",
+      "a": "是的。如果收到的产品状况不佳（腐烂/污染），我们将更换或退款。客户满意是我们的首要任务。"
      }
     ],
     "related": [
      {
-      "label": "Air Bambu Suling",
+      "label": "蒸馏竹水",
       "slug": "air-bambu-suling"
      },
      {
-      "label": "Proses Produksi",
+      "label": "生产过程",
       "slug": "proses-produksi"
      },
      {
-      "label": "Untuk Pengobatan",
+      "label": "用于治疗",
       "slug": "air-bambu-pengobatan"
      }
     ],
-    "waMessage": "Halo! Saya ingin memesan Air Bambu Tabib (sadapan mentah segar). Mohon info ketersediaan hari ini."
+    "waMessage": "您好！我想订购竹水（新鲜原始水）。请告知今天的供应情况。"
    }
   },
   "bambu-berkualitas": {
-   "navLabel": "Bambu Berkualitas",
-   "seoTitle": "Bambu Berkualitas Massal — Petung, Wulung, Apus, Ori Se-Indonesia",
-   "metaDescription": "Bambu berkualitas pilihan umur 3+ tahun: Petung konstruksi, Wulung premium, Apus anyaman, Ori rangka. Per batang hingga per truk ke seluruh Indonesia.",
-   "h1": "Bambu Berkualitas dalam Jumlah Besar",
-   "eyebrow": "Produk Massal",
-   "intro": "Petung, Wulung, Apus, dan Ori — terseleksi dari hutan rakyat terkurasi, siap kirim per batang hingga per truk ke seluruh Indonesia.",
+   "navLabel": "优质竹材",
+   "seoTitle": "批量优质竹材 — 普通竹、乌龙竹、阿普竹、奥里竹全印尼供应",
+   "metaDescription": "3年以上优质竹材：建筑用普通竹、高端乌龙竹、编织用阿普竹、轻型结构用奥里竹。从单根到整车，供应全印尼。",
+   "h1": "批量优质竹材",
+   "eyebrow": "批量产品",
+   "intro": "普通竹、乌龙竹、阿普竹和奥里竹 — 从受监管的民间森林中精选，可从单根到整车发货至全印尼。",
    "keywords": [
-    "bambu berkualitas",
-    "jual bambu petung",
-    "bambu wulung",
-    "bambu apus",
-    "bambu ori",
-    "suplier bambu konstruksi",
-    "harga bambu per batang",
-    "distribusi bambu massal"
+    "优质竹材",
+    "销售普通竹",
+    "乌龙竹",
+    "阿普竹",
+    "奥里竹",
+    "建筑竹材供应商",
+    "每根竹价格",
+    "批量竹材分销"
    ],
-   "menuDesc": "Petung, Wulung, Apus, Ori massal",
+   "menuDesc": "普通竹、乌龙竹、阿普竹、奥里竹批量供应",
    "s": {
-    "imageAlt": "Tumpukan batang bambu berkualitas Petung, Wulung, Apus, dan Ori siap kirim massal",
-    "tagline": "Petung, Wulung, Apus & Ori — Terseleksi, Siap Kirim Massal",
+    "imageAlt": "准备批量发货的优质普通竹、乌龙竹、阿普竹和奥里竹堆",
+    "tagline": "普通竹、乌龙竹、阿普竹 & 奥里竹 — 精选，准备批量发货",
     "description": [
-     "Kami menyediakan bambu berkualitas berumur 3+ tahun dari hutan rakyat terkurasi: Bambu Petung untuk konstruksi, Wulung untuk estetika premium, Apus untuk tali & anyaman, serta Ori untuk rangka ringan.",
-     "Setiap batang terseleksi lurus, kering merata, dan bebas hama — dengan opsi pengeringan & fumigasi. Kirim per batang, per ikat, hingga per truk penuh ke seluruh Indonesia."
+     "我们提供3年以上来自受监管民间森林的优质竹材：普通竹用于建筑，乌龙竹用于高端美学，阿普竹用于绳索和编织，奥里竹用于轻型结构。",
+     "每根竹材都经过精心挑选，笔直、均匀干燥、无虫害 — 提供干燥和熏蒸选项。从单根、捆装到整车，供应全印尼。"
     ],
     "sizes": [
      {
-      "name": "Per batang",
-      "note": "Retail proyek kecil"
+      "name": "按根",
+      "note": "小型项目零售"
      },
      {
-      "name": "Per ikat",
-      "note": "10–25 batang/ikat"
+      "name": "按捆",
+      "note": "每捆10-25根"
      },
      {
-      "name": "Per truk/kargo",
-      "note": "Volume proyek besar"
+      "name": "按车/货",
+      "note": "大型项目"
      }
     ],
     "features": [
-     "Seleksi umur 3+ tahun",
-     "Lurus & kering merata",
-     "Pengeringan & fumigasi",
-     "Bebas hama & jamur",
-     "Sertifikasi asal hutan rakyat",
-     "Muat kargo darat & laut"
+     "精选3年以上竹材",
+     "笔直干燥均匀",
+     "干燥与熏蒸处理",
+     "无虫害与霉菌",
+     "人民森林来源认证",
+     "陆路与海运货运"
     ],
     "specs": [
      {
-      "label": "Jenis",
-      "value": "4 Varietas Premium"
+      "label": "种类",
+      "value": "4种优质品种"
      },
      {
-      "label": "Panjang",
-      "value": "8–12 Meter"
+      "label": "长度",
+      "value": "8-12米"
      },
      {
-      "label": "Diameter",
-      "value": "5–18 Cm"
+      "label": "直径",
+      "value": "5-18厘米"
      },
      {
-      "label": "Umur",
-      "value": "3+ Tahun"
+      "label": "年龄",
+      "value": "3+年"
      }
     ],
     "uses": [
      {
-      "title": "Konstruksi & Bangunan",
-      "text": "Petung untuk struktur rumah bambu, jembatan, dan bangunan tahan gempa."
+      "title": "建筑与建造",
+      "text": "Petung用于竹屋结构、桥梁和抗震建筑。"
      },
      {
-      "title": "Aransemen & Interior",
-      "text": "Wulung hitam premium untuk dinding, plafon, dan furnitur estetik."
+      "title": "装饰与室内设计",
+      "text": "黑色优质Wulung用于墙壁、天花板和美观家具。"
      },
      {
-      "title": "Kerajinan & Anyaman",
-      "text": "Apus yang lentur untuk tas, tikar, topi, dan kerajinan ekspor."
+      "title": "工艺品与编织",
+      "text": "柔韧的Apus用于手提包、垫子、帽子出口工艺品。"
      },
      {
-      "title": "Furniture & Rangka",
-      "text": "Ori yang ramping untuk kursi, meja, dan rangka ringan."
+      "title": "家具与框架",
+      "text": "纤细的Ori用于椅子、桌子轻型框架。"
      },
      {
-      "title": "Lanskap & Taman",
-      "text": "Batang hidup & potong untuk greening proyek properti dan resor."
+      "title": "景观与花园",
+      "text": "活竹与切竹用于房地产和度假村绿化项目。"
      },
      {
-      "title": "Industri & Ekspor",
-      "text": "Pasokan massal berkelanjutan untuk pabrik, kontraktor, dan eksportir."
+      "title": "工业与出口",
+      "text": "为工厂、承包商和出口商提供持续批量供应。"
      }
     ],
     "howTo": [
-     "Tentukan jenis, ukuran (panjang & diameter), dan jumlah kebutuhan Anda.",
-     "Minta penawaran via WhatsApp — sertakan lokasi kirim untuk estimasi ongkos kargo.",
-     "Untuk proyek besar, kami berikan sampel batang sebelum kontrak.",
-     "Pengiriman dijadwalkan sesuai armada — segel kayu & strapping untuk muatan penuh."
+     "确定您的需求种类、尺寸（长度和直径）和数量。",
+     "通过WhatsApp询价 — 请提供送货地址以估算运费。",
+     "对于大型项目，我们在签约前提供竹竿样品。",
+     "根据船队安排发货 — 满载货物使用木封和打包带固定。"
     ],
     "faqs": [
      {
-      "q": "Jenis bambu apa yang paling kuat untuk konstruksi?",
-      "a": "Bambu Petung/Betung (Dendrocalamus asper) adalah pilihan utama konstruksi — diameter besar, serat padat, dan terbukti digunakan bangunan bambu modern Indonesia yang tahan gempa."
+      "q": "哪种竹子最适合建筑？",
+      "a": "Petung/Betung竹（Dendrocalamus asper）是建筑首选 — 直径大、纤维密，已用于印尼现代抗震竹建筑。"
      },
      {
-      "q": "Apakah bambu sudah kering/treatment?",
-      "a": "Ya, kami sediakan opsi bambu kering angin dan bambu treatment (perendaman borax + fumigasi) agar tahan kutu dan jamur hingga bertahun-tahun."
+      "q": "竹子是否已干燥/处理？",
+      "a": "是，我们提供风干竹和处理竹（硼砂浸泡+熏蒸）选项，可防虫防霉多年。"
      },
      {
-      "q": "Berapa minimal pemesanan untuk kargo?",
-      "a": "Untuk harga kargo terbaik, minimal 1 truk kecil (±200–400 batang tergantung ukuran). Di bawah itu tetap kami layani via ekspedisi reguler."
+      "q": "货运最低订购量是多少？",
+      "a": "为获得最佳货运价格，最低1辆小货车（约200-400根，视尺寸而定）。低于此量仍可通过普通快递服务。"
      },
      {
-      "q": "Bisa kirim ke luar Jawa?",
-      "a": "Bisa. Kami rutin mengirim kargo bambu ke Sumatera, Kalimantan, Sulawesi, Bali & NT, hingga Papua via jalur laut dengan packing aman."
+      "q": "能否运往爪哇岛外？",
+      "a": "可以。我们定期通过海运向苏门答腊、加里曼丹、苏拉威西、巴厘岛及努沙登加拉，甚至巴布亚安全运送竹货运。"
      }
     ],
     "related": [
      {
-      "label": "Air Bambu Suling",
+      "label": "竹笛水",
       "slug": "air-bambu-suling"
      },
      {
-      "label": "Pengiriman Massal",
+      "label": "批量运输",
       "slug": "pengiriman-massal"
      },
      {
-      "label": "Harga & Paket",
+      "label": "价格与套餐",
       "slug": "harga-paket"
      }
     ],
-    "waMessage": "Halo! Saya ingin memesan bambu batang berkualitas (Petung/Wulung/Apus/Ori). Mohon penawaran."
+    "waMessage": "您好！我想订购优质竹竿（Petung/Wulung/Apus/Ori）。请提供报价。"
    }
   },
   "proses-produksi": {
-   "navLabel": "Proses Produksi",
-   "seoTitle": "Proses Produksi & Distilasi Air Bambu — Standar Higienis BWN",
-   "metaDescription": "4 tahap produksi air bambu BWN: panen berkelanjutan, sadapan mata tunas, distilasi & uji mutu mikrobiologi, hingga pengemasan food-grade.",
-   "h1": "Proses Produksi & Distilasi",
-   "eyebrow": "Standar Mutu",
-   "intro": "Dari rumpun bambu lestari hingga kemasan food-grade — transparansi penuh bagaimana kami menghasilkan air bambu berkualitas.",
+   "navLabel": "生产流程",
+   "seoTitle": "竹子生产与蒸馏流程 — BWN卫生标准",
+   "metaDescription": "BWN竹子生产的4个阶段：可持续收获、竹尖采集、蒸馏与微生物质量检测，直至食品级包装。",
+   "h1": "生产与蒸馏流程",
+   "eyebrow": "质量标准",
+   "intro": "从可持续的竹丛到食品级包装 — 我们如何生产优质竹子水的完全透明过程。",
    "keywords": [
-    "proses produksi air bambu",
-    "distilasi air bambu",
-    "cara membuat air bambu",
-    "panen air bambu",
-    "uji mutu air bambu"
+    "竹子水生产流程",
+    "竹子水蒸馏",
+    "制作竹子水的方法",
+    "竹子水收获",
+    "竹子水质量检测"
    ],
-   "menuDesc": "Panen, sadapan, distilasi & uji mutu",
+   "menuDesc": "收获、采集、蒸馏与质量检测",
    "s": {
-    "introBefore": "Kepercayaan 18+ tahun kami bangun dari satu hal: ",
-    "introStrong": "transparansi mutu",
-    "introAfter": ". Dari rumpun bambu di hutan rakyat hingga segel kemasan dibuka di rumah Anda, setiap tahap tercatat dan terstandar — memadukan kearifan panen tradisional dengan teknologi distilasi modern.",
-    "timelineEyebrow": "Tahapan",
-    "timelineTitle": "Dari Hutan ke",
-    "timelineHighlight": "Gelas Anda",
-    "qcEyebrow": "Kontrol Mutu",
-    "qcTitle": "4 Lapis Jaminan",
-    "qcHighlight": "Kualitas",
+    "introBefore": "我们建立18+年的信任基于一件事：",
+    "introStrong": "质量透明度",
+    "introAfter": "。从民间森林中的竹丛到您家开封的包装，每个阶段都有记录和标准化 — 将传统收获智慧与现代蒸馏技术相结合。",
+    "timelineEyebrow": "阶段",
+    "timelineTitle": "从森林到",
+    "timelineHighlight": "您的杯子",
+    "qcEyebrow": "质量控制",
+    "qcTitle": "四重保证",
+    "qcHighlight": "质量",
     "qcSteps": [
      {
-      "title": "Uji Mikrobiologi",
-      "text": "Setiap batch diperiksa parameter TPC & patogen sebelum lolos kemasan."
+      "title": "微生物检测",
+      "text": "每批产品在包装前都会检查TPC和病原体参数。"
      },
      {
-      "title": "Fasilitas Higienis",
-      "text": "Ruang produksi terkontrol dengan sanitasi berkala dan aliran satu arah."
+      "title": "卫生设施",
+      "text": "生产区域定期消毒，采用单向气流。"
      },
      {
-      "title": "Kemasan Food-Grade",
-      "text": "Botol, jerigen, dan drum bersertifikat food-grade, disegel tamper-proof."
+      "title": "食品级包装",
+      "text": "瓶子、桶和鼓均获得食品级认证，采用防篡改密封。"
      },
      {
-      "title": "Jejak Batch",
-      "text": "Setiap kemasan tercatat asal panen & tanggal produksi — transparan penuh."
+      "title": "批次追踪",
+      "text": "每个包装都记录收获来源和生产日期 — 完全透明。"
      }
     ],
-    "commitmentStrong": "Komitmen berkelanjutan:",
-    "commitment": " kami hanya memanen bambu muda tanpa menebang rumpun — kelestarian hutan bambu rakyat adalah syarat keberlangsungan bisnis kami sejak 2007.",
-    "teamEyebrow": "Tim Produksi",
-    "teamTitle": "Disuling Santri Berpengalaman,",
-    "teamHighlight": "Diawasi Dewan Pakar Lintas Bidang",
-    "santriTitle": "Santri Berpengalaman",
-    "santriText": "Proses penyulingan kami dipercayakan kepada santri-santri berpengalaman — pekerja yang menjunjung kehati-hatian, kejujuran, dan ketelitian. Nilai-nilai inilah yang menjadikan setiap tetes air bambu kami bersih, halal, dan penuh keberkahan.",
-    "pakarTitle": "Dewan Pakar Lintas Bidang",
-    "pakarText": "Produksi kami dibackup dewan pakar lintas bidang — dari ahli teknologi pangan, praktisi pengobatan tradisional, hingga pakar mutu — memastikan setiap batch memenuhi standar keamanan dan khasiatnya terjaga.",
-    "ctaTitle": "Ingin Melihat Langsung Prosesnya?",
-    "ctaDescription": "Jadwalkan kunjungan fasilitas kami — terbuka untuk mitra, distributor, dan komunitas edukasi.",
-    "ctaWaMessage": "Halo! Saya ingin tahu lebih detail tentang proses produksi & uji mutu air bambu BWN."
+    "commitmentStrong": "可持续承诺：",
+    "commitment": "我们只收获幼竹而不砍伐整丛 — 民间竹林的保护是我们自2007年以来业务持续发展的条件。",
+    "teamEyebrow": "生产团队",
+    "teamTitle": "经验丰富的学徒，",
+    "teamHighlight": "由跨领域专家委员会监督",
+    "santriTitle": "经验丰富的学徒",
+    "santriText": "我们的蒸馏过程委托给经验丰富的学徒 — 他们秉持谨慎、诚实和细心的工人。这些价值观使我们的每一滴竹子水都纯净、清真且充满祝福。",
+    "pakarTitle": "跨领域专家委员会",
+    "pakarText": "我们的生产由跨领域专家委员会支持 — 从食品技术专家、传统医学实践者到质量专家 — 确保每批产品都符合安全标准，功效得以保持。",
+    "ctaTitle": "想亲眼看看生产过程吗？",
+    "ctaDescription": "预约参观我们的设施 — 对合作伙伴、分销商和教育社区开放。",
+    "ctaWaMessage": "您好！我想了解更多关于BWN竹子水生产和质量检测的详细信息。"
    }
   },
   "pengiriman-massal": {
-   "navLabel": "Pengiriman Massal",
-   "seoTitle": "Pengiriman Massal Air Bambu & Bambu Batang ke Seluruh Indonesia",
-   "metaDescription": "Layanan pengiriman jumlah besar: jerigen, drum, hingga kargo truk bambu batang. Reguler 1-3 hari, kargo antar pulau, ekspres udara.",
-   "h1": "Pengiriman Massal ke Seluruh Indonesia",
-   "eyebrow": "Layanan Distribusi",
-   "intro": "Volume besar bukan masalah — jerigen, drum, ikat bambu hingga kargo truk penuh, kami antar ke 38 provinsi dengan packing aman.",
+   "navLabel": "批量运输",
+   "seoTitle": "竹子水与竹竿批量运输服务",
+   "metaDescription": "大批量运输服务：桶装、鼓装，直至竹竿卡车运输。常规1-3天，跨岛货运，空运快递。",
+   "h1": "印尼全国批量运输",
+   "eyebrow": "分销服务",
+   "intro": "大批量不是问题 — 从水桶、鼓、竹捆到满载卡车的货物，我们安全包装并配送到38个省份。",
    "keywords": [
-    "pengiriman massal air bambu",
-    "kargo bambu",
-    "pengiriman bambu seluruh indonesia",
-    "kirim air bambu grosir",
-    "ekspedisi bambu batang",
-    "kargo antar pulau"
+    "竹水批发运输",
+    "竹子货运",
+    "印尼全境竹子运输",
+    "批发竹水配送",
+    "竹竿运输服务",
+    "岛屿间货运"
    ],
-   "menuDesc": "Kargo darat, laut & udara",
+   "menuDesc": "陆运、海运 & 空运",
    "s": {
-    "tiersEyebrow": "Layanan Kargo",
-    "tiersTitle": "Tiga Jalur Pengiriman",
-    "tiersHighlight": "Sesuai Kebutuhan Anda",
-    "tiersDescription": "Dari kurir reguler hingga kargo udara — semua distandarkan dengan packing aman.",
-    "capEyebrow": "Kapabilitas",
-    "capTitle": "Volume Besar?",
-    "capHighlight": "Siap.",
+    "tiersEyebrow": "货运服务",
+    "tiersTitle": "三种运输方式",
+    "tiersHighlight": "按需定制",
+    "tiersDescription": "从普通快递到空运 — 所有运输都采用安全包装标准。",
+    "capEyebrow": "运输能力",
+    "capTitle": "大批量？",
+    "capHighlight": "随时准备。",
     "capabilities": [
      {
-      "title": "Kapasitas Massal",
-      "text": "Botol harian, jerigen/drum palet, hingga truk penuh bambu batang 200–400 batang per kirim."
+      "title": "大批量运输能力",
+      "text": "日装瓶量、桶/托盘，到每批200-400根整卡车的竹竿。"
      },
      {
-      "title": "Packing Aman",
-      "text": "Karton double-wall, segel kayu, strapping, dan cold-pack untuk sadapan segar jarak jauh."
+      "title": "安全包装",
+      "text": "双层纸箱、木封、打包带，以及长途保鲜的冷包装。"
      },
      {
-      "title": "Pelacakan Kiriman",
-      "text": "Nomor resi & update status via WhatsApp sampai barang diterima."
+      "title": "货物追踪",
+      "text": "通过运单号和WhatsApp追踪状态，直至货物送达。"
      },
      {
-      "title": "Jadwal Rutin",
-      "text": "Kontrak pengiriman mingguan/bulanan untuk distributor, klinik, dan proyek."
+      "title": "定期运输",
+      "text": "为分销商、诊所和项目提供每周/每月的合同运输服务。"
      }
     ],
-    "flowEyebrow": "Alur Kirim",
-    "flowTitle": "Bagaimana Pesanan Besar",
-    "flowHighlight": "Diproses",
+    "flowEyebrow": "运输流程",
+    "flowTitle": "大批量订单处理流程",
+    "flowHighlight": "如何处理",
     "flowSteps": [
      {
-      "title": "Konsultasi & Penawaran",
-      "text": "Sampaikan jenis, volume, dan kota tujuan — penawaran resmi kami kirim maks. 1×24 jam."
+      "title": "咨询与报价",
+      "text": "告知我们您的货物类型、数量和目的地 — 我们将在24小时内发送正式报价。"
      },
      {
-      "title": "Kontrak & DP",
-      "text": "Sepakati harga, jadwal, dan syarat. DP 50% memulai produksi/pengadaan."
+      "title": "合同与定金",
+      "text": "商定价格、时间和条款。50%定金即可开始生产/采购。"
      },
      {
-      "title": "Produksi & Packing",
-      "text": "Produksi sesuai jadwal + packing standar kargo (segel kayu untuk muatan penuh)."
+      "title": "生产与包装",
+      "text": "按计划生产 + 标准货运包装（满载使用木封）。"
      },
      {
-      "title": "Kirim & Lacak",
-      "text": "Barang berangkat dengan resi terlacak — pelunasan saat serah terima."
+      "title": "运输与追踪",
+      "text": "货物发出时提供可追踪运单 — 交货时付清余款。"
      }
     ],
-    "ctaTitle": "Minta Penawaran Kargo Sekarang",
-    "ctaDescription": "Kirim detail kebutuhan Anda — penawaran resmi dengan estimasi ongkos kirim maksimal 1×24 jam kerja.",
-    "ctaWaMessage": "Halo! Saya ingin minta penawaran pengiriman massal. Berikut detail kebutuhan saya:"
+    "ctaTitle": "立即获取货运报价",
+    "ctaDescription": "发送您的需求详情 — 我们将在1个工作日内提供正式报价及运费估算。",
+    "ctaWaMessage": "您好！我想申请批量运输报价。以下是我的需求详情："
    }
   },
   "jangkauan-kota": {
-   "navLabel": "Jangkauan Kota",
-   "seoTitle": "Jangkauan Kota Pengiriman — 38 Provinsi Se-Indonesia | BWN",
-   "metaDescription": "Kami mengirim air bambu & bambu batang ke kota-kota seluruh Indonesia: Jakarta, Bandung, Surabaya, Medan, Makassar hingga Jayapura.",
-   "h1": "Jangkauan Kota Se-Indonesia",
-   "eyebrow": "Cakupan Wilayah",
-   "intro": "38 provinsi, puluhan kota, satu jaringan distribusi terpercaya. Temukan kota Anda dan mulai pesan hari ini.",
+   "navLabel": "城市覆盖范围",
+   "seoTitle": "印尼全境38省城市配送覆盖 | BWN",
+   "metaDescription": "我们将竹水和竹竿运送到印尼各地：雅加达、万隆、泗水、棉兰、望加锡至查亚普拉。",
+   "h1": "印尼全国城市覆盖",
+   "eyebrow": "区域覆盖",
+   "intro": "38个省，数十个城市，一个值得信赖的分销网络。找到您的城市，今天就开始订购吧。",
    "keywords": [
-    "jangkauan pengiriman indonesia",
-    "kirim air bambu jakarta",
-    "distributor air bambu kota",
-    "pengiriman bambu seluruh indonesia",
-    "kargo bambu antar pulau"
+    "印尼配送范围",
+    "雅加达竹水配送",
+    "城市竹水经销商",
+    "印尼全国竹子配送",
+    "岛屿间竹子货运"
    ],
-   "menuDesc": "38 provinsi se-Indonesia",
+   "menuDesc": "覆盖印尼38个省份",
    "s": {
-    "scopeEyebrow": "Cakupan Wilayah",
-    "scopeTitle": "38 Provinsi,",
-    "scopeHighlight": "Satu Jaringan Terpercaya",
-    "scopeDescription": "Sejak 2007 jaringan distribusi kami tumbuh dari Jawa Barat ke seluruh Nusantara — kota Anda pasti terjangkau.",
+    "scopeEyebrow": "覆盖区域",
+    "scopeTitle": "38个省份，",
+    "scopeHighlight": "一个值得信赖的网络",
+    "scopeDescription": "自2007年以来，我们的分销网络从西爪哇扩展到整个印度尼西亚群岛——您的城市肯定在我们的覆盖范围内。",
     "islands": [
-     "Pulau Jawa",
-     "Sumatera",
-     "Kalimantan",
-     "Sulawesi",
-     "Bali & Nusa Tenggara",
-     "Maluku & Papua"
+     "爪哇岛",
+     "苏门答腊岛",
+     "加里曼丹岛",
+     "苏拉威西岛",
+     "巴厘岛和努沙登加拉群岛",
+     "马鲁古群岛和巴布亚"
     ],
-    "citiesSuffix": "+ kota",
-    "notListedStrong": "Kota Anda tidak tercantum?",
-    "notListed": " Kami tetap bisa mengirim ke hampir semua wilayah Indonesia melalui mitra ekspedisi lokal — tanyakan langsung kepada tim kami.",
-    "checkCity": "Cek Kota Saya",
-    "checkWaMessage": "Halo! Apakah Bambu Water Nusantara mengirim ke kota saya?"
+    "citiesSuffix": "+个城市",
+    "notListedStrong": "您的城市没有列出？",
+    "notListed": "我们仍然可以通过当地合作伙伴运输到印度尼西亚几乎所有地区——直接咨询我们的团队。",
+    "checkCity": "检查我的城市",
+    "checkWaMessage": "你好！Bambu Water Nusantara是否运送到我的城市？"
    }
   },
   "harga-paket": {
-   "navLabel": "Harga & Paket",
-   "seoTitle": "Harga & Paket Air Bambu dan Bambu Batang — Retail hingga Grosir",
-   "metaDescription": "Daftar harga air bambu suling, air bambu tabib, dan bambu batang (Petung, Wulung, Apus, Ori) — retail, grosir, dan kargo korporat.",
-   "h1": "Harga & Paket",
-   "eyebrow": "Transparan & Terjangkau",
-   "intro": "Harga jelas tanpa biaya tersembunyi — dari botol satuan untuk keluarga hingga kargo truk untuk distributor dan proyek.",
+   "navLabel": "价格与套餐",
+   "seoTitle": "竹水和竹竿价格与套餐 — 零售到批发",
+   "metaDescription": "竹蒸馏水、竹药水和竹竿（Petung、Wulung、Apus、Ori）价格列表 — 零售、批发和企业货运。",
+   "h1": "价格与套餐",
+   "eyebrow": "透明与实惠",
+   "intro": "价格清晰无隐藏费用 — 从家庭单瓶到分销商和项目的卡车货运。",
    "keywords": [
-    "harga air bambu",
-    "harga bambu per batang",
-    "harga galon air bambu",
-    "harga grosir air bambu",
-    "paket air bambu",
-    "harga bambu petung wulung"
+    "竹水价格",
+    "每根竹竿价格",
+    "竹水桶价格",
+    "竹水批发价格",
+    "竹水套餐",
+    "Petung Wulung竹子价格"
    ],
-   "menuDesc": "Retail, grosir & korporat",
+   "menuDesc": "零售、批发与企业",
    "s": {
-    "priceEyebrow": "Daftar Harga",
-    "priceTitle": "Transparan dari",
-    "priceHighlight": "Retail hingga Kargo",
-    "priceDescription": "Harga indikatif 2025 — harga final menyesuaikan volume, lokasi kirim, dan fluktuasi panen.",
+    "priceEyebrow": "价格列表",
+    "priceTitle": "从",
+    "priceHighlight": "零售到货运",
+    "priceDescription": "2025年指示性价格 — 最终价格根据数量、配送地点和收成波动而调整。",
     "tabs": [
-     "💧 Air Bambu Suling",
-     "🌿 Air Bambu Tabib",
-     "🎍 Bambu Batang"
+     "💧 竹蒸馏水",
+     "🌿 竹药水",
+     "🎍 竹竿"
     ],
     "tableHeads": [
-     "Produk",
-     "Harga Indikatif",
-     "Satuan",
-     "Keterangan"
+     "产品",
+     "指示性价格",
+     "单位",
+     "说明"
     ],
-    "priceNote": "Harga belum termasuk ongkos kirim. Untuk volume besar, kota tujuan, dan kontrak rutin — harga final diberikan dalam penawaran resmi maksimal 1×24 jam.",
-    "tiersEyebrow": "Semakin Banyak, Semakin Hemat",
-    "tiersTitle": "Tiga Tingkat",
-    "tiersHighlight": "Harga Khusus",
+    "priceNote": "价格不包括运费。对于大量采购、目的地城市和定期合同 — 最终价格将在24小时内正式报价中给出。",
+    "tiersEyebrow": "越多越优惠",
+    "tiersTitle": "三个等级",
+    "tiersHighlight": "特价",
     "tiers": [
      {
-      "label": "Retail",
-      "desc": "1–9 unit",
-      "benefit": "Harga normal, tanpa minimum"
+      "label": "零售",
+      "desc": "1-9 单位",
+      "benefit": "标准价格，无最低订购量"
      },
      {
-      "label": "Grosir",
-      "desc": "10 unit ke atas",
-      "benefit": "Diskon bertingkat hingga 15%"
+      "label": "批发",
+      "desc": "10 单位及以上",
+      "benefit": "阶梯折扣高达15%"
      },
      {
-      "label": "Korporat/Kontrak",
-      "desc": "Bulanan / proyek",
-      "benefit": "Harga terbaik + jadwal pasokan tetap"
+      "label": "企业/合同",
+      "desc": "月度/项目",
+      "benefit": "最佳价格 + 固定供应时间表"
      }
     ],
-    "badgeBest": "Terbaik",
-    "ctaButton": "Minta Penawaran Final"
+    "badgeBest": "最佳",
+    "ctaButton": "索取最终报价"
    }
   },
   "cara-pemesanan": {
-   "navLabel": "Cara Pemesanan",
-   "seoTitle": "Cara Pemesanan Air Bambu & Bambu Batang — 4 Langkah Mudah",
-   "metaDescription": "Cara pesan air bambu & bambu batang BWN: pilih produk, konfirmasi via WhatsApp 0813-1651-6524, pembayaran aman, pengiriman se-Indonesia.",
-   "h1": "Cara Pemesanan Mudah & Cepat",
-   "eyebrow": "Panduan Order",
-   "intro": "Empat langkah sederhana dari memilih produk hingga air bambu tiba di depan pintu Anda — di mana pun di Indonesia.",
+   "navLabel": "订购方式",
+   "seoTitle": "竹子水与竹竿订购方式 — 4个简单步骤",
+   "metaDescription": "BWN竹子水与竹竿订购方式：选择产品，通过WhatsApp 0813-1651-6524确认，安全支付，全印尼配送。",
+   "h1": "简单快速的订购方式",
+   "eyebrow": "订购指南",
+   "intro": "从选择产品到竹子水送达您家门口的四个简单步骤 — 无论您在印度尼西亚的任何地方。",
    "keywords": [
-    "cara pesan air bambu",
-    "cara membeli air bambu",
-    "pesan air bambu whatsapp",
-    "pemesanan bambu batang",
-    "order air bambu"
+    "竹子水订购方式",
+    "如何购买竹子水",
+    "WhatsApp订购竹子水",
+    "竹竿订购",
+    "订购竹子水"
    ],
-   "menuDesc": "4 langkah mudah memesan",
+   "menuDesc": "4个简单订购步骤",
    "s": {
-    "stepsEyebrow": "4 Langkah Mudah",
-    "stepsTitle": "Dari Order ke",
-    "stepsHighlight": "Depan Pintu Anda",
-    "stepLabel": "Langkah",
+    "stepsEyebrow": "4个简单步骤",
+    "stepsTitle": "从订购到",
+    "stepsHighlight": "您的家门口",
+    "stepLabel": "步骤",
     "steps": [
      {
-      "title": "1. Pilih Produk & Volume",
-      "text": "Tentukan jenis (air bambu suling/tabib atau bambu batang), kemasan, dan jumlah. Ragu? Tim kami bantu rekomendasikan."
+      "title": "1. 选择产品与数量",
+      "text": "确定类型（蒸馏竹子水/药竹或竹竿）、包装和数量。犹豫？我们的团队可以帮助推荐。"
      },
      {
-      "title": "2. Konfirmasi via WhatsApp",
-      "text": "Chat WhatsApp {wa} atau isi formulir di bawah. Sertakan kota kirim — kami balas dengan harga final & estimasi tiba."
+      "title": "2. 通过WhatsApp确认",
+      "text": "WhatsApp联系 {wa} 或填写下方表格。请提供配送城市 — 我们将回复最终价格和预计到达时间。"
      },
      {
-      "title": "3. Pembayaran Aman",
-      "text": "Transfer bank, QRIS, atau COD area tertentu. Untuk kontrak besar: DP 50%, pelunasan saat barang tiba."
+      "title": "3. 安全支付",
+      "text": "银行转账、QRIS或特定区域的COD。对于大额合同：预付50%，货物到达时付清。"
      },
      {
-      "title": "4. Kirim & Terima",
-      "text": "Pesanan dikemas food-grade/kargo aman, berangkat dengan resi terlacak — sampai di 38 provinsi Indonesia."
+      "title": "4. 发货与接收",
+      "text": "订单使用食品级/安全包装发货，附有可追踪的运单 — 配送到印度尼西亚38个省份。"
      }
     ],
-    "paymentTitle": "Metode Pembayaran",
+    "paymentTitle": "支付方式",
     "paymentMethods": [
-     "Transfer Bank (BCA, BRI, Mandiri, BNI)",
-     "QRIS (semua e-wallet)",
-     "COD area Jabodetabek & Bandung",
-     "Invoice korporat / tempoh"
+     "银行转账（BCA、BRI、Mandiri、BNI）",
+     "QRIS（所有电子钱包）",
+     "雅加达-茂物-德波-勿加泗-万隆区域COD",
+     "企业发票/分期付款"
     ],
-    "shippingTitle": "Estimasi Pengiriman",
+    "shippingTitle": "预计配送时间",
     "shipping": [
      {
-      "area": "Jabodetabek & Jawa Barat",
-      "eta": "1–3 hari"
+      "area": "雅加达-茂物-德波-勿加泗-西爪哇",
+      "eta": "1-3天"
      },
      {
-      "area": "Pulau Jawa lainnya",
-      "eta": "2–4 hari"
+      "area": "爪哇岛其他地区",
+      "eta": "2-4天"
      },
      {
-      "area": "Sumatera/Kalimantan/Sulawesi",
-      "eta": "3–7 hari"
+      "area": "苏门答腊/加里曼丹/苏拉威西",
+      "eta": "3-7天"
      },
      {
-      "area": "Maluku, Papua & NTT",
-      "eta": "2–5 hari (udara)"
+      "area": "马鲁古、巴布亚及东努沙登加拉省",
+      "eta": "2-5天 (空运)"
      }
     ],
-    "chatTitle": "Lebih Suka Chat Langsung?",
-    "chatDesc": "Balasan cepat di jam kerja {hours}.",
+    "chatTitle": "更喜欢直接聊天？",
+    "chatDesc": "工作时间内{hours}内快速回复。",
     "chatWaLabel": "WhatsApp",
-    "faqEyebrow": "Info Cepat",
-    "faqTitle": "Pertanyaan Seputar",
-    "faqHighlight": "Pemesanan",
+    "faqEyebrow": "快速信息",
+    "faqTitle": "关于",
+    "faqHighlight": "订购",
     "quickFaqs": [
      {
-      "q": "Berapa lama pesanan diproses?",
-      "a": "Pesanan reguler diproses hari yang sama (sebelum 15.00 WIB). Air Bambu Tabib dipanen subuh berikutnya. Kargo besar mengikuti jadwal armada 1–3 hari persiapan."
+      "q": "订单需要多长时间处理？",
+      "a": "常规订单当天处理（下午15:00前）。医竹水于次日清晨采摘。大宗货运遵循船队1-3天的准备时间表。"
      },
      {
-      "q": "Apakah ada minimum order grosir?",
-      "a": "Harga grosir berlaku mulai 10 unit (jerigen/karton) atau 10 batang bambu. Di bawah itu tetap kami layani dengan harga retail."
+      "q": "有批发最低订购量吗？",
+      "a": "批发价适用于10单位（罐/箱）或10根竹子。低于此数量我们仍以零售价提供服务。"
      },
      {
-      "q": "Bisakah jadwal kirim rutin bulanan?",
-      "a": "Bisa. Kontrak pasokan rutin memberi harga terbaik + prioritas armada — populer untuk klinik terapi, distributor, dan proyek konstruksi."
+      "q": "可以有每月固定的送货时间表吗？",
+      "a": "可以。定期供应合同提供最佳价格+船队优先权——在理疗诊所、分销商和建筑项目中很受欢迎。"
      }
     ],
-    "faqMore": "Masih ada pertanyaan? Lihat",
-    "faqMoreLink": "halaman FAQ lengkap →"
+    "faqMore": "还有其他问题吗？查看",
+    "faqMoreLink": "完整FAQ页面 →"
    }
   },
   "artikel": {
-   "navLabel": "Semua Artikel",
-   "seoTitle": "Artikel & Pengetahuan Air Bambu — Pusat Informasi Kesehatan BWN",
-   "metaDescription": "Kumpulan artikel kesehatan air bambu: diabetes, batu ginjal, kolesterol, detoks, tulang, kecantikan, hingga sejarah tradisi Nusantara.",
-   "h1": "Pusat Pengetahuan Air Bambu",
-   "eyebrow": "Blog & Artikel",
-   "intro": "Semua yang perlu Anda tahu tentang air bambu — dikurasi dari riset ilmiah dan kearifan tradisional Nusantara.",
+   "navLabel": "所有文章",
+   "seoTitle": "竹水文章与知识 — BWN健康信息中心",
+   "metaDescription": "竹水健康文章集合：糖尿病、肾结石、胆固醇、排毒、骨骼、美容，乃至群岛传统历史。",
+   "h1": "竹水知识中心",
+   "eyebrow": "博客与文章",
+   "intro": "关于竹水您需要知道的一切——精选自科学研究和群岛的传统智慧。",
    "keywords": [
-    "artikel air bambu",
-    "blog air bambu",
-    "informasi kesehatan air bambu",
-    "pengetahuan air bambu",
-    "artikel minuman sehat"
+    "竹水文章",
+    "竹水博客",
+    "竹水健康信息",
+    "竹水知识",
+    "健康饮品文章"
    ],
-   "menuDesc": "Pusat pengetahuan air bambu",
+   "menuDesc": "竹水知识中心",
    "s": {
-    "headingEyebrow": "Perpustakaan Kesehatan",
-    "headingTitle": "7 Artikel Pilihan tentang",
-    "headingHighlight": "Air Bambu",
-    "headingDescription": "Dikurasi dari riset ilmiah (PMC, TIME) dan kearifan tabib Nusantara — semuanya gratis untuk Anda baca.",
-    "featuredBadge": "Unggulan",
-    "searchInfo": "Mencari topik tertentu? Semua artikel kami dioptimalkan agar mudah ditemukan di Google — cukup cari",
-    "searchQuery": "air bambu + topik Anda + bambuwater.web.id",
-    "searchTail": ", atau tanyakan langsung kepada tim kami via WhatsApp di kanan bawah layar."
+    "headingEyebrow": "健康图书馆",
+    "headingTitle": "7篇精选文章关于",
+    "headingHighlight": "竹水",
+    "headingDescription": "精选自科学研究（PMC, TIME）和群岛医竹传统智慧——全部免费供您阅读。",
+    "featuredBadge": "精选",
+    "searchInfo": "在寻找特定主题？我们所有的文章都经过优化，便于在Google上轻松找到——只需搜索",
+    "searchQuery": "竹水 + 您的主题 + bambuwater.web.id",
+    "searchTail": ",或直接通过屏幕右下角的WhatsApp向我们的团队咨询。"
    }
   },
   "testimoni": {
-   "navLabel": "Testimoni",
-   "seoTitle": "Testimoni Pelanggan — Cerita Nyata Manfaat Air Bambu BWN",
-   "metaDescription": "Cerita nyata pelanggan Bambu Water Nusantara: keluarga sehat, terapis yang mempercayai, dan mitra distributor di seluruh Indonesia.",
-   "h1": "Testimoni Pelanggan Kami",
-   "eyebrow": "Cerita Nyata",
-   "intro": "Dari dapur keluarga hingga klinik terapis — inilah cerita mereka yang telah merasakan manfaat air bambu BWN.",
+   "navLabel": "客户评价",
+   "seoTitle": "客户评价 — BWN竹水真实益处故事",
+   "metaDescription": "Bambu Water Nusantara客户的真实故事：健康家庭、信任的治疗师和印尼各地的分销合作伙伴。",
+   "h1": "我们的客户评价",
+   "eyebrow": "真实故事",
+   "intro": "从家庭厨房到治疗诊所 — 这是他们体验BWN竹子水好处的故事。",
    "keywords": [
-    "testimoni air bambu",
-    "review air bambu",
-    "pengalaman minum air bambu",
-    "testimoni bambu water nusantara"
+    "竹子水见证",
+    "竹子水评论",
+    "饮用竹子水体验",
+    "竹子水努山塔拉见证"
    ],
-   "menuDesc": "Cerita nyata pelanggan",
+   "menuDesc": "真实客户故事",
    "s": {
-    "headingEyebrow": "Kepercayaan Sejak 2007",
-    "headingTitle": "Cerita Mereka yang Sudah",
-    "headingHighlight": "Merasakannya",
-    "headingDescription": "Dari dapur keluarga hingga klinik dan proyek konstruksi — 18+ tahun membangun kepercayaan di seluruh Indonesia.",
-    "ratingAria": "Rating {n} dari 5 bintang",
-    "verified": "Pelanggan terverifikasi",
-    "statYearsLabel": "Tahun melayani sejak 2007",
-    "statProvincesLabel": "Provinsi terjangkau",
-    "statSatisfactionLabel": "Rata-rata kepuasan pelanggan",
-    "ctaTitle": "Gabung Bersama Ribuan Pelanggan Puas",
-    "ctaDescription": "Mulai dari satu galon untuk keluarga, hingga kontrak pasokan untuk bisnis Anda."
+    "headingEyebrow": "自2007年以来的信任",
+    "headingTitle": "已经体验过的人的故事",
+    "headingHighlight": "感受",
+    "headingDescription": "从家庭厨房到诊所和建筑项目 — 18+年在全印尼建立信任。",
+    "ratingAria": "{n}星中的{rating}星评分",
+    "verified": "已验证的客户",
+    "statYearsLabel": "自2007年起服务年限",
+    "statProvincesLabel": "覆盖省份",
+    "statSatisfactionLabel": "客户平均满意度",
+    "ctaTitle": "加入数千满意客户",
+    "ctaDescription": "从一个家庭水桶到您的商业供应合同。"
    }
   },
   "faq": {
-   "navLabel": "FAQ",
-   "seoTitle": "FAQ — Pertanyaan Umum Seputar Air Bambu & Layanan BWN",
-   "metaDescription": "Jawaban lengkap pertanyaan umum: apa itu air bambu, keamanan harian, perbedaan produk, cara pesan grosir, pengiriman, dan legalitas perusahaan.",
-   "h1": "Pertanyaan yang Sering Diajukan",
-   "eyebrow": "Bantuan & Info",
-   "intro": "Semua pertanyaan tentang air bambu, produk, pemesanan, dan pengiriman — dijawab lengkap dalam satu halaman.",
+   "navLabel": "常见问题",
+   "seoTitle": "常见问题 — 关于竹子水及BWN服务的常见问题",
+   "metaDescription": "常见问题的完整答案：什么是竹子水，日常安全性，产品差异，批量订购方式，配送和企业合法性。",
+   "h1": "常见问题",
+   "eyebrow": "帮助与信息",
+   "intro": "关于竹子水、产品、订购和配送的所有问题 — 在一页中全面回答。",
    "keywords": [
-    "faq air bambu",
-    "pertanyaan air bambu",
-    "tanya jawab air bambu",
-    "apakah air bambu aman",
-    "cara pesan air bambu grosir"
+    "竹子水常见问题",
+    "竹子水问题",
+    "竹子水问答",
+    "竹子水安全吗",
+    "如何批量订购竹子水"
    ],
-   "menuDesc": "Pertanyaan yang sering diajukan",
+   "menuDesc": "常见问题",
    "s": {
-    "headingEyebrow": "10 Pertanyaan Teratas",
-    "headingTitle": "Semua yang Ingin Anda",
-    "headingHighlight": "Tanyakan",
-    "headingDescription": "Dikurasi dari ribuan percakapan WhatsApp kami dengan pelanggan se-Indonesia.",
-    "unansweredTitle": "Pertanyaan Anda Belum Terjawab?",
-    "unansweredDesc": "Tim kami siap menjawab — konsultasi gratis, tanpa paksaan beli.",
-    "askWa": "Tanya via WhatsApp"
+    "headingEyebrow": "十大热门问题",
+    "headingTitle": "您想问的",
+    "headingHighlight": "一切",
+    "headingDescription": "精选自我们与全印尼客户的数千次WhatsApp对话。",
+    "unansweredTitle": "您的问题尚未得到解答？",
+    "unansweredDesc": "我们的团队随时准备解答 — 免费咨询，无购买压力。",
+    "askWa": "通过WhatsApp提问"
    }
   },
   "kontak": {
-   "navLabel": "Kontak",
-   "seoTitle": "Kontak & Pemesanan — WhatsApp 0813-1651-6524 | Bambu Water Nusantara",
-   "metaDescription": "Hubungi PT Bambu Water Nusantara: WhatsApp 0813-1651-6524, email, formulir pemesanan. Konsultasi gratis untuk kebutuhan terapi & grosir.",
-   "h1": "Hubungi Kami — Konsultasi Gratis",
-   "eyebrow": "Kontak & Pemesanan",
-   "intro": "Tim kami siap membantu kebutuhan terapi keluarga hingga kontrak distribusi massal. Balasan cepat di jam kerja.",
+   "navLabel": "联系我们",
+   "seoTitle": "联系与订购 — WhatsApp 0813-1651-6524 | Bambu Water Nusantara",
+   "metaDescription": "联系PT Bambu Water Nusantara：WhatsApp 0813-1651-6524，电子邮件，订购表单。免费咨询治疗和批量需求。",
+   "h1": "联系我们 — 免费咨询",
+   "eyebrow": "联系与订购",
+   "intro": "我们的团队随时准备帮助从家庭治疗需求到批量分销合同的各项需求。工作时间内快速回复。",
    "keywords": [
-    "kontak bambu water nusantara",
-    "wa air bambu",
-    "whatsapp air bambu",
-    "pesan air bambu",
-    "konsultasi air bambu",
-    "nomor wa bambu water"
+    "联系竹子水努山塔拉",
+    "竹子水WhatsApp",
+    "竹子水WhatsApp",
+    "竹水订购",
+    "竹水咨询",
+    "Bambu Water WhatsApp号码"
    ],
    "menuDesc": "",
    "s": {
     "cards": [
      {
-      "title": "WhatsApp (Tercepat)",
-      "note": "Balasan rata-rata < 15 menit di jam kerja"
+      "title": "WhatsApp (最快)",
+      "note": "工作时间平均回复时间 < 15 分钟"
      },
      {
-      "title": "Telepon"
+      "title": "电话"
      },
      {
-      "title": "Email Umum",
-      "note": "Pertanyaan umum & kerja sama"
+      "title": "公共邮箱",
+      "note": "一般咨询 & 合作"
      },
      {
-      "title": "Email Sales",
-      "note": "Penawaran grosir, kargo & kontrak"
+      "title": "销售邮箱",
+      "note": "批发报价、货运 & 合同"
      }
     ],
-    "identityTitle": "Identitas Perusahaan",
-    "legalLabel": "Badan Hukum",
-    "legalValue": "PT resmi, akta tercatat",
-    "foundedLabel": "Berdiri",
-    "foundedValue": "Pionir sejak 2007 — terbesar & pertama di Indonesia",
-    "siteLabel": "Situs Resmi",
-    "addressTitle": "Alamat & Area Layanan",
-    "areaLabel": "Area layanan:",
-    "areaText": "seluruh 38 provinsi Indonesia — kirim reguler, kargo laut, dan ekspres udara.",
-    "ctaTitle": "Kami Balas Secepat Mungkin",
-    "ctaDescription": "WhatsApp {wa} adalah jalur tercepat — konsultasi gratis untuk semua kebutuhan."
+    "identityTitle": "公司信息",
+    "legalLabel": "法律实体",
+    "legalValue": "正式PT公司，已注册",
+    "foundedLabel": "成立",
+    "foundedValue": "自2007年的先锋 — 印尼最大和第一",
+    "siteLabel": "官方网站",
+    "addressTitle": "地址 & 服务区域",
+    "areaLabel": "服务区域:",
+    "areaText": "整个印尼38个省份 — 常规邮寄、海运和空运。",
+    "ctaTitle": "我们将尽快回复",
+    "ctaDescription": "WhatsApp {wa} 是最快的方式 — 为所有需求提供免费咨询。"
    }
   }
  },
  "data": {
-  "brandClaim": "Sejak 2007 — Terbesar & Pertama di Indonesia",
-  "tagline": "Pionir Air Bambu Indonesia Sejak 2007",
-  "productionNote": "Air bambu kami disuling oleh santri berpengalaman dan diawasi dewan pakar lintas bidang — memadukan kehati-hatian, kejujuran, dan standar mutu modern.",
+  "brandClaim": "自2007年 — 印尼最大和第一",
+  "tagline": "2007年印尼竹水先锋",
+  "productionNote": "我们的竹水由经验丰富的学生蒸馏，并受跨领域专家委员会监督 — 谨慎、诚实和现代质量标准的融合。",
   "benefits": [
    {
     "icon": "thermometer",
-    "title": "Menurunkan Demam & Panas Dalam",
-    "description": "Efek mendinginkan alami air bambu sejak lama dimanfaatkan pengobatan tradisional Nusantara untuk meredakan demam dan panas dalam."
+    "title": "降热退烧",
+    "description": "竹水的天然降温效果长期以来被群岛传统医学用于缓解发烧和内热。"
    },
    {
     "icon": "wind",
-    "title": "Melegakan Batuk & Dahak",
-    "description": "Membantu membersihkan saluran pernapasan dari dahak dan meredakan iritasi tenggorokan secara alami."
+    "title": "缓解咳嗽和痰",
+    "description": "帮助自然清洁呼吸道中的痰，缓解喉咙刺激。"
    },
    {
     "icon": "heart-pulse",
-    "title": "Menjaga Kesehatan Jantung",
-    "description": "Kandungan flavonoid dan polifenol air bambu membantu melindungi jantung dan pembuluh darah dari serangan radikal bebas."
+    "title": "维护心脏健康",
+    "description": "竹水中的类黄酮和多酚有助于保护心脏和血管免受自由基的侵害。"
    },
    {
     "icon": "activity",
-    "title": "Mendukung Gula Darah Normal",
-    "description": "Dalam tradisi herbal, air tuak bambu dipercaya membantu menurunkan kadar gula darah dan menjaga metabolisme tubuh."
+    "title": "支持正常血糖",
+    "description": "在传统草药中，竹糯米水被认为有助于降低血糖并维持身体新陈代谢。"
    },
    {
     "icon": "droplets",
-    "title": "Melancarkan Pencernaan",
-    "description": "Mineral alami dan sifat alkali air bambu membantu melancarkan sistem pencernaan dan detoksifikasi tubuh."
+    "title": "促进消化",
+    "description": "竹水中的天然矿物质和碱性特性有助于促进消化系统和身体排毒。"
    },
    {
     "icon": "shield-check",
-    "title": "Meningkatkan Daya Tahan Tubuh",
-    "description": "Antioksidan, asam amino, dan mineral esensial dalam air bambu mendukung sistem imun agar tetap prima."
+    "title": "增强身体抵抗力",
+    "description": "竹水中的抗氧化剂、氨基酸和必需矿物质支持免疫系统保持最佳状态。"
    },
    {
     "icon": "sparkles",
-    "title": "Silika untuk Kulit, Rambut & Kuku",
-    "description": "Silika organik bambu — salah satu yang tertinggi di alam — mendukung produksi kolagen untuk kulit kenyal, rambut, dan kuku kuat."
+    "title": "硅元素对皮肤、头发和指甲",
+    "description": "竹子有机硅含量 — 自然界中最高的之一 — 支持皮肤弹性、头发和强健指甲的胶原蛋白生成。"
    },
    {
     "icon": "flower-2",
-    "title": "Meredakan Nyeri Menstruasi",
-    "description": "Pengobatan tradisional memanfaatkan air bambu untuk meredakan nyeri haid dan membantu mengurangi perdarahan berlebih."
+    "title": "缓解月经疼痛",
+    "description": "传统疗法利用竹水来缓解痛经，并帮助减少过量出血。"
    }
   ],
   "faqs": [
    {
-    "q": "Apa itu air bambu dan dari mana asalnya?",
-    "a": "Air bambu (air tuak bambu) adalah sadapan alami yang terbentuk di dalam ruas bambu muda. Air ini dikumpulkan dengan teknik mata tunas, lalu dapat dikonsumsi langsung atau disuling untuk keamanan dan daya tahan simpan yang lebih baik."
+    "q": "什么是竹水？它来自哪里？",
+    "a": "竹水（竹子发酵汁液）是在嫩竹节内形成的天然汁液。通过采芽技术收集，可直接饮用或蒸馏以提高安全性和保质期。"
    },
    {
-    "q": "Apa manfaat air bambu untuk kesehatan?",
-    "a": "Berdasarkan kajian ilmiah (Journal of Medicinal Plant Research, 2015), ekstrak bambu memiliki efek proteksi antioksidan, anti-inflamasi, dan mendukung kesehatan kardiovaskular. Dalam pengobatan tradisional Nusantara, air bambu dimanfaatkan untuk meredakan demam, batuk dan dahak, melancarkan pencernaan, membantu menurunkan gula darah dan kolesterol, serta menjaga daya tahan tubuh. Air bambu adalah pendamping terapi alami — bukan pengganti obat dokter."
+    "q": "竹水对健康有什么好处？",
+    "a": "根据科学研究（药用植物研究杂志，2015年），竹子提取物具有抗氧化、抗炎的保护作用，并支持心血管健康。在群岛传统医学中，竹水被用于缓解发烧、咳嗽和痰液、促进消化、帮助降低血糖和胆固醇，以及增强身体抵抗力。竹水是自然疗法的补充 — 不是医生的替代品。"
    },
    {
-    "q": "Apakah air bambu aman dikonsumsi setiap hari?",
-    "a": "Ya. Air bambu suling kami melewati proses distilasi bertahap dan uji mutu mikrobiologi sehingga aman dikonsumsi harian. Untuk air sadapan mentah (Air Bambu Tabib), kami merekomendasikan konsumsi sesuai anjuran terapis atau tenaga kesehatan."
+    "q": "竹水可以每天饮用吗？",
+    "a": "可以。我们的蒸馏竹水经过多级蒸馏和微生物质量检测，因此可以安全日常饮用。对于原始汁液（竹医水），我们建议按照治疗师或医疗人员的建议饮用。"
    },
    {
-    "q": "Apakah bisa memesan air bambu dan bambu batang dalam jumlah besar?",
-    "a": "Bisa. Kami melayani pemesanan grosir dan kargo — air bambu suling dalam jerigen/drum maupun bambu batang berkualitas (Petung, Wulung, Apus, Ori) per ikat hingga per truk, dengan pengiriman ke seluruh provinsi Indonesia."
+    "q": "可以批量订购竹水和竹竿吗？",
+    "a": "可以。我们批发和货运服务 — 无论是蒸馏竹水（瓶装/桶装）还是优质竹竿（Petung、Wulung、Apus、Ori），从捆到整车，可运往印尼所有省份。"
    },
    {
-    "q": "Jenis bambu apa saja yang tersedia?",
-    "a": "Kami menyediakan Bambu Petung/Betung (Dendrocalamus asper) untuk konstruksi, Bambu Wulung (hitam) untuk estetika dan kerajinan premium, Bambu Apus untuk tali dan anyaman, serta Bambu Ori untuk rangka ringan. Semua terseleksi umur 3+ tahun, lurus, dan kering merata."
+    "q": "有哪些种类的竹子？",
+    "a": "我们提供Bambu Petung/Betung（Dendrocalamus asper）用于建筑，Bambu Wulung（黑色）用于美学和高端工艺品，Bambu Apus用于绳索和编织，以及Bambu Ori用于轻型框架。所有竹子均选用3年以上树龄、笔直且干燥均匀的品种。"
    },
    {
-    "q": "Bagaimana cara memesan dan berapa lama pengirimannya?",
-    "a": "Anda dapat memesan melalui formulir di situs ini, WhatsApp, atau email sales. Pesanan reguler Jabodetabek & Jawa Barat 1–3 hari kerja; luar Jawa 3–7 hari kerja tergantung lokasi dan volume. Pengiriman besar menggunakan armada kargo terpercaya."
+    "q": "如何订购？需要多长时间发货？",
+    "a": "您可以通过此网站的表单、WhatsApp或销售邮箱订购。雅加达-茂物-德波-西爪哇地区的常规订单需要1-3个工作日；爪哇岛以外地区需要3-7个工作日，具体取决于位置和数量。大批量运输使用值得信赖的货运车队。"
    },
    {
-    "q": "Apakah PT Bambu Water Nusantara badan hukum resmi?",
-    "a": "Ya, kami badan hukum Perseroan Terbatas resmi dengan Akta Pendirian yang tercatat — didukung dewan pendiri, susunan komisaris dan direksi yang lengkap, divisi manager operasional, serta dewan pakar lintas bidang yang mengawasi mutu produksi."
+    "q": "PT Bambu Water Nusantara是合法实体吗？",
+    "a": "是的，我们是合法的有限责任公司，有注册的成立章程 — 拥有创始人支持、完整的董事会和管理层结构、运营部门以及监督产品质量的跨领域专家委员会。"
    },
    {
-    "q": "Apa perbedaan Air Bambu Suling dan Air Bambu Tabib?",
-    "a": "Air Bambu Suling adalah sadapan bambu yang dimurnikan melalui distilasi bertahap — aman untuk konsumsi harian dengan daya tahan lebih lama. Air Bambu Tabib adalah sadapan mentah segar langsung dari ruas bambu, dipanen dengan teknik tradisional untuk kebutuhan terapis, tabib, dan praktik pengobatan komplementer."
+    "q": "蒸馏竹水和竹医水有什么区别？",
+    "a": "蒸馏竹水是通过多级蒸馏净化的竹子汁液 — 可安全日常饮用，保质期更长。竹医水是直接从嫩竹节中提取的原始新鲜汁液，通过传统采芽技术收获，用于治疗师、医生和补充疗法实践。"
    },
    {
-    "q": "Apakah air bambu bisa menjadi pengganti obat dokter?",
-    "a": "Tidak. Air bambu adalah minuman terapi alami pendamping pola hidup sehat, bukan obat. Untuk kondisi medis tertentu seperti diabetes, hipertensi, atau penyakit ginjal, tetap konsultasikan dengan dokter atau tenaga kesehatan Anda sebelum menjadikan air bambu bagian dari program kesehatan."
+    "q": "竹水可以替代药物吗？",
+    "a": "不能。竹水是健康生活方式的自然疗法补充饮料，不是药物。对于某些特定疾病如糖尿病、高血压或肾病，在将竹水纳入健康计划前，请务必咨询您的医生或医疗人员。"
    },
    {
-    "q": "Apakah melayani pengiriman ke luar Pulau Jawa?",
-    "a": "Melayani. Kami mengirim ke 38 provinsi di seluruh Indonesia — Sumatera, Kalimantan, Sulawesi, Bali & Nusa Tenggara, Maluku, hingga Papua — melalui jaringan kargo darat, laut, dan udara dengan packing aman untuk pengiriman jarak jauh."
+    "q": "是否提供爪哇岛以外的配送服务？",
+    "a": "提供。我们通过陆路、海运和空运网络将产品运往印尼的38个省份 — 从苏门答腊、加里曼丹、苏拉威西、巴厘岛和努沙登加拉群岛，到马鲁古，甚至巴布亚 — 使用适合长途运输的安全包装。"
    }
   ],
   "products": [
    {
     "id": "air-bambu-suling",
-    "name": "Air Bambu Suling Premium",
-    "tagline": "Minuman terapi sehari-hari",
+    "name": "蒸馏竹水（精装）",
+    "tagline": "日常疗法饮料",
     "image": "/images/product-water-bottle.jpg",
     "sizes": [
-     "Botol 600 ml",
-     "Botol 1,5 L",
-     "Galon 19 L"
+     "600毫升瓶装",
+     "1.5升瓶装",
+     "19升桶装"
     ],
-    "description": "Air sadapan bambu muda yang disuling higienis untuk mempertahankan mineral dan silika alaminya. Cocok untuk konsumsi harian, program detoks, dan pendamping terapi kesehatan.",
+    "description": "嫩竹汁水经过卫生蒸馏，保留其天然矿物质和硅。适合日常饮用、排毒计划和健康疗法辅助。",
     "features": [
-     "Suling bertahap higienis",
-     "Bebas klorin & logam berat",
-     "pH seimbang alami",
-     "Kemasan food-grade"
+     "多级卫生蒸馏",
+     "无氯和重金属",
+     "自然平衡pH值",
+     "食品级包装"
     ],
-    "badge": "Unggulan"
+    "badge": "精选"
    },
    {
     "id": "air-bambu-tabib",
-    "name": "Air Bambu Tabib (Sadapan Mentah)",
-    "tagline": "Tradisi pengobatan Nusantara",
+    "name": "竹医水（原始汁液）",
+    "tagline": "群岛传统疗法",
     "image": "/images/process-harvest.jpg",
     "sizes": [
-     "Jerigen 5 L",
-     "Jerigen 10 L",
-     "Drum 30 L"
+     "5升桶装",
+     "10升桶装",
+     "30升桶装"
     ],
-    "description": "Sadapan air bambu murni langsung dari ruas bambu muda — dipanen dengan teknik mata tunas sesuai tradisi tabib, dikirim segar untuk kebutuhan terapi, pengobatan komplementer, dan penyembuhan.",
+    "description": "直接从嫩竹节中提取的纯净竹子汁液 — 按照传统医生的技术收获，新鲜运送，用于治疗、补充疗法和康复需求。",
     "features": [
-     "Panen segar per pesanan",
-     "Teknik mata tunas tradisional",
-     "Tanpa pengawet",
-     "Untuk terapis & tabib"
+     "按订单新鲜采摘",
+     "传统芽眼技术",
+     "无防腐剂",
+     "适用于治疗师和医生"
     ],
-    "badge": "Terapi"
+    "badge": "治疗"
    },
    {
     "id": "bambu-berkualitas",
-    "name": "Bambu Berkualitas Konstruksi & Kerajinan",
+    "name": "优质建筑与工艺竹材",
     "tagline": "Petung, Wulung, Apus, Ori",
     "image": "/images/product-bamboo-poles.jpg",
     "sizes": [
-     "Per batang",
-     "Per ikat",
-     "Per truk/kargo"
+     "每根",
+     "每捆",
+     "每车/货"
     ],
-    "description": "Bambu pilihan berumur 3+ tahun: Petung untuk konstruksi, Wulung untuk estetika, Apus untuk tali & kerajinan, dan Ori untuk rangka. Terseleksi lurus, kering merata, dan bebas hama.",
+    "description": "精选3年以上竹龄：Petung用于建筑，Wulung用于美学，Apus用于绳索和工艺，Ori用于框架。精选笔直、均匀干燥、无虫害。",
     "features": [
-     "Seleksi umur 3+ tahun",
-     "Lurus & kering merata",
-     "Pengeringan & fumigasi",
-     "Sertifikasi asal hutan rakyat"
+     "精选3年以上竹龄",
+     "笔直、均匀干燥",
+     "干燥和熏蒸",
+     "民间森林原产地认证"
     ],
-    "badge": "Massal"
+    "badge": "批量"
    }
   ],
   "process": [
    {
     "step": "01",
-    "title": "Panen Berkelanjutan",
-    "description": "Bambu muda dipilih dari hutan bambu rakyat terkurasi — dipanen tanpa merusak rumpun agar hutan tetap lestari."
+    "title": "可持续采收",
+    "description": "从受监管的民间竹林中选择幼竹——不破坏竹丛以确保森林可持续性。"
    },
    {
     "step": "02",
-    "title": "Sadapan Air Bambu",
-    "description": "Air sadapan diambil dengan teknik mata tunas di ruas bambu muda saat kandungan mineralnya paling tinggi."
+    "title": "竹子吸水",
+    "description": "在幼竹节处使用芽眼技术取水，此时其矿物质含量最高。"
    },
    {
     "step": "03",
-    "title": "Distilasi & Uji Mutu",
-    "description": "Disuling bertahap pada fasilitas higienis, diuji mikrobiologi & mineral, dipastikan layak konsumsi sesuai standar."
+    "title": "蒸馏与质量检测",
+    "description": "在卫生设施中进行分步蒸馏，进行微生物和矿物质检测，确保符合标准，可供消费。"
    },
    {
     "step": "04",
-    "title": "Pengemasan & Distribusi",
-    "description": "Dikemas food-grade lalu dikirim ke seluruh Indonesia — mulai botol satuan hingga kargo truk dalam jumlah besar."
+    "title": "包装与配送",
+    "description": "采用食品级包装，然后运往印度尼西亚各地——从单瓶到大量卡车货运。"
    }
   ],
   "deliveryTiers": [
    {
-    "name": "Reguler",
-    "area": "Jabodetabek & Jawa Barat",
-    "eta": "1–3 hari kerja",
+    "name": "常规",
+    "area": "雅加达-茂物-德波-勿加西及西爪哇",
+    "eta": "1-3个工作日",
     "icon": "truck",
-    "description": "Kurir terpercaya dengan packing food-grade aman untuk pesanan botol hingga jerigen.",
+    "description": "可靠的快递，采用食品级安全包装，适用于从瓶装到水桶的订单。",
     "features": [
-     "Min. pemesanan bebas",
-     "Packing food-grade",
-     "Lacak pengiriman"
+     "最低订单免运费",
+     "食品级包装",
+     "追踪配送"
     ]
    },
    {
-    "name": "Kargo Antar Pulau",
-    "area": "Seluruh Jawa, Sumatera, Kalimantan, Sulawesi, Bali & NT",
-    "eta": "3–7 hari kerja",
+    "name": "跨岛货运",
+    "area": "整个爪哇岛、苏门答腊、加里曼丹、苏拉威西、巴厘岛及东努沙登加拉",
+    "eta": "3-7个工作日",
     "icon": "ship",
-    "description": "Kargo darat & laut dengan volume besar untuk distributor, reseller, dan proyek.",
+    "description": "陆路和海运大宗货运，适用于分销商、经销商和项目。",
     "features": [
-     "Min. 1 jerigen / 10 batang",
-     "Segel kayu & strapping",
-     "Asuransi kargo opsional"
+     "最低1桶/10根",
+     "木封和捆扎",
+     "可选货运保险"
     ]
    },
    {
-    "name": "Ekspres Udara",
-    "area": "Maluku, Papua & NTT",
-    "eta": "2–5 hari kerja",
+    "name": "空运快递",
+    "area": "马鲁古省、巴布亚省及东努沙登加拉省",
+    "eta": "2-5个工作日",
     "icon": "plane",
-    "description": "Pengiriman udara untuk wilayah timur Indonesia — segar sampai tujuan.",
+    "description": "印尼东部地区的空运服务 — 新鲜直达目的地",
     "features": [
-     "Prioritas penerbangan",
-     "Cold-pack opsional",
-     "Cocok untuk terapis & klinik"
+     "优先航班",
+     "可选冷藏包装",
+     "适合治疗师和诊所"
     ]
    }
   ],
   "stats": [
    {
-    "prefix": "",
     "suffix": "+",
-    "label": "Tahun pengalaman — Terbesar & Pertama di Indonesia sejak 2007"
+    "label": "年经验 — 印尼最大及首家自2007年起",
+    "prefix": ""
    },
    {
-    "prefix": "",
-    "suffix": " ha",
-    "label": "Lahan bambu Indonesia — terluas di dunia"
+    "suffix": " 公顷",
+    "label": "印尼竹子土地 — 世界上最大的",
+    "prefix": ""
    },
    {
-    "prefix": "",
     "suffix": "%",
-    "label": "Kandungan silika organik ekstrak daun bambu"
+    "label": "竹叶提取物中的有机硅含量",
+    "prefix": ""
    },
    {
-    "suffix": " Provinsi",
-    "prefix": "",
-    "label": "Jangkauan pengiriman seluruh Indonesia"
+    "suffix": " 省",
+    "label": "覆盖整个印尼的配送范围",
+    "prefix": ""
    }
   ],
   "nutrition": [
    {
-    "name": "Silika Organik",
-    "note": "Ekstrak daun bambu berkisar hingga 70% silika — tertinggi di alam"
+    "name": "有机硅",
+    "note": "竹叶提取物含高达70%的硅 — 自然界最高含量"
    },
    {
-    "name": "Flavonoid & Polifenol",
-    "note": "Antioksidan pelindung sel dari radikal bebas"
+    "name": "类黄酮和多酚",
+    "note": "保护细胞免受自由基侵害的抗氧化剂"
    },
    {
-    "name": "Klorofil Alami",
-    "note": "Mendukung detoksifikasi dan regenerasi sel"
+    "name": "天然叶绿素",
+    "note": "支持细胞排毒和再生"
    },
    {
-    "name": "Asam Amino Esensial",
-    "note": "Blok pembangun protein bagi jaringan tubuh"
+    "name": "必需氨基酸",
+    "note": "身体组织蛋白质的构建模块"
    },
    {
-    "name": "Mineral Kalium, Kalsium & Magnesium",
-    "note": "Elektrolit alami penyeimbang cairan tubuh"
+    "name": "钾、钙和镁矿物质",
+    "note": "天然电解质，平衡体内液体"
    }
   ],
   "pricing": {
    "airBambu": [
     {
-     "product": "Botol 600 ml",
+     "product": "600毫升瓶装",
      "price": "Rp 15.000",
-     "unit": "per botol",
-     "note": "Karton isi 24 botol"
+     "unit": "每瓶",
+     "note": "每箱24瓶"
     },
     {
-     "product": "Botol 1,5 L",
+     "product": "1.5升瓶装",
      "price": "Rp 32.000",
-     "unit": "per botol",
-     "note": "Karton isi 12 botol"
+     "unit": "每瓶",
+     "note": "每箱12瓶"
     },
     {
-     "product": "Galon 19 L",
+     "product": "19升桶装水",
      "price": "Rp 95.000",
-     "unit": "per galon",
-     "note": "Termasuk galon food-grade"
+     "unit": "每桶",
+     "note": "含食品级桶"
     },
     {
-     "product": "Jerigen 10 L",
+     "product": "10升罐装水",
      "price": "Rp 60.000",
-     "unit": "per jerigen",
-     "note": "Grosir min. 10 pcs"
+     "unit": "每桶",
+     "note": "批发最低10件"
     },
     {
-     "product": "Drum 30 L",
+     "product": "30升桶装",
      "price": "Rp 165.000",
-     "unit": "per drum",
-     "note": "Grosir min. 5 drum"
+     "unit": "每桶",
+     "note": "批发最低5桶"
     }
    ],
    "airTabib": [
     {
-     "product": "Jerigen 5 L",
+     "product": "5升桶装",
      "price": "Rp 85.000",
-     "unit": "per jerigen",
-     "note": "Sadapan segar harian"
+     "unit": "每桶",
+     "note": "每日新鲜供应"
     },
     {
-     "product": "Jerigen 10 L",
+     "product": "10升桶装",
      "price": "Rp 160.000",
-     "unit": "per jerigen",
-     "note": "Sadapan segar harian"
+     "unit": "每桶",
+     "note": "每日新鲜供应"
     },
     {
-     "product": "Drum 30 L",
+     "product": "30升桶装",
      "price": "Rp 450.000",
-     "unit": "per drum",
-     "note": "Untuk klinik & komunitas tabib"
+     "unit": "每桶",
+     "note": "适用于诊所和传统医师社区"
     }
    ],
    "bambu": [
     {
-     "product": "Bambu Petung (konstruksi)",
+     "product": "竹筒（建筑用）",
      "price": "Rp 85.000 – 150.000",
-     "unit": "per batang",
-     "note": "Panjang 8–12 m, Ø 10–18 cm"
+     "unit": "每根",
+     "note": "长度8-12米，直径10-18厘米"
     },
     {
-     "product": "Bambu Wulung (hitam)",
+     "product": "黑竹",
      "price": "Rp 120.000 – 250.000",
-     "unit": "per batang",
-     "note": "Estetika premium, treatment kilau"
+     "unit": "每根",
+     "note": "优质美学，抛光处理"
     },
     {
-     "product": "Bambu Apus (tali & anyam)",
+     "product": "藤竹（编织用）",
      "price": "Rp 45.000 – 90.000",
-     "unit": "per batang",
-     "note": "Serat kuat, lentur"
+     "unit": "每根",
+     "note": "纤维强韧，柔韧性好"
     },
     {
-     "product": "Bambu Ori (rangka ringan)",
+     "product": "轻型框架竹",
      "price": "Rp 55.000 – 110.000",
-     "unit": "per batang",
-     "note": "Ramping untuk furniture"
+     "unit": "每根",
+     "note": "适合家具的细长竹材"
     }
    ]
   },
@@ -2049,111 +2049,111 @@
    "pendiri": [
     {
      "name": "Ko Abuy",
-     "role": "Dewan Pendiri"
+     "role": "创始人委员会"
     },
     {
      "name": "H. Gugun Gunara, S.E",
-     "role": "Dewan Pendiri"
+     "role": "创始人委员会"
     }
    ],
    "komisaris": [
     {
      "name": "Hj. Qonitah Lutfiah, S.E., M.M.",
-     "role": "Komisaris Utama",
+     "role": "首席委员",
      "shares": "30%"
     },
     {
      "name": "Drs. Arif Rachman Hakim",
-     "role": "Komisaris",
+     "role": "委员",
      "shares": "15%"
     },
     {
      "name": "Jajang Sutivana",
-     "role": "Komisaris",
+     "role": "董事",
      "shares": "15%"
     }
    ],
    "direktur": [
     {
      "name": "H. Gugun Gunara, S.E",
-     "role": "Direktur Utama",
+     "role": "总裁董事",
      "shares": "25%"
     },
     {
      "name": "Rahmadini",
-     "role": "Direktur",
+     "role": "董事",
      "shares": "5%"
     },
     {
      "name": "H. Abdul Rohman",
-     "role": "Direktur",
+     "role": "董事",
      "shares": "5%"
     },
     {
      "name": "H. Solihin",
-     "role": "Direktur",
+     "role": "董事",
      "shares": "5%"
     }
    ],
    "managers": [
     {
      "name": "Mr. Aceng Kurnia",
-     "role": "Manager Operasional"
+     "role": "运营经理"
     },
     {
      "name": "Mr. Yudi Oktora",
-     "role": "Manager Operasional"
+     "role": "运营经理"
     },
     {
      "name": "Mr. Mahbub",
-     "role": "Manager Operasional"
+     "role": "运营经理"
     },
     {
      "name": "Mr. Soleh M Ramdani",
-     "role": "Manager Operasional"
+     "role": "运营经理"
     },
     {
      "name": "Mr. Ivan Nugraha",
-     "role": "Manager Operasional"
+     "role": "运营经理"
     },
     {
      "name": "Mr. Hendri Sutiana",
-     "role": "Manager Operasional"
+     "role": "运营经理"
     }
    ],
    "offices": [
     {
      "id": "pusat",
-     "label": "Kantor Pusat",
-     "city": "Tasikmalaya"
+     "label": "总部办公室",
+     "city": "芝马加连雅"
     },
     {
      "id": "branch-2",
-     "label": "Branch Office 2",
-     "city": "Tasikmalaya"
+     "label": "分公司 2",
+     "city": "芝马加连雅"
     },
     {
      "id": "branch-3",
-     "label": "Branch Office 3",
-     "city": "Bandung"
+     "label": "分公司 3",
+     "city": "万隆"
     }
    ]
   },
   "testimonials": [
    {
     "name": "Bpk. Hendra Wijaya",
-    "role": "Pemilik Kafe Sehat, Bandung",
-    "text": "Air bambu suling dari BWN jadi andalan menu signature kami. Pelanggan betah, rasanya bening dan segar — beda dari air biasa. Pengiriman selalu tepat waktu."
+    "role": "健康咖啡馆老板，万隆",
+    "text": "BWN的蒸馏竹水成为我们招牌菜单的首选。顾客非常喜欢，味道清澈清爽——与普通水不同。送货总是准时。"
    },
    {
     "name": "Ibu Ratna Sari",
-    "role": "Praktisi Terapi Herbal, Surabaya",
-    "text": "Saya sudah mencari air tuak bambu berkualitas bertahun-tahun. Sadapan tabib dari BWN konsisten kemurniannya, dan ini membantu banyak klien program detoks saya."
+    "role": "草药治疗师，泗水",
+    "text": "多年来我一直在寻找高质量的竹子酒。BWN的竹酒纯度一致，这帮助了我很多排毒项目的客户。"
    },
    {
-    "name": "Ir. Bambang Prasetyo",
-    "role": "Kontraktor Bangunan Hijau, Jakarta",
-    "text": "Untuk paviliun bambu resor kami di Bali, BWN memasok ratusan batang bambu petung dan wulung dalam dua pengiriman kargo. Batangnya lurus, kering, tanpa cacat."
+    "name": "Ir. Bambang Prasyetyo",
+    "role": "绿色建筑承包商，雅加达",
+    "text": "为了我们在巴厘岛的度假村竹亭，BWN在两次货运中供应了数百根竹竿和乌龙竹竿。竹竿笔直、干燥、无瑕疵。"
    },
    {
     "name": "Ibu Nurul Hidayah",
@@ -2255,19 +2255,19 @@
   "about": {
    "values": [
     {
+     "text": "每一滴水都经过分步蒸馏和质量检测，才到达您的手中。",
      "icon": "shield-check",
-     "title": "Murni & Teruji",
-     "text": "Setiap tetes melewati distilasi bertahap dan uji mutu sebelum sampai ke tangan Anda."
+     "title": "Murni & Teruji"
     },
     {
      "icon": "heart-handshake",
-     "title": "Mitra Petani Bambu",
-     "text": "Bermitra dengan petani hutan bambu rakyat — membeli hasil panen dengan harga adil."
+     "title": "竹农合作伙伴",
+     "text": "与民间竹农森林合作——以公平价格收购收成。"
     },
     {
      "icon": "scale",
-     "title": "Badan Hukum Resmi",
-     "text": "PT berakta resmi dengan dewan pendiri, komisaris, direksi, dan dewan pakar lintas bidang — aman untuk kontrak & pengadaan besar."
+     "title": "合法法人实体",
+     "text": "拥有创始人委员会、董事会、管理层和跨领域专家董事会的正式有限公司——安全可靠，适用于大型合同和采购。"
     }
    ]
   }

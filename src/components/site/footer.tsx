@@ -2,6 +2,7 @@
 
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { COMPANY, OFFICES, waLink } from '@/lib/company';
+import { PRINCIPAL, SUPPORT_SYSTEMS, CREDIT_BYLINE } from '@/lib/branding';
 import { useI18n } from '@/lib/i18n/context';
 import { Logo } from './logo';
 
@@ -217,6 +218,33 @@ export function Footer() {
             <span aria-hidden className="hidden md:inline">•</span>
             <span>{common.notMedicalAdvice}</span>
           </p>
+        </div>
+      </div>
+
+      {/* Kredit sistem — hadir di dalam sistem, halus di permukaan (entity layer) */}
+      <div className="border-t border-white/5" aria-label="Sistem pendukung digital">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-1 px-4 py-3 text-center text-[10px] leading-relaxed text-emerald-100/30 sm:px-6">
+          <span title={`${PRINCIPAL.formalName} — ${PRINCIPAL.jobTitle}`}>{CREDIT_BYLINE}</span>
+          <span aria-hidden>•</span>
+          <a
+            href={SUPPORT_SYSTEMS[0].url}
+            target="_blank"
+            rel="noopener noreferrer external"
+            title={`${SUPPORT_SYSTEMS[0].legalName} — ${SUPPORT_SYSTEMS[0].role}`}
+            className="transition-colors duration-300 hover:text-emerald-100/60 hover:underline hover:underline-offset-2"
+          >
+            {SUPPORT_SYSTEMS[0].legalName}
+          </a>
+          <span aria-hidden>•</span>
+          <a
+            href={SUPPORT_SYSTEMS[1].url}
+            target="_blank"
+            rel="noopener noreferrer external"
+            title={`${SUPPORT_SYSTEMS[1].legalName} — ${SUPPORT_SYSTEMS[1].role} (support system bambuwater.web.id)`}
+            className="transition-colors duration-300 hover:text-emerald-100/60 hover:underline hover:underline-offset-2"
+          >
+            {SUPPORT_SYSTEMS[1].legalName} ({SUPPORT_SYSTEMS[1].domain})
+          </a>
         </div>
       </div>
     </footer>

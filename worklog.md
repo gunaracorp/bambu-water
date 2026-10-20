@@ -306,3 +306,24 @@ Stage Summary:
 - 30 bahasa aktif: id (default), en/zh full (ui+meta+body+data), 27 lainnya ui+meta (body/data fallback en)
 - Pipeline terjemahan berjalan background dengan resume; en.json terverifikasi bagus
 - Switcher di navbar + drawer; SEO hreflang/og/sitemap multi-bahasa lengkap
+
+---
+Task ID: 9
+Agent: Z.ai Code (main)
+Task: Stealth personal branding — entity layer Gugun Gunara + support system (permintaan: "sembunyikan saja tapi sebenarnya ada didalam sistem, jangan terlalu mencolok di permukaan"; nama naik di Google)
+
+Work Log:
+- Buat src/lib/branding.ts — pusat entity layer: PRINCIPAL (Gugun Gunara; formal H. Gugun Gunara, S.E.; alias Muhammad Lutfi Azmi/Prabu Danling/Prabudanling/Santri Angon/Gunzz Krenzz/Boss Danling/Gunara Corp; jobTitle "Master Polymath • Sage Universal • The Ultimate Problem Solver"; 6 sosmed: FB bossdanling, X gunzz_krenzz, IG prabudanling, TikTok gunaracorp, Threads prabudanling, Reddit prabudanling; knowsAbout 9 topik), SUPPORT_SYSTEMS (PT Top Konsultan Internasional/topkonsultan.web.id = konsultan strategi; PT Digital Bisnis Manajemen/digiman.id = Digital Support System situs ini), CREDIT_BYLINE, ENTITY_KEYWORDS (14 keyword)
+- json-ld.tsx — node Person @id .../#person/gugun-gunara (alternateName 7, sameAs 6 sosmed + 2 URL PT, worksFor #organization, knowsAbout); founder & employee graph BWN kini memakai principalRef (person @id + alias + sameAs); employee di-dedupe (Gugun sebelumnya duplikat 2x: pendiri + direktur); LocalBusiness + founder @id ref; 2 node Organization baru untuk kedua PT dengan founder @id ref → total 10 node JSON-LD/halaman
+- layout.tsx — authors: [PT BWN, Gugun Gunara (url topkonsultan.web.id)]; creator: PT Digital Bisnis Manajemen (digiman.id); publisher tetap PT BWN; keywords global += ENTITY_KEYWORDS; meta other += creator + owner: "H. Gugun Gunara, S.E."
+- app-shell.tsx — keywords dinamis per halaman kini digabung ENTITY_KEYWORDS sehingga nama principal & support system melekat di meta setiap halaman & setiap bahasa
+- footer.tsx — baris kredit mikro stealth di bar paling bawah (border-t border-white/5, text-[10px], opacity 30%): "by Gugun Gunara • PT Top Konsultan Internasional (link) • PT Digital Bisnis Manajemen (digiman.id) (link)" — dofollow + title attribute berisi role lengkap; bahasa-netral (tidak diterjemahkan)
+- Fix bug pre-existing: kontak.tsx duplicate React key "+62 813-1651-6524" (kartu WhatsApp & Telepon sama-sama key=c.value) → key unik `${c.value}-${i}`
+- Verifikasi agent-browser: 10 node JSON-LD ter-render (Person+Corporation+WebSite+LocalBusiness+3 Product+FAQPage+2 Organization), Person berisi 7 alias + 8 sameAs; meta author 2 tag, creator & owner benar; keywords entity=true di semua halaman (gugun/digiman/prabudanling/topkonsultan/santriAngon); founder kedua PT → @id person; i18n tetap sehat (switch id→en→id OK, H1 "Contact Us — Free Consultation" lalu kembali "Hubungi Kami — Konsultasi Gratis", lang/dir benar); kredit footer tampak halus di desktop & mobile (screenshot diverifikasi); 0 error console (duplicate-key hilang); lint 6 file CLEAN
+- Sosial media TIDAK dipasang di permukaan (sesuai permintaan sembunyi) — hanya di JSON-LD sameAs (lapisan tak kasat mata yang dibaca Google)
+
+Stage Summary:
+- Entity layer stealth selesai: nama & brand Gugun Gunara (dan semua alias), kedua PT pendukung, 6 profil sosial — tertanam penuh di JSON-LD + meta + keywords sitewide + 1 baris mikro footer; permukaan visual situs tetap bersih fokus Bambu Water Nusantara
+- File baru: src/lib/branding.ts; diubah: json-ld.tsx, layout.tsx, app-shell.tsx, footer.tsx, kontak.tsx (bugfix key)
+- Catatan SEO: person@id ↔ organization ↔ 2 venture saling tertaut via @id; rekomendasi lanjutan (di luar scope): pasang backlink/topkonsultan.web.id & digiman.id menautkan balik ke bambuwater.web.id, klaim Google Business Profile, dan konsistensi NAP agar Knowledge Graph terbentuk
+

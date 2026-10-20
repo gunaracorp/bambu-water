@@ -7,6 +7,7 @@ import { getPageMeta } from '@/lib/pages-registry';
 import { I18nProvider, useI18n, pageMeta } from '@/lib/i18n/context';
 import { localeMeta, localeUrl, LOCALES, type Locale } from '@/lib/i18n/config';
 import { SITE_URL, COMPANY } from '@/lib/company';
+import { ENTITY_KEYWORDS } from '@/lib/branding';
 
 import { JsonLd } from '@/components/site/json-ld';
 import { Navbar } from '@/components/site/navbar';
@@ -75,9 +76,11 @@ function Shell() {
     const tm = pageMeta(t, slug);
     const seoTitle = (tm.seoTitle as string) || metaId.seoTitle;
     const desc = (tm.metaDescription as string) || metaId.metaDescription;
-    const kw = Array.isArray(tm.keywords) && tm.keywords.length > 0
-      ? (tm.keywords as string[]).join(', ')
-      : (metaId.keywords ?? []).join(', ');
+    const kwBase = Array.isArray(tm.keywords) && tm.keywords.length > 0
+      ? (tm.keywords as string[])
+      : (metaId.keywords ?? []);
+    /* Entity layer: nama pemilik & support system melekat di meta setiap halaman */
+    const kw = [...kwBase, ...ENTITY_KEYWORDS].join(', ');
     const url = localeUrl(locale, slug, SITE_URL);
 
     setMeta('name', 'description', desc);
