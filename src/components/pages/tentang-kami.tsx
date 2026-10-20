@@ -8,6 +8,7 @@ import { Reveal, StaggerContainer, StaggerItem } from '@/components/site/reveal'
 import { Leadership } from '@/components/site/leadership';
 import { CtaBand } from '@/components/site/cta-band';
 import { useI18n } from '@/lib/i18n/context';
+import { useCurrentYear } from '@/hooks/use-current-year';
 import { COMPANY, BRAND_CLAIM, OFFICES, PRODUCTION_TEAM_NOTE } from '@/lib/company';
 
 const VALUE_ICONS = [Leaf, Factory, Truck, Users];
@@ -55,7 +56,7 @@ export function TentangKamiPage() {
   const values = Array.isArray(s.values) && s.values.length > 0 ? s.values : VALUES_FALLBACK;
   const milestones = Array.isArray(s.milestones) && s.milestones.length > 0 ? s.milestones : MILESTONES_FALLBACK;
   const legal = Array.isArray(s.legal) && s.legal.length > 0 ? s.legal : LEGAL_FALLBACK;
-  const years = new Date().getFullYear() - 2007;
+  const years = useCurrentYear() - 2007;
 
   return (
     <>
@@ -91,7 +92,7 @@ export function TentangKamiPage() {
                     <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{l.label}</p>
-                      <p className="mt-0.5 text-sm font-semibold text-foreground">{l.value.replace('{years}', String(years))}</p>
+                      <p suppressHydrationWarning className="mt-0.5 text-sm font-semibold text-foreground">{l.value.replace('{years}', String(years))}</p>
                     </div>
                   </div>
                 );

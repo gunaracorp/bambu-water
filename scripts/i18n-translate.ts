@@ -11,13 +11,23 @@
  * Jalankan: bun run scripts/i18n-translate.ts [locale...]   (tanpa arg = semua)
  */
 import ZAI from 'z-ai-web-dev-sdk';
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const ROOT = join(process.cwd(), 'src/lib/i18n/dictionaries');
-const TMP = join(ROOT, 'tmp');
+/** Partial progress DI LUAR src/ — menulis di dalam src/ memicu HMR Turbopack
+ * (full reload → mismatch hidrasi sesaat saat dev). Dot-dir di root aman watcher. */
+const TMP = join(process.cwd(), '.i18n-cache');
 const COMPILED = join(ROOT, 'compiled');
 mkdirSync(TMP, { recursive: true });
+
+/** Tulis atomik: file sementara lalu rename — watcher tidak pernah melihat
+ * JSON setengah jadi (mencegah "Unexpected token" saat HMR/reload). */
+function writeAtomic(path: string, data: string) {
+  const tmpPath = `${path}.${process.pid}.tmp`;
+  writeFileSync(tmpPath, data);
+  renameSync(tmpPath, path);
+}
 
 const idDict = JSON.parse(readFileSync(join(COMPILED, 'id.json'), 'utf8'));
 
@@ -187,6 +197,21 @@ async function translateLocale(locale: string, subset: any, batchSize = 45): Pro
   if (keys.length === 0) return null;
   const partialPath = join(TMP, `${locale}.partial.json`);
   const partial: Flat = existsSync(partialPath) ? JSON.parse(readFileSync(partialPath, 'utf8')) : {};
+  /* DE-POISON: nilai partial yang identik dengan sumber id = fallback gagal dari
+   * run lama (dulu id-fallback ditulis ke partial lalu dianggap "selesai").
+   * Hapus agar di-terjemahkan ulang. Brand/angka yang memang sama akan
+   * dikembalikan LLM apa adanya — hanya biaya kecil sekali per run. */
+  let dePoisoned = 0;
+  for (const k of Object.keys(partial)) {
+    if (partial[k] === flat[k]) {
+      delete partial[k];
+      dePoisoned++;
+    }
+  }
+  if (dePoisoned > 0) {
+    writeAtomic(partialPath, JSON.stringify(partial, null, 0));
+    console.log(`   🧹 de-poison ${dePoisoned} nilai id-fallback → diterjemahkan ulang`);
+  }
   const chunks = chunkObject(flat, batchSize);
   const batchHash = keys.length; // sederhana
   console.log(`🌐 [${locale}] ${LANG_NAMES[locale]} — ${keys.length} string, ${chunks.length} batch (partial: ${Object.keys(partial).length})`);
@@ -199,16 +224,16 @@ async function translateLocale(locale: string, subset: any, batchSize = 45): Pro
     }
     const result = await translateBatch(locale, LANG_NAMES[locale], chunk);
     Object.assign(partial, result);
-    writeFileSync(partialPath, JSON.stringify(partial, null, 0));
+    writeAtomic(partialPath, JSON.stringify(partial, null, 0));
     done++;
     console.log(`   ✓ batch ${done}/${chunks.length}`);
     /* Jeda antar-batch untuk menghindari rate-limit */
     await new Promise((r) => setTimeout(r, 10000));
   }
   void batchHash;
-  /* Pastikan key yang belum terisi diisi dari sumber id (fallback aman) */
-  for (const k of keys) if (!(k in partial) || !partial[k]) partial[k] = flat[k];
-  writeFileSync(partialPath, JSON.stringify(partial, null, 0));
+  /* Key gagal TIDAK ditulis ke partial (dulu menjadi poison — dianggap selesai
+   * padahal masih id). Merge main() mem-fallback ke id saat menulis compiled;
+   * run berikutnya otomatis mencoba ulang key yang hilang. */
   return partial;
 }
 
@@ -245,7 +270,7 @@ async function main() {
       return o;
     };
     const result = deepMerge(merged, overlay);
-    writeFileSync(outPath, JSON.stringify(result, null, 1));
+    writeAtomic(outPath, JSON.stringify(result, null, 1));
     const count = Object.keys(flatten(result)).length;
     console.log(`✅ compiled/${locale}.json — ${count} string${full ? ' (FULL: ui+meta+body+data)' : ' (ui+meta)'}`);
   }

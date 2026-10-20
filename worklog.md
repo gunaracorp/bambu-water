@@ -327,3 +327,26 @@ Stage Summary:
 - File baru: src/lib/branding.ts; diubah: json-ld.tsx, layout.tsx, app-shell.tsx, footer.tsx, kontak.tsx (bugfix key)
 - Catatan SEO: person@id ↔ organization ↔ 2 venture saling tertaut via @id; rekomendasi lanjutan (di luar scope): pasang backlink/topkonsultan.web.id & digiman.id menautkan balik ke bambuwater.web.id, klaim Google Business Profile, dan konsistensi NAP agar Knowledge Graph terbentuk
 
+
+---
+Task ID: 10
+Agent: Z.ai Code (main)
+Task: (a) Diagnosa & root-cause fix error hidrasi switcher bahasa (paste user) + (b) buat README.md "super design full animasi full SEO standard internasional id/en god mode tier max" (perintah terakhir user)
+
+Work Log:
+- Baca upload user (paste error): hydration mismatch radix useId `radix-_R_7iindlb_` vs `radix-_R_uaindlb_` pada DropdownMenuTrigger "Bahasa aktif: ..." — pola sama dengan kasus Task 6 (drift posisi tree saat hidrasi).
+- Reproduksi empiris agent-browser: fresh load `/`, `#/en/faq`, `#/ar/kontak`, reload — SEMUA 0 error → bug tidak ada di jalur hidrasi app, melainkan artifact dev: pipeline `scripts/i18n-translate.ts` (PID 29045, start 17:59) menulis `compiled/*.json` + partial DI DALAM `src/lib/i18n/dictionaries/tmp/` saat browser hidup → Turbopack HMR full-reload → mismatch sesaat (persis catatan Task 8).
+- Hardening pipeline (root-cause): (1) tulis atomik `writeAtomic()` (tmp + renameSync) di i18n-translate.ts & i18n-compile.ts → watcher tak pernah lihat JSON setengah jadi; (2) partial dipindah ke `.i18n-cache/` (di luar src/, dot-dir) → tidak memicu HMR lagi; (3) partial lama dikopi ke lokasi baru (resume aman).
+- Hardening hidrasi app: `new Date()` saat render (footer.tsx, about.tsx, tentang-kami.tsx) → hook baru `useCurrentYear()` berbasis useSyncExternalStore (getServerSnapshot=tahun modul; interval 60 dtk menangkap pergantian tahun) + `suppressHydrationWarning` pada node teks tahun; fix nested `<p>` yang sempat terbentuk di footer.
+- FIX BUG FUNGSIONAL BARU (ditemukan saat E2E): switch balik EN→id MACET di beranda. Akar: `setGlobalLocale` di context.tsx meng-reimplement parser hash inline — hash locale-only `#/en` dianggap slug 'en' → target = `#/en` (no-op). Fix: pakai `parseHash`+`buildHash` bersama dari config.ts (+ guard `'#'` vs `''`). Satu sumber kebenaran parsing.
+- FIX KUALITAS KAMUS: ja.json dll berisi nilai id-fallback dari run lama (id-fill ditulis ke partial → dianggap selesai). Pipeline baru: de-poison otomatis saat load (nilai partial === sumber id → hapus → diterjemahkan ulang; zh: 329 nilai dipulihkan) + key gagal TIDAK lagi ditulis ke partial.
+- Pipeline direstart dengan kode baru (nohup → /tmp/i18n-translate3.log) — jalan background, resume + retry 429 otomatis, tulis atomik.
+- README.md dibuat dari nol (belum ada): bilingual penuh 🇮🇩 Indonesia + 🇬🇧 English, header center + 13 shields.io badge, hero image, tabel fitur, diagram arsitektur ASCII, routing hash contoh, tabel SEO internasional (meta/canonical/hreflang/OG/JSON-LD/sitemap/entity/geo), grid 30 bahasa + cakupan, inventaris animasi, peta situs 25 halaman, bisnis & kontak (WA +62 813-1651-6524, Sejak 2007 Terbesar & Pertama), quick start, struktur proyek, pola engineering hidrasi-aman.
+- Verifikasi akhir: lint CLEAN (semua file tersentuh); browser: fresh load id/en/ar 0 error; switch id→en→id E2E PASS (title/lang/H1/hash benar); faq→zh PASS (#/zh/faq, title 中文); ja lazy-load PASS (0 error); RTL ar PASS (dir=rtl, layout mirror benar — screenshot); mobile iPhone 14 PASS (switcher Globe tampak, hero utuh, footer ada); dev.log bersih.
+
+Stage Summary:
+- Error hidrasi yang di-paste user = artifact dev pipeline (bukan bug app) — akarnya dibereskan permanen: tulis atomik + partial di luar src/ + de-poison; app kini bebas pemicu HMR-mismatch dari pipeline.
+- 1 bug fungsional nyata ditemukan & diperbaiki: switch balik ke Bahasa Indonesia macet di hash locale-only (#/en) — kini id↔en↔zh↔ja dua arah mulus (terverifikasi browser).
+- README.md god-mode tier-max selesai: bilingual id/en, super design, dokumentasi lengkap animasi + SEO internasional + 30 bahasa + business.
+- File baru: README.md, src/hooks/use-current-year.ts, .i18n-cache/; diubah: scripts/i18n-translate.ts, scripts/i18n-compile.ts, src/lib/i18n/context.tsx, footer.tsx, about.tsx, tentang-kami.tsx.
+- Pipeline terjemahan 27 bahasa lanjut di background (atomic, resume-able, self-healing) — update compiled/*.json per locale selesai; dev-only HMR refresh mungkin terlihat sekali per locale tapi TANPA risiko JSON rusak.

@@ -9,12 +9,19 @@
  *
  * Jalankan: bun run scripts/i18n-compile.ts
  */
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, renameSync, existsSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { PAGES_META, NAV_GROUPS } from '../src/lib/pages-registry';
 
 const ROOT = join(process.cwd(), 'src/lib/i18n/dictionaries');
 const read = (p: string) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null);
+
+/** Tulis atomik — watcher (Turbopack) tidak pernah melihat JSON setengah jadi. */
+function writeAtomic(path: string, data: string) {
+  const tmpPath = `${path}.${process.pid}.tmp`;
+  writeFileSync(tmpPath, data);
+  renameSync(tmpPath, path);
+}
 
 function deepMerge(base: any, overlay: any): any {
   if (overlay === undefined || overlay === null) return base;
@@ -87,12 +94,12 @@ if (existsSync(dataPartsDir)) {
 
 const id = { ui, pages, data };
 
-writeFileSync(join(ROOT, 'compiled', 'id.json'), JSON.stringify(id, null, 1));
+writeAtomic(join(ROOT, 'compiled', 'id.json'), JSON.stringify(id, null, 1));
 
 /* en/zh stub agar import statis app tidak gagal sebelum terjemahan siap */
 for (const loc of ['en', 'zh']) {
   const p = join(ROOT, 'compiled', `${loc}.json`);
-  if (!existsSync(p)) writeFileSync(p, JSON.stringify({}, null, 1));
+  if (!existsSync(p)) writeAtomic(p, JSON.stringify({}, null, 1));
 }
 
 /* ===== Laporan ===== */

@@ -4,6 +4,7 @@ import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin, ArrowUpRight, Messa
 import { COMPANY, OFFICES, waLink } from '@/lib/company';
 import { PRINCIPAL, SUPPORT_SYSTEMS, CREDIT_BYLINE } from '@/lib/branding';
 import { useI18n } from '@/lib/i18n/context';
+import { useCurrentYear } from '@/hooks/use-current-year';
 import { Logo } from './logo';
 
 type FooterLink = { slug: string; href: string; label: string };
@@ -66,7 +67,7 @@ export function Footer() {
   const { t } = useI18n();
   const s = t.ui.footer;
   const common = t.ui.common;
-  const year = new Date().getFullYear();
+  const year = useCurrentYear();
 
   /* Label aktif dari dictionary (t.pages[slug].navLabel / articleLinks); fallback label id */
   const resolveLabel = (colKey: string, slug: string, index: number, fallback: string): string => {
@@ -207,7 +208,7 @@ export function Footer() {
       {/* Bar bawah */}
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-center text-xs text-emerald-100/60 sm:px-6 md:flex-row md:text-left">
-          <p>
+          <p suppressHydrationWarning>
             © {year} {COMPANY.legalName} • {COMPANY.domain}. {common.copyright}
           </p>
           <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">

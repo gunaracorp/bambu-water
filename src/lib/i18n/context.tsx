@@ -9,7 +9,7 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from 'react';
-import { DEFAULT_LOCALE, LOCALES, localeMeta, type Locale } from './config';
+import { DEFAULT_LOCALE, LOCALES, localeMeta, parseHash, buildHash, type Locale } from './config';
 
 /** Dictionary longgar — bentuk mengikuti compiled/id.json */
 export type Dictionary = any;
@@ -105,15 +105,14 @@ export function useLocale(): Locale {
   return useSyncExternalStore(subscribeLocale, getLocaleSnapshot, getLocaleServer);
 }
 
-/** Ganti bahasa global — menulis hash dengan prefix locale, slug dipertahankan */
+/** Ganti bahasa global — menulis hash dengan prefix locale, slug dipertahankan.
+ * WAJIB lewat parseHash/buildHash bersama (config.ts) — parser inline terbukti
+ * gagal untuk hash locale-only (#/en) yang membuat switch balik ke id macet. */
 export function setGlobalLocale(next: Locale) {
   if (typeof window === 'undefined') return;
-  const raw = window.location.hash.replace(/^#\/?/, '').trim();
-  const segs = raw.split('/').filter(Boolean);
-  if (segs.length > 1 && LOCALES.some((l) => l.code === segs[0])) segs.shift();
-  const slug = segs.join('/') || 'beranda';
-  const target = next === DEFAULT_LOCALE ? (slug === 'beranda' ? '#/' : `#/${slug}`) : `#/${next}/${slug === 'beranda' ? '' : slug}`.replace(/\/$/, '');
-  if (window.location.hash === target) {
+  const { slug } = parseHash(window.location.hash);
+  const target = buildHash(next, slug);
+  if (window.location.hash === target || (target === '#' && window.location.hash === '')) {
     listeners.forEach((fn) => fn());
   } else {
     window.location.hash = target;

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Eye, Target, HeartHandshake, ShieldCheck, Scale, MapPin } from 'lucide-react';
 import { COMPANY } from '@/lib/company';
 import { useI18n } from '@/lib/i18n/context';
+import { useCurrentYear } from '@/hooks/use-current-year';
 import { Reveal, StaggerContainer, StaggerItem } from './reveal';
 import { SectionHeading } from './section-heading';
 
@@ -39,7 +40,7 @@ export function About() {
     Array.isArray(t.data?.about?.values) && t.data.about.values.length > 0
       ? t.data.about.values
       : VALUES;
-  const years = new Date().getFullYear() - 2007;
+  const years = useCurrentYear() - 2007;
 
   return (
     <section id="tentang" className="relative overflow-hidden py-24 sm:py-28" aria-label={s.ariaLabel}>
@@ -92,7 +93,7 @@ export function About() {
               <p className="text-xs font-semibold uppercase tracking-wider text-bamboo">{s.expLabel}</p>
               <p className="mt-1 font-serif text-lg font-bold text-foreground">{s.expSince}</p>
               <p className="font-serif text-2xl font-bold text-primary">{s.expHighlight}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{s.expYears.replace('{years}', String(years))}</p>
+              <p suppressHydrationWarning className="mt-1 text-xs text-muted-foreground">{s.expYears.replace('{years}', String(years))}</p>
             </motion.div>
           </Reveal>
 
