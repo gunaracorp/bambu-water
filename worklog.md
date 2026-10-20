@@ -137,3 +137,21 @@ Stage Summary:
 - Dewan Pendiri resmi berisi 2 pendiri: Ko Abuy & H. Gugun Gunara, S.E
 - Gugun Gunara tampil ganda sesuai struktur: Dewan Pendiri + Direktur Utama (25%)
 - SEO: schema.org founder memuat kedua pendiri
+
+---
+Task ID: 6
+Agent: Z.ai Code (main)
+Task: Fix hydration error "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties" (radix ids mismatch di Faq accordion + Select kontak, halaman beranda)
+
+Work Log:
+- Diagnosa paste error user: hanya atribut hasil useId radix (aria-controls/id/aria-labelledby) yang beda antara server vs client → render hidrasi berbeda dari SSR.
+- Root cause ditemukan di framer-motion: useReducedMotion → initPrefersReducedMotion() (motion-dom) membaca window.matchMedia("(prefers-reduced-motion)") SECARA SINKRON saat render pertama client; server selalu null. User dengan setting OS reduce-motion (hemat baterai Android, Windows animation effects off, macOS Reduce Motion) → render hidrasi ≠ SSR → hydration mismatch.
+- Fix: hook baru src/hooks/use-prefers-reduced-motion.ts (useSyncExternalStore; getServerSnapshot=false sehingga render hidrasi selalu identik dengan SSR; sinkron ke nilai asli setelah hidrasi). reveal.tsx (Reveal + StaggerItem) kini memakai hook ini, bukan useReducedMotion framer-motion.
+- Verifikasi empiris: simulasi client reduce-motion (getSnapshot=true sementara) → beranda/faq/kontak CLEAN; kembali ke snapshot asli.
+- Sweep 25/25 halaman fresh-load: 0 hydration error. Animasi framer-motion tetap jalan (motion styles present), accordion expand OK, lint bersih, dev.log tanpa error.
+- Catatan tambahan: variasi error yang sama (radix id bergeser) juga bisa muncul sesaat saat reload bersamaan dengan recompile dev server (HTML lama vs bundle baru) — sifatnya transient khusus dev, hilang dengan refresh, tidak ada di production build.
+
+Stage Summary:
+- Sumber hydration mismatch deterministik dihilangkan: useReducedMotion framer-motion diganti hook aman-hidrasi sendiri.
+- 25/25 halaman terverifikasi bebas hydration error; interaksi & animasi tetap normal.
+- File baru: src/hooks/use-prefers-reduced-motion.ts; reveal.tsx diubah.

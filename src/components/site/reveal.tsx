@@ -1,7 +1,8 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
+import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none';
 
@@ -35,7 +36,7 @@ export function Reveal({
   className?: string;
   once?: boolean;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const o = reduce ? {} : offset(direction);
 
   return (
@@ -87,7 +88,7 @@ export function StaggerItem({
   className?: string;
   direction?: Direction;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const o = reduce ? {} : offset(direction, 36);
 
   return (
