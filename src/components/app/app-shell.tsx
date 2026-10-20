@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useHashRoute, setMeta, setCanonical, setHreflang } from '@/hooks/use-hash-route';
+import { getPageMeta } from '@/lib/pages-registry';
 import { I18nProvider, useI18n, pageMeta } from '@/lib/i18n/context';
 import { localeMeta, localeUrl, LOCALES, type Locale } from '@/lib/i18n/config';
 import { SITE_URL, COMPANY } from '@/lib/company';
@@ -164,17 +165,17 @@ function Shell() {
       <Navbar activeSlug={slug} />
 
       <main className="flex-1" id="konten-utama">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${locale}|${slug}`}
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.45, ease: [0.21, 0.47, 0.32, 0.98] }}
-          >
-            {renderPage()}
-          </motion.div>
-        </AnimatePresence>
+        {/* TANPA AnimatePresence mode="wait" — navigasi cepat bisa membuat exit
+         * animation macet dan membekukan seluruh subtree halaman. Enter animation
+         * saja: halaman lama langsung diganti, halaman baru fade+slide masuk. */}
+        <motion.div
+          key={`${locale}|${slug}`}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          {renderPage()}
+        </motion.div>
       </main>
 
       <Footer />

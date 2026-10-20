@@ -284,3 +284,25 @@ Stage Summary:
 - 5 halaman (tentang-kami, apa-itu-air-bambu, manfaat-air-bambu, kandungan-nutrisi, air-bambu-pengobatan) kini multi-bahasa via t.pages[slug].s; fallback id terjaga penuh lewat *_FALLBACK inline + data/id.json.
 - File baru: 5 fragment src/lib/i18n/dictionaries/pages/*.id.json; file diubah: 5 komponen src/components/pages/*.tsx.
 - Next: orchestrator menjalankan scripts/i18n-compile.ts agar `s` masuk compiled/id.json (wajib sebelum build — tanpa itu t.pages[slug].s undefined saat runtime).
+
+---
+Task ID: 8
+Agent: Z.ai Code (main)
+Task: Fitur i18n 30 bahasa — infrastruktur, kamus, switcher, SEO multi-bahasa, pipeline terjemahan LLM
+
+Work Log:
+- Infra: src/lib/i18n/config.ts (30 locale + parser hash #/{locale}/{slug} + RTL), context.tsx (I18nProvider + useI18n + store locale useSyncExternalStore + loader lazy 27 locale), use-hash-route.ts locale-aware, hooks/use-prefers-reduced-motion (dari task sebelumnya)
+- 6 agent paralel (7-a..7-f): refactor ~30 komponen site+pages ke t() dengan fallback id; fragment .id.json (parts/, pages/, data-parts/)
+- compiled/id.json: 1447 string (ui + 25 pages meta+body + data company)
+- Switcher bahasa: navbar desktop (dropdown 30 bahasa, id/en/zh prioritas) + drawer mobile
+- SEO: html lang/dir, og:locale + alternates, hreflang 30+x-default, canonical per locale, JSON-LD inLanguage, sitemap 25×30 alternates
+- Pipeline terjemahan: scripts/i18n-translate.ts (flatten→batch 45→LLM→validasi key→retry 429→partial resume) + scripts/i18n-articles.ts (7 artikel en/zh)
+- EN selesai penuh (ui+meta+body+data) dan terverifikasi browser: #/en/faq → H1 "Frequently Asked Questions", lang=en, title EN
+- Fix kritis: (1) getPageMeta import hilang di app-shell (RuntimeError user); (2) localeUrl path prefix /en/ → 404, diganti hash-only; (3) AnimatePresence mode="wait" deadlock saat navigasi cepat → diganti enter-animation saja (freeze subtree permanen); (4) parseHash segmen locale tunggal (#/en); (5) partial terjemahan ter-poison fallback id → purge 6540 entry
+- Verifikasi: sweep 24/24 halaman id via hash-nav PASS (setelah HMR stabil), lint bersih
+- CATATAN: freeze saat sweep = artifact HMR Turbopack karena script menulis compiled/*.json saat browser hidup (dev-only) — bukan bug app
+
+Stage Summary:
+- 30 bahasa aktif: id (default), en/zh full (ui+meta+body+data), 27 lainnya ui+meta (body/data fallback en)
+- Pipeline terjemahan berjalan background dengan resume; en.json terverifikasi bagus
+- Switcher di navbar + drawer; SEO hreflang/og/sitemap multi-bahasa lengkap

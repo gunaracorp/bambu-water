@@ -322,8 +322,8 @@
    "ariaLabel": "Call to action",
    "title": "Ready to Experience the Benefits of Bamboo Water?",
    "description": "Free consultation with our team — for family therapy needs, wholesale, to mass bamboo cargo to your city.",
-   "legal": "Official legal entity",
-   "chatCta": "WhatsApp Chat",
+   "legal": "Legal entity",
+   "chatCta": "Chat WhatsApp",
    "formCta": "Fill Form"
   },
   "productTemplate": {
@@ -344,14 +344,14 @@
  "pages": {
   "beranda": {
    "navLabel": "Home",
-   "seoTitle": "Bambu Water Nusantara — Natural Medicinal Bamboo Water Therapy & Nationwide Bamboo Distribution",
-   "metaDescription": "Manufacturer of bamboo distilled water and medicinal bamboo water for natural healing. Quality bamboo distribution in bulk to all cities in Indonesia. WA 0813-1651-6524.",
+   "seoTitle": "Bambu Water Nusantara — Natural Bamboo Water Therapy & Bamboo Distribution Across Indonesia",
+   "metaDescription": "Manufacturer of distilled bamboo water & medicinal bamboo water for natural healing. Quality bamboo distribution in bulk to all cities in Indonesia. WA 0813-1651-6524.",
    "h1": "Pure Bamboo Extract for Health From Within",
    "eyebrow": "PT Bambu Water Nusantara — bambuwater.web.id",
-   "intro": "Selected bamboo drinking water for medicine & natural health therapy, and quality bamboo in large quantities — delivered throughout Indonesia.",
+   "intro": "Selected bamboo drinking water for medicine & natural health therapy, as well as quality bamboo in large quantities — shipped throughout Indonesia.",
    "keywords": [
     "bamboo water",
-    "medicinal bamboo water",
+    "bamboo water for medicine",
     "bamboo water therapy",
     "distilled bamboo water",
     "bamboo distribution indonesia",
@@ -361,24 +361,24 @@
   },
   "tentang-kami": {
    "navLabel": "About Us",
-   "seoTitle": "About Us — PT Bambu Water Nusantara, Trusted Official Legal Entity",
-   "metaDescription": "Get to know PT Bambu Water Nusantara: company profile, vision and mission, legal establishment deed, leadership structure, and our quality commitment.",
+   "seoTitle": "About Us — PT Bambu Water Nusantara, Trusted Legal Entity",
+   "metaDescription": "Get to know PT Bambu Water Nusantara: company profile, vision mission, legal establishment certificate, leadership structure, and our quality commitment.",
    "h1": "About PT Bambu Water Nusantara",
    "eyebrow": "Company Profile",
-   "intro": "An official legal entity company that brings quality bamboo therapy water and premium Nusantara bamboo — from regulated community forests to your home.",
+   "intro": "A legal entity company that provides quality bamboo therapy water and premium Nusantara bamboo — from regulated community forests to your home.",
    "keywords": [
     "about bambu water nusantara",
     "PT Bambu Water Nusantara",
     "bamboo water company profile",
-    "PT bambu water legality",
+    "PT bambu water legalitas",
     "bamboo water legal entity"
    ],
-   "menuDesc": "Profile, vision mission & legality",
+   "menuDesc": "Profile, vision mission & legalitas",
    "s": {
-    "story_title": "18+ Years Bringing",
+    "story_title": "18+ Years Delivering",
     "story_highlight": "Nusantara Bamboo Extract",
     "story_title_end": "for Health",
-    "p1_a": "PT Bambu Water Nusantara (BWN) is a company providing bamboo water for natural healing and therapy medicine —",
+    "p1_a": "PT Bambu Water Nusantara (BWN) is a company providing bamboo water for natural health therapy and medicine —",
     "p1_strong": "the first and largest in Indonesia since 2007",
     "p1_b": ". We harvest young bamboo sap from regulated community bamboo forests, purify it through hygienic distillation, and deliver it to homes, therapy clinics, and distributor partners across the archipelago.",
     "p2_a": "More than just a drink, bamboo water is a heritage ancestral remedy now supported by modern scientific research. Alongside bamboo water, we also provide",
@@ -1619,26 +1619,26 @@
    "metaDescription": "Real customer stories from Bambu Water Nusantara: healthy families, trusted therapists, and distributor partners across Indonesia.",
    "h1": "Customer Testimonials",
    "eyebrow": "Real Stories",
-   "intro": "From family kitchens to therapy clinics — here are their stories of experiencing the benefits of BWN bamboo water.",
+   "intro": "From family kitchens to therapy clinics — here are the stories of those who have experienced the benefits of BWN bamboo water.",
    "keywords": [
-    "bamboo water testimonial",
-    "bamboo water review",
+    "bamboo water testimonials",
+    "bamboo water reviews",
     "drinking bamboo water experience",
-    "bambu water nusantara testimonial"
+    "bambu water nusantara testimonials"
    ],
    "menuDesc": "Customer stories",
    "s": {
     "headingEyebrow": "Trusted Since 2007",
-    "headingTitle": "Stories of Those Who Have",
+    "headingTitle": "Stories from Those Who Have",
     "headingHighlight": "Experienced It",
     "headingDescription": "From family kitchens to clinics and construction projects — 18+ years building trust across Indonesia.",
     "ratingAria": "Rating {n} out of 5 stars",
     "verified": "Verified customer",
-    "statYearsLabel": "Years serving since 2007",
-    "statProvincesLabel": "Provinces covered",
+    "statYearsLabel": "Years of service since 2007",
+    "statProvincesLabel": "Provinces reached",
     "statSatisfactionLabel": "Average customer satisfaction",
     "ctaTitle": "Join Thousands of Satisfied Customers",
-    "ctaDescription": "From one gallon for your family to supply contracts for your business."
+    "ctaDescription": "From a gallon for your family, to supply contracts for your business."
    }
   },
   "faq": {
@@ -1647,7 +1647,7 @@
    "metaDescription": "Complete answers to common questions: what is bamboo water, daily safety, product differences, how to order wholesale, delivery, and company legality.",
    "h1": "Frequently Asked Questions",
    "eyebrow": "Help & Info",
-   "intro": "All your questions about bamboo water, products, ordering, and delivery — answered comprehensively in one page.",
+   "intro": "All questions about bamboo water, products, ordering, and delivery — answered completely on one page.",
    "keywords": [
     "bamboo water faq",
     "bamboo water questions",
@@ -1661,8 +1661,8 @@
     "headingTitle": "Everything You Want to",
     "headingHighlight": "Ask",
     "headingDescription": "Curated from thousands of WhatsApp conversations with customers across Indonesia.",
-    "unansweredTitle": "Your Question Not Answered?",
-    "unansweredDesc": "Our team is ready to answer — free consultation, no purchase obligation.",
+    "unansweredTitle": "Your Question Unanswered?",
+    "unansweredDesc": "Our team is ready to answer — free consultation, no purchase pressure.",
     "askWa": "Ask via WhatsApp"
    }
   },
@@ -1672,9 +1672,9 @@
    "metaDescription": "Contact PT Bambu Water Nusantara: WhatsApp 0813-1651-6524, email, order form. Free consultation for therapy & wholesale needs.",
    "h1": "Contact Us — Free Consultation",
    "eyebrow": "Contact & Ordering",
-   "intro": "Our team is ready to assist with family therapy needs to mass distribution contracts. Quick response during business hours.",
+   "intro": "Our team is ready to help with family therapy needs to mass distribution contracts. Quick response during business hours.",
    "keywords": [
-    "contact bambu water nusantara",
+    "bambu water nusantara contact",
     "wa bamboo water",
     "whatsapp bamboo water",
     "order bamboo water",
@@ -1697,7 +1697,7 @@
      },
      {
       "title": "Sales Email",
-      "note": "Wholesale, cargo & contract offers"
+      "note": "Wholesale offers, cargo & contracts"
      }
     ],
     "identityTitle": "Company Identity",
@@ -1911,9 +1911,9 @@
    {
     "name": "Air Express",
     "area": "Maluku, Papua & NTT",
-    "eta": "2–5 business days",
+    "eta": "2–5 working days",
     "icon": "plane",
-    "description": "Air freight for eastern Indonesia — fresh to your destination.",
+    "description": "Air delivery for eastern Indonesia — fresh to destination.",
     "features": [
      "Flight priority",
      "Optional cold-pack",
@@ -1934,7 +1934,7 @@
    },
    {
     "suffix": "%",
-    "label": "Organic silica content in bamboo leaf extract",
+    "label": "Organic silica content of bamboo leaf extract",
     "prefix": ""
    },
    {
@@ -1946,7 +1946,7 @@
   "nutrition": [
    {
     "name": "Organic Silica",
-    "note": "Bamboo leaf extract contains up to 70% silica — highest in nature"
+    "note": "Bamboo leaf extract up to 70% silica — highest in nature"
    },
    {
     "name": "Flavonoids & Polyphenols",
@@ -1954,7 +1954,7 @@
    },
    {
     "name": "Natural Chlorophyll",
-    "note": "Supports cell detoxification and regeneration"
+    "note": "Supports detoxification and cell regeneration"
    },
    {
     "name": "Essential Amino Acids",
@@ -2003,13 +2003,13 @@
      "product": "5 L Jerigen",
      "price": "Rp 85,000",
      "unit": "per jerigen",
-     "note": "Fresh daily supply"
+     "note": "Daily fresh sadapan"
     },
     {
      "product": "10 L Jerigen",
      "price": "Rp 160,000",
      "unit": "per jerigen",
-     "note": "Fresh daily supply"
+     "note": "Daily fresh sadapan"
     },
     {
      "product": "30 L Drum",

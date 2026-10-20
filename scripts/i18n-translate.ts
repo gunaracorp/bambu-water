@@ -156,9 +156,9 @@ async function translateBatch(
     return out;
   } catch (err) {
     const msg = (err as Error).message ?? '';
-    /* 429 rate-limit → tunggu lebih lama */
-    if (msg.includes('429') && attempt <= 6) {
-      const wait = 20000 * attempt;
+    /* 429 rate-limit → tunggu lebih lama (maks 8 percobaan) */
+    if (msg.includes('429') && attempt <= 8) {
+      const wait = Math.min(30000 * attempt, 120000);
       console.log(`   ⏳ 429 rate-limit — tunggu ${wait / 1000}s (percobaan ${attempt})`);
       await new Promise((r) => setTimeout(r, wait));
       return translateBatch(lang, langName, batch, attempt + 1);
@@ -181,7 +181,7 @@ function chunkObject(obj: Flat, size: number): Flat[] {
   return chunks;
 }
 
-async function translateLocale(locale: string, subset: any, batchSize = 60): Promise<Flat | null> {
+async function translateLocale(locale: string, subset: any, batchSize = 45): Promise<Flat | null> {
   const flat = flatten(subset);
   const keys = Object.keys(flat);
   if (keys.length === 0) return null;
@@ -203,7 +203,7 @@ async function translateLocale(locale: string, subset: any, batchSize = 60): Pro
     done++;
     console.log(`   ✓ batch ${done}/${chunks.length}`);
     /* Jeda antar-batch untuk menghindari rate-limit */
-    await new Promise((r) => setTimeout(r, 2500));
+    await new Promise((r) => setTimeout(r, 10000));
   }
   void batchHash;
   /* Pastikan key yang belum terisi diisi dari sumber id (fallback aman) */
@@ -215,7 +215,8 @@ async function translateLocale(locale: string, subset: any, batchSize = 60): Pro
 async function main() {
   const args = process.argv.slice(2);
   const targets = args.length > 0 ? args : ALL_LOCALES;
-  const order = ['en', 'zh', ...ALL_LOCALES.filter((l) => !['en', 'zh'].includes(l))];
+  /* zh diprioritaskan (bahasa priority #3), lalu sisanya */
+  const order = ['zh', ...ALL_LOCALES.filter((l) => l !== 'zh')];
   const list = order.filter((l) => targets.includes(l));
 
   for (const locale of list) {
