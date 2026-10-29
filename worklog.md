@@ -214,3 +214,9 @@ Stage Summary:
 
 ### ⚠️ Catatan keamanan untuk pemilik
 - Token GitHub dibagikan via chat plaintext — **segera revoke/regenerate** setelah push selesai (Settings → Developer settings → Tokens).
+
+### 📤 Bukti Push (G6)
+- Remote lama ternyata MIRROR KOTOR: berisi `db/` (PII), `.zscripts/`, `download/`, history UUID + commit "Replace repository with latest local project" (prabudanling) → **force push** commit bersih `deab182` menggantikannya (9b699b5...deab182 forced update).
+- Verifikasi API: commit terakhir = deab182 (281 file) ✅ · root bersih tanpa db/.zscripts/download/.env/zip ✅ · `php-cms/` utuh (9 entri: index, admin-cms, config, lib/, templates/, data/, assets/, .htaccess, README) ✅
+- Repo di poles: description "🌿 Air Bambu Nusantara — Next.js 16 + PHP Full CMS "Kembar Abadi"…" + homepage bambuwater.web.id + topics (bamboo-water, php-cms, nextjs, indonesia, herbal, sqlite, cms) ✅
+- Remote origin (tanpa token) terpasang: https://github.com/gunaracorp/bambu-water.git
