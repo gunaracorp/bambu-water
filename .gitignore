@@ -62,3 +62,6 @@ server.log
 *.zip
 /.zscripts/
 /research/*.png
+
+# artefak scaffold (dibuat ulang platform) — jangan commit
+/download/
