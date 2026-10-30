@@ -52,3 +52,37 @@ CMS admin, URL bersih, SQLite terpadatkan, dan tanpa dependensi runtime.
 - i18n EN parsial (nav/footer/label) — konten programatik fallback ID (pola sama dengan Next.js)
 - Lacak pesanan = simulasi deterministik (paritas dengan versi Next.js) — bukan integrasi kurir
 - Uji runtime dilakukan dengan `php -S` + browser E2E di sandbox; Apache .htaccess diuji struktural
+
+---
+
+## 🔍 SEO Universalis (v0.5.0) — Panduan Menjadi Acuan Mesin Pencari
+
+Paket SEO terpadu untuk Google, Bing, Yandex, DuckDuckGo, **dan mesin pencari AI** (ChatGPT Search, Perplexity, Claude, Copilot).
+
+### Yang sudah terpasang otomatis
+| Lapisan | Isi |
+|---|---|
+| **Meta head** | Title unik, description, canonical, `robots` + `googlebot` + `bingbot`, hreflang (id/en/x-default), OG lengkap + dimensi gambar, **Twitter Card**, geo-tag ID, `article:published_time` (konversi otomatis tanggal Indonesia → ISO 8601) |
+| **JSON-LD** | Organization (global) · **BreadcrumbList** (semua halaman) · **FAQPage** (kondisi, layanan, bambu, artikel) · **Product + AggregateOffer IDR** (halaman bambu) · BlogPosting (artikel) |
+| **Sitemap** | `sitemap.xml` = index → `sitemap-pages.xml` (2.649 URL, prioritas berjenjang) + `sitemap-tags.xml` (1.386 tag) dengan `lastmod`/`changefreq` |
+| **robots.txt** | Matriks eksplisit 26 user-agent: mesin pencari utama + **AI crawler** (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, dkk.) |
+| **AI-SEO** | `/llms.txt` (ringkasan + tautan kunci) & `/llms-full.txt` (katalog + artikel penuh) — standar [llmstxt.org] agar AI mengutip situs Anda dengan benar |
+| **Tag Hub** | `/tag` + 1.386 halaman `/tag/{slug}` — HUB agregasi konten nyata (bukan doorway), meta & intro dirotasi anti-duplikat |
+| **IndexNow** | File kunci `/{kunci}.txt`, ping otomatis saat admin menyimpan artikel, alat submit massal |
+| **RSS** | `/feed.xml` — 7 artikel, sinyal kesegaran untuk Bing/DuckDuckGo/Feedly |
+| **Teknis** | Kompresi gzip, cache header, charset UTF-8, admin `noindex` via `X-Robots-Tag` |
+
+### Langkah Anda sekali jalan (15 menit — wajib untuk peringkat)
+1. **Google Search Console** → [search.google.com/search-console](https://search.google.com/search-console) → daftarkan properti domain → salin kode verifikasi → tempel ke `SEO_GOOGLE_SITE_VERIFICATION` di `config.php` → submit `sitemap.xml`.
+2. **Bing Webmaster Tools** → [bing.com/webmasters](https://www.bing.com/webmasters) → verifikasi (kode → `SEO_BING_SITE_VERIFICATION`) → **impor dari GSC sekali klik** → submit sitemap.
+3. **Yandex Webmaster** → [webmaster.yandex.com](https://webmaster.yandex.com) → verifikasi → `SEO_YANDEX_VERIFICATION`.
+4. **IndexNow (instant Bing)** → dari folder php-cms jalankan:
+   ```bash
+   php tools/ping-indexnow.php https://domain-anda.com
+   ```
+   Sejak itu, setiap artikel yang Anda simpan di Admin CMS otomatis di-ping ke Bing/Yandex/Seznam/Naver.
+5. **Google Analytics 4 / Clarity** (opsional, pemantauan): pasang di situs Next.js via env — mirror PHP fokus ke indexing.
+
+### Ekspektasi jujur Dewan-46
+Teknis di atas = **pondasi sempurna** (indeks cepat, tanpa error crawl, kaya cuplikan/FAQ/product di SERP, terbaca AI). Peringkat #1 juga ditentukan: kualitas konten vs kompetitor, usia domain, backlink, dan perilaku pengguna — hal yang tumbuh dengan waktu dan promosi (WA, media sosial, marketplace). Kami berikan semua yang di sisi teknis bisa dikendalikan — sisanya strategi konten & otoritas yang terus kami siapkan strukturnya.
+

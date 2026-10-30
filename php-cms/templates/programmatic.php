@@ -18,6 +18,7 @@ function render_city(string $slug): void
         'title' => "Jual Air Bambu {$name} — Pengiriman {$city['eta']}",
         'desc' => "Air bambu suling & bambu berkualitas dikirim ke {$name}, {$city['province']}. Estimasi tiba {$city['eta']}. Harga grosir & retail transparan — WA 0813-1651-6524.",
         'canonical' => '/kota/' . $slug,
+        'breadcrumbs' => ['Beranda' => '/', 'Peta Kota' => '/kota', 'Air Bambu ' . $name => '/kota/' . $slug],
     ];
     ob_start(); ?>
 <?= page_hero('Kota › ' . $name, "Air Bambu & Bambu Berkualitas untuk {$name}", "Pengiriman ke {$name}, {$city['province']} ({$city['region']}) dengan estimasi {$city['eta']}. Retail botol, langganan galon, hingga kargo truk.") ?>
@@ -42,7 +43,7 @@ function render_city(string $slug): void
 function render_cities_index(): void
 {
     $cities = json_load('cities')['all'];
-    $meta = ['title' => 'Jangkauan Pengiriman 2.524 Kota & Kabupaten Se-Indonesia', 'desc' => 'Daftar lengkap kota & kabupaten tujuan pengiriman air bambu dan bambu berkualitas — 38 provinsi, estimasi per wilayah.', 'canonical' => '/kota'];
+    $meta = ['title' => 'Jangkauan Pengiriman 2.524 Kota & Kabupaten Se-Indonesia', 'desc' => 'Daftar lengkap kota & kabupaten tujuan pengiriman air bambu dan bambu berkualitas — 38 provinsi, estimasi per wilayah.', 'canonical' => '/kota', 'breadcrumbs' => ['Beranda' => '/', 'Peta Kota' => '/kota']];
     ob_start(); ?>
 <?= page_hero('Jangkauan Kota', '2.524 Kota & Kabupaten Terjangkau', 'Dari Banda Aceh sampai Papua — cari kota Anda, lihat estimasi tiba, pesan dalam hitungan menit.', '38 Provinsi') ?>
 <section class="section"><div class="container">
@@ -70,6 +71,7 @@ function render_condition(string $slug): void
         'title' => "Air Bambu untuk {$name} — Panduan Terapi Alami",
         'desc' => "Panduan air bambu untuk {$name}: cara pakai, kandungan pendukung, tradisi tabib Nusantara, dan FAQ. Terapi pendamping alami.",
         'canonical' => '/air-bambu-untuk/' . $slug,
+        'breadcrumbs' => ['Beranda' => '/', 'Pusat Kesehatan' => '/kesehatan', $name => '/air-bambu-untuk/' . $slug],
     ];
     ob_start(); ?>
 <?= page_hero('Kesehatan › ' . $name, 'Air Bambu untuk ' . $name, (string) $c['hook'], 'Terapi Pendamping Alami') ?>
@@ -92,6 +94,8 @@ function render_condition(string $slug): void
   <?php endforeach; ?>
 </div></section>
 <?php endif; ?>
+<?php $faqLd = seo_faq_ld($c['faqs'] ?? []); if ($faqLd !== ''): ?><script type="application/ld+json"><?= $faqLd ?></script>
+<?php endif; ?>
 <?= cta_band("Mulai Terapi untuk {$name}", "Air bambu suling & tabib tersedia untuk kirim ke seluruh Indonesia.") ?>
 <?php render_layout($meta, (string) ob_get_clean());
 }
@@ -103,7 +107,7 @@ function render_conditions_index(): void
     foreach ($all as $c) {
         $cats[$c['category']][] = $c;
     }
-    $meta = ['title' => 'Pusat Kesehatan — 60+ Kondisi & Air Bambu', 'desc' => 'Jelajahi 60+ kondisi kesehatan yang didokumentasikan tradisi tabib Nusantara & literatur modern beserta panduan pemakaian air bambu.', 'canonical' => '/kesehatan'];
+    $meta = ['title' => 'Pusat Kesehatan — 60+ Kondisi & Air Bambu', 'desc' => 'Jelajahi 60+ kondisi kesehatan yang didokumentasikan tradisi tabib Nusantara & literatur modern beserta panduan pemakaian air bambu.', 'canonical' => '/kesehatan', 'breadcrumbs' => ['Beranda' => '/', 'Pusat Kesehatan' => '/kesehatan']];
     ob_start(); ?>
 <?= page_hero('Pusat Kesehatan', '60+ Kondisi, Satu Sari Alam', 'Dokumentasi jujur penggunaan air bambu per kondisi kesehatan — lengkap dengan cara pakai dan FAQ.', 'Literatur + Tradisi') ?>
 <section class="section"><div class="container">
@@ -128,7 +132,7 @@ function render_service(string $slug): void
         not_found_redirect();
         return;
     }
-    $meta = ['title' => $s['name'] . ' — ' . APP_NAME, 'desc' => $s['hook'], 'canonical' => '/layanan/' . $slug];
+    $meta = ['title' => $s['name'] . ' — Spesifikasi & Cara Daftar', 'desc' => $s['hook'], 'canonical' => '/layanan/' . $slug, 'breadcrumbs' => ['Beranda' => '/', 'Layanan' => '/layanan', $s['name'] => '/layanan/' . $slug]];
     ob_start(); ?>
 <?= page_hero('Layanan › ' . $s['name'], $s['name'], (string) $s['hook'], $s['category']) ?>
 <section class="section"><div class="container split">
@@ -147,6 +151,8 @@ function render_service(string $slug): void
     <a class="btn btn-primary" style="margin-top:16px" href="<?= wa_link('Halo, saya tertarik layanan: ' . $s['name']) ?>" target="_blank" rel="noopener">Tanya Langsung via WA</a>
   </div>
 </div></section>
+<?php $faqLd = seo_faq_ld($s['faqs'] ?? []); if ($faqLd !== ''): ?><script type="application/ld+json"><?= $faqLd ?></script>
+<?php endif; ?>
 <?= cta_band('Kustomisasi Layanan Anda', 'Semua layanan bisa disesuaikan volume & jadwalnya.') ?>
 <?php render_layout($meta, (string) ob_get_clean());
 }
@@ -158,7 +164,7 @@ function render_services_index(): void
     foreach ($all as $s) {
         $cats[$s['category'] ?? 'Lainnya'][] = $s;
     }
-    $meta = ['title' => 'Katalog 25 Layanan — Langganan, Kargo, Kemitraan', 'desc' => '25 layanan Bambu Water Nusantara: langganan rumah tangga, pasokan korporat, kargo antar pulau, kemitraan distributor, hingga supply konstruksi bambu.', 'canonical' => '/layanan'];
+    $meta = ['title' => 'Katalog 25 Layanan — Langganan, Kargo, Kemitraan', 'desc' => '25 layanan Bambu Water Nusantara: langganan rumah tangga, pasokan korporat, kargo antar pulau, kemitraan distributor, hingga supply konstruksi bambu.', 'canonical' => '/layanan', 'breadcrumbs' => ['Beranda' => '/', 'Layanan' => '/layanan']];
     ob_start(); ?>
 <?= page_hero('Katalog Layanan', '25 Layanan untuk Semua Skala', 'Dari galon rumah tangga sampai kontrak pasokan korporat dan kargo full loads.', 'Resmi & Terkontrak') ?>
 <section class="section"><div class="container">
@@ -183,7 +189,7 @@ function render_bamboo(string $slug): void
         return;
     }
     $name = (string) $b['name'];
-    $meta = ['title' => "Bambu {$name} — Harga, Spesifikasi & FAQ", 'desc' => $b['hook'] . ' Harga ' . ($b['priceRange'] ?? '') . '. Pengiriman massal se-Indonesia.', 'canonical' => '/bambu/' . $slug];
+    $meta = ['title' => "Bambu {$name} — Harga, Spesifikasi & FAQ", 'desc' => $b['hook'] . ' Harga ' . ($b['priceRange'] ?? '') . '. Pengiriman massal se-Indonesia.', 'canonical' => '/bambu/' . $slug, 'breadcrumbs' => ['Beranda' => '/', 'Jenis Bambu' => '/bambu', $name => '/bambu/' . $slug]];
     ob_start(); ?>
 <?= page_hero('Jenis Bambu › ' . $name, $name, (string) $b['hook'], ($b['category'] ?? '') . ' • ' . ($b['latin'] ?? '')) ?>
 <section class="section"><div class="container split">
@@ -207,6 +213,9 @@ function render_bamboo(string $slug): void
     <?php endforeach; endif; ?>
   </div>
 </div></section>
+<script type="application/ld+json"><?= seo_product_ld($b) ?></script>
+<?php $faqLd = seo_faq_ld($b['faqs'] ?? []); if ($faqLd !== ''): ?><script type="application/ld+json"><?= $faqLd ?></script>
+<?php endif; ?>
 <?= cta_band("Pesan Bambu {$name} Massal", 'Sebut panjang, diameter, dan jumlah — estimasi kargo keluar 1×24 jam.') ?>
 <?php render_layout($meta, (string) ob_get_clean());
 }
@@ -214,7 +223,7 @@ function render_bamboo(string $slug): void
 function render_bamboo_index(): void
 {
     $all = json_load('bamboo');
-    $meta = ['title' => '8 Jenis Bambu Berkualitas — Harga & Spesifikasi', 'desc' => 'Petung, Betung, Wulung, Apus, Ori, dan lainnya — harga per batang, spesifikasi teknis, aplikasi, dan tips perawatan.', 'canonical' => '/bambu'];
+    $meta = ['title' => '8 Jenis Bambu Berkualitas — Harga & Spesifikasi', 'desc' => 'Petung, Betung, Wulung, Apus, Ori, dan lainnya — harga per batang, spesifikasi teknis, aplikasi, dan tips perawatan.', 'canonical' => '/bambu', 'breadcrumbs' => ['Beranda' => '/', 'Jenis Bambu' => '/bambu']];
     ob_start(); ?>
 <?= page_hero('Jenis Bambu', '8 Varietas Pilihan Kami', 'Setiap jenis punya karakter — kami bantu pilih yang tepat untuk proyek Anda.', 'Harga Transparan') ?>
 <section class="section"><div class="container grid grid-4">
@@ -229,7 +238,7 @@ function render_bamboo_index(): void
 function render_articles_index(): void
 {
     $all = json_load('articles');
-    $meta = ['title' => 'Artikel & Wawasan Air Bambu', 'desc' => 'Kumpulan artikel edukasi: air bambu untuk gula darah, kolesterol, ginjal, hingga panduan memilih jenis bambu konstruksi.', 'canonical' => '/artikel'];
+    $meta = ['title' => 'Artikel & Wawasan Air Bambu', 'desc' => 'Kumpulan artikel edukasi: air bambu untuk gula darah, kolesterol, ginjal, hingga panduan memilih jenis bambu konstruksi.', 'canonical' => '/artikel', 'breadcrumbs' => ['Beranda' => '/', 'Artikel' => '/artikel']];
     ob_start(); ?>
 <?= page_hero('Artikel', 'Wawasan & Panduan Air Bambu', 'Artikel berbasis riset — ditulis jujur, merujuk literatur publik yang kredibel.', 'Edukasi Berkelanjutan') ?>
 <section class="section"><div class="container grid grid-3">
@@ -252,10 +261,13 @@ function render_article(string $slug): void
         not_found_redirect();
         return;
     }
-    $meta = ['title' => $a['seoTitle'] ?? $a['title'], 'desc' => $a['metaDescription'] ?? $a['excerpt'], 'canonical' => '/artikel/' . $slug];
+    $_isoUpdated = seo_iso_date((string) ($a['updated'] ?? ''));
+    $meta = ['title' => $a['seoTitle'] ?? $a['title'], 'desc' => $a['metaDescription'] ?? $a['excerpt'], 'canonical' => '/artikel/' . $slug, 'type' => 'article', 'published' => $_isoUpdated ?: date('c'), 'modified' => $_isoUpdated, 'breadcrumbs' => ['Beranda' => '/', 'Artikel' => '/artikel', $a['title'] => '/artikel/' . $slug]];
     ob_start(); ?>
 <?= page_hero('Artikel › ' . ($a['category'] ?? ''), (string) $a['title'], (string) $a['excerpt'], ($a['readMinutes'] ?? '') . ' menit baca') ?>
-<script type="application/ld+json"><?= json_encode(['@context' => 'https://schema.org', '@type' => 'BlogPosting', 'headline' => $a['title'], 'description' => $a['metaDescription'] ?? '', 'dateModified' => $a['updated'] ?? '', 'author' => ['@type' => 'Organization', 'name' => APP_NAME]]) ?></script>
+<script type="application/ld+json"><?= json_encode(['@context' => 'https://schema.org', '@type' => 'BlogPosting', 'headline' => $a['title'], 'description' => $a['metaDescription'] ?? '', 'datePublished' => $_isoUpdated ?: date('c'), 'dateModified' => $_isoUpdated ?: date('c'), 'inLanguage' => 'id-ID', 'author' => ['@type' => 'Organization', 'name' => APP_NAME], 'publisher' => ['@type' => 'Organization', 'name' => APP_NAME]]) ?></script>
+<?php $faqLd = seo_faq_ld($a['faqs'] ?? []); if ($faqLd !== ''): ?><script type="application/ld+json"><?= $faqLd ?></script>
+<?php endif; ?>
 <section class="section"><div class="container" style="max-width:800px">
   <div class="card reveal" style="background:var(--em-50)"><b>Poin kunci:</b><ul style="margin:8px 0 0;color:var(--muted)"><?php foreach ($a['keyPoints'] ?? [] as $kp): ?><li><?= e($kp) ?></li><?php endforeach; ?></ul></div>
   <div class="reveal" style="margin-top:26px">

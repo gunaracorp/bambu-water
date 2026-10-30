@@ -206,3 +206,9 @@ footer.site { background: var(--em-950); color: rgba(255,255,255,.85); margin-to
   .section { padding: 52px 0; }
   .hero-inner { padding: 78px 0 92px; }
 }
+
+/* ===== SEO Universalis (v0.5.0) — Tag Hub ===== */
+.tag-cloud { margin-top: .9rem; }
+.tag-pill { display: inline-flex; align-items: center; padding: 7px 14px; border-radius: 999px; background: var(--em-50); color: var(--em-800); font-size: .87rem; font-weight: 600; border: 1px solid rgba(2,44,34,.10); transition: all .18s ease; }
+.tag-pill:hover { background: var(--em-800); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 14px -8px rgba(2,44,34,.5); }
+.card-link { display: block; text-decoration: none; color: inherit; }

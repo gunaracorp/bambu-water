@@ -3,7 +3,7 @@
  * Layout utama — shell navbar/footer/WA float/palette.
  * Variabel: $meta = ['title','desc','canonical'], $content = HTML body.
  */
-$meta = array_merge(['title' => APP_NAME, 'desc' => '', 'canonical' => '/'], $meta ?? []);
+$meta = array_merge(['title' => APP_NAME, 'desc' => '', 'canonical' => '/', 'type' => 'website', 'keywords' => '', 'robots' => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1', 'published' => '', 'modified' => '', 'breadcrumbs' => []], $meta ?? []);
 // S1-DESIGN: brand ditambahkan TEPAT SEKALI di layout — template memberi title polos.
 $_siteName = (string) setting('site_name', APP_NAME);
 $_fullTitle = trim((string) $meta['title']);
@@ -22,6 +22,8 @@ $navItems = [
     '/faq' => 'FAQ',
     '/kontak' => t('Kontak', 'Contact'),
 ];
+$_siteUrl = rtrim(setting('site_url', SITE_URL), '/');
+$_canonUrl = $_siteUrl . $meta['canonical'];
 ?><!DOCTYPE html>
 <html lang="<?= lang() === 'en' ? 'en' : 'id' ?>">
 <head>
@@ -29,12 +31,40 @@ $navItems = [
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= e($_fullTitle) ?></title>
 <meta name="description" content="<?= e($meta['desc']) ?>">
-<link rel="canonical" href="<?= e(rtrim(setting('site_url', SITE_URL), '/') . $meta['canonical']) ?>">
-<meta property="og:type" content="website">
+<?php if (($meta['keywords'] ?? '') !== ''): ?><meta name="keywords" content="<?= e($meta['keywords']) ?>">
+<?php endif; ?>
+<meta name="robots" content="<?= e($meta['robots']) ?>">
+<meta name="googlebot" content="<?= e($meta['robots']) ?>">
+<meta name="bingbot" content="<?= e($meta['robots']) ?>">
+<?php if (SEO_GOOGLE_SITE_VERIFICATION !== ''): ?><meta name="google-site-verification" content="<?= e(SEO_GOOGLE_SITE_VERIFICATION) ?>">
+<?php endif; if (SEO_BING_SITE_VERIFICATION !== ''): ?><meta name="msvalidate.01" content="<?= e(SEO_BING_SITE_VERIFICATION) ?>">
+<?php endif; if (SEO_YANDEX_VERIFICATION !== ''): ?><meta name="yandex-verification" content="<?= e(SEO_YANDEX_VERIFICATION) ?>">
+<?php endif; ?>
+<link rel="canonical" href="<?= e($_canonUrl) ?>">
+<link rel="alternate" hreflang="id" href="<?= e($_canonUrl) ?>">
+<link rel="alternate" hreflang="en" href="<?= e($_canonUrl . (str_contains($meta['canonical'], '?') ? '&' : '?') . 'lang=en') ?>">
+<link rel="alternate" hreflang="x-default" href="<?= e($_canonUrl) ?>">
+<link rel="alternate" type="application/rss+xml" title="<?= e(setting('site_name', APP_NAME)) ?> — RSS" href="<?= e($_siteUrl) ?>/feed.xml">
+<link rel="sitemap" type="application/xml" href="<?= e($_siteUrl) ?>/sitemap.xml">
+<meta property="og:type" content="<?= e($meta['type']) ?>">
 <meta property="og:site_name" content="<?= e(setting('site_name', APP_NAME)) ?>">
+<meta property="og:url" content="<?= e($_canonUrl) ?>">
+<meta property="og:locale" content="<?= lang() === 'en' ? 'en_US' : 'id_ID' ?>">
 <meta property="og:title" content="<?= e($meta['title']) ?>">
 <meta property="og:description" content="<?= e($meta['desc']) ?>">
-<meta property="og:image" content="<?= e(rtrim(setting('site_url', SITE_URL), '/') . site_url_path('/assets/images/hero-bamboo.jpg')) ?>">
+<meta property="og:image" content="<?= e($_siteUrl . site_url_path('/assets/images/hero-bamboo.jpg')) ?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<?php if (($meta['published'] ?? '') !== ''): ?><meta property="article:published_time" content="<?= e($meta['published']) ?>">
+<?php endif; if (($meta['modified'] ?? '') !== ''): ?><meta property="article:modified_time" content="<?= e($meta['modified']) ?>">
+<?php endif; ?>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="<?= e(SEO_TWITTER_HANDLE) ?>">
+<meta name="twitter:title" content="<?= e($meta['title']) ?>">
+<meta name="twitter:description" content="<?= e($meta['desc']) ?>">
+<meta name="twitter:image" content="<?= e($_siteUrl . site_url_path('/assets/images/hero-bamboo.jpg')) ?>">
+<meta name="geo.region" content="ID">
+<meta name="geo.placename" content="Indonesia">
 <meta name="theme-color" content="#022c22">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23022c22'/%3E%3Cpath d='M16 6c3 4 5 7 5 10a5 5 0 1 1-10 0c0-3 2-6 5-10z' fill='%23d4a843'/%3E%3C/svg%3E" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +78,8 @@ $navItems = [
     'email' => setting('email', DEFAULT_EMAIL),
     'softwareVersion' => APP_VERSION,
 ]) ?></script>
+<?php if (($meta['breadcrumbs'] ?? []) !== []): ?><script type="application/ld+json"><?= seo_breadcrumb_ld($meta['breadcrumbs']) ?></script>
+<?php endif; ?>
 </head>
 <body>
 <a class="skip-link" href="#main"><?= t('Langsung ke konten', 'Skip to content') ?></a>

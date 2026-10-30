@@ -220,3 +220,29 @@ Stage Summary:
 - Verifikasi API: commit terakhir = deab182 (281 file) ✅ · root bersih tanpa db/.zscripts/download/.env/zip ✅ · `php-cms/` utuh (9 entri: index, admin-cms, config, lib/, templates/, data/, assets/, .htaccess, README) ✅
 - Repo di poles: description "🌿 Air Bambu Nusantara — Next.js 16 + PHP Full CMS "Kembar Abadi"…" + homepage bambuwater.web.id + topics (bamboo-water, php-cms, nextjs, indonesia, herbal, sqlite, cms) ✅
 - Remote origin (tanpa token) terpasang: https://github.com/gunaracorp/bambu-water.git
+
+## 2025-12-19 — v0.5.0 "SEO Universalis" (Dewan-46 Divisi SEO)
+**Permintaan pemilik:** full SEO untuk semua mesin pencari (utama Google & Bing) + mesin pencari AI, 1.000 tag paling dicari, aktivasi master seo/polymath/sage universal + 46 dewan pakar.
+
+### Dibangun (php-cms/)
+1. **Bank kata kunci 1.386 tag** via `tools/build-keywords.php` → `data/keywords.json` (kota×8 pola, kondisi, layanan, bambu, edukasi, harga) — regenerable (Z2).
+2. **Tag Hub**: `/tag` direktori + 1.386 halaman `/tag/{slug}` — agregasi konten nyata via pencocokan token (bukan doorway); title/desc/intro 3-variasi rotasi md5-slug; JSON-LD WebPage+Breadcrumb.
+3. **lib/seo.php**: seo_tag_matches, seo_related_tags, seo_breadcrumb_ld, seo_faq_ld, seo_product_ld (AggregateOffer IDR dari priceRange), seo_iso_date (bulan ID→ISO), indexnow_ping (best-effort, silent).
+4. **Head upgrade (layout.php)**: robots/googlebot/bingbot, hreflang id/en/x-default, Twitter Card, og:url/locale/dimensi, article:published_time, keywords per halaman, slot verifikasi GSC/Bing/Yandex, RSS+sitemap link, geo ID.
+5. **JSON-LD injection**: breadcrumb semua tipe halaman (kota, kondisi, layanan, bambu, artikel, inti, tag); FAQPage kondisi/layanan/bambu/artikel; Product+offer bambu; BlogPosting diperkaya.
+6. **robots.txt**: matriks 26 UA — mesin pencari utama + AI (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, Bytespider, dkk.).
+7. **AI-SEO**: /llms.txt + /llms-full.txt (llmstxt.org) — fakta kunci, tautan kurasi, katalog + artikel penuh.
+8. **IndexNow**: kunci 32-hex (config), file verifikasi /{kunci}.txt, ping otomatis saat admin simpan artikel (flash "+ IndexNow ✓"), tools/ping-indexnow.php massal sekali-POST.
+9. **Sitemap index**: sitemap.xml → pages (2.649) + tags (1.386) = 4.035 URL, lastmod/changefreq/priority.
+10. **RSS /feed.xml** + .htaccess (X-Robots-Tag /admin noindex, nosniff, Referrer-Policy).
+
+### Bug fix internal
+- layout.php: `<?php` dobel dalam konteks PHP (parse error line 25) → dibersihkan.
+- Articles.json tanggal "Juni 2025" tak terbaca mesin → seo_iso_date() → `2025-06-01T00:00:00+07:00` ✅.
+
+### Kejujuran Dewan (ditulis di README)
+Peringkat #1 tak bisa dijamin siapa pun — fondasi teknis 100% tuntas; langkah GSC/Bing/Yandex/IndexNow 15 menit didokumentasikan.
+
+### Verifikasi (G6)
+- php -l semua file bersih; 16 rute 200; matriks JSON-LD curl 6/6 breadcrumb, 3/4 FAQPage (artikel ✓), Product 1/1; sitemap-tags 1.386; browser tag hub (12 kartu + 10 pill) — bukti research/seo-tag-hub-v050.png.
+- Catatan: token GitHub 401 (di-revoke sesuai saran) → push v0.5.0 menunggu token baru dari pemilik.

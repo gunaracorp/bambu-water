@@ -768,7 +768,7 @@ function render_core_page(string $path): bool
         return false;
     }
     $p = $pages[$slug];
-    $meta = ['title' => $p['title'], 'desc' => $p['desc'], 'canonical' => $path];
+    $meta = ['title' => $p['title'], 'desc' => $p['desc'], 'canonical' => $path, 'breadcrumbs' => ['Beranda' => '/', $p['title'] => $path]];
     $body = page_hero($p['crumb'], str_contains($p['crumb'], ' ') ? $p['crumb'] : ucfirst($p['crumb']), $p['desc'], $p['badge'] ?? '')
         . ($p['body'])();
     render_layout($meta, $body);

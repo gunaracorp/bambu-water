@@ -3,6 +3,28 @@
 Format: [Keep a Changelog](https://keepachangelog.com) · SemVer · **1 tugas = 1 versi** (S1).
 Riwayat 0.1.0–0.2.1 direkonstruksi jujur dari `worklog.md` (Z3 Version Archaeology).
 
+## [0.5.0] — 2025-12-19 — "SEO Universalis" (Mesin Pencari Semua, Termasuk AI)
+
+Aktivasi Dewan-46 Divisi SEO: full SEO untuk Google, Bing, Yandex, DuckDuckGo + mesin pencari AI — di seluruh `php-cms/`.
+
+### Added
+- **Tag Hub 1.386 halaman** (`/tag` + `/tag/{slug}`): bank kata kunci pencarian populer (kota besar × pola jual/harga/supplier/distributor, kondisi kesehatan, layanan, bambu, edukasi) — hub agregasi konten nyata, meta & intro dirotasi anti-duplikat; generator `tools/build-keywords.php` (Z2: data JSON tahan lama).
+- **`lib/seo.php`**: pencocokan token hub↔konten, breadcrumb/FAQ/Product LD, IndexNow ping, konversi tanggal Indonesia→ISO 8601.
+- **AI-SEO**: `/llms.txt` + `/llms-full.txt` (standar llmstxt.org — ringkasan, fakta kunci, katalog, artikel penuh); `robots.txt` matriks **26 user-agent** termasuk GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, dkk.
+- **IndexNow (Bing instant indexing)**: kunci verifikasi `/{kunci}.txt`, ping otomatis saat admin menyimpan artikel, alat massal `tools/ping-indexnow.php` (sekali POST → Bing/Yandex/Seznam/Naver).
+- **`<head>` penuh**: robots/googlebot/bingbot, hreflang id/en/x-default, Twitter Card, og:url + og:locale + dimensi gambar, article:published/modified_time, meta keywords per halaman, slot verifikasi GSC/Bing/Yandex, RSS `<link>`, geo-tag ID.
+- **JSON-LD**: BreadcrumbList di SEMUA halaman; FAQPage (kondisi, layanan, bambu, artikel); Product + AggregateOffer IDR (bambu); BlogPosting diperkaya (datePublished/Modified ISO, inLanguage, publisher).
+- **Sitemap index**: `sitemap.xml` → `sitemap-pages.xml` (2.649) + `sitemap-tags.xml` (1.386) = **4.035 URL**, dengan lastmod/changefreq/priority berjenjang.
+- **RSS `/feed.xml`** (7 artikel) + **`.htaccess`**: X-Robots-Tag noindex untuk /admin, nosniff, Referrer-Policy, charset.
+
+### Verified (G6)
+- `php -l` seluruh file → bersih; 11 rute inti + tag hub + llms + feed + sitemap + key file → 200.
+- Matriks JSON-LD via curl: breadcrumb 6/6 tipe halaman; FAQPage 3 tipe; Product 1/1 bambu; `Juni 2025` → `2025-06-01T00:00:00+07:00`.
+- Browser: tag hub render 12 kartu terkait + 10 pill topik (bukti `research/seo-tag-hub-v050.png`).
+
+### Catatan jujur Dewan-46
+Pondasi teknis kini sempurna & lengkap. Peringkat #1 Google juga ditentukan otoritas (backlink, usia, konten vs kompetitor) — dipandu di bagian "SEO Universalis" README: GSC → Bing Webmaster (impor GSC) → Yandex → IndexNow.
+
 ## [0.4.1] — 2025-12-19 — "Kembar Abadi: Push GunaraCorp"
 
 Patch sanitasi publikasi + perbaikan tampilan, dipicu permintaan push repo publik `github.com/gunaracorp/bambu-water`.

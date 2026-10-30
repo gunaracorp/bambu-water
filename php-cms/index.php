@@ -1,8 +1,8 @@
 <?php
 /**
- * Front Controller — BWN PHP CMS v0.4.0
+ * Front Controller — BWN PHP CMS v0.5.0 "SEO Universalis"
  * Semua request lewat sini (via .htaccess / router php -S).
- * URL bersih paritas dengan situs Next.js: /kota/{slug}, /air-bambu-untuk/{slug}, dll.
+ * URL bersih: /kota/{slug}, /air-bambu-untuk/{slug}, /tag/{slug}, /llms.txt, dll.
  */
 declare(strict_types=1);
 
@@ -25,8 +25,11 @@ if (PHP_SAPI === 'cli-server') {
 }
 
 require __DIR__ . '/config.php';
+require ROOT_DIR . '/lib/seo.php';               // SEO Universalis: tag hub, IndexNow, JSON-LD
 require ROOT_DIR . '/templates/pages.php';      // core_pages() dipakai sitemap & router
 require ROOT_DIR . '/templates/programmatic.php';
+require ROOT_DIR . '/templates/tags.php';       // /tag + /tag/{slug}
+require ROOT_DIR . '/templates/llms.php';       // /llms.txt + /llms-full.txt (AI SEO)
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
@@ -67,12 +70,64 @@ if ($path === '/api/health') {
 
 if ($path === '/robots.txt') {
     header('Content-Type: text/plain; charset=utf-8');
-    echo "User-agent: *\nAllow: /\nDisallow: /admin\nSitemap: " . rtrim(setting('site_url', SITE_URL), '/') . "/sitemap.xml\n";
+    header('Cache-Control: public, max-age=3600');
+    $base = rtrim(setting('site_url', SITE_URL), '/');
+    echo "# Bambu Water Nusantara — robots.txt (SEO Universalis v" . APP_VERSION . ")\n";
+    echo "# Mesin pencari utama: seluruh situs terbuka kecuali panel admin\n\n";
+    foreach (['Googlebot','Googlebot-Image','Googlebot-News','Googlebot-Video','Bingbot','DuckDuckBot','YandexBot','Baiduspider','Applebot','Slurp'] as $ua) {
+        echo "User-agent: {$ua}\nAllow: /\nDisallow: /admin\n\n";
+    }
+    echo "# Mesin pencari & asisten AI — dipersilakan penuh (dokumen publik)\n";
+    foreach (['GPTBot','OAI-SearchBot','ChatGPT-User','ClaudeBot','Claude-User','Claude-SearchBot','anthropic-ai','PerplexityBot','Perplexity-User','Google-Extended','Applebot-Extended','Bytespider','YouBot','cohere-ai','Meta-ExternalAgent','Amazonbot'] as $ua) {
+        echo "User-agent: {$ua}\nAllow: /\nDisallow: /admin\n\n";
+    }
+    echo "# Semua agen lain\nUser-agent: *\nAllow: /\nDisallow: /admin\n\n";
+    echo "Sitemap: {$base}/sitemap.xml\n";
+    echo "# Dokumen AI: {$base}/llms.txt (ringkas) · {$base}/llms-full.txt (lengkap)\n";
     exit;
 }
 
 if ($path === '/sitemap.xml') {
+    $_GET['type'] = 'index';
     require ROOT_DIR . '/templates/sitemap.php';
+    exit;
+}
+if ($path === '/sitemap-pages.xml') {
+    $_GET['type'] = 'pages';
+    require ROOT_DIR . '/templates/sitemap.php';
+    exit;
+}
+if ($path === '/sitemap-tags.xml') {
+    $_GET['type'] = 'tags';
+    require ROOT_DIR . '/templates/sitemap.php';
+    exit;
+}
+if ($path === '/feed.xml') {
+    require ROOT_DIR . '/templates/feed.php';
+    exit;
+}
+if ($path === '/llms.txt') {
+    llms_render(false);
+    exit;
+}
+if ($path === '/llms-full.txt') {
+    llms_render(true);
+    exit;
+}
+/* IndexNow key verification file: /{KEY}.txt */
+if ($path === '/' . indexnow_key() . '.txt') {
+    header('Content-Type: text/plain; charset=utf-8');
+    echo indexnow_key();
+    exit;
+}
+
+/* ---------- Tag Hub (SEO Universalis) ---------- */
+if ($path === '/tag') {
+    render_tags_index();
+    exit;
+}
+if (preg_match('#^/tag/([a-z0-9\-]+)$#', $path, $m)) {
+    render_tag($m[1]);
     exit;
 }
 

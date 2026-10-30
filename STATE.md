@@ -11,8 +11,8 @@
 | **Stack** | Next.js 16 (App Router) · React 19 · TS · Tailwind 4 · shadcn/ui · Framer Motion · Prisma/SQLite · Bun |
 | **Arsitektur** | SPA hash-routing `#/{locale}/{slug}` dalam SATU route `/` — hydration-proof, 33 halaman inti + 2.621 programatik = **2.654 URL sitemap** |
 | **i18n** | 30 bahasa (eager id/en/zh + lazy 27), RTL penuh |
-| **Versi aktif** | **v0.4.1 "Kembar Abadi: Push GunaraCorp"** (2025-12-19) — Next.js + PHP CMS sinkron, repo publik bersih |
-| **Sesi terakhir** | Push publik ke `github.com/gunaracorp/bambu-water` (commit bersih orphan, PII disanitasi dari history); fix title dobel layout PHP + hero dobel bambu; PHP 8.3.13 dipulihkan di /home/z/php-bin; ZIP `bambu-water-php-cms-v0.4.1.zip` (35 file, tanpa sqlite); S1 sinkron 4 titik |
+| **Versi aktif** | **v0.5.0 "SEO Universalis"** (2025-12-19) — full SEO Google/Bing/Yandex/AI + 1.386 tag hub di PHP CMS |
+| **Sesi terakhir** | SEO Universalis: Tag Hub 1.386 hal, lib/seo.php, llms.txt + llms-full.txt (AI-SEO), robots 26 UA (GPTBot/ClaudeBot/Perplexity dkk), IndexNow + ping on-publish + alat massal, sitemap index 4.035 URL, JSON-LD penuh (Breadcrumb/FAQ/Product), RSS, head upgrade. Token GitHub 401 → push menunggu token baru |
 
 ## b. Skor 12 Area (akhir sesi ini)
 | # | Area | Sebelum → Sesudah | PJ |
@@ -58,10 +58,10 @@
 | Motion System | Animasi GPU + reduced-motion | ✅ Tegak |
 | Command Palette | Navigasi 2.654 hal | ✅ Tegak |
 | Kontak/WA API | Lead capture (Prisma) | ✅ Tegak |
-| Sistem Versi S1 | SemVer + badge + /api/version | ✅ Tegak (v0.4.1, 2 mesin sinkron) |
+| Sistem Versi S1 | SemVer + badge + /api/version | ✅ Tegak (v0.5.0, 2 mesin sinkron) |
 | Analitik S7 | GA4+Clarity env-gated | 🟡 Setengah (⏳ ID) |
 | Runbook S12 | Pemulihan operasi | ✅ Tegak |
-| **PHP CMS Mirror** | php-cms/ 2.649 URL + admin | ✅ Tegak (v0.4.1; ZIP siap deploy; repo publik gunaracorp) |
+| **PHP CMS Mirror** | php-cms/ 4.035 URL (2.649 hal + 1.386 tag) + admin + SEO Universalis | ✅ Tegak (v0.5.0; ZIP siap deploy; push menunggu token baru) |
 
 ## f. NEXT-QUEUE (prioritas sesi berikutnya)
 | Pri | Tugas | Effort |

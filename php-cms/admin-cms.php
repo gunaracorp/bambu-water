@@ -101,6 +101,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             ON CONFLICT(slug) DO UPDATE SET title = excluded.title, description = excluded.description, body = excluded.body')
             ->execute([trim((string) $_POST['slug']), trim((string) $_POST['title']), trim((string) $_POST['description']), trim((string) $_POST['body'])]);
         $flash = 'Artikel tersimpan (override aktif).';
+        /* SEO Universalis: ping IndexNow agar artikel baru terindeks Bing/Yandex dalam hitungan menit */
+        $artUrl = rtrim(setting('site_url', SITE_URL), '/') . '/artikel/' . urlencode(trim((string) $_POST['slug']));
+        $flash .= indexnow_ping([$artUrl]) ? ' IndexNow ✓' : '';
     } elseif ($act === 'pass_change') {
         $cur = (string) $_POST['current'];
         $new = (string) $_POST['new'];

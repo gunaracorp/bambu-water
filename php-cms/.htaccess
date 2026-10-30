@@ -25,3 +25,17 @@ ExpiresByType application/javascript "access plus 7 days"
 ExpiresByType image/jpeg "access plus 30 days"
 ExpiresByType image/svg+xml "access plus 30 days"
 </IfModule>
+
+# === SEO Universalis (v0.5.0) ===
+AddDefaultCharset UTF-8
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-DNS-Prefetch-Control "on"
+</IfModule>
+# Panel admin: larang diindeks SEMUA mesin (header lebih kuat daripada meta)
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/admin#">
+    Header set X-Robots-Tag "noindex, nofollow, noarchive"
+  </If>
+</IfModule>
