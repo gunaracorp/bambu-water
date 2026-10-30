@@ -246,3 +246,24 @@ Peringkat #1 tak bisa dijamin siapa pun — fondasi teknis 100% tuntas; langkah 
 ### Verifikasi (G6)
 - php -l semua file bersih; 16 rute 200; matriks JSON-LD curl 6/6 breadcrumb, 3/4 FAQPage (artikel ✓), Product 1/1; sitemap-tags 1.386; browser tag hub (12 kartu + 10 pill) — bukti research/seo-tag-hub-v050.png.
 - Catatan: token GitHub 401 (di-revoke sesuai saran) → push v0.5.0 menunggu token baru dari pemilik.
+
+## 2026-10-30 — Push v0.5.0 tuntas + diagnosis hydrasi (sesi kelanjutan)
+**Permintaan pemilik:** token GitHub baru + upload log error konsol (hydration mismatch Radix useId).
+
+### 1. Push GitHub (tuntas)
+- Token baru diverifikasi via API: login `gunaracorp`, repo `bambu-water`, push_access true.
+- Push sukses `8904a85..04a08cf main` — membawa `ddceef6` (v0.5.0 SEO Universalis, tertahan 401 sesi lalu) + `04a08cf` (chore gitignore upload//tool-results/).
+- Bukti G6 API: HEAD remote `04a08cf`; spot-check 200 → `php-cms/lib/seo.php`, `templates/tags.php`, `templates/llms.php`, `data/keywords.json`, `admin-cms.php`, `templates/layout.php`. llms.txt & robots & sitemap ternyata rute dinamis index.php (bukan file statis) — sesuai desain.
+- Lint `bun run lint` CLEAN sebelum push.
+
+### 2. Diagnosis error hydrasi (upload user) — akar masalah: ekstensi browser
+- Gejala log: hanya atribut turunan `useId` Radix (`id`, `aria-controls`, `aria-labelledby`) di seluruh halaman bergeser (`_R_*eqlb` client vs `_R_*b5eqlb` server); teks/DOM 100% cocok → tanda khas re-render pemulihan klien setelah interferensi DOM eksternal, BUKAN bug render.
+- Audit kode: I18nProvider & useHashRoute aman (useSyncExternalStore server-snapshot), JsonLd murni-data, Analytics null (tanpa env), layout/page bersih. File `use-hash-route.ts` diperiksa byte-per-byte (`od -c`) — `history[method]` utuh (kecurigaan korupsi = artefak tampilan terminal).
+- Reproduksi empiris agent-browser (8 skenario): `/`, reload-di-hash `#/id/kontak`, `#/en/faq` (accordion), kontak — SEMUA konsol bersih. Simulasi ekstensi via proxy injeksi 8081: buang 1 script ld+json → diabaikan React; buang div ScrollProgress (elemen nyata) → dipulihkan diam-diam React 19, nol error.
+- Kesimpulan dewan: tidak ada bug yang bisa diperbaiki pada kode; sumber = manipulasi DOM oleh ekstensi browser di perangkat pemilik (pola klasik yang disebut dokumen React). Bersifat recoverable — UI utuh, pengunjung & crawler tak terpengaruh. Saran: uji di incognito tanpa ekstensi; hindari translate-otomatis pada tab dev.
+
+### 3. Smoke test PHP CMS v0.5.0 pasca-push (9/9 rute 200)
+`/` 29KB · `/llms.txt` 1,7KB · `/llms-full.txt` 21KB · `/tag` 157KB (1.386 tag, judul "Peta Kata Kunci — 1.000+ Topik") · `/robots.txt` · `/sitemap.xml` (index) · `/sitemap-tags.xml` 229KB · `/kota/jakarta-selatan` · `/air-bambu-untuk/kesehatan-ginjal` — semua 200 ✅
+
+### 4. Keamanan
+- Token kedua sudah dipakai via chat plaintext → **WAJIB revoke** setelah push ini (Settings → Developer settings → Tokens). Disimpan hanya di command ephemeral, tidak di file repo.
