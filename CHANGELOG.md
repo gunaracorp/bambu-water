@@ -3,6 +3,27 @@
 Format: [Keep a Changelog](https://keepachangelog.com) · SemVer · **1 tugas = 1 versi** (S1).
 Riwayat 0.1.0–0.2.1 direkonstruksi jujur dari `worklog.md` (Z3 Version Archaeology).
 
+## [0.5.2] — 2026-10-31 — "Dewan Audit" (Audit Menyeluruh + Perbaikan Nyata)
+
+Sesi audit arah 3.0.0.0 (Dewan-46): seluruh repo diaudit, PHP CMS diuji E2E di PHP 8.4.13 sungguhan, dan 4 temuan diperbaiki langsung.
+
+### Fixed (php-cms/)
+- **Override artikel kini benar-benar tampil di halaman publik** — sebelumnya tabel `article_overrides` hanya ditulis Admin CMS, tidak pernah dibaca `render_article()` (perubahan judul/deskripsi/catatan isi tidak berdampak). Kini judul & deskripsi SEO override dipakai di meta + JSON-LD, catatan isi tampil sebagai kartu "Catatan dari kami".
+- **Form artikel admin mengambil nilai override tersimpan** — sebelumnya selalu menampilkan data asli JSON, sehingga simpanan kedua menimpa override sebelumnya tanpa sengaja.
+
+### Security (php-cms/)
+- **Rate limit login admin berbasis IP** (5 percobaan / 5 menit) — brake berbasis sesi saja dapat dilewati dengan membuang cookie.
+- **`rate_limited()` memakai `REMOTE_ADDR`** — sebelumnya memprioritaskan `HTTP_X_FORWARDED_FOR` yang dikirim klien dan mudah dipalsukan untuk melewati rate limit.
+- **Petunjuk password default di halaman login hanya tampil selama password default masih aktif** — setelah diganti, petunjuk hilang (tidak lagi menampilkan kredensial bawaan ke publik).
+
+### Changed
+- Statistik "Halaman Publik" di dashboard admin dihitung dinamis (tidak lagi hardcode 2644; aktual 2.649).
+- Dokumentasi audit lengkap: `AUDIT-2026-10-31.md` (kondisi repo, peta Next.js, rencana migrasi P0/P1/P2 menuju 3.0.0.0).
+
+### Verified (G6)
+- `php -l` PHP 8.4.13: seluruh 14 file PHP bersih.
+- E2E `php -S` (skrip otomatis): 32+ pemeriksaan — rute publik, SEO endpoint, proteksi file sensitif (403), 404, login admin salah/benar, form kontak dengan/tanpa CSRF, persistensi SQLite.
+
 ## [0.5.1] — 2026-10-30 — "Pintu Pencari" (Verifikasi & Analitik PHP CMS)
 
 Kelanjutan SEO Universalis: melengkapi tiga kekosongan yang ditemukan audit permintaan pemilik (sitemap & index sitemap ternyata sudah ada sejak 0.5.0).

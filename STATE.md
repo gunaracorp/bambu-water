@@ -7,69 +7,71 @@
 | | |
 |---|---|
 | **Situs** | PT Bambu Water Nusantara — bambuwater.web.id |
-| **Repo sumber** | github.com/prabudanling/bambu-water |
-| **Stack** | Next.js 16 (App Router) · React 19 · TS · Tailwind 4 · shadcn/ui · Framer Motion · Prisma/SQLite · Bun |
-| **Arsitektur** | SPA hash-routing `#/{locale}/{slug}` dalam SATU route `/` — hydration-proof, 33 halaman inti + 2.621 programatik = **2.654 URL sitemap** |
-| **i18n** | 30 bahasa (eager id/en/zh + lazy 27), RTL penuh |
-| **Versi aktif** | **v0.5.1 "Pintu Pencari"** (2026-10-30) — verifikasi file GSC/Bing/Yandex + GA4/Clarity + panduan; di atas v0.5.0 SEO Universalis (1.386 tag hub) |
-| **Sesi terakhir** | (2026-10-30 · lanjutan) Push v0.5.0 tuntas (`04a08cf`→`37a0c2e`) + rilis **v0.5.1 "Pintu Pencari"**: audit permintaan pemilik → sitemap/index ternyata sudah lengkap (4.035 URL); dibangun rute verifikasi FILE GSC/Yandex/Bing (env/config-gated, kode asing 404), GA4+Clarity (anonymize_ip, nol script bila kosong), PANDUAN-GSC-ANALYTICS.md. Bukti: php -l bersih, server uji 8082 env-gated 6/6 rute, main 8080 aman |
+| **Repo sumber** | github.com/gunaracorp/bambu-water (branch `main`) |
+| **Arah arsitektur (BARU — keputusan pemilik)** | **PHP 8.4 Shared Hosting Edition menuju 3.0.0.0**: PHP CMS (`php-cms/`) menjadi aplikasi utama; Next.js/Node.js akan DIHAPUS bertahap setelah verifikasi; clean URL tanpa hash; target shared hosting cPanel |
+| **Stack PHP CMS** | PHP 8.4 murni · PDO SQLite (WAL) · front controller + .htaccess clean URL · admin CMS · SEO Universalis · tanpa Node.js, tanpa build step |
+| **Stack lama (menunggu penghapusan)** | Next.js 16 (App Router) · React 19 · TS · Tailwind 4 · shadcn/ui · Framer Motion · Prisma/SQLite · Bun — hash-routing `#/{locale}/{slug}` (melanggar standar clean URL 3.0.0.0) |
+| **Versi aktif** | **v0.5.2 "Dewan Audit"** (2026-10-31) — audit menyeluruh + 4 perbaikan keamanan/fungsional + uji E2E 34/34 di PHP 8.4.13 sungguhan |
+| **Sesi terakhir** | (2026-10-31) Audit P0 lengkap seluruh repo (289 file): peta Next.js untuk penghapusan aman, audit keamanan PHP CMS, uji runtime PHP 8.4.13 (E2E 34/34), perbaikan bug override artikel (admin→publik kini bekerja), rate limit login admin per IP, hardening XFF→REMOTE_ADDR, petunjuk password default kondisional. Laporan lengkap: **`AUDIT-2026-10-31.md`** |
 
 ## b. Skor 12 Area (akhir sesi ini)
 | # | Area | Sebelum → Sesudah | PJ |
 |---|---|---|---|
-| 1 | Arsitektur & Kode | 90 → 92 (#1,#2) | S1 versi + endpoint |
-| 2 | Performa | 88 → 89 (#8,#23) | headers cache |
-| 3 | SEO | 96 → 97 (#1) | softwareVersion JSON-LD |
-| 4 | UX/UI & Branding | 90 → 90 | — (stabil) |
-| 5 | Aksesibilitas | 82 → 83 | skip-link |
-| 6 | Keamanan | 70 → 84 (#7,#37,#39) | rate-limit + security headers |
-| 7 | Monetisasi | 80 → 80 | — (stabil, CTA WA hidup) |
-| 8 | Analitik & Data | 25 → 70 (#25) | GA4+Clarity env-gated |
-| 9 | Konten | 95 → 95 | — (2.654 hal, hidup) |
-| 10 | Dokumentasi | 75 → 90 (#44) | RUNBOOK + CHANGELOG + STATE |
-| 11 | Legal & Kepatuhan | 85 → 85 | privasi+S&K ada; cookie notice P2 |
-| 12 | Operasi & Resiliensi | 55 → 78 (#31,#43) | /api/health + runbook |
+| 1 | Arsitektur & Kode | 92 → 94 (#audit penuh, 4 fix terverifikasi) | jalur 3.0.0.0 jelas |
+| 2 | Performa | 89 → 89 | — (file-cache P1) |
+| 3 | SEO | 97 → 97 | — (stabil) |
+| 4 | UX/UI & Branding | 90 → 90 | — |
+| 5 | Aksesibilitas | 83 → 83 | — |
+| 6 | Keamanan | 84 → 88 (#3 fix keamanan + uji) | sisa: FilesMatch DB, header frame, SMTP |
+| 7 | Monetisasi | 80 → 80 | — |
+| 8 | Analitik & Data | 70 → 70 | ⏳ ID GA4/Clarity pemilik |
+| 9 | Konten | 95 → 95 | 2.649 hal PHP hidup |
+| 10 | Dokumentasi | 90 → 94 (AUDIT-2026-10-31.md) | rencana P0/P1/P2 tertulis |
+| 11 | Legal & Kepatuhan | 85 → 85 | cookie notice P1 |
+| 12 | Operasi & Resiliensi | 78 → 80 | skrip E2E otomatis tersimpan |
 
 ## c. Kapabilitas TEGAK (G3 — DILARANG DIRUSAK)
-- **Hash-routing hydration-proof** (`use-hash-route.ts` + patches history/title-observer) — jangan sentuh tanpa memahami patch-nya.
-- **Auto-Pages Engine**: `src/lib/data/{cities,conditions,services,bamboo-types}.ts` + `auto-pages.ts` + `auto-pages-renderer.tsx` — mesin 2.621 halaman.
-- **i18n eager id/en/zh + lazy 27** — pola di `i18n-PATTERN.md`; compiled dict `src/lib/i18n/dictionaries/compiled/`.
-- **Prisma ContactMessage + POST/GET `/api/contact`** (zod validated) — form kontak hidup.
-- **Endpoint SEO**: sitemap.xml (2.654) · robots.ts granular · manifest.webmanifest · icon.tsx/apple-icon.tsx.
-- **Command Palette Ctrl+K** (indeks 2.654+ halaman) & **motion-primitives** (reduced-motion safe).
-- **Artikel fix**: `ARTICLE_UI_FALLBACK` di article-page.tsx — JANGAN hapus (mencegah crash 7 artikel).
+- **PHP CMS mandiri** (`php-cms/`) — terbukti NOL dependensi ke folder lain; jalankan `php -S 0.0.0.0:8080 index.php`.
+- **Auto-Pages Engine PHP**: `data/{cities,conditions,services,bamboo,articles}.json` (2.524/60/25/8/7) + router regex + sitemap 2.649+1.386 URL.
+- **Admin CMS** `/admin`: login (CSRF + bcrypt + regenerate id + rate limit IP 5/5menit), pesan, artikel override (KINI benar-benar tampil di publik), pengaturan, akun.
+- **SEO Universalis**: meta head penuh, JSON-LD (Organization/Breadcrumb/FAQ/Product/BlogPosting), llms.txt, IndexNow, RSS, robots 26 UA.
+- **Proteksi file sensitif**: router php -S (403) + `.htaccess` rewrite block.
 - **WhatsApp float** 0813-1651-6524 — kanal konversi utama.
+- *(Arsip Next.js)* Hash-routing hydration-proof + i18n 30 bahasa + Prisma contact — tetap utuh di `src/` sampai penghapusan terjadwal; DILARANG dikembangkan lebih lanjut (arah 3.0.0.0).
 
 ## d. Utang Teknis & Setengah Jalan
-- `next.config.ts`: `typescript.ignoreBuildErrors: true` — bawaan scaffold; idealnya false + bersihkan.
-- Cookie consent notice belum ada (P2).
-- `tmp/` dictionary partial (9 bahasa) menunggu kompilasi penuh via `scripts/i18n-*`.
-- Spektrum-8 token layer terpasang sebagai deklarasi; migrasi penuh warna hardcode → token belum dilakukan (P3, risiko visual rendah).
-- GA4/Clarity membutuhkan ID asli pemilik (⏳).
+- **Penghapusan Next.js belum dilakukan** (P0 #7) — `src/`, manifes, prisma, scripts/i18n, Caddyfile, examples, mini-services, tests scaffold, branch vercel masih ada.
+- SQLite di dalam webroot — perlu `<FilesMatch>` lapis kedua (P0 #2).
+- Tidak ada notifikasi email pesanan (SMTP) — P0 #3.
+- Akses langsung `/admin-cms.php` masih dieksekusi di Apache — P0 #4.
+- Header frame/HSTS/CSP belum ada — P0 #5.
+- Redirect hash→clean belum dipetakan — P0 #6.
+- Cookie consent belum ada (P1); GA4/Clarity menunggu ID pemilik (P2).
+- `search-index.json` & sitemap tanpa file-cache (P1, hemat CPU shared hosting).
 
 ## e. PIAGAM 2125 (final)
-> Dilihat dari tahun 2125: Bambu Water Nusantara adalah penjaga warisan — bahwa air sederhana dari batang bambu tanah Jawa pernah menyembuhkan, dan tetap disajikan dengan jujur, ilmiah, dan berwibawa. Kami membangun rumah digital yang tak lekang: konten lebih tahan lama dari kode, URL yang tak pernah patah, dan kejujuran yang tak musim. Setiap halaman kota, tiap istilah glossarium, tiap data sains — adalah sumbang mahar bagi generasi yang tak akan pernah kami temui. Kami menolak tren sesaat, memeluk standar abadi: aksesibel bagi semua, cepat bagi semua, jujur kepada semua. Teknologi akan ganti wajah seratus kali; janji kami tidak. *Air yang jujur,warisan yang abadi.*
+> Dilihat dari tahun 2125: Bambu Water Nusantara adalah penjaga warisan — bahwa air sederhana dari batang bambu tanah Jawa pernah menyembuhkan, dan tetap disajikan dengan jujur, ilmiah, dan berwibawa. Kami membangun rumah digital yang tak lekang: konten lebih tahan lama dari kode, URL yang tak pernah patah, dan kejujuran yang tak musim. Setiap halaman kota, tiap istilah glossarium, tiap data sains — adalah sumbang mahar bagi generasi yang tak akan pernah kami temui. Kami menolak tren sesaat, memeluk standar abadi: aksesibel bagi semua, cepat bagi semua, jujur kepada semua. Teknologi akan ganti wajah seratus kali; janji kami tidak. *Air yang jujur, warisan yang abadi.*
 
 ## PETA MODUL ABADI (ringkas)
 | Modul | Fungsi | Status |
 |---|---|---|
-| Auto-Pages Engine | 2.621 hal programatik SEO | ✅ Tegak |
-| i18n 30 Bahasa | Lokalisasi + RTL | ✅ Tegak |
-| Motion System | Animasi GPU + reduced-motion | ✅ Tegak |
-| Command Palette | Navigasi 2.654 hal | ✅ Tegak |
-| Kontak/WA API | Lead capture (Prisma) | ✅ Tegak |
-| Sistem Versi S1 | SemVer + badge + /api/version | ✅ Tegak (v0.5.1, 2 mesin sinkron) |
-| Analitik S7 | GA4+Clarity env-gated | 🟡 Setengah (⏳ ID) |
-| Runbook S12 | Pemulihan operasi | ✅ Tegak |
-| **PHP CMS Mirror** | php-cms/ 4.035 URL (2.649 hal + 1.386 tag) + admin + SEO Universalis | ✅ Tegak (v0.5.1; TERPUSH; verifikasi file + analitik + panduan GSC) |
+| PHP CMS + Admin | Situs utama + CMS (arah 3.0.0.0) | ✅ Tegak (v0.5.2, E2E 34/34) |
+| Auto-Pages Engine PHP | 2.649 hal programatik + 1.386 tag | ✅ Tegak |
+| SEO Universalis | Google/Bing/Yandex/AI + IndexNow | ✅ Tegak |
+| Kontak/WA | Lead capture SQLite (WA float) | ✅ Tegak (email P0) |
+| Sistem Versi S1 | SemVer + badge + /api/version | ✅ Tegak (v0.5.2, 4 titik sinkron) |
+| Runbook S12 | Pemulihan operasi | ✅ Tegak (pembaruan PHP-first menyusul) |
+| **Mirror Next.js** | `src/` 213 file hash-routing | 🟠 BEKU — menunggu penghapusan aman (P0 #7) |
 
 ## f. NEXT-QUEUE (prioritas sesi berikutnya)
 | Pri | Tugas | Effort |
 |---|---|---|
-| P0 | ⏳ Pasang ID GA4 + Clarity asli (menunggu pemilik) | 15m |
-| P1 | Cookie consent notice + link kebijakan privasi | 45m |
-| P1 | Audit kontras WCAG penuh tiap section (lensa #11) | 2j |
-| P2 | Kompilasi 9 dictionary `tmp/` → compiled (scripts/i18n-compile) | 1j |
-| P2 | Migrasi penuh warna hardcode → token SPEKTRUM-8 | 3j |
-| P3 | `ignoreBuildErrors:false` + bersihkan TS error | 2j |
-| P3 | Abandoned-lead recovery (email/WA follow-up otomatis) | 4j |
+| P0 | `.htaccess` `<FilesMatch>` deny sqlite/json + blokir `admin-cms.php` langsung + header frame/HSTS | 30m |
+| P0 | PHPMailer + SMTP cPanel: notifikasi pesanan baru (fallback log) | 2j |
+| P0 | Peta redirect hash→clean + tabel verifikasi | 1j |
+| P0 | **Penghapusan Next.js bertahap** + restuktur repo PHP-first + rewrite README/STATE/RUNBOOK | 4j |
+| P0 | Rilis 3.0.0.0: tag + CHANGELOG + ZIP deploy + panduan cPanel | 1j |
+| P1 | Cookie consent + ganti-password wajib login pertama | 1j |
+| P1 | File-cache sitemap & search-index | 1j |
+| P1 | Self-host font + audit WCAG kontras | 2j |
+| P2 | Roadmap 99 tahap (11×9) — setelah validasi fakta bisnis pemilik | 3j |

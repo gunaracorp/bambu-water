@@ -285,3 +285,35 @@ Peringkat #1 tak bisa dijamin siapa pun — fondasi teknis 100% tuntas; langkah 
 - Main 8080 (config kosong): `/google1a2b3c4d.html` → 404 ✓, nol script analitik ✓.
 - Server uji 8082 env-gated: `/google1a2b3c4d.html` → 200 persis "google-site-verification: …" ✓; kode asing → 404 ✓; `/yandex9f8e7dab.html` → 200 HTML verifikasi ✓; `/BingSiteAuth.xml` → 200 XML ✓; gtag G-TEST12345 + anonymize_ip ✓; Clarity "claritytest99" ✓; `app.js?v=0.5.1` ✓.
 - Versi sinkron 4 titik: package.json 0.5.1 · version.ts 0.5.1 "Pintu Pencari" · CHANGELOG entri baru · config.php 0.5.1.
+
+## 2026-10-31 — v0.5.2 "Dewan Audit" — Audit menyeluruh arah 3.0.0.0 + perbaikan nyata
+**Mandat:** Master prompt 3.0.0.0 (PHP 8.4 Shared Hosting Edition) — audit dulu, jangan bikin fitur baru; perbaikan boleh langsung jika terverifikasi.
+
+### 1. Audit (P0)
+- Clone `gunaracorp/bambu-water` `main` (`ab11e2a`) — 289 file. Ars sitektur ganda terkonfirmasi: Next.js 16 (213 file src, ~21.5K LOC, hash-routing) + PHP CMS mandiri (2.888 baris, clean URL).
+- PHP CMS diuji di **PHP 8.4.13 sungguhan** (static CLI): `php -l` 14/14 bersih; E2E otomatis `php -S`+curl → rute publik, SEO endpoint, proteksi file sensitif (403), 404, login admin, form kontak + CSRF, persistensi SQLite — **34/34 PASS**.
+- Paritas data JSON vs `src/lib/data/*.ts` terverifikasi (2.524 kota/60 kondisi/25 layanan/8 bambu/7 artikel); gambar duplikat; grep membuktikan **php-cms NOL referensi keluar folder** → penghapusan Next.js aman dilakukan bertahap.
+- Sweep keamanan: nol raw-echo XSS, nol eval/exec, nol SQL string-concat, nol secrets di repo.
+
+### 2. Diperbaiki langsung (semua diuji)
+1. **Bug: override artikel tidak pernah dibaca renderer** (`render_article` hanya baca JSON; admin tulis `article_overrides` sia-sia) → kini judul+deskripsi override dipakai di meta/JSON-LD, catatan isi tampil sebagai kartu "Catatan dari kami" (nl2br + e()).
+2. **Form artikel admin tidak memuat override tersimpan** → simpanan kedua menimpa lama; kini prefill dari DB.
+3. **Brute-force login**: tambah rate limit per IP 5/5menit (lapis 2 di atas brake 1 detik/sesi).
+4. **`rate_limited()`**: `REMOTE_ADDR` diutamakan (XFF palsuan → bypass).
+5. **Petunjuk password default** di halaman login hanya tampil selama password default masih aktif.
+6. Statistik "Halaman Publik" dashboard → dihitung dinamis (2644 hardcode → 2.649 aktual).
+
+### 3. Pengujian (bukti nyata)
+- `php -l` PHP 8.4.13: helpers/admin-cms/programmatic/config → bersih.
+- Skrip uji baru `verify-v052.sh`: 11/11 PASS (override tampil di publik + ter-escape XSS, form prefill, hint default kondisional, ganti password, rate limit percobaan ke-6 diblokir).
+- E2E penuh ulang: **34/34 PASS**. Catatan isolasi: file rate-limit `/tmp/bwn_rl_*` persisten antar-run — skrip uji kini meresetnya (proteksi bekerja sesuai desain).
+- **Belum diuji**: hosting cPanel nyata (mod_rewrite, allowoverride, php.ini) dan produksi — dicantumkan jujur di AUDIT §8.
+
+### 4. Dokumentasi
+- **`AUDIT-2026-10-31.md`** (baru): kondisi repo, peta Next.js yang dihapus/dipertahankan, PHP 8.4, kesiapan shared hosting, risiko, P0/P1/P2, rencana uji & deploy/rollback.
+- `STATE.md` ditulis ulang: arah 3.0.0.0, Next.js beku (menunggu penghapusan), NEXT-QUEUE baru.
+- `CHANGELOG.md` entri 0.5.2; versi disinkronkan 4 titik (config.php, package.json, version.ts, worklog ini).
+
+### 5. Keamanan & risiko
+- Token GitHub dipakai via chat plaintext → **WAJIB revoke + rotate** setelah sesi (sudah jadi pola sesi sebelumnya; diulang).
+- Risiko terbuka terdokumentasi di AUDIT §6 (FilesMatch DB, SMTP, redirect hash, cPanel checklist).

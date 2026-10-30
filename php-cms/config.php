@@ -7,8 +7,8 @@
 declare(strict_types=1);
 
 define('APP_NAME', 'Bambu Water Nusantara');
-define('APP_VERSION', '0.5.1');
-define('APP_CODENAME', 'SEO Universalis (PHP CMS)');
+define('APP_VERSION', '0.5.2');
+define('APP_CODENAME', 'Dewan Audit (PHP CMS)');
 define('SITE_URL', 'https://bambuwater.web.id'); // ganti saat deploy, mis. https://bambuwater.web.id
 define('BASE_PATH', rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/'));
 define('ROOT_DIR', __DIR__);

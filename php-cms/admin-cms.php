@@ -34,10 +34,14 @@ if (!$authed && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && ($route === 
     if (!csrf_ok()) {
         $loginError = 'Sesi kedaluwarsa — coba lagi.';
     } else {
-        // Brake anti-bruteforce: min 1 detik antar percobaan per sesi
+        // Brake anti-bruteforce lapis 1: min 1 detik antar percobaan per sesi
         $last = $_SESSION['bwn_last_login_try'] ?? 0;
         if (time() - $last < 1) {
             $loginError = 'Terlalu cepat — tunggu sebentar.';
+        } elseif (rate_limited('admin-login', 5, 300)) {
+            // Lapis 2 (v0.5.2): batas 5 percobaan / 5 menit PER IP — brake berbasis
+            // sesi saja bisa dilewati dengan membuang cookie.
+            $loginError = 'Terlalu banyak percobaan — coba lagi dalam 5 menit.';
         } else {
             $_SESSION['bwn_last_login_try'] = time();
             $u = trim((string) ($_POST['username'] ?? ''));
@@ -58,6 +62,17 @@ if (!$authed && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && ($route === 
 
 if (!$authed) {
     $csrf = csrf_token();
+    /* v0.5.2: petunjuk password default HANYA tampil selama password default
+       masih aktif — setelah diganti, petunjuk hilang (tak membocorkan
+       kredensial bawaan ke halaman login publik). */
+    $showDefaultHint = false;
+    try {
+        $st = db()->prepare('SELECT password_hash FROM admin_users WHERE username = ? LIMIT 1');
+        $st->execute([ADMIN_USER]);
+        $rowDefault = $st->fetch();
+        $showDefaultHint = $rowDefault && password_verify(ADMIN_DEFAULT_PASS, (string) $rowDefault['password_hash']);
+    } catch (Throwable) {
+    }
     ?><!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Admin — <?= e(APP_NAME) ?></title><link rel="stylesheet" href="<?= site_url_path('/assets/style.css') ?>?v=<?= APP_VERSION ?>"></head>
     <body class="admin-body"><div style="min-height:100vh;display:grid;place-items:center;padding:20px">
@@ -69,7 +84,7 @@ if (!$authed) {
         <div class="field"><label>Username</label><input name="username" required autocomplete="username"></div>
         <div class="field"><label>Password</label><input name="password" type="password" required autocomplete="current-password"></div>
         <button class="btn btn-primary" style="width:100%;justify-content:center">Masuk →</button>
-        <p style="font-size:.8rem;color:var(--muted);margin-top:14px">Login pertama: <code>admin</code> / <code><?= e(ADMIN_DEFAULT_PASS) ?></code> — <b>segera ganti di menu Akun</b>.</p>
+        <?php if ($showDefaultHint): ?><p style="font-size:.8rem;color:var(--muted);margin-top:14px">Login pertama: <code>admin</code> / <code><?= e(ADMIN_DEFAULT_PASS) ?></code> — <b>segera ganti di menu Akun</b>.</p><?php endif; ?>
       </form>
     </div></body></html><?php
     exit;
@@ -126,10 +141,17 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 
 /* ---------- Data halaman admin ---------- */
 $counts = db()->query('SELECT COUNT(*) c, SUM(CASE WHEN status = "new" THEN 1 ELSE 0 END) n FROM contact_messages')->fetch();
+/* v0.5.2: jumlah halaman publik dihitung dinamis (tidak lagi hardcode 2644) */
+$pubPages = count(core_pages())
+    + count(json_load('cities')['all'] ?? [])
+    + count(json_load('conditions')['all'] ?? [])
+    + count(json_load('services')['all'] ?? [])
+    + count(json_load('bamboo'))
+    + count(json_load('articles'));
 $statsRow = [
     'Pesan Masuk' => (int) ($counts['c'] ?? 0),
     'Belum Diproses' => (int) ($counts['n'] ?? 0),
-    'Halaman Publik' => 2644,
+    'Halaman Publik' => $pubPages,
     'Versi CMS' => 'v' . APP_VERSION,
 ];
 $messages = db()->query('SELECT * FROM contact_messages ORDER BY created_at DESC LIMIT 100')->fetchAll();
@@ -208,9 +230,12 @@ $page = $route === '/' ? 'dashboard' : trim($route, '/');
 <?php elseif ($page === 'artikel'): ?>
   <h2>Kelola Artikel</h2>
   <p style="color:var(--muted)">Pilih artikel untuk mengubah judul, deskripsi SEO, dan isi ringkas. Perubahan tersimpan sebagai <b>override</b> di database — data asli JSON tetap aman (G1/Z2).</p>
-  <?php $ovr = [];
-  foreach (db()->query('SELECT slug FROM article_overrides') as $r) {
-      $ovr[$r['slug']] = true;
+  <?php /* v0.5.2: form kini mengambil nilai override yang sudah tersimpan —
+     sebelumnya selalu menampilkan data asli, sehingga simpanan kedua
+     menimpa override sebelumnya tanpa sengaja. */
+  $ovr = [];
+  foreach (db()->query('SELECT slug, title, description, body FROM article_overrides') as $r) {
+      $ovr[$r['slug']] = $r;
   } ?>
   <div class="grid grid-3" style="margin-top:16px">
     <?php foreach ($articles as $a): ?>
@@ -219,9 +244,9 @@ $page = $route === '/' ? 'dashboard' : trim($route, '/');
         <form method="post">
           <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>"><input type="hidden" name="act" value="article_save">
           <input type="hidden" name="slug" value="<?= e($a['slug']) ?>">
-          <div class="field"><label>Judul</label><input name="title" value="<?= e($a['title']) ?>"></div>
-          <div class="field"><label>Deskripsi SEO</label><input name="description" value="<?= e($a['metaDescription'] ?? '') ?>"></div>
-          <div class="field"><label>Catatan isi (tambahan tampil di bawah artikel)</label><textarea name="body" rows="4"><?= '' ?></textarea></div>
+          <div class="field"><label>Judul</label><input name="title" value="<?= e($ovr[$a['slug']]['title'] ?? $a['title']) ?>"></div>
+          <div class="field"><label>Deskripsi SEO</label><input name="description" value="<?= e($ovr[$a['slug']]['description'] ?? ($a['metaDescription'] ?? '')) ?>"></div>
+          <div class="field"><label>Catatan isi (tambahan tampil di bawah artikel)</label><textarea name="body" rows="4"><?= e($ovr[$a['slug']]['body'] ?? '') ?></textarea></div>
           <button class="btn btn-primary" style="padding:9px 18px;font-size:.88rem">Simpan</button>
         </form>
         </div>

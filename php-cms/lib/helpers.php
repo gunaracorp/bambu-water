@@ -73,8 +73,13 @@ function csrf_ok(): bool
 /* ---------- Rate limit (file-based, tanpa infra) ---------- */
 function rate_limited(string $bucket, int $max = 5, int $windowSec = 60): bool
 {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'cli';
-    $ip = trim(explode(',', (string) $ip)[0]);
+    /* Keamanan: REMOTE_ADDR diutamakan — HTTP_X_FORWARDED_FOR dikirim klien dan
+       mudah dipalsukan untuk melewati rate limit. XFF hanya fallback bila
+       REMOTE_ADDR kosong (kasus proxy ekstrem tertentu). */
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+    if ($ip === '' || $ip === 'cli') {
+        $ip = trim(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'cli'))[0]);
+    }
     $file = sys_get_temp_dir() . '/bwn_rl_' . md5($bucket . '|' . $ip) . '.json';
     $now = time();
     $data = is_file($file) ? json_decode((string) file_get_contents($file), true) : null;

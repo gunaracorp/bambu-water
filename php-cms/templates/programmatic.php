@@ -261,6 +261,25 @@ function render_article(string $slug): void
         not_found_redirect();
         return;
     }
+    /* v0.5.2 (perbaikan bug): override artikel yang disimpan Admin CMS kini
+       BENAR-BENAR dibaca dan diterapkan — sebelumnya tabel article_overrides
+       hanya ditulis, tidak pernah dibaca oleh halaman publik. */
+    $_ov = null;
+    try {
+        $st = db()->prepare('SELECT title, description, body FROM article_overrides WHERE slug = ? LIMIT 1');
+        $st->execute([$slug]);
+        $_ov = $st->fetch() ?: null;
+    } catch (Throwable) {
+        $_ov = null;
+    }
+    if ($_ov) {
+        if (trim((string) ($_ov['title'] ?? '')) !== '') {
+            $a['title'] = (string) $_ov['title'];
+        }
+        if (trim((string) ($_ov['description'] ?? '')) !== '') {
+            $a['metaDescription'] = (string) $_ov['description'];
+        }
+    }
     $_isoUpdated = seo_iso_date((string) ($a['updated'] ?? ''));
     $meta = ['title' => $a['seoTitle'] ?? $a['title'], 'desc' => $a['metaDescription'] ?? $a['excerpt'], 'canonical' => '/artikel/' . $slug, 'type' => 'article', 'published' => $_isoUpdated ?: date('c'), 'modified' => $_isoUpdated, 'breadcrumbs' => ['Beranda' => '/', 'Artikel' => '/artikel', $a['title'] => '/artikel/' . $slug]];
     ob_start(); ?>
@@ -279,6 +298,9 @@ function render_article(string $slug): void
     <h2 style="margin-top:34px">Kesimpulan</h2>
     <p style="color:var(--muted)"><?= e($a['conclusion'] ?? '') ?></p>
   </div>
+  <?php if ($_ov && trim((string) ($_ov['body'] ?? '')) !== ''): ?>
+  <div class="card reveal" style="margin-top:22px;background:var(--em-50)"><b><?= t('Catatan dari kami', 'A note from us') ?>:</b><p style="color:var(--muted);margin:6px 0 0"><?= nl2br(e($_ov['body'])) ?></p></div>
+  <?php endif; ?>
   <?php if (!empty($a['faqs'])): ?>
   <h2 style="margin-top:36px">FAQ</h2>
   <?php foreach ($a['faqs'] as $f): ?>
