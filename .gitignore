@@ -65,3 +65,7 @@ server.log
 
 # artefak scaffold (dibuat ulang platform) — jangan commit
 /download/
+
+# artefak sesi (log alat & unggahan user) — jangan commit
+/upload/
+/tool-results/
