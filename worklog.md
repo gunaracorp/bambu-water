@@ -267,3 +267,21 @@ Peringkat #1 tak bisa dijamin siapa pun — fondasi teknis 100% tuntas; langkah 
 
 ### 4. Keamanan
 - Token kedua sudah dipakai via chat plaintext → **WAJIB revoke** setelah push ini (Settings → Developer settings → Tokens). Disimpan hanya di command ephemeral, tidak di file repo.
+
+## 2026-10-30 — v0.5.1 "Pintu Pencari" — verifikasi file & analitik PHP CMS
+**Permintaan pemilik:** "sitemap.xml, index sitemap, dokumen-dokumen Google Search Console & Analytics apakah sudah ada untuk PHP?"
+
+### Audit jawaban (G6, live curl)
+- SUDAH ADA sejak 0.5.0: `/sitemap.xml` (sitemapindex → pages 2.649 + tags 1.386 = 4.035 URL), `/sitemap-pages.xml`, `/sitemap-tags.xml`, `/feed.xml`, slot meta verifikasi GSC/Bing/Yandex (config.php).
+- BELUM ADA → dibangun sekarang: (1) verifikasi metode FILE, (2) Analytics, (3) panduan.
+
+### Dibangun
+1. **Rute file verifikasi** (index.php): `/google{kode}.html` + `/yandex{kode}.html` + `/BingSiteAuth.xml` — hanya melayani nama file yang TEPAT terdaftar di config.php (SEO_GSC_VERIFY_FILE / SEO_YANDEX_VERIFY_FILE / SEO_BING_AUTH_XML; getenv-overridable). Kode asing → 404.
+2. **Analitik** (layout.php + config.php): ANALYTICS_GA4_ID (gtag.js, anonymize_ip UU PDP/GDPR) + ANALYTICS_CLARITY_ID; kosong = nol script (privasi-utama).
+3. **PANDUAN-GSC-ANALYTICS.md**: GSC (domain/URL-prefix, verifikasi meta & file, submit sitemap index), Bing (impor GSC, BingSiteAuth.xml, IndexNow otomatis), Yandex, GA4, Clarity + checklist 9 item.
+
+### Verifikasi (G6)
+- php -l config/index/layout → bersih.
+- Main 8080 (config kosong): `/google1a2b3c4d.html` → 404 ✓, nol script analitik ✓.
+- Server uji 8082 env-gated: `/google1a2b3c4d.html` → 200 persis "google-site-verification: …" ✓; kode asing → 404 ✓; `/yandex9f8e7dab.html` → 200 HTML verifikasi ✓; `/BingSiteAuth.xml` → 200 XML ✓; gtag G-TEST12345 + anonymize_ip ✓; Clarity "claritytest99" ✓; `app.js?v=0.5.1` ✓.
+- Versi sinkron 4 titik: package.json 0.5.1 · version.ts 0.5.1 "Pintu Pencari" · CHANGELOG entri baru · config.php 0.5.1.

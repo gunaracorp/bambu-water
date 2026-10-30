@@ -159,5 +159,24 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
 </div>
 
 <script src="<?= site_url_path('/assets/app.js') ?>?v=<?= APP_VERSION ?>" defer></script>
+
+<?php /* ===== Analitik (v0.5.1) — aktif hanya bila ID diisi di config.php =====
+   Tanpa ID = nol script (privasi-utama). GA4 dianonimkan IP (UU PDP/GDPR). */
+if (ANALYTICS_GA4_ID !== ''): ?>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?= e(ANALYTICS_GA4_ID) ?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '<?= e(ANALYTICS_GA4_ID) ?>', { anonymize_ip: true });
+</script>
+<?php endif; if (ANALYTICS_CLARITY_ID !== ''): ?>
+<script>
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})
+  (window,document,"clarity","script","<?= e(ANALYTICS_CLARITY_ID) ?>");
+</script>
+<?php endif; ?>
 </body>
 </html>

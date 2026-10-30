@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 define('APP_NAME', 'Bambu Water Nusantara');
-define('APP_VERSION', '0.5.0');
+define('APP_VERSION', '0.5.1');
 define('APP_CODENAME', 'SEO Universalis (PHP CMS)');
 define('SITE_URL', 'https://bambuwater.web.id'); // ganti saat deploy, mis. https://bambuwater.web.id
 define('BASE_PATH', rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/'));
@@ -37,6 +37,25 @@ define('SEO_TWITTER_HANDLE', '@bambuwater');   // handle X/Twitter brand
 /* Kunci IndexNow — instant indexing ke Bing/Yandex/Seznam/Naver.
    File verifikasi otomatis tersedia di /{kunci}.txt (rute index.php). */
 define('INDEXNOW_KEY', 'a28b2801c357a006444c582d886099fe');
+
+/* --- Verifikasi metode FILE (v0.5.1) — alternatif meta tag di atas ---
+   GSC:    nama file persis dari dashboard, mis. 'google1a2b3c4d.html'
+   Yandex: mis. 'yandex9f8e7d.html'
+   Bing:   tempel SELURUH isi BingSiteAuth.xml dari dashboard Bing.
+   Kosong = rute file tak aktif (404). Bisa juga via env tanpa edit file:
+   SetEnv SEO_GSC_VERIFY_FILE googleXXXX.html  (.htaccess cPanel) */
+define('SEO_GSC_VERIFY_FILE', getenv('SEO_GSC_VERIFY_FILE') ?: '');
+define('SEO_YANDEX_VERIFY_FILE', getenv('SEO_YANDEX_VERIFY_FILE') ?: '');
+define('SEO_BING_AUTH_XML', getenv('SEO_BING_AUTH_XML') ?: '');
+
+/* --- Analitik (v0.5.1) — GA4 + Microsoft Clarity ---
+   GA4:     'G-XXXXXXXXXX' dari Admin → Data Streams
+   Clarity: ID proyek dari dashboard clarity.microsoft.com
+   Kosong = NOL script dirender (privasi-utama, UU PDP/GDPR-ready).
+   Catatan kepatuhan: pasang setelah kebijakan cookie disepakati pemilik
+   (lihat STATE.md NEXT-QUEUE P1). Bisa juga via env tanpa edit file. */
+define('ANALYTICS_GA4_ID', getenv('ANALYTICS_GA4_ID') ?: '');
+define('ANALYTICS_CLARITY_ID', getenv('ANALYTICS_CLARITY_ID') ?: '');
 
 error_reporting(APP_DEBUG ? E_ALL : 0);
 ini_set('display_errors', APP_DEBUG ? '1' : '0');

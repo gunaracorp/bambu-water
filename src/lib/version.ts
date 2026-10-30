@@ -14,8 +14,8 @@ export const APP_NAME = 'Bambu Water Nusantara';
 export const APP_DOMAIN = 'bambuwater.web.id';
 
 /** SemVer — naikkan setiap rilis: MAJOR.MINOR.PATCH */
-export const APP_VERSION = '0.5.0';
-export const VERSION_CODENAME = 'SEO Universalis';
-export const VERSION_DATE = '2025-12-19';
+export const APP_VERSION = '0.5.1';
+export const VERSION_CODENAME = 'Pintu Pencari';
+export const VERSION_DATE = '2026-10-30';
 
 export const VERSION_LABEL = `v${APP_VERSION}`;

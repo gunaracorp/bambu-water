@@ -3,6 +3,19 @@
 Format: [Keep a Changelog](https://keepachangelog.com) · SemVer · **1 tugas = 1 versi** (S1).
 Riwayat 0.1.0–0.2.1 direkonstruksi jujur dari `worklog.md` (Z3 Version Archaeology).
 
+## [0.5.1] — 2026-10-30 — "Pintu Pencari" (Verifikasi & Analitik PHP CMS)
+
+Kelanjutan SEO Universalis: melengkapi tiga kekosongan yang ditemukan audit permintaan pemilik (sitemap & index sitemap ternyata sudah ada sejak 0.5.0).
+
+### Added (php-cms/)
+- **Verifikasi metode FILE**: rute dinamis `/google{kode}.html` (Google Search Console), `/yandex{kode}.html` (Yandex), `/BingSiteAuth.xml` (Bing) — hanya melayani nama file yang terdaftar persis di `config.php` (kode asing → 404, aman). Konten sesuai ketentuan resmi masing-masing mesin.
+- **Analitik GA4 + Microsoft Clarity**: konstanta `ANALYTICS_GA4_ID` / `ANALYTICS_CLARITY_ID` (getenv-overridable untuk cPanel `.htaccess SetEnv`); gtag.js dengan `anonymize_ip: true` (UU PDP/GDPR-ready); kosong = nol script dirender (privasi-utama, konsisten dengan mesin Next.js).
+- **`PANDUAN-GSC-ANALYTICS.md`**: panduan 15–20 menit — GSC (domain/URL-prefix, verifikasi meta & file, submit sitemap index), Bing Webmaster (impor GSC, BingSiteAuth.xml, IndexNow otomatis), Yandex, GA4 step-by-step, Clarity, + checklist 9 item berstatus.
+
+### Verified (G6)
+- `php -l` config.php / index.php / layout.php → bersih.
+- Server uji env-gated: `/google1a2b3c4d.html` (diisi via env) → 200 `google-site-verification: …`; kode asing → 404; `/BingSiteAuth.xml` 200; GA4+Clarity script muncul hanya saat ID diisi, nol script saat kosong.
+
 ## [0.5.0] — 2025-12-19 — "SEO Universalis" (Mesin Pencari Semua, Termasuk AI)
 
 Aktivasi Dewan-46 Divisi SEO: full SEO untuk Google, Bing, Yandex, DuckDuckGo + mesin pencari AI — di seluruh `php-cms/`.

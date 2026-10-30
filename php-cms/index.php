@@ -121,6 +121,29 @@ if ($path === '/' . indexnow_key() . '.txt') {
     exit;
 }
 
+/* ---------- Verifikasi metode FILE (v0.5.1) — GSC / Yandex / Bing ----------
+ * Hanya melayani nama file yang TEPAT terdaftar di config.php (aman:
+ * kode asing otomatis 404). Konten wajib persis ketentuan masing-masing. */
+if (preg_match('#^/(google[a-z0-9_\-]+\.html)$#', $path, $m)) {
+    if (SEO_GSC_VERIFY_FILE !== '' && $m[1] === SEO_GSC_VERIFY_FILE) {
+        header('Content-Type: text/plain; charset=utf-8');
+        echo 'google-site-verification: ' . SEO_GSC_VERIFY_FILE;
+        exit;
+    }
+}
+if (preg_match('#^/(yandex[a-z0-9_\-]+\.html)$#', $path, $m)) {
+    if (SEO_YANDEX_VERIFY_FILE !== '' && $m[1] === SEO_YANDEX_VERIFY_FILE) {
+        header('Content-Type: text/html; charset=utf-8');
+        echo '<html><head></head><body>Verification: ' . SEO_YANDEX_VERIFY_FILE . '</body></html>';
+        exit;
+    }
+}
+if ($path === '/BingSiteAuth.xml' && SEO_BING_AUTH_XML !== '') {
+    header('Content-Type: application/xml; charset=utf-8');
+    echo SEO_BING_AUTH_XML;
+    exit;
+}
+
 /* ---------- Tag Hub (SEO Universalis) ---------- */
 if ($path === '/tag') {
     render_tags_index();

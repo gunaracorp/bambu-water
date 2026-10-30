@@ -11,8 +11,8 @@
 | **Stack** | Next.js 16 (App Router) · React 19 · TS · Tailwind 4 · shadcn/ui · Framer Motion · Prisma/SQLite · Bun |
 | **Arsitektur** | SPA hash-routing `#/{locale}/{slug}` dalam SATU route `/` — hydration-proof, 33 halaman inti + 2.621 programatik = **2.654 URL sitemap** |
 | **i18n** | 30 bahasa (eager id/en/zh + lazy 27), RTL penuh |
-| **Versi aktif** | **v0.5.0 "SEO Universalis"** (2025-12-19) — full SEO Google/Bing/Yandex/AI + 1.386 tag hub di PHP CMS |
-| **Sesi terakhir** | (2026-10-30) Push v0.5.0 TUNTAS ke gunaracorp/bambu-water (`8904a85..04a08cf`) dengan token baru + verifikasi API 6 file kunci. Diagnosis error hydrasi upload user: bukan bug kode — 8 skenario browser bersih nol error, simulasi ekstensi via proxy injeksi mengonfirmasi pola interferensi DOM; recoverable. Smoke test PHP 9/9 rute 200 (tag hub 1.386, llms.txt AI-SEO hidup) |
+| **Versi aktif** | **v0.5.1 "Pintu Pencari"** (2026-10-30) — verifikasi file GSC/Bing/Yandex + GA4/Clarity + panduan; di atas v0.5.0 SEO Universalis (1.386 tag hub) |
+| **Sesi terakhir** | (2026-10-30 · lanjutan) Push v0.5.0 tuntas (`04a08cf`→`37a0c2e`) + rilis **v0.5.1 "Pintu Pencari"**: audit permintaan pemilik → sitemap/index ternyata sudah lengkap (4.035 URL); dibangun rute verifikasi FILE GSC/Yandex/Bing (env/config-gated, kode asing 404), GA4+Clarity (anonymize_ip, nol script bila kosong), PANDUAN-GSC-ANALYTICS.md. Bukti: php -l bersih, server uji 8082 env-gated 6/6 rute, main 8080 aman |
 
 ## b. Skor 12 Area (akhir sesi ini)
 | # | Area | Sebelum → Sesudah | PJ |
@@ -58,10 +58,10 @@
 | Motion System | Animasi GPU + reduced-motion | ✅ Tegak |
 | Command Palette | Navigasi 2.654 hal | ✅ Tegak |
 | Kontak/WA API | Lead capture (Prisma) | ✅ Tegak |
-| Sistem Versi S1 | SemVer + badge + /api/version | ✅ Tegak (v0.5.0, 2 mesin sinkron) |
+| Sistem Versi S1 | SemVer + badge + /api/version | ✅ Tegak (v0.5.1, 2 mesin sinkron) |
 | Analitik S7 | GA4+Clarity env-gated | 🟡 Setengah (⏳ ID) |
 | Runbook S12 | Pemulihan operasi | ✅ Tegak |
-| **PHP CMS Mirror** | php-cms/ 4.035 URL (2.649 hal + 1.386 tag) + admin + SEO Universalis | ✅ Tegak (v0.5.0; TERPUSH 04a08cf; ZIP siap deploy) |
+| **PHP CMS Mirror** | php-cms/ 4.035 URL (2.649 hal + 1.386 tag) + admin + SEO Universalis | ✅ Tegak (v0.5.1; TERPUSH; verifikasi file + analitik + panduan GSC) |
 
 ## f. NEXT-QUEUE (prioritas sesi berikutnya)
 | Pri | Tugas | Effort |
