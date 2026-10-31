@@ -61,11 +61,11 @@ function render_home(): void
         ['Pak Budi — Makassar', 'Kargo antar pulau ternyata tidak ribet. Galon tiba aman, packing rapi sekali.'],
         ['Bu Lilis — Bogor', 'Anak saya yang susah minum air putih malah suka air bambunya. Manis alami tanpa gula.'],
     ];
-    $meta = ['title' => 'Air Bambu Terapi Pengobatan Alami & Distribusi Bambu Se-Indonesia', 'desc' => 'PT Bambu Water Nusantara — produsen air bambu suling & tabib untuk terapi kesehatan alami sejak 2007. Distribusi bambu berkualitas massal ke seluruh Indonesia. WA 0813-1651-6524.', 'canonical' => '/'];
+    $meta = ['title' => 'Air Bambu Terapi Pengobatan Alami & Distribusi Bambu Se-Indonesia', 'desc' => 'PT Bambu Water Nusantara — produsen air bambu suling & tabib untuk terapi kesehatan alami sejak 2007. Distribusi bambu berkualitas massal ke seluruh Indonesia. WA 0813-1651-6524.', 'canonical' => '/', 'lcp' => site_url_path('/assets/images/hero-bamboo.jpg')];
 
     ob_start(); ?>
-<section class="hero">
-  <div class="hero-bg" style="background-image:url('<?= site_url_path('/assets/images/hero-bamboo.jpg') ?>')" role="img" aria-label="Hutan bambu Nusantara"></div>
+<section class="hero" role="img" aria-label="Hutan bambu Nusantara">
+  <img class="hero-bg" src="<?= site_url_path('/assets/images/hero-bamboo.jpg') ?>" alt="" aria-hidden="true"<?= img_dim('/assets/images/hero-bamboo.jpg') ?> fetchpriority="high" decoding="async">
   <div class="container hero-inner">
     <span class="badge-glass">🍃 <?= e(company('BRAND_CLAIM')) ?></span>
     <h1>Sari Bambu Murni, <em>Kesehatan dari Alam</em> Nusantara</h1>
@@ -97,7 +97,7 @@ function render_home(): void
       <p style="color:var(--muted)">Didukung hutan bambu rakyat 2,1 juta hektare — terluas di dunia — dan tim produksi yang membina petani secara berkelanjutan.</p>
       <a class="btn btn-primary" href="<?= site_url_path('/tentang-kami') ?>">Kenali Kami Lebih Dekat</a>
     </div>
-    <img class="reveal" src="<?= site_url_path('/assets/images/about-plantation.jpg') ?>" alt="Perkebunan bambu Nusantara" loading="lazy">
+    <img class="reveal" src="<?= site_url_path('/assets/images/about-plantation.jpg') ?>" alt="Perkebunan bambu Nusantara" loading="lazy" decoding="async"<?= img_dim('/assets/images/about-plantation.jpg') ?>>
   </div>
 </section>
 
@@ -118,7 +118,7 @@ function render_home(): void
 
 <section class="section section-tint">
   <div class="container split">
-    <img class="reveal" src="<?= site_url_path('/assets/images/wellness.jpg') ?>" alt="Gelas air bambu sehat" loading="lazy">
+    <img class="reveal" src="<?= site_url_path('/assets/images/wellness.jpg') ?>" alt="Gelas air bambu sehat" loading="lazy" decoding="async"<?= img_dim('/assets/images/wellness.jpg') ?>>
     <div class="reveal">
       <p class="eyebrow">Sains di Baliknya</p>
       <h2>Kandungan Nutrisi Tertinggi di Kelasnya</h2>
@@ -156,7 +156,7 @@ function render_home(): void
     <?php foreach ($products as $i => $p): ?>
       <div class="tab-panel <?= $i === 0 ? 'active' : '' ?>" data-panel="p<?= $i ?>">
         <div class="split">
-          <img src="<?= site_url_path($p['image']) ?>" alt="<?= e($p['name']) ?>" loading="lazy" style="border-radius:22px;box-shadow:var(--shadow)">
+          <img src="<?= site_url_path($p['image']) ?>" alt="<?= e($p['name']) ?>" loading="lazy" decoding="async"<?= img_dim($p['image']) ?> style="border-radius:22px;box-shadow:var(--shadow)">
           <div>
             <?php if (!empty($p['badge'])): ?><span class="pill pill-new"><?= e($p['badge']) ?></span><?php endif; ?>
             <h3 style="margin-top:8px"><?= e($p['name']) ?> — <span style="color:var(--gold-600)"><?= e($p['tagline'] ?? '') ?></span></h3>
@@ -244,7 +244,7 @@ function core_pages(): array
             'body' => function () {
                 ob_start(); ?>
 <section class="section"><div class="container split">
-  <img class="reveal" src="<?= site_url_path('/assets/images/about-plantation.jpg') ?>" alt="Perkebunan bambu" loading="lazy">
+  <img class="reveal" src="<?= site_url_path('/assets/images/about-plantation.jpg') ?>" alt="Perkebunan bambu" loading="lazy" decoding="async"<?= img_dim('/assets/images/about-plantation.jpg') ?>>
   <div class="reveal">
     <p class="eyebrow">Sejak 2007</p>
     <h2>Visi & Misi</h2>
@@ -277,7 +277,7 @@ function core_pages(): array
     <p>Dipanen dengan teknik <b>mata tunas</b>: lubang kecil dibuat pada ruas terpilih, air menetes semalam suntuk, lalu ditampung higienis. Satu batang hanya memberi 1–2 liter — itulah mengapa air bambu langka dan berharga.</p>
     <ul style="color:var(--muted)"><li>Kaya <b>silika organik</b> hingga 70% — tertinggi di alam</li><li>Mengandung flavonoid & polifenol antioksidan</li><li>Mineral K, Ca, Mg + asam amino alami</li></ul>
   </div>
-  <img class="reveal" src="<?= site_url_path('/assets/images/process-harvest.jpg') ?>" alt="Panen sadapan bambu" loading="lazy">
+  <img class="reveal" src="<?= site_url_path('/assets/images/process-harvest.jpg') ?>" alt="Panen sadapan bambu" loading="lazy" decoding="async"<?= img_dim('/assets/images/process-harvest.jpg') ?>>
 </div></section>
 <section class="section section-tint"><div class="container" style="text-align:center">
   <h2 class="reveal">Ingin Tahu Khasiatnya untuk Kondisi Anda?</h2>
@@ -346,7 +346,7 @@ function core_pages(): array
                 $p = company('PRODUCTS')[0] ?? [];
                 ob_start(); ?>
 <section class="section"><div class="container split">
-  <img class="reveal" src="<?= site_url_path($p['image'] ?? '/assets/images/product-water-bottle.jpg') ?>" alt="Air bambu suling premium" loading="lazy">
+  <img class="reveal" src="<?= site_url_path($p['image'] ?? '/assets/images/product-water-bottle.jpg') ?>" alt="Air bambu suling premium" loading="lazy" decoding="async"<?= img_dim($p['image'] ?? '/assets/images/product-water-bottle.jpg') ?>>
   <div class="reveal">
     <span class="pill pill-new"><?= e($p['badge'] ?? 'Unggulan') ?></span>
     <h2><?= e($p['name']) ?></h2>
@@ -376,7 +376,7 @@ function core_pages(): array
     <p style="font-weight:700">Tersedia: <?= e(implode(' • ', $p['sizes'] ?? ['Jerigen 5 L', 'Galon 19 L'])) ?></p>
     <a class="btn btn-primary" href="<?= wa_link('Halo, saya tabib/praktisi tertarik Air Bambu Tabib') ?>" target="_blank" rel="noopener">Harga Khusus Praktisi</a>
   </div>
-  <img class="reveal" src="<?= site_url_path('/assets/images/process-distillation.jpg') ?>" alt="Distilasi air bambu" loading="lazy">
+  <img class="reveal" src="<?= site_url_path('/assets/images/process-distillation.jpg') ?>" alt="Distilasi air bambu" loading="lazy" decoding="async"<?= img_dim('/assets/images/process-distillation.jpg') ?>>
 </div></section>
 <?php return (string) ob_get_clean(); },
         ],
@@ -404,7 +404,7 @@ function core_pages(): array
             'body' => function () {
                 ob_start(); ?>
 <section class="section"><div class="container split">
-  <img class="reveal" src="<?= site_url_path('/assets/images/process-harvest.jpg') ?>" alt="Panen bambu" loading="lazy">
+  <img class="reveal" src="<?= site_url_path('/assets/images/process-harvest.jpg') ?>" alt="Panen bambu" loading="lazy" decoding="async"<?= img_dim('/assets/images/process-harvest.jpg') ?>>
   <ul class="timeline reveal">
     <?php foreach (company('PROCESS', []) as $p): ?>
       <li><b><?= e($p['step']) ?> — <?= e($p['title']) ?></b><br><span style="color:var(--muted)"><?= e($p['description']) ?></span></li>
@@ -412,7 +412,7 @@ function core_pages(): array
   </ul>
 </div></section>
 <section class="section section-tint"><div class="container split">
-  <img class="reveal" src="<?= site_url_path('/assets/images/process-distillation.jpg') ?>" alt="Distilasi higienis" loading="lazy">
+  <img class="reveal" src="<?= site_url_path('/assets/images/process-distillation.jpg') ?>" alt="Distilasi higienis" loading="lazy" decoding="async"<?= img_dim('/assets/images/process-distillation.jpg') ?>>
   <div class="reveal"><h2>Standar Higienis Farmasi</h2><p style="color:var(--muted)">Setiap batch melewati suling bertahap, uji organoleptik, dan pengemasan food-grade. Jejak batch tercatat — bila Anda bertanya, kami jawab.</p></div>
 </div></section>
 <?php return (string) ob_get_clean(); },
@@ -553,6 +553,7 @@ function core_pages(): array
     <?php if (!empty($_GET['err'])): ?><div class="alert alert-err" role="alert"><?= e((string) $_GET['err']) ?></div><?php endif; ?>
     <form method="post" action="<?= site_url_path('/kontak') ?>">
       <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
+      <div class="hp-field" aria-hidden="true"><label>Website (jangan diisi)</label><input name="website" tabindex="-1" autocomplete="off"></div>
       <div class="field"><label for="f-name">Nama Lengkap *</label><input id="f-name" name="name" required minlength="2" maxlength="120"></div>
       <div class="grid grid-2">
         <div class="field"><label for="f-phone">No. WhatsApp / Telepon *</label><input id="f-phone" name="phone" required minlength="8" maxlength="30"></div>

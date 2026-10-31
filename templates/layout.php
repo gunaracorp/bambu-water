@@ -52,7 +52,7 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
 <meta property="og:locale" content="<?= lang() === 'en' ? 'en_US' : 'id_ID' ?>">
 <meta property="og:title" content="<?= e($meta['title']) ?>">
 <meta property="og:description" content="<?= e($meta['desc']) ?>">
-<meta property="og:image" content="<?= e($_siteUrl . site_url_path('/assets/images/hero-bamboo.jpg')) ?>">
+<meta property="og:image" content="<?= e($_siteUrl . site_url_path('/assets/images/og-image.jpg')) ?>">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <?php if (($meta['published'] ?? '') !== ''): ?><meta property="article:published_time" content="<?= e($meta['published']) ?>">
@@ -62,14 +62,17 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
 <meta name="twitter:site" content="<?= e(SEO_TWITTER_HANDLE) ?>">
 <meta name="twitter:title" content="<?= e($meta['title']) ?>">
 <meta name="twitter:description" content="<?= e($meta['desc']) ?>">
-<meta name="twitter:image" content="<?= e($_siteUrl . site_url_path('/assets/images/hero-bamboo.jpg')) ?>">
+<meta name="twitter:image" content="<?= e($_siteUrl . site_url_path('/assets/images/og-image.jpg')) ?>">
 <meta name="geo.region" content="ID">
 <meta name="geo.placename" content="Indonesia">
 <meta name="theme-color" content="#022c22">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23022c22'/%3E%3Cpath d='M16 6c3 4 5 7 5 10a5 5 0 1 1-10 0c0-3 2-6 5-10z' fill='%23d4a843'/%3E%3C/svg%3E" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<?php /* Font self-hosted (lihat assets/fonts/) — nol request pihak ketiga,
+   font-display: swap, preconnect/Google Fonts dihapus (render-blocking). */ ?>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="<?= site_url_path('/assets/fonts/plus-jakarta-sans-var.woff2') ?>">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="<?= site_url_path('/assets/fonts/playfair-display-700.woff2') ?>">
+<?php if (!empty($meta['lcp'])): /* LCP hero — prioritas tertinggi */ ?><link rel="preload" as="image" href="<?= e($_siteUrl . $meta['lcp']) ?>" fetchpriority="high">
+<?php endif; ?>
 <link rel="stylesheet" href="<?= site_url_path('/assets/style.css') ?>?v=<?= APP_VERSION ?>" id="mainStyle">
 <script type="application/ld+json"><?= json_encode([
     '@context' => 'https://schema.org', '@type' => 'Organization',
@@ -90,12 +93,12 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
       <span class="logo-dot" aria-hidden="true">🎋</span>
       <span>Bambu Water<br><small style="letter-spacing:.28em;font-size:.6rem;color:var(--gold-600)">NUSANTARA</small></span>
     </a>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="const n=document.getElementById('navLinks');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navLinks">☰</button>
     <nav class="nav-links" id="navLinks" aria-label="<?= t('Navigasi utama', 'Main navigation') ?>">
       <?php foreach ($navItems as $href => $label): ?>
         <a href="<?= site_url_path($href) ?>" <?= ($meta['canonical'] === $href) ? 'aria-current="page"' : '' ?>><?= e($label) ?></a>
       <?php endforeach; ?>
-      <button class="tab-btn" style="margin-left:6px" onclick="openPalette()" aria-label="Cari situs (Ctrl+K)">🔍 Cari</button>
+      <button class="tab-btn" style="margin-left:6px" data-pal-open aria-label="Cari situs (Ctrl+K)">🔍 Cari</button>
       <a href="<?= site_url_path('/kontak') ?>" class="btn btn-gold" style="padding:10px 18px"><?= t('Pesan Sekarang', 'Order Now') ?></a>
       <a href="<?= lang_switch_url() ?>" class="nav-links-lang" style="padding:9px 10px;font-size:.85rem"><?= lang() === 'en' ? '🇮🇩 ID' : '🇬🇧 EN' ?></a>
     </nav>
@@ -160,23 +163,35 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
 
 <script src="<?= site_url_path('/assets/app.js') ?>?v=<?= APP_VERSION ?>" defer></script>
 
-<?php /* ===== Analitik (v0.5.1) — aktif hanya bila ID diisi di config.php =====
-   Tanpa ID = nol script (privasi-utama). GA4 dianonimkan IP (UU PDP/GDPR). */
-if (ANALYTICS_GA4_ID !== ''): ?>
+<?php /* ===== Analitik (v3) — privasi-utama (UU PDP/GDPR) =====
+   Script analitik HANYA dimuat bila: (1) ID diisi di config.php, DAN
+   (2) pengunjung menekan "Setuju" pada banner cookie (cookie bwn_consent=1).
+   Tanpa ID atau tanpa persetujuan = nol script pihak ketiga. GA4 dianonimkan IP. */
+$_analyticsOn = (ANALYTICS_GA4_ID !== '' || ANALYTICS_CLARITY_ID !== '');
+$_consent = ($_COOKIE['bwn_consent'] ?? '') === '1';
+if ($_analyticsOn && !$_consent): ?>
+<div class="consent" id="consentBanner" role="region" aria-label="Persetujuan cookie">
+  <p>Kami memakai cookie fungsional; analitik (Google Analytics / Clarity) hanya aktif dengan persetujuan Anda. <a href="<?= site_url_path('/kebijakan-privasi') ?>">Kebijakan Privasi</a>.</p>
+  <div>
+    <button class="btn btn-primary" data-consent="1" style="padding:9px 18px">Setuju</button>
+    <button class="btn btn-outline" data-consent="0" style="padding:9px 18px">Tolak</button>
+  </div>
+</div>
+<?php endif; if ($_analyticsOn && $_consent): if (ANALYTICS_GA4_ID !== ''): ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e(ANALYTICS_GA4_ID) ?>"></script>
-<script>
+<script nonce="<?= csp_nonce() ?>">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', '<?= e(ANALYTICS_GA4_ID) ?>', { anonymize_ip: true });
 </script>
 <?php endif; if (ANALYTICS_CLARITY_ID !== ''): ?>
-<script>
+<script nonce="<?= csp_nonce() ?>">
   (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
   t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})
   (window,document,"clarity","script","<?= e(ANALYTICS_CLARITY_ID) ?>");
 </script>
-<?php endif; ?>
+<?php endif; endif; ?>
 </body>
 </html>

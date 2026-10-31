@@ -1,10 +1,12 @@
 <?php
 /**
- * SEO Universalis (v0.5.0) — Sitemap Index Profesional
+ * SEO Universalis — Sitemap Index Profesional (v3, file-cached)
  *  /sitemap.xml          → sitemap index (menunjuk 2 child)
  *  /sitemap-pages.xml    → halaman inti + programatik + artikel (prioritas berjenjang)
  *  /sitemap-tags.xml     → 1.386 tag hub
- * Dipicu dari index.php dengan ?type=index|pages|tags
+ * Dipicu dari index.php dengan ?type=index|pages|tags.
+ * Cache file 1 jam (data/cache/) — dibuang otomatis saat admin menyimpan
+ * artikel/pengaturan (cache_clear) agar lastmod & daftar URL tetap akurat.
  */
 declare(strict_types=1);
 
@@ -12,14 +14,26 @@ $type = $_GET['type'] ?? 'index';
 $base = rtrim(setting('site_url', SITE_URL), '/');
 header('Content-Type: application/xml; charset=utf-8');
 header('Cache-Control: public, max-age=3600');
-echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 
-if ($type === 'index'): ?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc><?= e($base) ?>/sitemap-pages.xml</loc><lastmod><?= date('Y-m-d') ?></lastmod></sitemap>
-  <sitemap><loc><?= e($base) ?>/sitemap-tags.xml</loc><lastmod><?= date('Y-m-d') ?></lastmod></sitemap>
-</sitemapindex>
-<?php exit; endif;
+$cacheKey = 'sitemap-' . $type;
+$hit = cache_get($cacheKey, 3600);
+if ($hit !== null) {
+    header('X-Cache: HIT');
+    echo $hit;
+    exit;
+}
+
+$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+
+if ($type === 'index') {
+    $xml .= "<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n"
+        . "  <sitemap><loc>" . e($base) . "/sitemap-pages.xml</loc><lastmod>" . date('Y-m-d') . "</lastmod></sitemap>\n"
+        . "  <sitemap><loc>" . e($base) . "/sitemap-tags.xml</loc><lastmod>" . date('Y-m-d') . "</lastmod></sitemap>\n"
+        . "</sitemapindex>\n";
+    cache_set($cacheKey, $xml);
+    echo $xml;
+    exit;
+}
 
 /* ---------- pages | tags ---------- */
 $urls = []; // [loc, priority, changefreq, lastmod]
@@ -52,9 +66,12 @@ if ($type === 'pages') {
         $urls[] = ['/tag/' . ($t['slug'] ?? ''), $prio, 'weekly', $today];
     }
 }
-?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<?php foreach ($urls as [$loc, $prio, $freq, $lm]): ?>
-  <url><loc><?= e($base . $loc) ?></loc><lastmod><?= e($lm) ?></lastmod><changefreq><?= e($freq) ?></changefreq><priority><?= e($prio) ?></priority></url>
-<?php endforeach; ?>
-</urlset>
+
+$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+foreach ($urls as [$loc, $prio, $freq, $lm]) {
+    $xml .= "  <url><loc>" . e($base . $loc) . "</loc><lastmod>" . e($lm) . "</lastmod><changefreq>" . e($freq) . "</changefreq><priority>" . e($prio) . "</priority></url>\n";
+}
+$xml .= "</urlset>\n";
+
+cache_set($cacheKey, $xml);
+echo $xml;

@@ -1,19 +1,47 @@
 <?php
 /**
- * Bambu Water Nusantara — PHP Full CMS v0.5.0 "SEO Universalis"
+ * Bambu Water Nusantara — PHP 8.4 + SQLite, arsitektur PHP Murni
  * Konfigurasi pusat. Satu-satunya file yang wajib disentuh saat pindah hosting.
- * Mirror dari situs Next.js bambuwater.web.id — desain identik, URL bersih.
+ * Aplikasi PHP murni untuk shared hosting cPanel — tanpa Node.js, tanpa build step.
  */
 declare(strict_types=1);
 
 define('APP_NAME', 'Bambu Water Nusantara');
-define('APP_VERSION', '0.5.2');
-define('APP_CODENAME', 'Dewan Audit (PHP CMS)');
+define('APP_VERSION', '3.0.0.0');
+define('APP_CODENAME', 'Nusantara PHP Murni');
 define('SITE_URL', 'https://bambuwater.web.id'); // ganti saat deploy, mis. https://bambuwater.web.id
 define('BASE_PATH', rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/'));
 define('ROOT_DIR', __DIR__);
-define('DATA_DIR', ROOT_DIR . '/data');
-define('DB_FILE', ROOT_DIR . '/data/cms.sqlite');
+
+/* --- Penyimpanan privat ---
+   Default: folder data/ di dalam aplikasi (dilindungi .htaccess berlapis).
+   cPanel TINGKAT LANJUT: pindahkan di luar public_html dengan membuat folder
+   mis. /home/USER/bwn-data lalu set env BWN_DATA_DIR (atau FilesMatch tetap
+   melindungi lokasi default — dua-duanya aman). */
+define('DATA_DIR', (string) (getenv('BWN_DATA_DIR') ?: ROOT_DIR . '/data'));
+define('DB_FILE', DATA_DIR . '/cms.sqlite');
+define('CACHE_DIR', DATA_DIR . '/cache');
+
+/* --- Hardening sesi PHP (diterapkan sebelum session_start mana pun) --- */
+if (PHP_SAPI !== 'cli' && session_status() === PHP_SESSION_NONE) {
+    $bwnIsHttps = (($_SERVER['HTTPS'] ?? '') !== '' && ($_SERVER['HTTPS'] ?? '') !== 'off')
+        || (($_SERVER['REQUEST_SCHEME'] ?? '') === 'https')
+        || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_only_cookies', '1');
+    ini_set('session.cookie_httponly', '1');
+    ini_set('session.cookie_samesite', 'Lax');
+    ini_set('session.cookie_secure', $bwnIsHttps ? '1' : '0');
+    ini_set('session.cookie_lifetime', '0');
+    ini_set('session.gc_maxlifetime', '7200');
+    session_name('BWNSESS');
+    unset($bwnIsHttps);
+}
+
+/* --- Notifikasi email pesanan baru (opsional) ---
+   Isi alamat tujuan di Admin → Pengaturan (kolom "Email Notifikasi") atau
+   set env BWN_NOTIFY_EMAIL. Kosong = tanpa email (pesan tetap masuk database). */
+define('CONTACT_NOTIFY_EMAIL', (string) (getenv('BWN_NOTIFY_EMAIL') ?: ''));
 
 /* --- Kontak & brand (bisa dioverride dari Admin → Pengaturan) --- */
 define('DEFAULT_PHONE', '+62 813-1651-6524');
@@ -22,7 +50,9 @@ define('DEFAULT_EMAIL', 'halo@bambuwater.web.id');
 
 /* --- Admin CMS (G6: ubah password pertama kali login!) --- */
 define('ADMIN_USER', 'admin');
-define('ADMIN_DEFAULT_PASS', 'bambuwater2025'); // di-hash otomatis saat login pertama
+define('ADMIN_DEFAULT_PASS', 'bambuwater2025'); // di-hash otomatis saat login pertama — WAJIB diganti
+/* Ganti password default ditegakkan: admin diarahkan ke menu Akun selama
+   password default masih aktif (lihat admin-cms.php). */
 
 /* --- Debug: jangan true di produksi --- */
 define('APP_DEBUG', false);

@@ -1,39 +1,107 @@
-# BWN PHP CMS — clean URLs
+# =============================================================
+#  Bambu Water Nusantara — Apache (cPanel shared hosting)
+#  PHP 8.4 + SQLite — clean URL + proteksi berlapis + cache
+#  Arsip v3.0.0.0 "Nusantara PHP Murni"
+# =============================================================
 Options -Indexes
+ServerSignature Off
+AddDefaultCharset UTF-8
+
+# ---------- Rewrite engine: clean URL + proteksi ----------
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# Lindungi file sensitif
-RewriteRule ^(config\.php|lib/|data/.*\.json|data/.*\.sqlite|data/.*\.sqlite-.*)$ - [F,L]
+# --- (Opsional) Kanonisasi HTTPS + www → domain canonical ---
+# AKTIFKAN di produksi setelah SSL domain aktif (cPanel AutoSSL/Let's Encrypt).
+# Ganti bambuwater.web.id bila canonical Anda memakai www.
+# RewriteCond %{HTTPS} !=on [OR]
+# RewriteCond %{HTTP:X-Forwarded-Proto} =http
+# RewriteRule ^ https://bambuwater.web.id%{REQUEST_URI} [R=301,L,NE]
 
-# File/folder nyata (assets, images) dilayani langsung
+# --- Blokir file kode & data sensitif (lapis 1: rewrite) ---
+# config/admin dieksekusi HANYA via include dari index.php
+RewriteRule ^(config\.php|admin-cms\.php)$ - [F,L]
+# Direktori internal & cache tidak dilayani langsung
+RewriteRule ^(lib|templates|tools|data/cache)(/|$) - [F,L]
+
+# --- File/folder nyata (assets, images, fonts) dilayani langsung ---
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Semua rute → front controller
+# --- Semua rute → front controller (clean URL, tanpa hash) ---
 RewriteRule ^ index.php [L]
 </IfModule>
 
+# ---------- Lapis 2: FilesMatch — deny meski rewrite dimatikan ----------
+<FilesMatch "\.(sqlite|sqlite-journal|sqlite-wal|sqlite-shm|db|json|log|md|bak|old|save|ini|sh|lock|yml|yaml|dist|pem|env|txt\.bak)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+<FilesMatch "^(config\.php|admin-cms\.php)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# ---------- Kompresi ----------
 <IfModule mod_deflate.c>
-AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/javascript application/json application/xml image/svg+xml
 </IfModule>
+
+# ---------- Browser cache ----------
 <IfModule mod_expires.c>
 ExpiresActive On
 ExpiresByType text/css "access plus 7 days"
 ExpiresByType application/javascript "access plus 7 days"
 ExpiresByType image/jpeg "access plus 30 days"
+ExpiresByType image/png "access plus 30 days"
+ExpiresByType image/webp "access plus 30 days"
 ExpiresByType image/svg+xml "access plus 30 days"
+ExpiresByType font/woff2 "access plus 90 days"
+</IfModule>
+<IfModule mod_mime.c>
+AddType image/webp .webp
+AddType font/woff2 .woff2
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(woff2)$">
+    Header set Cache-Control "public, max-age=7776000"
+  </FilesMatch>
+  <FilesMatch "\.webp$">
+    Header append Vary "Accept"
+  </FilesMatch>
 </IfModule>
 
-# === SEO Universalis (v0.5.0) ===
-AddDefaultCharset UTF-8
+# ---------- WebP transparan: browser modern otomatis menerima .webp ----------
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{REQUEST_FILENAME}\.webp -f
+RewriteRule ^assets/images/(.+)\.jpg$ assets/images/$1.webp [T=image/webp,L]
+</IfModule>
+
+# ---------- Header keamanan (HTTP) ----------
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
   Header set X-DNS-Prefetch-Control "on"
+  # HSTS — aktif bila HTTPS sudah stabil (AutoSSL). Matikan bila sertifikat bermasalah:
+  Header always set Strict-Transport-Security "max-age=15552000"
 </IfModule>
-# Panel admin: larang diindeks SEMUA mesin (header lebih kuat daripada meta)
+
+# ---------- Panel admin: larang diindeks SEMUA mesin ----------
 <IfModule mod_headers.c>
   <If "%{REQUEST_URI} =~ m#^/admin#">
     Header set X-Robots-Tag "noindex, nofollow, noarchive"

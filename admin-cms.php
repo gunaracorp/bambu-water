@@ -13,6 +13,7 @@ if (!defined('APP_VERSION')) {
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
     }
+    send_security_headers();
     $route = $_SERVER['PATH_INFO'] ?? '/';
 } else {
     $route = $_GET['route'] ?? '/';
@@ -21,9 +22,38 @@ if (!defined('APP_VERSION')) {
 $route = '/' . trim($route, '/');
 $authed = !empty($_SESSION['bwn_admin']);
 
+/* Admin TIDAK untuk mesin pencari (header lebih kuat daripada meta saja) */
+if (!headers_sent()) {
+    header('X-Robots-Tag: noindex, nofollow, noarchive');
+}
+
+/* ---------- Kedaluwarsa sesi tidak-aktif (2 jam) ---------- */
+if ($authed) {
+    $lastAct = (int) ($_SESSION['bwn_last_activity'] ?? time());
+    if (time() - $lastAct > 7200) {
+        session_unset();
+        session_destroy();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        $authed = false;
+    } else {
+        $_SESSION['bwn_last_activity'] = time();
+    }
+}
+
 /* ---------- Logout ---------- */
 if ($route === '/logout') {
+    $_SESSION = [];
     session_destroy();
+    if (!headers_sent() && ini_get('session.use_cookies')) {
+        $p = session_get_cookie_params();
+        @setcookie(session_name(), '', [
+            'expires' => time() - 42000,
+            'path' => $p['path'], 'domain' => $p['domain'],
+            'secure' => (bool) $p['secure'], 'httponly' => true, 'samesite' => 'Lax',
+        ]);
+    }
     header('Location: ' . site_url_path('/admin'));
     exit;
 }
@@ -61,6 +91,11 @@ if (!$authed && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && ($route === 
 }
 
 if (!$authed) {
+    /* Rute admin lain tanpa sesi → kembali ke form login (bukan render 200) */
+    if ($route !== '/' && $route !== '/login') {
+        header('Location: ' . site_url_path('/admin'));
+        exit;
+    }
     $csrf = csrf_token();
     /* v0.5.2: petunjuk password default HANYA tampil selama password default
        masih aktif — setelah diganti, petunjuk hilang (tak membocorkan
@@ -107,14 +142,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $flash = 'Pesan dihapus.';
     } elseif ($act === 'settings') {
         $st = db()->prepare('INSERT INTO settings (k, v) VALUES (?, ?) ON CONFLICT(k) DO UPDATE SET v = excluded.v');
-        foreach (['site_name', 'phone', 'whatsapp', 'email', 'site_url'] as $k) {
+        foreach (['site_name', 'phone', 'whatsapp', 'email', 'site_url', 'notify_email'] as $k) {
             $st->execute([$k, trim((string) ($_POST[$k] ?? ''))]);
         }
+        cache_clear(); // sitemap/kanonik bergantung setting — buang cache file
         $flash = 'Pengaturan tersimpan.';
     } elseif ($act === 'article_save') {
         db()->prepare('INSERT INTO article_overrides (slug, title, description, body) VALUES (?, ?, ?, ?)
             ON CONFLICT(slug) DO UPDATE SET title = excluded.title, description = excluded.description, body = excluded.body')
             ->execute([trim((string) $_POST['slug']), trim((string) $_POST['title']), trim((string) $_POST['description']), trim((string) $_POST['body'])]);
+        cache_clear();
         $flash = 'Artikel tersimpan (override aktif).';
         /* SEO Universalis: ping IndexNow agar artikel baru terindeks Bing/Yandex dalam hitungan menit */
         $artUrl = rtrim(setting('site_url', SITE_URL), '/') . '/artikel/' . urlencode(trim((string) $_POST['slug']));
@@ -172,13 +209,30 @@ $nav = static function (string $cur): void {
 };
 
 $page = $route === '/' ? 'dashboard' : trim($route, '/');
+
+/* ---------- Wajib ganti password default (ditegakkan, bukan sekadar hint) ----------
+   Selama password default masih aktif, admin diarahkan ke menu Akun. */
+$mustChange = false;
+try {
+    $st = db()->prepare('SELECT password_hash FROM admin_users WHERE id = ? LIMIT 1');
+    $st->execute([(int) $_SESSION['bwn_admin']]);
+    $rowCur = $st->fetch();
+    $mustChange = $rowCur && password_verify(ADMIN_DEFAULT_PASS, (string) $rowCur['password_hash']);
+} catch (Throwable) {
+}
+if ($mustChange && $page !== 'akun') {
+    header('Location: ' . site_url_path('/admin/akun?must=1'));
+    exit;
+}
 ?><!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Admin — <?= e(APP_NAME) ?></title><link rel="stylesheet" href="<?= site_url_path('/assets/style.css') ?>?v=<?= APP_VERSION ?>"></head>
 <body class="admin-body"><?php $nav($page); ?>
 <div class="container" style="padding:30px 0 60px">
 <?php if ($flash): ?><div class="alert alert-ok"><?= e($flash) ?></div><?php endif; ?>
 
 <?php if ($page === 'dashboard'): ?>
+  <?php if ($mustChange): ?><div class="alert alert-err"><b>Keamanan:</b> Anda masih memakai password bawaan. Wajib diganti sekarang — lihat menu <a href="<?= e(site_url_path('/admin/akun')) ?>" style="text-decoration:underline">Akun</a>.</div><?php endif; ?>
   <h2>Dashboard</h2>
   <div class="grid grid-4" style="margin-top:16px">
     <?php foreach ($statsRow as $label => $val): ?>
@@ -208,7 +262,7 @@ $page = $route === '/' ? 'dashboard' : trim($route, '/');
           <form method="post" style="display:inline"><input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>"><input type="hidden" name="act" value="msg_status"><input type="hidden" name="id" value="<?= (int) $m['id'] ?>">
             <input type="hidden" name="status" value="<?= $m['status'] === 'new' ? 'done' : 'new' ?>">
             <button class="pill <?= $m['status'] === 'new' ? 'pill-new' : 'pill-done' ?>" style="border:0;cursor:pointer"><?= $m['status'] === 'new' ? 'Tandai selesai' : 'Buka lagi' ?></button></form>
-          <form method="post" style="display:inline;margin-left:6px" onsubmit="return confirm('Hapus pesan ini?')"><input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>"><input type="hidden" name="act" value="msg_delete"><input type="hidden" name="id" value="<?= (int) $m['id'] ?>">
+          <form method="post" style="display:inline;margin-left:6px" data-confirm="Hapus pesan ini?"><input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>"><input type="hidden" name="act" value="msg_delete"><input type="hidden" name="id" value="<?= (int) $m['id'] ?>">
             <button class="pill pill-dim" style="border:0;cursor:pointer">Hapus</button></form>
         </td>
       </tr>
@@ -223,6 +277,8 @@ $page = $route === '/' ? 'dashboard' : trim($route, '/');
     <div class="field"><label>Telepon Tampil</label><input name="phone" value="<?= e($settings['phone'] ?? DEFAULT_PHONE) ?>"></div>
     <div class="field"><label>WhatsApp (format 62…)</label><input name="whatsapp" value="<?= e($settings['whatsapp'] ?? DEFAULT_WA) ?>"></div>
     <div class="field"><label>Email</label><input name="email" value="<?= e($settings['email'] ?? DEFAULT_EMAIL) ?>"></div>
+    <div class="field"><label>Email Notifikasi Pesanan (opsional)</label><input name="notify_email" type="email" value="<?= e($settings['notify_email'] ?? CONTACT_NOTIFY_EMAIL) ?>" placeholder="pemilik@domain.com">
+      <small style="color:var(--muted)">Kosong = tanpa email. Jika diisi, setiap pesan masuk diberitahukan via email hosting (deliverabilitas bergantung SPF/DKIM domain).</small></div>
     <div class="field"><label>URL Situs (untuk canonical & sitemap)</label><input name="site_url" value="<?= e($settings['site_url'] ?? SITE_URL) ?>"></div>
     <button class="btn btn-primary">Simpan Pengaturan</button>
   </form>
@@ -258,6 +314,7 @@ $page = $route === '/' ? 'dashboard' : trim($route, '/');
   <h2>Ganti Password</h2>
   <form method="post" class="card" style="max-width:460px;margin-top:16px;padding:30px">
     <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>"><input type="hidden" name="act" value="pass_change">
+    <?php if ($mustChange): ?><div class="alert alert-err">Password bawaan masih aktif — wajib diganti sebelum mengelola konten.</div><?php endif; ?>
     <div class="field"><label>Password saat ini</label><input type="password" name="current" required></div>
     <div class="field"><label>Password baru (min 8)</label><input type="password" name="new" required minlength="8"></div>
     <button class="btn btn-primary">Ganti Password</button>
@@ -267,4 +324,13 @@ $page = $route === '/' ? 'dashboard' : trim($route, '/');
   <h2>404 — Menu tidak ada</h2>
 <?php endif; ?>
 </div>
+<script nonce="<?= csp_nonce() ?>">
+/* Konfirmasi hapus tanpa handler inline (kompatibel CSP nonce) */
+document.addEventListener('submit', function (ev) {
+  var f = ev.target;
+  if (f.matches && f.matches('[data-confirm]') && !window.confirm(f.getAttribute('data-confirm'))) {
+    ev.preventDefault();
+  }
+}, true);
+</script>
 </body></html>

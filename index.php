@@ -34,13 +34,24 @@ require ROOT_DIR . '/templates/llms.php';       // /llms.txt + /llms-full.txt (A
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+lang();                       // panggil awal: cookie preferensi bahasa terpasang sebelum output
+send_security_headers();      // CSP + proteksi header untuk SEMUA respons via front controller
 
 /* ---------- Path dasar (dukung subfolder + query lang) ---------- */
-$path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
-if (BASE_PATH !== '' && str_starts_with($path, BASE_PATH)) {
-    $path = substr($path, strlen(BASE_PATH)) ?: '/';
+$rawPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+if (BASE_PATH !== '' && str_starts_with($rawPath, BASE_PATH)) {
+    $rawPath = substr($rawPath, strlen(BASE_PATH)) ?: '/';
 }
-$path = '/' . trim($path, '/');
+
+/* Kanonikalisasi URL (SEO): trailing-slash & huruf besar → 301 permanen.
+   File fisik nyata dilayani Apache/cli-server sebelum sampai sini. */
+if ($rawPath !== '/' && (str_ends_with($rawPath, '/') || preg_match('/[A-Z]/', $rawPath))) {
+    $target = '/' . trim(mb_strtolower($rawPath), '/');
+    $qs = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY);
+    header('Location: ' . site_url_path($target === '' ? '/' : $target) . ($qs ? '?' . $qs : ''), true, 301);
+    exit;
+}
+$path = '/' . trim($rawPath, '/');
 if ($path === '//') {
     $path = '/';
 }
@@ -157,6 +168,12 @@ if (preg_match('#^/tag/([a-z0-9\-]+)$#', $path, $m)) {
 if ($path === '/search-index.json') {
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: public, max-age=600');
+    $hit = cache_get('search-index', 600);
+    if ($hit !== null) {
+        header('X-Cache: HIT');
+        echo $hit;
+        exit;
+    }
     $b = BASE_PATH;
     $idx = [['t' => 'Beranda', 'g' => 'Halaman', 'u' => $b . '/']];
     foreach (json_load('company')['PRODUCTS'] ?? [] as $p) {
@@ -177,7 +194,9 @@ if ($path === '/search-index.json') {
     foreach (json_load('articles') as $a) {
         $idx[] = ['t' => $a['title'] ?? '', 'g' => 'Artikel', 'u' => $b . '/artikel/' . ($a['slug'] ?? '')];
     }
-    echo json_encode($idx, JSON_UNESCAPED_SLASHES);
+    $json = json_encode($idx, JSON_UNESCAPED_SLASHES);
+    cache_set('search-index', (string) $json);
+    echo $json;
     exit;
 }
 

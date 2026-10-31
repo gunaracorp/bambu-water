@@ -19,6 +19,13 @@ if (rate_limited('contact', 5, 60)) {
 
 $in = static fn (string $k): string => trim((string) ($_POST[$k] ?? ''));
 
+/* Honeypot anti-spam: kolom tersembunyi dari manusia. Bot yang mengisinya
+   dianggap spam — diterima "sukses" tanpa disimpan (tanpa bocor ke bot). */
+if ($in('website') !== '') {
+    header('Location: ' . site_url_path('/kontak?ok=1'));
+    exit;
+}
+
 $name = mb_substr($in('name'), 0, 120);
 $phone = mb_substr($in('phone'), 0, 30);
 $email = mb_substr($in('email'), 0, 200);
@@ -47,6 +54,16 @@ try {
     $st->execute([$name, $email !== '' ? $email : null, $phone, $city !== '' ? $city : null, $orderType, $message]);
 } catch (Throwable) {
     $fail('Terjadi kesalahan server. Silakan coba lagi.');
+}
+
+/* Notifikasi email opsional (Admin → Pengaturan → Email Notifikasi).
+   Best-effort: gagal kirim tidak pernah menggagalkan pesanan. */
+try {
+    notify_admin_new_message([
+        'name' => $name, 'phone' => $phone, 'email' => $email,
+        'city' => $city, 'order_type' => $orderType, 'message' => $message,
+    ]);
+} catch (Throwable) {
 }
 
 header('Location: ' . site_url_path('/kontak?ok=1'));

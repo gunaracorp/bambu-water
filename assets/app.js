@@ -2,6 +2,53 @@
 (function () {
   'use strict';
 
+  /* ---------- Legacy hash URL → clean URL (migrasi dari era Next.js) ----------
+     URL lama #/{locale}/{slug} tidak pernah dikirim ke server — dipetakan di sini
+     ke URL bersih (history.replaceState, tanpa reload). */
+  (function () {
+    var h = location.hash;
+    if (h.length > 2 && h.charAt(0) === '#' && h.charAt(1) === '/' && location.pathname === '/') {
+      var rest = h.slice(2).replace(/\/+$/, '');
+      var langQ = '';
+      if (/^(en|id)\//.test(rest)) {
+        langQ = (rest.slice(0, 2) === 'en') ? '?lang=en' : '';
+        rest = rest.slice(3);
+      }
+      if (rest !== '' && /^[a-z0-9\-\/=]+$/.test(rest)) {
+        var target = '/' + rest + langQ;
+        history.replaceState(null, '', target);
+      }
+    }
+  })();
+
+  /* ---------- Menu mobile (tanpa handler inline — CSP-safe) ---------- */
+  var navToggle = document.getElementById('navToggle');
+  if (navToggle) {
+    navToggle.addEventListener('click', function () {
+      var n = document.getElementById('navLinks');
+      var open = n.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+    });
+  }
+
+  /* ---------- Tombol buka command palette ---------- */
+  document.querySelectorAll('[data-pal-open]').forEach(function (btn) {
+    btn.addEventListener('click', function () { openPalette(); });
+  });
+
+  /* ---------- Banner persetujuan analitik (hanya tampil bila analitik dikonfigurasi) ---------- */
+  var cBanner = document.getElementById('consentBanner');
+  if (cBanner) {
+    cBanner.querySelectorAll('[data-consent]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var v = btn.getAttribute('data-consent') === '1' ? '1' : '0';
+        document.cookie = 'bwn_consent=' + v + '; max-age=31536000; path=/; samesite=Lax';
+        location.reload();
+      });
+    });
+  }
+
   /* ---------- Reveal on scroll ---------- */
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {

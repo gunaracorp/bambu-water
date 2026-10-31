@@ -11,6 +11,9 @@
  */
 declare(strict_types=1);
 
+/* CLI-only: alat ini tidak boleh dieksekusi via web. */
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('CLI only'); }
+
 $ROOT = dirname(__DIR__);
 require $ROOT . '/config.php';
 require ROOT_DIR . '/lib/seo.php';

@@ -84,7 +84,7 @@ function render_condition(string $slug): void
     <div class="alert alert-err" style="margin-top:16px">⚠️ Terapi pendamping — bukan pengganti pengobatan medis. Konsultasikan dengan tenaga kesehatan.</div>
     <a class="btn btn-primary" href="<?= wa_link('Halo, saya ingin konsultasi air bambu untuk ' . $name) ?>" target="_blank" rel="noopener">Konsultasi Gratis via WA</a>
   </div>
-  <img class="reveal" src="<?= site_url_path('/assets/images/wellness.jpg') ?>" alt="Terapi air bambu untuk <?= e($name) ?>" loading="lazy">
+  <img class="reveal" src="<?= site_url_path('/assets/images/wellness.jpg') ?>" alt="Terapi air bambu untuk <?= e($name) ?>" loading="lazy" decoding="async"<?= img_dim('/assets/images/wellness.jpg') ?>>
 </div></section>
 <?php if (!empty($c['faqs'])): ?>
 <section class="section section-tint"><div class="container" style="max-width:820px">
@@ -207,7 +207,7 @@ function render_bamboo(string $slug): void
     <p style="color:var(--muted)"><?= e($b['careTips']) ?></p>
   </div>
   <div class="reveal">
-    <img src="<?= site_url_path('/assets/images/product-bamboo-poles.jpg') ?>" alt="Batang bambu <?= e($name) ?>" loading="lazy" style="border-radius:22px;box-shadow:var(--shadow)">
+    <img src="<?= site_url_path('/assets/images/product-bamboo-poles.jpg') ?>" alt="Batang bambu <?= e($name) ?>" loading="lazy" decoding="async"<?= img_dim('/assets/images/product-bamboo-poles.jpg') ?> style="border-radius:22px;box-shadow:var(--shadow)">
     <?php if (!empty($b['faqs'])): foreach ($b['faqs'] as $f): ?>
       <details class="faq" style="margin-top:12px"><summary><?= e($f['q']) ?></summary><div class="faq-body"><?= e($f['a']) ?></div></details>
     <?php endforeach; endif; ?>
