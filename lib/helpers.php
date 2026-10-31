@@ -91,11 +91,50 @@ function rate_limited(string $bucket, int $max = 5, int $windowSec = 60): bool
     return $data['count'] > $max;
 }
 
-/* ---------- i18n ringan: id penuh, en parsial, fallback id ---------- */
+/* ---------- i18n: 30 bahasa (v3.1) — map "teks Indonesia" -> terjemahan ----------
+   Kamus = aset aplikasi di lib/i18n/ (bukan data pengguna — ikut kode,
+   terproteksi RewriteRule lib/ + FilesMatch *.json, kebal BWN_DATA_DIR).
+   Sumber era Next.js (git 0e042bc) + terjemahan inti tambahan.
+   Fallback berlapis: map bahasa -> teks EN template -> teks ID. */
+function i18n_dir(): string
+{
+    return ROOT_DIR . '/lib/i18n';
+}
+
+function i18n_langs(): array
+{
+    static $l = null;
+    if ($l === null) {
+        $meta = i18n_load('_meta');
+        $l = (is_array($meta['langs'] ?? null) && $meta['langs'] !== []) ? $meta['langs'] : ['id', 'en'];
+    }
+    return $l;
+}
+
+function lang_native_name(string $code): string
+{
+    $meta = i18n_load('_meta');
+    return (string) ($meta['names'][$code] ?? strtoupper($code));
+}
+
+function lang_og_locale(string $code): string
+{
+    $meta = i18n_load('_meta');
+    return (string) ($meta['og'][$code] ?? $code . '_' . strtoupper($code));
+}
+
+function lang_is_rtl(string $code): bool
+{
+    return in_array($code, ['ar', 'fa', 'he', 'ur'], true);
+}
+
 function lang(): string
 {
+    $allowed = i18n_langs();
     $l = $_GET['lang'] ?? ($_COOKIE['lang'] ?? 'id');
-    $l = $l === 'en' ? 'en' : 'id';
+    if (!in_array($l, $allowed, true)) {
+        $l = 'id';
+    }
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
     }
@@ -111,17 +150,61 @@ function lang(): string
     return $l;
 }
 
-function t(string $idText, string $enText = ''): string
+/** Muat kamus i18n dari lib/i18n/{name}.json (cache per request). */
+function i18n_load(string $name): array
 {
-    return lang() === 'en' && $enText !== '' ? $enText : $idText;
+    static $cache = [];
+    if (!isset($cache[$name])) {
+        $file = i18n_dir() . '/' . $name . '.json';
+        $cache[$name] = is_file($file) ? (json_decode((string) file_get_contents($file), true) ?: []) : [];
+    }
+    return $cache[$name];
 }
 
-function lang_switch_url(): string
+function i18n_lookup(string $l, string $idText): ?string
+{
+    static $maps = [];
+    if (!isset($maps[$l])) {
+        $maps[$l] = $l !== 'id' ? i18n_load($l) : [];
+    }
+    $hit = $maps[$l][$idText] ?? null;
+    return is_string($hit) && trim($hit) !== '' ? $hit : null;
+}
+
+function t(string $idText, string $enText = ''): string
+{
+    $l = lang();
+    if ($l === 'id') {
+        return $idText;
+    }
+    if ($l === 'en') {
+        return $enText !== '' ? $enText : (i18n_lookup('en', $idText) ?? $idText);
+    }
+    $hit = i18n_lookup($l, $idText);
+    if ($hit !== null) {
+        return $hit;
+    }
+    return $enText !== '' ? $enText : $idText;
+}
+
+/** URL versi bahasa $code untuk halaman sekarang (query lain dipertahankan). */
+function lang_url(string $code): string
 {
     $qs = $_GET;
-    $qs['lang'] = lang() === 'en' ? 'id' : 'en';
+    if ($code === 'id') {
+        unset($qs['lang']);
+    } else {
+        $qs['lang'] = $code;
+    }
     $path = strtok($_SERVER['REQUEST_URI'] ?? '/', '?') ?: '/';
-    return e($path . '?' . http_build_query($qs));
+    $qsStr = http_build_query($qs);
+    return e($path . ($qsStr !== '' ? '?' . $qsStr : ''));
+}
+
+/** Kompatibilitas: toggle lama id<->en. */
+function lang_switch_url(): string
+{
+    return lang_url(lang() === 'en' ? 'id' : 'en');
 }
 
 /* ---------- Slug & data lookups ---------- */

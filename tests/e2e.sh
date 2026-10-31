@@ -9,6 +9,7 @@ set -u
 cd "$(dirname "$0")/.."
 ROOT="$(pwd)"
 PHP_BIN="${PHP_BIN:-php}"
+command -v "$PHP_BIN" >/dev/null 2>&1 || { echo "FATAL: PHP_BIN '$PHP_BIN' tidak ditemukan. Jalankan: PHP_BIN=/path/ke/php bash $0"; exit 2; }
 PORT="${BWN_TEST_PORT:-8091}"
 BASE="http://127.0.0.1:$PORT"
 PASS=0; FAIL=0; FAILED_TESTS=()
@@ -25,6 +26,12 @@ expect_header() { local name="$1" needle="$2"; shift 2; local h; h="$(curl -sI "
 # ---------- 0. Instance terisolasi ----------
 TMP_DATA="$(mktemp -d /tmp/bwn-e2e-data.XXXXXX)"
 cp data/*.json "$TMP_DATA"/
+# Produksi selalu punya cms.sqlite — pra-buat file kosong (app akan mengisi tabelnya)
+# supaya asersi blokir 403 menguji kondisi nyata, bukan 404 file-absen.
+: > "$TMP_DATA/cms.sqlite"
+# Rate-limit berbasis file di /tmp bertahan antar-run (kunci: bucket+IP) —
+# bersihkan agar hitungan login e2e selalu dimulai dari nol (deterministik).
+rm -f /tmp/bwn_rl_*.json 2>/dev/null
 JAR="$(mktemp /tmp/bwn-e2e-cookies.XXXXXX)"
 env BWN_DATA_DIR="$TMP_DATA" "$PHP_BIN" -S "127.0.0.1:$PORT" index.php >/tmp/bwn-e2e-server.log 2>&1 &
 SRV_PID=$!
@@ -49,7 +56,7 @@ expect_code "sitemap.xml (index)" 200 "$BASE/sitemap.xml"
 expect_code "feed.xml (RSS)" 200 "$BASE/feed.xml"
 expect_code "llms.txt" 200 "$BASE/llms.txt"
 expect_code "api/health" 200 "$BASE/api/health"
-expect_contains "api/version = PHP + v3" '"version":"3.0.0.0"' "$BASE/api/version"
+if curl -s "$BASE/api/version" | grep -qE '"version":"3\.[0-9]+\.[0-9]+\.[0-9]+"' && curl -s "$BASE/api/version" | grep -q '"engine":"PHP'; then ok "api/version = PHP + v3.x"; else bad "api/version = PHP + v3.x" "pola version 3.x / engine PHP tidak ditemukan"; fi
 NPAGES="$(curl -s "$BASE/sitemap-pages.xml" | grep -c '<loc>' || true)"
 [ "${NPAGES:-0}" -ge 2600 ] && ok "sitemap-pages >= 2600 URL ($NPAGES)" || bad "sitemap-pages >= 2600 URL" "${NPAGES:-0}"
 NTAGS="$(curl -s "$BASE/sitemap-tags.xml" | grep -c '<loc>' || true)"
@@ -71,6 +78,7 @@ echo ""
 echo "== 5. Batas keamanan file =="
 expect_code "config.php diblokir" 403 "$BASE/config.php"
 expect_code "database sqlite diblokir" 403 "$BASE/data/cms.sqlite"
+expect_code "kamus i18n diblokir (lib/i18n/*.json)" 403 "$BASE/lib/i18n/de.json"
 expect_code "data JSON diblokir" 403 "$BASE/data/company.json"
 expect_code "lib/ diblokir" 403 "$BASE/lib/db.php"
 expect_code "templates/ diblokir" 403 "$BASE/templates/layout.php"
@@ -101,6 +109,24 @@ case "$HOMEPAGE" in *'onclick='*) bad "tanpa handler onclick inline (CSP-safe)" 
 expect_lacks "admin tidak bocor di halaman publik" 'bwn_admin' "$BASE/"
 ENPAGE="$(curl -s "$BASE/?lang=en")"
 case "$ENPAGE" in *'<html lang="en"'*) ok "?lang=en -> html lang=en";; *) bad "?lang=en -> html lang=en" "missing";; esac
+
+echo ""
+echo "== 7b. i18n 30 bahasa (v3.1) =="
+NHREF="$(echo "$HOMEPAGE" | grep -c 'hreflang=')"
+[ "${NHREF:-0}" -ge 30 ] && ok "hreflang >= 30 bahasa ($NHREF)" || bad "hreflang >= 30 bahasa" "${NHREF:-0}"
+DEPAGE="$(curl -s "$BASE/?lang=de")"
+case "$DEPAGE" in *'Startseite'*) ok "?lang=de -> nav terjemahan Jerman";; *) bad "?lang=de -> nav terjemahan Jerman" "missing";; esac
+case "$DEPAGE" in *'Jetzt bestellen'*) ok "?lang=de -> CTA Jerman";; *) bad "?lang=de -> CTA Jerman" "missing";; esac
+ARPAGE="$(curl -s "$BASE/?lang=ar")"
+case "$ARPAGE" in *'dir="rtl"'*) ok "?lang=ar -> dir=rtl";; *) bad "?lang=ar -> dir=rtl" "missing";; esac
+JAPAGE="$(curl -s "$BASE/?lang=ja")"
+case "$JAPAGE" in *'<html lang="ja"'*) ok "?lang=ja -> html lang=ja";; *) bad "?lang=ja -> html lang=ja" "missing";; esac
+BADCASE="$(curl -s -o /dev/null -w '%{http_code}' "$BASE/?lang=xx-hack")"
+[ "$BADCASE" = "200" ] && ok "kode bahasa asing aman (fallback id, tetap 200)" || bad "kode bahasa asing aman" "$BADCASE"
+LANGHACK="$(curl -s "$BASE/?lang=<script>")"
+case "$LANGHACK" in *'<script>nav'*) bad "?lang=XSS tidak bocor ke HTML" "masih ada";; *) ok "?lang=XSS tidak bocor ke HTML";; esac
+case "$HOMEPAGE" in *'class="lang"'*) ok "switcher bahasa di header";; *) bad "switcher bahasa di header" "missing";; esac
+case "$HOMEPAGE" in *'id="toTop"'*) ok "tombol kembali-ke-atas ada";; *) bad "tombol kembali-ke-atas ada" "missing";; esac
 LD="$(curl -s "$BASE/" | tr -d '\n' | grep -o '<script type="application/ld+json">[^<]*</script>' | head -1 | sed 's/<script type="application\/ld+json">//;s/<\/script>//')"
 if [ -n "$LD" ] && echo "$LD" | python3 -c "import json,sys; json.load(sys.stdin)" 2>/dev/null; then ok "JSON-LD valid (parse OK)"; else bad "JSON-LD valid (parse OK)" "invalid"; fi
 expect_code "assets woff2 tersedia" 200 "$BASE/assets/fonts/plus-jakarta-sans-var.woff2"

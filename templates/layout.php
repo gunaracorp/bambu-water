@@ -24,8 +24,9 @@ $navItems = [
 ];
 $_siteUrl = rtrim(setting('site_url', SITE_URL), '/');
 $_canonUrl = $_siteUrl . $meta['canonical'];
+$_lang = lang();
 ?><!DOCTYPE html>
-<html lang="<?= lang() === 'en' ? 'en' : 'id' ?>">
+<html lang="<?= e($_lang) ?>" dir="<?= lang_is_rtl($_lang) ? 'rtl' : 'ltr' ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,15 +42,18 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
 <?php endif; if (SEO_YANDEX_VERIFICATION !== ''): ?><meta name="yandex-verification" content="<?= e(SEO_YANDEX_VERIFICATION) ?>">
 <?php endif; ?>
 <link rel="canonical" href="<?= e($_canonUrl) ?>">
+<?php foreach (i18n_langs() as $_lc): if ($_lc === 'id'): ?>
 <link rel="alternate" hreflang="id" href="<?= e($_canonUrl) ?>">
-<link rel="alternate" hreflang="en" href="<?= e($_canonUrl . (str_contains($meta['canonical'], '?') ? '&' : '?') . 'lang=en') ?>">
+<?php else: ?>
+<link rel="alternate" hreflang="<?= e($_lc) ?>" href="<?= e($_canonUrl . (str_contains($meta['canonical'], '?') ? '&' : '?') . 'lang=' . $_lc) ?>">
+<?php endif; endforeach; ?>
 <link rel="alternate" hreflang="x-default" href="<?= e($_canonUrl) ?>">
 <link rel="alternate" type="application/rss+xml" title="<?= e(setting('site_name', APP_NAME)) ?> — RSS" href="<?= e($_siteUrl) ?>/feed.xml">
 <link rel="sitemap" type="application/xml" href="<?= e($_siteUrl) ?>/sitemap.xml">
 <meta property="og:type" content="<?= e($meta['type']) ?>">
 <meta property="og:site_name" content="<?= e(setting('site_name', APP_NAME)) ?>">
 <meta property="og:url" content="<?= e($_canonUrl) ?>">
-<meta property="og:locale" content="<?= lang() === 'en' ? 'en_US' : 'id_ID' ?>">
+<meta property="og:locale" content="<?= e(lang_og_locale($_lang)) ?>">
 <meta property="og:title" content="<?= e($meta['title']) ?>">
 <meta property="og:description" content="<?= e($meta['desc']) ?>">
 <meta property="og:image" content="<?= e($_siteUrl . site_url_path('/assets/images/og-image.jpg')) ?>">
@@ -98,9 +102,16 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
       <?php foreach ($navItems as $href => $label): ?>
         <a href="<?= site_url_path($href) ?>" <?= ($meta['canonical'] === $href) ? 'aria-current="page"' : '' ?>><?= e($label) ?></a>
       <?php endforeach; ?>
-      <button class="tab-btn" style="margin-left:6px" data-pal-open aria-label="Cari situs (Ctrl+K)">🔍 Cari</button>
-      <a href="<?= site_url_path('/kontak') ?>" class="btn btn-gold" style="padding:10px 18px"><?= t('Pesan Sekarang', 'Order Now') ?></a>
-      <a href="<?= lang_switch_url() ?>" class="nav-links-lang" style="padding:9px 10px;font-size:.85rem"><?= lang() === 'en' ? '🇮🇩 ID' : '🇬🇧 EN' ?></a>
+      <button class="tab-btn" style="margin-left:6px" data-pal-open aria-label="Cari situs (Ctrl+K)">🔍 <?= t('Cari', 'Search') ?></button>
+      <a href="<?= site_url_path('/kontak') ?>" class="btn btn-gold btn-sm"><?= t('Pesan Sekarang', 'Order Now') ?></a>
+      <details class="lang">
+        <summary aria-label="<?= t('Ganti bahasa', 'Change language') ?>">🌐 <?= e(strtoupper($_lang)) ?></summary>
+        <div class="lang-panel">
+          <?php foreach (i18n_langs() as $_lc): ?>
+          <a href="<?= lang_url($_lc) ?>" <?= $_lc === $_lang ? 'aria-current="true"' : '' ?>><?= e(lang_native_name($_lc)) ?><small><?= e(strtoupper($_lc)) ?></small></a>
+          <?php endforeach; ?>
+        </div>
+      </details>
     </nav>
   </div>
 </header>
@@ -153,6 +164,7 @@ $_canonUrl = $_siteUrl . $meta['canonical'];
 <a class="wa-float" href="<?= wa_link(t('Halo, saya ingin bertanya tentang air bambu', 'Hello, I want to ask about bamboo water')) ?>" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
   <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.7 1.8.8 1.9c0 .1.1.3 0 .4-.4.8-.9 1-.7 1.4.8 1.3 1.7 2 3 2.7.4.2.6.2.8-.1l.8-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2z"/></svg>
 </a>
+<button class="to-top" id="toTop" aria-label="<?= t('Kembali ke atas', 'Back to top') ?>">↑</button>
 
 <div class="pal-backdrop" id="palBackdrop" role="dialog" aria-modal="true" aria-label="Pencarian situs">
   <div class="pal">
@@ -173,8 +185,8 @@ if ($_analyticsOn && !$_consent): ?>
 <div class="consent" id="consentBanner" role="region" aria-label="Persetujuan cookie">
   <p>Kami memakai cookie fungsional; analitik (Google Analytics / Clarity) hanya aktif dengan persetujuan Anda. <a href="<?= site_url_path('/kebijakan-privasi') ?>">Kebijakan Privasi</a>.</p>
   <div>
-    <button class="btn btn-primary" data-consent="1" style="padding:9px 18px">Setuju</button>
-    <button class="btn btn-outline" data-consent="0" style="padding:9px 18px">Tolak</button>
+    <button class="btn btn-primary btn-sm" data-consent="1"><?= t('Setuju', 'Accept') ?></button>
+    <button class="btn btn-outline btn-sm" data-consent="0"><?= t('Tolak', 'Decline') ?></button>
   </div>
 </div>
 <?php endif; if ($_analyticsOn && $_consent): if (ANALYTICS_GA4_ID !== ''): ?>

@@ -2,6 +2,51 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com) · SemVer · **1 tugas = 1 versi** (S1).
 
+## [3.1.0.0] — 2026-11-01 — "Spektrum v2 + 30 Bahasa" (Desain Profesional & i18n Penuh)
+
+Respons umpan balik pemilik: tampilan v3.0.0.0 dinilai kurang profesional dan kamus 30 bahasa era
+Next.js ikut terhapus. Rilis ini mengembalikan keduanya di atas fondasi PHP murni — tanpa framework,
+tanpa build tool, tetap 100% kompatibel cPanel.
+
+### Added — Desain (Opsi A)
+- **Design system "Spektrum v2"** (`assets/style.css` 239 → ±470 baris): design tokens berlapis
+  (layered shadow, ring fokus, gradien brand/emas), hero gradient-mesh + blob mengambang + badge
+  berdenyut + teks gradien, statbar kaca menimpa hero, kartu dengan aksen gradien saat hover,
+  ikon gradien, testimoni bergaya kutipan, timeline bertitik, tab pill gradien, FAQ dengan status
+  terbuka beraksen, tombol dengan efek kilau, footer dengan garis gradasi & hover geser.
+- **Animasi bermakna**: reveal-on-scroll dengan stagger otomatis untuk grid (IntersectionObserver),
+  hero zoom lambat, bayangan navbar saat scroll, tombol kembali-ke-atas.
+- **Aksesibilitas**: `.reveal` hanya menyembunyikan konten saat JS aktif (tanpa JS = semua terlihat),
+  `prefers-reduced-motion` mematikan seluruh gerak, fokus tetap kontras.
+
+### Added — i18n 30 Bahasa (Opsi B)
+- **Kamus dipulihkan dari git** (0e042bc era Next.js) → `lib/i18n/{kode}.json` (aset aplikasi,
+  terproteksi RewriteRule `lib/` + FilesMatch `*.json`, kebal `BWN_DATA_DIR`).
+- **Fakta jujur yang ditemukan**: kamus lama hanya benar-benar menerjemahkan ~8 bahasa
+  (en 90%, zh 79%, es/pt 57%, ar 52%, hi 46%, ru 8%, bn 3%); 21 bahasa lain ternyata masih
+  teks Indonesia berlabel ganda. Rilis ini menambah **terjemahan inti UI (32 string) untuk
+  19 bahasa tambahan** (de, fr, it, ja, ko, nl, pl, tr, vi, ms, th, fil, sw, fa, he, ur, uk, bn, ru).
+- `t()` kini lookup kamus per bahasa dengan fallback berlapis (map → EN template → ID);
+  `lang()` memvalidasi 30 kode; **switcher bahasa** `<details>` di header (berfungsi tanpa JS),
+  **hreflang 30 bahasa + x-default**, `og:locale` per bahasa, **dir="rtl"** untuk ar/fa/he/ur
+  beserta penyesuaian CSS RTL.
+- Konten hasil-generate (2.524 kota dll.) tetap Indonesia — fallback transparan, sama seperti
+  perilaku situs lama, kini terdokumentasi.
+
+### Changed
+- `APP_VERSION` 3.1.0.0 (cache-busting `?v=` otomatis di CSS/JS).
+
+### Security
+- Router `php -S`: blokir `/data|/lib|/templates` **tidak lagi bergantung keberadaan file**
+  (defense in depth, paritah `.htaccess`; sebelumnya 404 saat file absen, kini konsisten 403).
+
+### Tests
+- Suite E2E: **83 → 93 asersi** — tambah: hreflang ≥30, terjemahan DE (nav+CTA), RTL AR,
+  lang=ja, kode bahasa asing aman, `?lang=XSS` tidak bocor, switcher & tombol-to-top ada,
+  kamus `lib/i18n/*.json` diblokir 403, pra-buat `cms.sqlite` + bersih-bersih rate-limit antar-run
+  (deterministik), asersi versi kini agnostik (3.x).
+- Hasil: **93/93 PASS** pada PHP 8.4.13 (binary produksi target).
+
 ## [3.0.0.0] — 2026-11-01 — "Nusantara PHP Murni" (Next.js Eliminated)
 
 Teknis dari spesifikasi modernisasi penuh: repo kini **aplikasi PHP murni** — Next.js/Vercel/Node.js

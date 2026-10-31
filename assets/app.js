@@ -2,6 +2,10 @@
 (function () {
   'use strict';
 
+  /* Tandai JS aktif — CSS .reveal hanya menyembunyikan konten bila JS jalan
+     (tanpa JS: seluruh konten tetap terlihat — aksesibilitas & SEO aman). */
+  document.documentElement.classList.add('js');
+
   /* ---------- Legacy hash URL → clean URL (migrasi dari era Next.js) ----------
      URL lama #/{locale}/{slug} tidak pernah dikirim ke server — dipetakan di sini
      ke URL bersih (history.replaceState, tanpa reload). */
@@ -49,13 +53,43 @@
     });
   }
 
+  /* ---------- Navbar: bayangan saat scroll ---------- */
+  var navEl = document.querySelector('.nav');
+  var toTop = document.getElementById('toTop');
+  var onScroll = function () {
+    var y = window.scrollY || 0;
+    if (navEl) navEl.classList.toggle('scrolled', y > 8);
+    if (toTop) toTop.classList.toggle('show', y > 640);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  if (toTop) {
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   /* ---------- Reveal on scroll ---------- */
+  /* Enhancement: kartu dalam grid & blok utama ikut ter-reveal tanpa
+     mengubah HTML template (tanpa JS: semua tetap terlihat). */
+  document.querySelectorAll('.grid > *, .stats, .split > *, .timeline li, .price-table')
+    .forEach(function (el) { if (!el.classList.contains('reveal')) el.classList.add('reveal'); });
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  /* ---------- Dropdown bahasa (details): tutup saat klik luar / Escape ---------- */
+  document.querySelectorAll('details.lang').forEach(function (d) {
+    document.addEventListener('click', function (ev) {
+      if (d.open && !d.contains(ev.target)) d.open = false;
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && d.open) d.open = false;
+    });
+  });
 
   /* ---------- Tabs ---------- */
   document.querySelectorAll('.tab-btn[data-tab]').forEach(function (btn) {

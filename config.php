@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 define('APP_NAME', 'Bambu Water Nusantara');
-define('APP_VERSION', '3.0.0.0');
+define('APP_VERSION', '3.1.0.0');
 define('APP_CODENAME', 'Nusantara PHP Murni');
 define('SITE_URL', 'https://bambuwater.web.id'); // ganti saat deploy, mis. https://bambuwater.web.id
 define('BASE_PATH', rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/'));

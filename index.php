@@ -7,20 +7,21 @@
 declare(strict_types=1);
 
 /* php -S router: serahkan file statis nyata ke server bawaan,
-   TAPI kunci file kode/data agar tak bisa diunduh mentah */
+   TAPI kunci file kode & direktori data agar tak bisa diunduh mentah.
+   Blokir direktori sensitif TIDAK bergantung keberadaan file
+   (defense in depth — paritah perilaku .htaccess di Apache). */
 if (PHP_SAPI === 'cli-server') {
-    $file = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    if (is_file($file)) {
-        $blocked = preg_match('#\.(json|sqlite|sqlite-wal|sqlite-shm|md|log|gz)$#i', $file)
-            || str_contains($file, '/data/') || str_contains($file, '/lib/')
-            || str_contains($file, '/templates/') || str_ends_with($file, '/config.php');
-        if ($blocked) {
-            http_response_code(403);
-            exit;
-        }
-        if (!str_ends_with($file, '.php')) {
-            return false;
-        }
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
+    $file = __DIR__ . $path;
+    $blocked = preg_match('#^/(data|lib|templates)(/|$)#', $path)
+        || (is_file($file) && preg_match('#\.(json|sqlite|sqlite-wal|sqlite-shm|md|log|gz)$#i', $file))
+        || str_ends_with($path, '/config.php') || $path === '/config.php';
+    if ($blocked) {
+        http_response_code(403);
+        exit;
+    }
+    if (is_file($file) && !str_ends_with($file, '.php')) {
+        return false;
     }
 }
 
