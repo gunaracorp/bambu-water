@@ -317,3 +317,46 @@ Peringkat #1 tak bisa dijamin siapa pun — fondasi teknis 100% tuntas; langkah 
 ### 5. Keamanan & risiko
 - Token GitHub dipakai via chat plaintext → **WAJIB revoke + rotate** setelah sesi (sudah jadi pola sesi sebelumnya; diulang).
 - Risiko terbuka terdokumentasi di AUDIT §6 (FilesMatch DB, SMTP, redirect hash, cPanel checklist).
+
+---
+
+## Sesi 2026-11-01 — v3.0.0.0 "Nusantara PHP Murni" (eliminasi Next.js + modernisasi penuh)
+
+### 1. Keamanan sesi (terjadi dulu, sebelum kerja)
+- Owner menempel **GitHub PAT (`ghp_…`) ke chat** → dianggap bocor. **Tidak dipakai, tidak disimpan, tidak dikirim** oleh sesi ini. Saran tegas: revoke di GitHub → Settings → Developer settings → PAT. (Repo publik — clone butuh nol kredensial.)
+
+### 2. Eliminasi Next.js (Phase 2, commit 7964a82)
+- Scan lintas-repo membuktikan `php-cms/` nol referensi ke `src/ public/ prisma/ examples/ mini-services/ scripts/ tests/` + 10 config Next/bun/tailwind/eslint/Caddy/i18n-PATTERN → semua `git rm` dengan aman.
+- Arsip era ganda: `repo-legacy-worklog.md` + `AUDIT-2026-10-31.md` → `docs/archive/`.
+
+### 3. Restrukturisasi PHP-first (commit 4d9a91c)
+- `php-cms/*` → root repo (`git mv`, riwayat utuh). Root = aplikasi = `public_html`. Path fix `admin-cms.php` standalone. `.gitignore` PHP-first.
+
+### 4. Keamanan (baru)
+- `.htaccess` 2 lapis: `<FilesMatch>` deny (sqlite/json/log/bak/env + config/admin) + rewrite block lib/templates/tools/data-cache; header XFO/nosniff/Referrer/Permissions/HSTS; webp negotiation; cache TTL (css/js 7d, img 30d, woff2 90d).
+- CSP + nonce per-request dari PHP (`send_security_headers()`); semua `onclick` inline dipindah ke app.js; JSON-LD aman (data block).
+- Sesi: strict mode, HttpOnly/SameSite=Lax/Secure-otomatis, nama `BWNSESS`, idle admin 2 jam, logout bersih.
+- Wajib ganti password default (redirect paksa ke Akun) + banner dashboard.
+- Honeypot form kontak; admin noindex X-Robots-Tag dari PHP; guard CLI tools; kanonikalisasi 301 (trailing slash + uppercase, query dipertahankan).
+
+### 5. Performa
+- Font self-hosted WOFF2 (Playfair 700 + PJS variable 400–800, latin, swap, preload) — Google Fonts dihapus.
+- WebP 8 gambar (hemat 11–43%) + og-image.jpg 1200×630 sungguhan; LCP hero `<img fetchpriority=high>` + preload + width/height (CLS); dimensi semua `<img>` via `img_dim()`.
+- File-cache sitemap (1 jam) & search-index (10 menit) + `cache_clear()` otomatis saat admin menyimpan.
+
+### 6. CMS & fitur
+- Email notifikasi pesanan (mail() cPanel, opsional via kolom Pengaturan, gagal-email tak pernah menggagalkan pesanan).
+- Consent analitik: GA4/Clarity hanya setelah persetujuan (banner + cookie bwn_consent); default = nol script pihak ketiga.
+- Redirect hash→clean URL era Next.js di app.js; cookie preferensi bahasa persisten.
+
+### 7. Pengujian (bukti)
+- `php -l` PHP 8.4.13: 16/16 file bersih.
+- **`tests/e2e.sh` (baru, permanen, produksi-aman via BWN_DATA_DIR terisolasi): 83/83 PASS** — rute publik, SEO endpoints, 301, 403/404, header keamanan, kualitas HTML, cache, kontak (CSRF/honeypot), siklus admin lengkap.
+- Verifikasi admin manual: login → paksa ganti password → ganti → dashboard; HttpOnly terverifikasi via cookie jar.
+
+### 8. Dokumentasi
+- README/STATE/RUNBOOK/CHANGELOG ditulis ulang PHP-first; `docs/DEPLOYMENT-CPANEL.md` (tanpa SSH, 11 bab + rollback); `docs/SECURITY.md` (model + risiko residual); `docs/MODERNIZATION-REPORT-2026-11-01.md` (laporan A–J).
+- PageSpeed: PSI API anonymous 429 (quota) — **tidak ada skor dikarang**; baseline terukur: HTML produksi lama 294 KB, TTFB 44–152 ms; pengukuran pasca-deploy masuk NEXT-QUEUE P1.
+
+### 9. Status push (jujur)
+- Branch `modernization/php-only` **belum di-push** (tanpa kredensial). Deliverable: ZIP deploy + git bundle + patch series untuk owner. Nol operasi remote destruktif.

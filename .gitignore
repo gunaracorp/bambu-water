@@ -1,71 +1,38 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Bambu Water Nusantara — PHP 8.4 + SQLite (PHP-first repo)
+# NEVER commit runtime secrets or databases to this public repo.
 
-# dependencies
-node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Runtime database & cache (created automatically on first request)
+/data/cms.sqlite
+/data/cms.sqlite-journal
+/data/cms.sqlite-wal
+/data/cms.sqlite-shm
+/data/cache/
 
-# testing
-/coverage
+# Local/private config overrides (credentials, SMTP, API keys)
+.env
+.env.*
+config.local.php
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-local-*
-.claude
-.z-ai-config
-*.log
-dev.log
-dev.out.log
-test
-prompt
-
-server.log
-# Skills directory
-/skills/
-# === Sanitasi repo publik (v0.4.1) — jangan pernah commit ke repo publik ===
+# Uploads & session artifacts
+/upload/
+/tool-results/
+/download/
 /db/
 *.db
 *.sqlite
 *.sqlite-journal
 *.sqlite-wal
 *.sqlite-shm
-*.zip
-/.zscripts/
-/research/*.png
 
-# artefak scaffold (dibuat ulang platform) — jangan commit
-/download/
+# Editor/OS noise
+.DS_Store
+*.log
+*.bak
+*.orig
+*.pem
 
-# artefak sesi (log alat & unggahan user) — jangan commit
-/upload/
-/tool-results/
+# Legacy Node.js era (kept ignored defensively; the stack is gone)
+node_modules/
+/.next/
+/out/
+.vercel
