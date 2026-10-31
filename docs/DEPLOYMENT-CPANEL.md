@@ -10,7 +10,7 @@
 |---|---|
 | File `bambu-water-php-3.0.0.0.zip` | Dari paket rilis / hasil `git clone` + kompres folder |
 | Login cPanel hosting Anda | dari penyedia hosting |
-| Domain mengarah ke hosting (DNS) | cPanel → Domains → document root `public_html` |
+| Domain mengarah ke hosting (DNS) | Lihat **§6** — saat ini domain masih menunjuk ke Vercel dan HARUS dialihkan dulu |
 
 **Isi ZIP = isi repo ini** (index.php, config.php, admin-cms.php, lib/, templates/, data/, assets/, tools/, tests/, docs/, .htaccess, README, dll).
 
@@ -20,7 +20,7 @@
 1. cPanel → **File Manager** → masuk `public_html`.
 2. Jika ada situs lama: klik **Select All** → **Compress** → pilih **Zip** → beri nama `backup-lama-<tanggal>.zip` → unduh ke komputer Anda.
 3. Simpan juga folder `data/` lama (kalau ada) — itulah database & pesan pelanggan.
-> Rollback = kembali mengekstrak ZIP ini (lihat §9).
+> Rollback = kembali mengekstrak ZIP ini (lihat §10).
 
 ---
 
@@ -56,7 +56,35 @@ public_html/
 
 ---
 
-## 6. Verifikasi situs publik — 3 menit
+## 6. Alihkan domain dari Vercel ke hosting cPanel — 10 menit (+ tunggu propagasi)
+
+⚠️ **PENTING — baca dulu.** Kondisi terverifikasi 2026-11-01: `bambuwater.web.id` masih
+dilayani oleh **Vercel** (situs Next.js lama dengan URL `#/`):
+
+| Record DNS | Nilai sekarang | Arti |
+|---|---|---|
+| Nameserver | `sari.ns.dnscloud.id`, `rama.ns.dnscloud.id` | DNS dikelola di panel registrar (dnscloud — biasanya Domainesia/registrar tempat domain didaftarkan) |
+| A record `@` | `216.198.79.1` | **IP Vercel** — inilah kenapa situs lama masih tayang |
+| CNAME `www` | `…vercel-dns-017.com` | **Vercel** juga |
+
+Selama tabel di atas belum diganti, **apapun yang Anda upload ke cPanel tidak akan tampak**
+di `bambuwater.web.id`. Selesaikan langkah ini sebelum §7 (verifikasi):
+
+1. **Cari IP hosting Anda**: cPanel → halaman muka ( bagian *General Information*) → **Shared IP Address** → catat (contoh `103.14.xx.xx`).
+2. **Buka pengelola DNS domain**: login ke registrar/panel tempat DNS dikelola (indikasi kuat: Domainesia atau registrar yang memakai dnscloud) → pilih domain `bambuwater.web.id` → **DNS Management / Kelola DNS**.
+3. **Edit dua record** (biarkan nameserver apa adanya):
+   - Record **A** untuk `@` : ganti `216.198.79.1` → **IP hosting cPanel Anda** (TTL 300 bila tersedia).
+   - Record **CNAME** untuk `www` : ganti nilai Vercel → **`@`** (mengikuti alamat utama) atau CNAME yang diberikan hosting.
+   - Jika ada record **AAAA** untuk `@`/`www` yang menunjuk Vercel → hapus.
+4. **Simpan** → tunggu propagasi (umumnya 10 menit – 4 jam). Cek cepat: buka https://dnschecker.org → masukkan `bambuwater.web.id` → harus muncul IP hosting Anda (bukan `216.198.79.1`).
+5. **(Opsional, setelah situs baru aktif)** hapus domain `bambuwater.web.id` dari proyek Vercel agar tidak ganda.
+6. Baru setelahnya jalankan **AutoSSL** (§11) — sertifikat HTTPS hanya bisa diterbitkan setelah domain menunjuk ke hosting.
+
+**Tanda berhasil:** buka situs → tampilan baru tanpa `#` di URL; atau cek header server bukan lagi `Vercel`.
+
+---
+
+## 7. Verifikasi situs publik — 3 menit
 Buka di browser (ganti domain Anda):
 
 | URL | Hasil yang benar |
@@ -74,7 +102,7 @@ Jika semua halaman 404 kecuali beranda → minta hosting mengaktifkan **mod_rewr
 
 ---
 
-## 7. Login admin pertama (WAJIB ganti password) — 2 menit
+## 8. Login admin pertama (WAJIB ganti password) — 2 menit
 1. Buka `https://bambuwater.web.id/admin`.
 2. Login: `admin` / `bambuwater2025`.
 3. Anda akan **langsung diarahkan ke menu Akun** — ini fitur keamanan: password default terkunci sampai diganti.
@@ -86,7 +114,7 @@ Jika semua halaman 404 kecuali beranda → minta hosting mengaktifkan **mod_rewr
 
 ---
 
-## 8. Checklist verifikasi akhir
+## 9. Checklist verifikasi akhir
 - [ ] Beranda + 3 halaman contoh terbuka (kota/kesehatan/artikel)
 - [ ] `/admin` ganti password berhasil, dashboard terbuka
 - [ ] `config.php` dan `data/*.json` → 403
@@ -96,22 +124,22 @@ Jika semua halaman 404 kecuali beranda → minta hosting mengaktifkan **mod_rewr
 
 ---
 
-## 9. Rollback (jika perlu) — < 5 menit
+## 10. Rollback (jika perlu) — < 5 menit
 1. File Manager → `public_html` → hapus file/folder aplikasi baru (index.php, config.php, admin-cms.php, lib, templates, data, assets, tools, .htaccess, tests, docs).
 2. Ekstrak `backup-lama-<tanggal>.zip` → selesai.
 3. Restore database: kembalikan `data/cms.sqlite` (+ `-wal`/`-shm` bila ada) dari backup.
 
 ---
 
-## 10. Pasca-deploy yang disarankan
-1. **HTTPS**: cPanel → SSL/TLS Status → **Run AutoSSL**. Setelah sertifikat aktif, buka `.htaccess` → hapus tanda `#` pada blok *"Kanonisasi HTTPS"* (5 baris) → simpan. Semua http otomatis 301 ke https.
+## 11. Pasca-deploy yang disarankan
+1. **HTTPS**: cPanel → SSL/TLS Status → **Run AutoSSL** (lakukan SETELAH §6 selesai — domain sudah menunjuk hosting). Setelah sertifikat aktif, buka `.htaccess` → hapus tanda `#` pada blok *"Kanonisasi HTTPS"* (5 baris) → simpan. Semua http otomatis 301 ke https.
 2. **Search Console**: verifikasi (meta sudah siap di config.php `SEO_GOOGLE_SITE_VERIFICATION`, atau file verifikasi) → submit `sitemap.xml`.
 3. **IndexNow** (Bing/Yandex instant): dari terminal lokal `php tools/ping-indexnow.php https://bambuwater.web.id` — atau biarkan otomatis: setiap artikel disimpan di CMS langsung di-ping.
 4. **Analitik** (opsional): isi `ANALYTICS_GA4_ID` / `ANALYTICS_CLARITY_ID` di `config.php` — pengunjung akan diminta persetujuan dulu (banner cookie otomatis).
 
 ---
 
-## 11. Peta file — apa yang harus DIJAGA
+## 12. Peta file — apa yang harus DIJAGA
 | Path | Peran | Boleh dihapus? |
 |---|---|---|
 | `data/*.json` | Konten seluruh situs | ❌ JANGAN |
