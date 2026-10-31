@@ -1,71 +1,66 @@
-# Bambu Water Nusantara — bambuwater.web.id
+# 🌿 Bambu Water Nusantara — PHP 8.4 + SQLite (v3.0.0.0 "Nusantara PHP Murni")
 
-> **Situs resmi PT Bambu Water Nusantara** — pionir, terbesar & pertama di Indonesia dalam air bambu terapi pengobatan sejak 2007, serta distribusi bambu berkualitas massal se-Indonesia.
-> 🌏 bambuwater.web.id · WhatsApp **0813-1651-6524** · ![version](https://img.shields.io/badge/version-0.4.0--Kembar_Abadi_PHP_CMS-14532d) ![sitemap](https://img.shields.io/badge/sitemap-2.654_URL-166534) ![a11y](https://img.shields.io/badge/WCAG-2.1_AA-4d7c0f)
+Situs resmi **bambuwater.web.id** — aplikasi **PHP murni + SQLite** untuk shared hosting cPanel.
+Tanpa Node.js, tanpa npm/bun, tanpa build step, tanpa framework. Upload ke `public_html` dan situs hidup.
 
----
+> **Era Next.js telah berakhir.** Sejak v3.0.0.0 repo ini 100% PHP (lihat `docs/MODERNIZATION-REPORT-2026-11-01.md`).
 
-## 🇮🇩 Indonesia
-
-Website korporas standar internasional dengan **2.646 halaman full-SEO Google**, 30 bahasa dunia, animasi Framer Motion, dan arsitektur hydration-proof.
-
-### Fitur Utama
-
-| Kategori | Detail |
+## ✨ Isi Paket
+| Komponen | Detail |
 |---|---|
-| **Halaman Total** | 2.646 URL full-SEO (25 halaman inti + 2.621 halaman programatik) |
-| **Halaman Kota** | 2.524 kota & kabupaten — 38 provinsi (`#/kota/{slug}`) |
-| **Pusat Kesehatan** | 60+ kondisi terapi (`#/air-bambu-untuk/{slug}`) |
-| **Katalog Layanan** | 25 layanan bisnis + 2.524 layanan pengiriman kota (`#/layanan/{slug}`) |
-| **Jenis Bambu** | 8 varietas lengkap — harga, spesifikasi, FAQ (`#/bambu/{slug}`) |
-| **Halaman Indeks** | 4 indeks dengan pencarian live: kota, kesehatan, layanan, bambu |
-| **Bahasa** | 30 bahasa (id, en, zh, es, hi, ar, fr, ...) — RTL penuh |
-| **SEO** | Meta dinamis per halaman · JSON-LD (10+ node) · Sitemap 2.646 URL · hreflang · canonical · OG/Twitter |
-| **Animasi** | Framer Motion di seluruh section (reveal, stagger, parallax) |
-| **Entitas** | JSON-LD Person/Organization graph (entity layer stealth) |
+| **Halaman publik** | Beranda 14 section + 24 halaman inti + **2.524 kota** + 60 kondisi kesehatan + 25 layanan + 8 jenis bambu + 7 artikel = **2.649 URL** (server-side render murni) |
+| **Admin CMS** | `/admin` — dashboard, pesan masuk (buka/tandai/hapus), pengaturan situs (nama, WA, email, URL, **email notifikasi**), editor artikel (override aman), ganti password (**wajib** saat pertama login) |
+| **SEO** | Meta unik per URL, canonical, hreflang id/en, OG + Twitter Card, JSON-LD (Organization/Breadcrumb/FAQ/Product/BlogPosting), `sitemap.xml` dinamis 4.035 URL, robots.txt 26 UA, `llms.txt`, RSS, IndexNow |
+| **Keamanan** | CSP + nonce, `.htaccess` berlapis (FilesMatch deny), PDO prepared statements, `htmlspecialchars` penuh, CSRF token, rate limit, password_hash, sesi hardening (HttpOnly/SameSite/Secure/strict), honeypot form |
+| **Performa** | Font self-hosted WOFF2, WebP otomatis + fallback JPEG, hero LCP `fetchpriority="high"`, dimensi gambar anti-CLS, file-cache sitemap & search-index, kompresi gzip |
+| **Interaktif** | Command palette Ctrl+K (2.649 halaman), kalkulator kesehatan, lacak pesanan, filter live, reveal-on-scroll |
+| **i18n** | ID penuh + EN parsial (`?lang=en`, cookie persisten), fallback ID |
 
-### Arsitektur Programatik — Auto-Pages Engine
+## 🚀 Instalasi Shared Hosting (cPanel) — tanpa SSH
+Panduan lengkap bergambar: **[docs/DEPLOYMENT-CPANEL.md](docs/DEPLOYMENT-CPANEL.md)**.
 
-```
-src/lib/data/
-  ├── cities.ts          # 2.524 kota · 38 provinsi · ETA per wilayah
-  ├── conditions.ts      # 60 kondisi kesehatan + FAQ per kondisi
-  ├── services.ts        # 25 layanan (langganan/kargo/kemitraan/bambu)
-  └── bamboo-types.ts    # 8 jenis bambu + spesifikasi teknis
-src/lib/auto-pages.ts    # Generator meta SEO (title/desc/keywords) per slug
-src/components/pages/
-  ├── auto-shared.tsx    # Blok bersama: hero, FAQ, JSON-LD, search
-  └── auto-pages-renderer.tsx  # Dispatcher semua halaman programatik
-```
+1. Upload ZIP rilis ke `public_html/` via **File Manager** → Extract.
+2. cPanel → **Select PHP Version / MultiPHP Manager** → pilih **PHP 8.4**.
+3. Pastikan folder `data/` writable (755/775) — SQLite `data/cms.sqlite` dibuat otomatis saat request pertama.
+4. Buka domain → **login pertama:** `admin` / `bambuwater2025` → Anda **dipaksa** ke menu Akun → ganti password.
+5. Menu **Pengaturan** → cek URL situs (canonical & sitemap) + opsional isi **Email Notifikasi**.
 
-**Routing hash-based hydration-proof**: `#/{locale}/{slug}` dalam satu route Next.js `/` — nol SSR hydration error, SEO tetap penuh via meta engine + JSON-LD + sitemap dinamis.
-
-### Patches Engineering Penting
-
-- **History Patch** (`use-hash-route.ts`): navigasi `<Link href="#/...">` Next.js memakai `pushState` (tanpa event `hashchange`) → dipatch agar SPA hash routing respons — hanya dispatch bila hash **benar-benar berubah**, async `setTimeout` agar tidak melanggar fase efek React (mencegah `useInsertionEffect` error & hydration mismatch).
-- **Title Observer**: guard 2 detik melawan restorasi `<title>` oleh payload RSC Next.js.
-- **i18n**: eager id/en/zh + lazy 27 bahasa; fallback id untuk konten programatik.
-
-### Jalankan
-
+## 🖥️ Jalankan Lokal (tanpa Apache)
 ```bash
-bun install
-bun run dev        # http://localhost:3000
-bun run lint       # ESLint
-bun run db:push    # Prisma schema
+php -S 0.0.0.0:8080 index.php
+# buka http://localhost:8080
 ```
 
----
+## 🧪 Uji E2E (produksi-aman)
+```bash
+bash tests/e2e.sh        # instance terisolasi — tidak menyentuh DB lokal/produksi
+# PHP_BIN=/path/php8.4 bash tests/e2e.sh   # bila php default bukan 8.4
+```
+83 assertion: rute publik, SEO endpoints, kanonikalisasi 301, proteksi file, header keamanan,
+cache, form kontak (CSRF/honeypot), siklus admin lengkap.
 
-## 🇬🇧 English
+## 🧩 Struktur
+```
+├── index.php          # Front controller + router clean URL
+├── config.php         # ⭐ Satu file konfigurasi (versi, admin, kontak, env override)
+├── admin-cms.php      # Panel CMS tunggal (login, pesan, artikel, pengaturan, akun)
+├── lib/               # helpers (escape/CSRF/cache/CSP/i18n) + db (PDO SQLite WAL)
+├── templates/         # layout, pages (inti), programmatic, tags, sitemap, feed, llms
+├── data/              # Konten JSON (2.524 kota dll) + cms.sqlite (dibuat otomatis) + cache/
+├── assets/            # style.css (design system), app.js, images (JPG+WebP), fonts (WOFF2)
+├── tools/             # CLI: ping-indexnow, build-keywords (diblokir via web)
+├── tests/             # e2e.sh — 83 assertion, instance terisolasi
+└── docs/              # Panduan deploy cPanel, keamanan, laporan modernisasi, arsip
+```
 
-Official corporate website of PT Bambu Water Nusantara — Indonesia's pioneer & largest therapeutic bamboo water producer since 2007, plus mass bamboo distribution nationwide.
+## 🔐 Catatan Keamanan
+- `data/` (database + cache) dilindungi **dua lapis** di Apache: `RewriteRule` + `<FilesMatch>` deny.
+- Tingkat lanjut: pindahkan `data/` ke luar `public_html` dengan env `BWN_DATA_DIR` (lihat docs/SECURITY.md).
+- Password default `bambuwater2025` **wajib diganti** — aplikasi mengunci dashboard sampai diganti.
 
-- **2,646 full-SEO pages**: 25 core + 2,621 programmatic (2,524 city pages, 60+ health conditions, 25 services, 8 bamboo types, 4 searchable indexes)
-- **30 languages** with full RTL, dynamic per-page meta, 10+ JSON-LD nodes, 2,646-URL sitemap, hreflang & canonical management
-- **Stack**: Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS 4 · shadcn/ui · Framer Motion · Prisma/SQLite · Bun
-
-### Contact
-
-PT Bambu Water Nusantara — Guntur Village No.50, Padasuka, Sukarame, Tasikmalaya, West Java
-WhatsApp +62 813-1651-6524 · halo@bambuwater.web.id · Senin–Sabtu 08.00–17.00 WIB
+## 📌 Kejujuran Teknis (Dewan-46)
+- i18n EN parsial (nav/footer/label) — konten programatik fallback ID (pola sama dengan era sebelumnya).
+- Lacak pesanan = simulasi deterministik — bukan integrasi kurir.
+- Notifikasi email memakai `mail()` hosting — deliverabilitas bergantung SPF/DKIM domain (docs/SECURITY.md).
+- E2E dijalankan di PHP 8.4.13 + server bawaan; Apache `.htaccess` teruji struktural — verifikasi penuh
+  dilakukan sekali di cPanel produksi (checklist tersedia di docs/DEPLOYMENT-CPANEL.md).

@@ -1,6 +1,67 @@
 # Changelog — bambuwater.web.id
 
 Format: [Keep a Changelog](https://keepachangelog.com) · SemVer · **1 tugas = 1 versi** (S1).
+
+## [3.0.0.0] — 2026-11-01 — "Nusantara PHP Murni" (Next.js Eliminated)
+
+Teknis dari spesifikasi modernisasi penuh: repo kini **aplikasi PHP murni** — Next.js/Vercel/Node.js
+dihapus seluruhnya, arsitektur direstrukturisasi PHP-first, keamanan berlapis, performa & SEO ditingkatkan,
+lengkap dengan suite E2E otomatis dan panduan deploy cPanel tanpa SSH.
+
+### Removed (Phase 2 — Next.js Elimination)
+- `src/` (213 file: App Router, komponen, i18n 30 bahasa, UI kit), `public/` (gambar duplikat),
+  `prisma/`, `examples/websocket`, `mini-services`, `scripts/i18n-*.ts`, `tests/*.sh` scaffold lama.
+- Konfigurasi Next/Vercel: `next.config.ts`, `package.json`, `bun.lock`, `tsconfig.json`,
+  `tailwind.config.ts`, `postcss.config.mjs`, `eslint.config.mjs`, `components.json`, `Caddyfile`, `i18n-PATTERN.md`.
+- **Verifikasi**: `php-cms/` terbukti nol referensi ke semua folder tersebut (scan lintas-repo sebelum hapus).
+  Nol dependensi Node.js/npm/bun tersisa. Arsip dokumen era lama dipindah ke `docs/archive/`.
+
+### Changed (Phase 3 — Restrukturisasi PHP-First)
+- **Isi `php-cms/` dipindah ke root repo** — root repo = aplikasi yang bisa di-upload langsung ke `public_html`.
+- Path fix `admin-cms.php` (mode standalone) pasca relokasi.
+- Versi 3.0.0.0, codename "Nusantara PHP Murni"; `.gitignore` ditulis ulang untuk stack PHP.
+
+### Security (Phase 5)
+- **`.htaccess` berlapis**: `<FilesMatch>` deny (sqlite/json/log/bak/env + config.php/admin-cms.php),
+  blokir `lib/ templates/ tools/ data/cache/`, lapis kedua selain rewrite.
+- **CSP + nonce per-request** via PHP (`send_security_headers()`): `script-src 'self' 'nonce-…'`,
+  `frame-ancestors 'self'`, `object-src 'none'`, `upgrade-insecure-requests` (HTTPS). Handler `onclick`
+  inline dipindah ke `app.js` — tak ada lagi script inline tanpa nonce (JSON-LD data block tak terdampak).
+- **Header keamanan lengkap**: X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy,
+  HSTS (opsional di .htaccess), `X-Robots-Tag: noindex` untuk /admin (kini dari PHP + .htaccess).
+- **Hardening sesi**: `session.use_strict_mode`, cookie `HttpOnly`+`SameSite=Lax`+`Secure` otomatis saat HTTPS,
+  nama sesi kustom `BWNSESS`, kedaluwarsa idle admin 2 jam, logout menghapus session + cookie.
+- **Wajib ganti password default** — admin diarahkan paksa ke menu Akun selama password bawaan aktif.
+- **Kanonikalisasi URL 301**: trailing slash & huruf besar → URL bersih (query dipertahankan) — mencegah duplikat.
+- **Honeypot anti-spam** pada form kontak (bot dijawab "sukses" tanpa disimpan).
+
+### Performance (Phase 6)
+- **Font self-hosted WOFF2** (Playfair Display 700 + Plus Jakarta Sans variable 400–800, latin, `font-display: swap`,
+  preload 2 file kritis) — Google Fonts CDN dihapus (2 request render-blocking hilang).
+- **WebP transparan**: 8 gambar dikonversi (hemat 11–43%) + negosiasi otomatis via .htaccess, fallback JPEG.
+- **LCP hero** kini `<img fetchpriority="high">` + `preload` (sebelumnya CSS background — tidak diprioritaskan browser).
+- **Dimensi gambar** (`width`/`height`) di semua `<img>` via `img_dim()` — anti layout shift (CLS).
+- **File-cache** sitemap (2.649+1.386 URL) & search-index (TTL 1 jam/10 menit) — dibangun ulang otomatis saat admin
+  menyimpan artikel/pengaturan; header `X-Cache: HIT/MISS` untuk verifikasi.
+- `og-image.jpg` 1200×630 sungguhan (sebelumnya klaim dimensi og tidak sesuai file).
+
+### Added
+- **`tests/e2e.sh`** — suite E2E otomatis **83 assertion** (instance terisolasi via `BWN_DATA_DIR`,
+  produksi-aman): rute publik, SEO endpoints, kanonikalisasi, 403 file sensitif, header keamanan,
+  kualitas HTML, cache, form kontak (CSRF/honeypot/validasi), siklus admin lengkap. **83/83 PASS di PHP 8.4.13.**
+- **Notifikasi email pesanan baru** (opsional, `mail()` bawaan cPanel — tanpa dependensi; kolom "Email
+  Notifikasi" di Admin → Pengaturan; kegagalan email tidak pernah menggagalkan pesanan).
+- **Consent analitik**: GA4/Clarity hanya dimuat setelah persetujuan (banner + cookie `bwn_consent`);
+  tanpa ID dikonfigurasi = nol script pihak ketiga (default, UU PDP/GDPR).
+- **Redirect hash → clean URL**: URL lama era Next.js `#/{locale}/{slug}` dipetakan ke URL bersih di `app.js`.
+- Guard CLI untuk `tools/*.php` (blokir eksekusi via web).
+- Dokumentasi: `docs/DEPLOYMENT-CPANEL.md` (tanpa SSH), `docs/SECURITY.md`, `docs/MODERNIZATION-REPORT-2026-11-01.md`.
+
+### Verified
+- `php -l` PHP 8.4.13: seluruh file PHP bersih.
+- E2E `tests/e2e.sh`: **83/83 PASS**.
+- Smoke Apache `.htaccess` teruji struktural (mod_rewrite/FilesMatch/mod_headers/mod_expires bersyarat IfModule — aman di shared hosting).
+
 Riwayat 0.1.0–0.2.1 direkonstruksi jujur dari `worklog.md` (Z3 Version Archaeology).
 
 ## [0.5.2] — 2026-10-31 — "Dewan Audit" (Audit Menyeluruh + Perbaikan Nyata)
