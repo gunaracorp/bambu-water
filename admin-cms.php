@@ -9,7 +9,7 @@ declare(strict_types=1);
 /* Dua moda akses: via router utama (route di $_GET) ATAU langsung oleh php -S
    (directory-index menculik /admin/* → PATH_INFO). Keduanya di-handle di sini. */
 if (!defined('APP_VERSION')) {
-    require dirname(__DIR__) . '/config.php';
+    require __DIR__ . '/config.php';
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
     }
