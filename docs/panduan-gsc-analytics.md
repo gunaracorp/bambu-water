@@ -1,7 +1,7 @@
 # 📡 Panduan Google Search Console & Analytics — PHP CMS Bambu Water
 
 > Versi dokumen: v0.5.1 "Pintu Pencari" (2026-10-30)
-> Target: situs PHP mirror (php-cms/) di bambuwater.web.id
+> Target: situs PHP mirror (./) di bambuwater.web.id
 > Estimasi total: ± 15–20 menit untuk semua platform di bawah.
 
 ---
